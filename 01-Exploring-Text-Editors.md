@@ -1,3 +1,11 @@
 # Exploring Text Editors
 
-Blap blap blap
+## Motivation
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading
