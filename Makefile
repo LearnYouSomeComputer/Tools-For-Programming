@@ -12,7 +12,7 @@ MD_PIECES = 00-FrontMatter.md	\
 	11-Unit-testing-with-Boost-Unit-Test-Framework.md	\
 	12-Using-C++11-and-the-Standard-Template-Library.md	\
 	13-Graphical-User-Interfaces-with-Qt.md	\
-	14-Typsetting-with-LaTeX.md
+	14-Typesetting-with-LaTeX.md
 
 all: ${MD_PIECES}
 	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf $^
