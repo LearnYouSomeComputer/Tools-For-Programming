@@ -53,7 +53,7 @@ For each:
 
 ### Notepad++
 
-[Notepad++](https://notepad-plus-plus.org/) is a popular text editor for Windows.
+[Notepad++](https://notepad-plus-plus.org/)[^npp] is a popular text editor for Windows.
 It is free, easy to install, and sports a variety of features including syntax highlighting and automatic indetation.
 Many people choose this editor because it is lightweight and easy to use.
 
@@ -66,49 +66,55 @@ Other shortcuts indent or outdent[^outdent] blocks of code or insert or remove c
 In addition to those shortcuts, if your cursor is on a brace, bracket, or parenthesis, you can jump to the matching brace, bracket, or parenthesis with \keys{\ctrl+b}.
 
 ##### Word-based shortcuts
-- *Ctrl-Left/Right*: Move cursor forward or backward by one word
-- *Ctrl-Backspace/Delete*: Delete to start/end of word
+- \keys{\ctrl+\arrowkeyleft} / \keys{\arrowkeyright}: Move cursor forward or backward by one word
+- \keys{\ctrl+\backdel}: Delete to start/end of word
 
 ##### Line-based shortcuts
-- *Ctrl-Shift-Backspace/Delete*: Delete to start/end of line
-- *Ctrl-L*: Delete current line
-- *Ctrl-T*: Transpose (swap) current and previous lines
-- *Ctrl-Shift-Up/Down*: Move current line/selection up or down
-- *Ctrl-D*: Duplicate current line
-- *Ctrl-J*: Join selected lines
+- \keys{\ctrl+\shift+\backspace}: Delete to start/end of line
+- \keys{\ctrl+l}: Delete current line
+- \keys{\ctrl+t}: Transpose (swap) current and previous lines
+- \keys{\ctrl+\shift+\arrowkeyup} / \keys{\arrowkeydown}: Move current line/selection up or down
+- \keys{\ctrl+d}: Duplicate current line
+- \keys{\ctrl+j}: Join selected lines
 
 ##### Indenting and commenting code
 
-- *Tab*: Indent current line/block
-- *Shift-Tab*: Outdent current line/block
-- *Ctrl-Q*: Single-line comment/uncomment current line/selection
-- *Ctrl-Shift-Q*: Block comment curent line/selection
+- \keys{\tab}: Indent current line/block
+- \keys{\shift+\tab}: Outdent current line/block
+- \keys{\ctrl+q}: Single-line comment/uncomment current line/selection
+- \keys{\ctrl+\shift+q}: Block comment curent line/selection
 
 #### Column Editing
 
-- *Alt-Shift-Up/Down/Left/Right*: Column selection
-- *Alt-Left Mouse*: Column selection
-- *Alt-C*: Column editor
+You can also select text in columns, rather than line by line.
+To do this, use \keys{\Alt+\shift+\arrowkeyup} / \keys{\arrowkeydown} / \keys{\arrowkeyleft} / \keys{\arrowkeyright} to perform a column selection, or hold
+\keys{\Alt} and left-click.
+
+If you have selected a column of text, you can type to insert text on each line in the column or edit as usual (e.g., \keys{\del} deletes the selection or one character from each line).
+Notepad++ also features a column editor that can insert text or a column of increasing numbers. When you have performed a column selection, press \keys{\Alt+c} to open it.
+
+![Column Editor](01/npp-column-editor.png)
 
 #### Multiple Cursors
 
 Notepad++ supports multiple cursors, allowing you to edit text in multiple locations at once.
-To place multiple cursors, hold *Ctrl* and left-click everywhere you want a cursor.
+To place multiple cursors, hold \keys{\ctrl} and left-click everywhere you want a cursor.
 Then, you can type as normal and your edits will appear at each cursor location.
 
 For example, suppose we've written the declaration for a class named `road` and that we've copied the member function declarations to an implementation file.
-We want to scope them (`road::width()` instead of `width()), but that's tedious to do one function at a time.
+We want to scope them (`road::width()` instead of `width()`), but that's tedious to do one function at a time.
 With multiple cursors, though, you can do that all in one go!
 
 <!-- TODO: fix image sizes so these fit on one page -->
 
 First, place a cursor at the beginning of each function name:
 
-![Placing multiple cursors with *Ctrl-left-click*](01/npp-mult-cursors-1.PNG "Placing multiple cursors with *Ctrl-left-click*")\
+<!-- TODO: can't use \keys{\ctrl} in captions??? -->
+![Placing multiple cursors with Ctrl + left-click](01/npp-mult-cursors-1.PNG)
 
 Then, type `road::`. Like magic, it appears in front of each function:
 
-![Typing `road::` inserts that text at each cursor location](01/npp-mult-cursors-2.PNG)\
+![Typing `road::` inserts that text at each cursor location](01/npp-mult-cursors-2.PNG)
 
 
 #### Document Map
@@ -116,7 +122,7 @@ Then, type `road::`. Like magic, it appears in front of each function:
 A document map can be handy when navigating large files[^large].
 It shows a bird's-eye view of the document; you can click to jump to particular locations.
 
-The document map can be enabled from the *View* menu.
+The document map can be enabled by clicking \menu{View > Document Map}
 
 ![The document map](01/npp-document-map.PNG)
 
@@ -130,7 +136,7 @@ One common setting is to switch Notepad++ to use spaces instead of tabs:
 
 #### Plugins
 
-Notepad++ has support for plugins; you can see a list of them [here](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central).
+Notepad++ has support for plugins; you can see a list of them [here](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central)[^npp-plugins].
 Unfortunately, plugins must be installed to the same directory Notepad++ is installed in, so you will need to install Notepad++ yourself to use plugins.
 
 ### Atom
@@ -160,5 +166,7 @@ Unfortunately, plugins must be installed to the same directory Notepad++ is inst
 [^others-too]: And many other programming languages, for that matter.
 [^compilers]: Including compilers.
 [^globe]: Thanks to cloud computing, this is becoming commonplace, yo.
+[^npp]: Website: [https://notepad-plus-plus.org/](https://notepad-plus-plus.org/)
 [^large]: Of course, this feature might encourage making large files rather than multiple manageable files...
 [^outdent]: *Outdent* (verb). Latin: To remove a tooth; English: The opposite of indent.
+[^npp-plugins]: [http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central)
