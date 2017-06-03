@@ -15,4 +15,4 @@ MD_PIECES = 00-FrontMatter.md	\
 	14-Typesetting-with-LaTeX.md
 
 all: ${MD_PIECES}
-	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf $^
+	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf --include-in-header packages.tex $^

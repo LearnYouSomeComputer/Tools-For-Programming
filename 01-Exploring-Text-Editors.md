@@ -42,6 +42,7 @@ Even if you prefer to use an IDE for development, you will still run into situat
 **Note**: Because this is your first pre-lab, the walkthrough will be completed in class.
 
 For each:
+
 - Helpful URLs (main website) / tutorial mode
 - Special terminology
 - Moving around text, cut/copy/paste, nifty editing features
@@ -51,6 +52,86 @@ For each:
 - Plugins
 
 ### Notepad++
+
+[Notepad++](https://notepad-plus-plus.org/) is a popular text editor for Windows.
+It is free, easy to install, and sports a variety of features including syntax highlighting and automatic indetation.
+Many people choose this editor because it is lightweight and easy to use.
+
+#### Keyboard shortcuts
+
+Beyond the standard editing shortcuts that most programs use, Notepad++ has some key shortcuts that come in handy when programming.
+Word- and line-focused shortcuts are useful when editing variable names or rearranging snippets of code.
+Other shortcuts indent or outdent[^outdent] blocks of code or insert or remove comments.
+
+In addition to those shortcuts, if your cursor is on a brace, bracket, or parenthesis, you can jump to the matching brace, bracket, or parenthesis with \keys{\ctrl+b}.
+
+##### Word-based shortcuts
+- *Ctrl-Left/Right*: Move cursor forward or backward by one word
+- *Ctrl-Backspace/Delete*: Delete to start/end of word
+
+##### Line-based shortcuts
+- *Ctrl-Shift-Backspace/Delete*: Delete to start/end of line
+- *Ctrl-L*: Delete current line
+- *Ctrl-T*: Transpose (swap) current and previous lines
+- *Ctrl-Shift-Up/Down*: Move current line/selection up or down
+- *Ctrl-D*: Duplicate current line
+- *Ctrl-J*: Join selected lines
+
+##### Indenting and commenting code
+
+- *Tab*: Indent current line/block
+- *Shift-Tab*: Outdent current line/block
+- *Ctrl-Q*: Single-line comment/uncomment current line/selection
+- *Ctrl-Shift-Q*: Block comment curent line/selection
+
+#### Column Editing
+
+- *Alt-Shift-Up/Down/Left/Right*: Column selection
+- *Alt-Left Mouse*: Column selection
+- *Alt-C*: Column editor
+
+#### Multiple Cursors
+
+Notepad++ supports multiple cursors, allowing you to edit text in multiple locations at once.
+To place multiple cursors, hold *Ctrl* and left-click everywhere you want a cursor.
+Then, you can type as normal and your edits will appear at each cursor location.
+
+For example, suppose we've written the declaration for a class named `road` and that we've copied the member function declarations to an implementation file.
+We want to scope them (`road::width()` instead of `width()), but that's tedious to do one function at a time.
+With multiple cursors, though, you can do that all in one go!
+
+<!-- TODO: fix image sizes so these fit on one page -->
+
+First, place a cursor at the beginning of each function name:
+
+![Placing multiple cursors with *Ctrl-left-click*](01/npp-mult-cursors-1.PNG "Placing multiple cursors with *Ctrl-left-click*")\
+
+Then, type `road::`. Like magic, it appears in front of each function:
+
+![Typing `road::` inserts that text at each cursor location](01/npp-mult-cursors-2.PNG)\
+
+
+#### Document Map
+
+A document map can be handy when navigating large files[^large].
+It shows a bird's-eye view of the document; you can click to jump to particular locations.
+
+The document map can be enabled from the *View* menu.
+
+![The document map](01/npp-document-map.PNG)
+
+#### Settings
+
+Notepad++ has a multitude of settings that can configure everything from syntax highlight colors to keyboard shortcuts.
+You can even customize some settings per programming language, including indentation.
+One common setting is to switch Notepad++ to use spaces instead of tabs:
+
+![Configuring Notepad++ to use spaces rather than tabs](01/npp-tab-settings.PNG)
+
+#### Plugins
+
+Notepad++ has support for plugins; you can see a list of them [here](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central).
+Unfortunately, plugins must be installed to the same directory Notepad++ is installed in, so you will need to install Notepad++ yourself to use plugins.
 
 ### Atom
 
@@ -79,3 +160,5 @@ For each:
 [^others-too]: And many other programming languages, for that matter.
 [^compilers]: Including compilers.
 [^globe]: Thanks to cloud computing, this is becoming commonplace, yo.
+[^large]: Of course, this feature might encourage making large files rather than multiple manageable files...
+[^outdent]: *Outdent* (verb). Latin: To remove a tooth; English: The opposite of indent.
