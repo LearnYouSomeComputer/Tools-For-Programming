@@ -93,7 +93,11 @@ To do this, use \keys{\Alt+\shift+\arrowkeyup} / \keys{\arrowkeydown} / \keys{\a
 If you have selected a column of text, you can type to insert text on each line in the column or edit as usual (e.g., \keys{\del} deletes the selection or one character from each line).
 Notepad++ also features a column editor that can insert text or a column of increasing numbers. When you have performed a column selection, press \keys{\Alt+c} to open it.
 
-![Column Editor](01/npp-column-editor.png)
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=0.5\textheight]{01/npp-column-editor.png}
+	\caption{Column Editor}
+\end{figure}
 
 #### Multiple Cursors
 
@@ -106,16 +110,21 @@ We want to scope them (`road::width()` instead of `width()`), but that's tedious
 With multiple cursors, though, you can do that all in one go!
 
 <!-- TODO: fix image sizes so these fit on one page -->
-
+\newpage
 First, place a cursor at the beginning of each function name:
-
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=0.4\textheight]{01/npp-mult-cursors-1.PNG}
+	\caption{Placing multiple cursors with Ctrl + left-click}
+\end{figure}
 <!-- TODO: can't use \keys{\ctrl} in captions??? -->
-![Placing multiple cursors with Ctrl + left-click](01/npp-mult-cursors-1.PNG)
 
 Then, type `road::`. Like magic, it appears in front of each function:
-
-![Typing `road::` inserts that text at each cursor location](01/npp-mult-cursors-2.PNG)
-
+\begin{figure}[!h]
+	\centering
+	\includegraphics[height=0.4\textheight]{01/npp-mult-cursors-2.PNG}
+	\caption{Typing \texttt{road::} inserts that text at each cursor location}
+\end{figure}
 
 #### Document Map
 
