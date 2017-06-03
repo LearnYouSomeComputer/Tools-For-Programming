@@ -14,5 +14,14 @@ MD_PIECES = 00-FrontMatter.md	\
 	13-Graphical-User-Interfaces-with-Qt.md	\
 	14-Typesetting-with-LaTeX.md
 
-all: ${MD_PIECES}
-	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf --include-in-header packages.tex $^
+.PHONY: all tex
+
+all: cs1001_prelab.pdf
+
+tex: cs1001_prelab.tex
+
+cs1001_prelab.pdf: ${MD_PIECES} packages.tex
+	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf --include-in-header packages.tex ${MD_PIECES}
+
+cs1001_prelab.tex: ${MD_PIECES} packages.tex
+	pandoc --from markdown+raw_tex --output cs1001_prelab.tex --include-in-header packages.tex ${MD_PIECES}
