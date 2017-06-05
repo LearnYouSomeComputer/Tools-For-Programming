@@ -96,9 +96,9 @@ If you have selected a column of text, you can type to insert text on each line 
 Notepad++ also features a column editor that can insert text or a column of increasing numbers. When you have performed a column selection, press \keys{\Alt+c} to open it.
 
 \begin{figure}[!h]
-	\centering
-	\includegraphics[height=0.5\textheight]{01/npp-column-editor.png}
-	\caption{Column Editor}
+    \centering
+    \includegraphics[height=0.5\textheight]{01/npp-column-editor.png}
+    \caption{Column Editor}
 \end{figure}
 
 #### Multiple Cursors
@@ -115,17 +115,17 @@ With multiple cursors, though, you can do that all in one go!
 \newpage
 First, place a cursor at the beginning of each function name:
 \begin{figure}[!h]
-	\centering
-	\includegraphics[height=0.4\textheight]{01/npp-mult-cursors-1.PNG}
-	\caption{Placing multiple cursors with Ctrl + left-click}
+    \centering
+    \includegraphics[height=0.4\textheight]{01/npp-mult-cursors-1.PNG}
+    \caption{Placing multiple cursors with Ctrl + left-click}
 \end{figure}
 <!-- TODO: can't use \keys{\ctrl} in captions??? -->
 
 Then, type `road::`. Like magic, it appears in front of each function:
 \begin{figure}[!h]
-	\centering
-	\includegraphics[height=0.4\textheight]{01/npp-mult-cursors-2.PNG}
-	\caption{Typing \texttt{road::} inserts that text at each cursor location}
+    \centering
+    \includegraphics[height=0.4\textheight]{01/npp-mult-cursors-2.PNG}
+    \caption{Typing \texttt{road::} inserts that text at each cursor location}
 \end{figure}
 
 #### Document Map
@@ -151,6 +151,108 @@ Notepad++ has support for plugins; you can see a list of them [here](http://docs
 Unfortunately, plugins must be installed to the same directory Notepad++ is installed in, so you will need to install Notepad++ yourself to use plugins.
 
 ### Atom
+
+Programmers like to program.
+Some programmers like pretty things.
+Thus there is Atom.
+
+Atom is a featureful text editor that is developed by [GitHub](https://atom.io/).
+Designed with customization in mind, Atom is built on top of the engine that drives the Google Chrome web browser.
+Atom allows users to customize just about every feature that it offers.
+Style can be changed using cascading style sheets[^css] and behavior can be changed using JavaScript[^javascript].
+
+Additionally, being a hip-and-trendy \texttrademark piece of software, you can install community packages written by other developers.
+In fact, if you find that Atom is missing some particular behavior, you can create a package and make it available to the world, as well[^rich]!
+
+Atom has a GUI, so it is mouse friendly and human friendly, too.
+
+#### Tree View
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=0.3\textheight]{01/atom-window.png}
+    \caption{One Atom window with Tree View on the left and an empty pane on the right}
+\end{figure}
+
+Using \keys{\ctrl+\} (or \menu{View > Toggle Tree View}), you can toggle Atom's Tree View.
+The Tree View is a convenient tool for browsing files within a folder or subfolders.
+By clicking the down arrow to the left of a folder, you can see its contents.
+Simply double click a file to open it up.
+
+As you double click files, they open up in new **tabs**.
+
+#### Tabs
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=0.3\textheight]{01/atom-tabs.png}
+    \caption{Atom with multiple tabs in one pane}
+\end{figure}
+
+To switch between tabs, simply click on them at the top.
+It works much the same way as browser tabs do.
+
+Keep an eye on your tabs!
+Atom will indicate when a file has changed and needs to be saved.
+This can be very helpful when you find yourself asking "why is `g++` *still* complaining?".
+
+#### Panes
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=0.3\textheight]{01/atom-split-pane.png}
+    \caption{One window split into two panes}
+\end{figure}
+
+In addition to opening files in several tabs, you can display several files at once in separate **panes**.
+Each pane has its own collection of tabs.
+
+You can split your window into **left-and-right** panes by right-clicking in the tabs area and choosing \menu{Split Right} or \menu{Split Left}.
+You can split your window into **top-and-bottom** panes by right-clicking in the tabs area and choosing \menu{Split Down} or \menu{Split Up}.
+You can also close panes by choosing \menu{Close Pane}.
+
+#### The Command Palette
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=0.3\textheight]{01/atom-command-palette.png}
+    \caption{The Atom command palette (i.e., your best friend forever).}
+\end{figure}
+
+You may notice that Atom's drop-down menu options are sparse.
+There is not much to choose from.
+Don't fret[^fret]!
+
+Most of Atom's functionality is accessible using its **command palette**.
+To open the command palette simply type \keys{\ctrl + \shift + p}.
+The command palette is the place to search for any fancy thing you might want to do with Atom.
+
+Any.
+
+Fancy.
+
+Thing.
+
+You can even use it to accomplish a lot of the tasks you would otherwise use your mouse for!
+For example, you can split your pane using the `pane:split-right` command in the command palette.
+
+Many of the commands have corresponding **keybindings**, as well.
+These are *very* handy, as they can save you a lot of command typing.
+
+#### Customization
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=0.3\textheight]{01/atom-settings.png}
+    \caption{Atom's settings open in a new tab. You can search through its keybindings here.}
+\end{figure}
+
+If you open up Atom's settings (using a the menu or command palette), you'll find quite a few bells and whistles that you can customize.
+As you explore these options, take note that you can search for keybindings here.
+Atom has a helpful search tool that makes it easy to quickly find the keybinding for a particular command.
+
+If you don't see a keybinding for a command you like, just create your own!
+You can also choose preset keymaps to make Atom behave like other text editors including (but not limited to) emacs!
 
 ### JPico
 
@@ -279,17 +381,17 @@ Switch between windows with \keys{\esc},\keys{n} and \keys{\esc},\keys{p}.
 You can adjust the size of the window with \keys{\esc},\keys{g} and \keys{\esc},\keys{j}.
 
 \begin{figure}[!h]
-	\centering
-	\includegraphics[height=0.3\textheight]{01/jpico-two-split.png}
-	\caption{\texttt{jpico} with two files open on screen}
+    \centering
+    \includegraphics[height=0.3\textheight]{01/jpico-two-split.png}
+    \caption{\texttt{jpico} with two files open on screen}
 \end{figure}
 
 To either show only the current window or to show all windows, press \keys{\esc},\keys{i}.
 
 \begin{figure}[!h]
-	\centering
-	\includegraphics[height=0.3\textheight]{01/jpico-zoom-out.png}
-	\caption{\texttt{jpico} `zoomed out' to show three open files at once}
+    \centering
+    \includegraphics[height=0.3\textheight]{01/jpico-zoom-out.png}
+    \caption{\texttt{jpico} `zoomed out' to show three open files at once}
 \end{figure}
 
 #### Configuration
@@ -753,19 +855,19 @@ For each of the following editors...
 - Close a file
 - Exit the editor
 - Move your cursor around
-	-     Up/down/right/left
-	-     Skip words
+    -     Up/down/right/left
+    -     Skip words
 - Edit the contents of a file
 - Undo
 - Cut / Copy / Paste ("Yank")
-	-     Whole lines
-	-     Select/highlight areas of text
+    -     Whole lines
+    -     Select/highlight areas of text
 - Open two files at once (tabs/splits/whatever)
-	-     Change between open files
-	-     View a list of open files
-	-     Return to a normal view/frame (just a single file)
+    -     Change between open files
+    -     View a list of open files
+    -     Return to a normal view/frame (just a single file)
 - Configure your editor
-	-     How do you change settings? (Tab width, cleanup trailing whitespace, UI colors, etc.)
+    -     How do you change settings? (Tab width, cleanup trailing whitespace, UI colors, etc.)
 
 \newpage
 For each editor, answer the following questions:
@@ -842,3 +944,8 @@ This keyboard is also the reason for why ~ refers to your home directory in Linu
 [^emacs-gui]: For example, if you are using X forwarding, Emacs can detect the ability to open a GUI for you.
 [^shorter-letter]: Well, the `nw` in `-nw` stands for no window, but Emacs takes it much more dramatically.
 [^violent]: Don't ask why Emacs has such violent terms. There's no keyboard-related excuse for that one.
+[^css]: CSS is used to specify the design for websites, and it works in Atom, too.
+[^javascript]: JavaScript[^java] is the language of the web. It makes web pages interactive!
+[^java]: JavaScript should never, ever be confused with Java. They are very different.
+[^rich]: Just don't expect to get rich.
+[^fret]: Please, please don't fret. It'll be OK. Just keep a-readin', friend.
