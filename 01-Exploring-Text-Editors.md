@@ -484,6 +484,7 @@ In Emacs, your "copied" and "cut" information is stored in the "kill ring"[^viol
 The kill ring is... a ring that stores things you've killed (cut), so that you can yank (paste) them later.
 
 Vocabulary:
+
 - **Kill**[^violent] - Cut
 - **Yank** - Paste
 
