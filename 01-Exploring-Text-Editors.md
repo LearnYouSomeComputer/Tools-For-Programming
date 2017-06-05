@@ -11,7 +11,7 @@ Because of its simple and featureless interface, many people find editors like `
 Many users miss the ability to use a mouse or simply copy/paste lines from files without bewildering keyboard shortcuts.
 
 Fortunately, there are myriad text editors available.
-Many of the more popular options are available to you on campus machines and can be installed on your person computers as well!
+Many of the more popular options are available to you on campus machines and can be installed on your personal computers as well!
 These editors offer many features that may (hopefully) already be familiar to you.
 Such features include:
 
@@ -25,7 +25,7 @@ In this lab, you will try using several text editors with the goal of finding on
 
 Several of the editors you will see do not have a graphical user interface (GUI).
 Although the ability to use a mouse is comfortable and familiar, don't discount the console editors!
-Despite their learning curves, many experienced programmers strongly prefer console editors due to their speed, stability, and convenience.
+Despite their learning curves, many experienced programmers still prefer console editors due to their speed, stability, and convenience.
 Knowing a console editor is also handy in situations where you need to edit files on a machine halfway around the globe[^globe]!
 
 **Note:** This chapter focuses on text editors; integrated development environments will be discussed later in the semester.
@@ -54,7 +54,7 @@ For each:
 ### Notepad++
 
 [Notepad++](https://notepad-plus-plus.org/)[^npp] is a popular text editor for Windows.
-It is free, easy to install, and sports a variety of features including syntax highlighting and automatic indetation.
+It is free, easy to install, and sports a variety of features including syntax highlighting and automatic indentation.
 Many people choose this editor because it is lightweight and easy to use.
 
 #### Keyboard shortcuts
