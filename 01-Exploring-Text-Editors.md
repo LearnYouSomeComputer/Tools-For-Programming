@@ -733,11 +733,53 @@ set tabstop=4
 set expandtab
 ```
 
+\newpage
 ## Questions
 
 **Note**: Because this is your first pre-lab, questions will be answered in class.
 
+For each of the following editors...
 
+- Notepad++
+- Atom
+- Vim
+- Emacs
+
+... figure out how to do the following:
+
+- Open a file
+- Save a file
+- Close a file
+- Exit the editor
+- Move your cursor around
+	-     Up/down/right/left
+	-     Skip words
+- Edit the contents of a file
+- Undo
+- Cut / Copy / Paste ("Yank")
+	-     Whole lines
+	-     Select/highlight areas of text
+- Open two files at once (tabs/splits/whatever)
+	-     Change between open files
+	-     View a list of open files
+	-     Return to a normal view/frame (just a single file)
+- Configure your editor
+	-     How do you change settings? (Tab width, cleanup trailing whitespace, UI colors, etc.)
+
+\newpage
+For each editor, answer the following questions:
+
+- What do you like about it?
+\vspace{0.4\textheight}
+
+- What do you dislike about it?
+
+\newpage
+Each editor has its own learning curves, but any seasoned programmer will tell you the value of knowing your text editor inside and out. Pick an editor and master it. If you get tired of one, try a different one!
+
+Once you get comfortable with an editor, check out “plugins” for various languages. These can assist you as you code to correct your syntax as you go as well as various other features.
+
+![Learning editors is easy and fun!](01/learning-curve.png)
 
 ## Quick Reference
 
