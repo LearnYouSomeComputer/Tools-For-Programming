@@ -460,7 +460,7 @@ Some other useful commands:
 #### Undo and Redo
 
 Type `C-_` to undo the last operation.
-If you type `C-_` repeatedly, Emacs will continue to undo actions as far as it it can remember.
+If you type `C-_` repeatedly, Emacs will continue to undo actions as far as it can remember.
 
 The way Emacs saves actions takes a little getting used to.
 Undo actions are, themselves, undo-able.
