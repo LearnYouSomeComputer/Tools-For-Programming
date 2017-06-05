@@ -790,13 +790,27 @@ Once you get comfortable with an editor, check out “plugins” for various lan
 
 ### Notepad++
 
+- [The Notepad++ Website](https://notepad-plus-plus.org/)
+- [The Notepad++ Wiki](http://docs.notepad-plus-plus.org/index.php/Main_Page), a handy reference for a lot of Notepad++ features
+- [Notepad++ Plugin Directory](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central), a list of plugins you might want to install
+- [Notepad++ Source Code](https://github.com/notepad-plus-plus/notepad-plus-plus) -- Notepad++ is free and open source, so you can modify it yourself!
 
 ### JPico
 
+- [The Joe Website](http://joe-editor.sourceforge.net/)
+- [Joe Manual](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md)
+- [Joe Source Code](https://sourceforge.net/projects/joe-editor/files/)
+- [Some Joe History](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/history.md)
 
 ### Vim
 
-- Helpful URLs (main website, downloads, package index, tutorial, etc.) / tutorial mode
+- [Vim Website](http://www.vim.org/)
+- [A Vim Cheat Sheet](https://vim.rtorr.com/)
+- [Another Vim Cheat Sheet](http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html)
+- [Why do people use Vi?](http://www.viemu.com/a-why-vi-vim.html), with handy examples of how to combine Vim features together
+- [Vim Tips Wiki](http://vim.wikia.com/wiki/Vim_Tips_Wiki), full of useful "how do I do X" articles
+- [Vim Plugins Directory](http://vimawesome.com/) (there are a LOT of plugins...)
+- [Vim Source Code](https://github.com/vim/vim)
 
 
 [^others-too]: And many other programming languages, for that matter.
