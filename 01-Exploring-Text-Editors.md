@@ -307,6 +307,275 @@ Some handy options:
 
 (You can read more about mouse support [here](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md#xterm-mouse-support)[^jpico-mouse].)
 
+### Emacs
+
+Emacs is a command-line and GUI text editor for Linux, Windows, and macOS.
+Many joke that Emacs is so featureful that it is the only program you need to have installed on any computer.
+Some have taken this to an extreme and shown as a proof of concept that you can use Emacs as your operating system.
+Although that's a fun fact, you shouldn't actually do that.
+
+Emacs was originally developed using a keyboard known as the [space-cadet keyboard](https://en.wikipedia.org/wiki/Space-cadet_keyboard).
+Its layout is similar to, though notably different from today's typical keyboard layout.
+One such difference is that the space-cadet had a Meta key, which we no longer have today.
+Another difference is the layout of modifier keys.
+Many of the Emacs keybindings (keyboard shortcuts, sort of) felt natural for space-cadet users but feel like insane acrobatics today.
+When starting to use Emacs, many users will find that reaching for Alt, Control, and Escape leaves their pinky fingers feeling tired and swollen.
+This has known as "Emacs pinky".
+Prolonged use of Emacs will lead to inhuman pinky strength which can be used with measurable success in combat situations.
+
+Success with Emacs boils down to your development of muscle memory for its vast collection of keybindings.
+Once you have the basics down, you will find yourself angry about having to ever use a mouse.
+Emacs provides a tutorial that you can access from any Emacs installation.
+After launching Emacs, simply type \keys{\ctrl+h} followed by \keys{\ctrl+t} to start the tutorial.
+The tutorial is just like any other editable file, so you can play with it as you please.
+When you're done, simply exit Emacs with \keys{\ctrl+x} followed by \keys{\ctrl+c}.
+Your changes to the tutorial won't be saved.
+
+#### Starting Emacs
+
+The command used to start Emacs is simply `emacs`.
+Just like `jpico`, you can open specific files by listing them as arguments to the command.
+
+~~~shell
+$ emacs main.cpp
+~~~
+
+When it starts, Emacs will first check to see whether or not it has the ability to open any GUI windows for you[^emacs-gui].
+Assuming it can, Emacs will opt to start its GUI interface.
+The Emacs GUI is no more featureful than the command-line interface.
+Sure, you have the ability to reach for your mouse and click the Cut button, but that is no faster than simply typing \keys{\ctrl+k}.
+
+In the name of speed and convenience, many Emacs users choose to skip the GUI.
+You can start Emacs without a GUI by running `emacs -nw`.
+The `-nw` flag tells Emacs[^shorter-letter]...
+
+> Dear Emacs,
+>
+> I know you're very fancy, and you can draw all sorts of cute shapes. That
+> scissor you got there is dandy, and your save button looks like a floppy disk
+> isn't that so great?
+>
+> Please don't bother with any of that, though. I just want you to open in the
+> command-line like jpico, so that I can get some work done and move on with my life.
+>
+> With love,
+> Me, the user.
+
+If you choose to use the GUI, you should be aware of the following: **Emacs is still quirky and it is not going to behave like Notepad++ or Atom**.
+Cut, copy, and paste, for example, are not going to work the way you expect.
+It is really worth your time to get familiar with Emacs before you jump in blind.
+
+#### Keybindings
+
+To use Emacs (at all, really) you need to know its keybindings.
+Keybindings are important enough that this little bit of information deserves its own section.
+
+Keybindings can be thought of one or more keyboard shortcut.
+You may have to type a **series** of things in order to get things to work.
+What's more -- if you mess up, you'll likely have to start again from scratch.
+
+Keybindings are read right to left using the following notation:
+
+- The `C-` prefix indicates you need to hold the Control key while you type
+- The `M-` prefix indicates you need to hold the Alt key (formerly Meta key) while you type
+- Anything by itself you type **without** a modifier key.
+
+Here are a handful of examples:
+
+- `C-f` (\keys{\ctrl+f}) -- Move your cursor forward one character
+- `M-w` (\keys{\alt+w})-- Copy a region
+- `C-x C-c` (\keys{\ctrl+x} followed by \keys{\ctrl+c}) -- Exit Emacs
+- `C-u 8 r` (\keys{\ctrl+u} followed by \keys{8} followed by \keys{r}) -- Type 8 lowercase `r`'s in a row.
+
+You can always ask Emacs what a keybinding does using `C-h k <keybinding>`.
+For example,
+
+- `C-h k C-f` -- What does `C-f` do?
+- `C-h k C-x C-c` -- What does `C-x C-c` do?
+
+Finally, if you done goofed, you can always tell Emacs to cancel your keybinding-in-progress.
+Simply type `C-g`.
+According to the Emacs help page...
+
+> C-g runs the command keyboard-quit... this character quits directly.
+> At a top-level, as an editor command, this simply beeps.
+
+As mentioned, you can also use `C-g` to get your fill of beeps.
+
+#### Executing Extended Commands
+
+It is worth mention that every keybinding just runs a function in Emacs.
+For example, `C-f` (which moves your cursor forward) runs a function called `forward-char`.
+You can run any function by name using `M-x`.
+`M-x` creates a little command prompt at the very bottom of Emacs.
+Simply type the name of a command there and press Enter to run it.
+
+For example, if you typed `M-x` and entered `forward-char` in the prompt and pressed Enter, your cursor would move forward one character.
+Granted, that requires... 13?... More keystrokes than `C-f`, but by golly, you can do it!
+
+`M-x` is *very* useful for invoking commands that don't actually have keybindings.
+
+#### Moving Around
+
+Although you can use your arrow keys to move your cursor around, you will feel much fancier if you learn the proper keybindings to do so in Emacs.
+
+Moving by character:
+- `C-f` Move forward a character
+- `C-b` Move backward a character
+
+Moving by word:
+- `M-f` Move forward a word
+- `M-b` Move backward a word
+
+Moving by line:
+- `C-n` Move to next line
+- `C-p` Move to previous line
+
+Moving around lines:
+- `C-a` Move to beginning of line
+- `C-e` Move to end of line
+
+Moving by sentence:
+- `M-a` Move back to beginning of sentence
+- `M-e` Move forward to end of sentence
+
+Scrolling by page:
+- `C-v` Move forward one screenful (Page Down)
+- `M-v` Move backward one screenful (Page Up)
+
+Some other useful commands:
+- `C-l` Emacs will keep your cursor in place and shift the text within your window.
+  Try typing `C-l` a few times in a row to see what it does.
+- `C-s` starts search.
+  After you type `C-s`, you will see a prompt at the bottom of Emacs.
+  Simply type the string you're searching for and press Enter.
+  Emacs will highlight the matches one at a time.
+  Continue to type `C-s` to scroll through all the matches in the document.
+  `C-g` will quit.
+
+#### Undo and Redo
+
+Type `C-_` to undo the last operation.
+If you type `C-_` repeatedly, Emacs will continue to undo actions as far as it it can remember.
+
+The way Emacs saves actions takes a little getting used to.
+Undo actions are, themselves, undo-able.
+The consequences of this are more obvious when you play around with `C-_` yourself.
+
+To add further quirkiness, Emacs doesn't have redo.
+So don't mess up, or you're going to have to undo all your undoing.
+
+#### Saving and Quitting
+
+You can save a document with `C-x C-s`.
+If necessary, Emacs will prompt you for a file name.
+Just watch the bottom of Emacs to see if it's asking you any questions.
+
+You can quit Emacs with `C-x C-c`.
+If you have anything open that has not been saved, Emacs will prompt you to see if you really want to quit.
+
+#### Kill and Yank
+
+In Emacs, your "copied" and "cut" information is stored in the "kill ring"[^violent].
+The kill ring is... a ring that stores things you've killed (cut), so that you can yank (paste) them later.
+
+Vocabulary:
+- **Kill**[^violent] - Cut
+- **Yank** - Paste
+
+In order to kill parts of a file, you'll need to be able to select them.
+You can select a region by first setting a mark at your current cursor location with `C-space`.
+Then, simply move your cursor to highlight the stuff you want to select.
+Use `C-w` to kill the selection and add it to your kill ring.
+You can also use `M-w` to kill the selection without actually removing it (copy instead of cut).
+
+If you want to get content out of your kill ring, you can "yank" it out with `C-y`.
+By default, `C-y` will yank whatever you last killed.
+You can follow `C-y` with `M-y` to circle through other things you've previously killed.
+That is, Emacs will maintain a history of things you've killed.
+
+That's right!
+Emacs' kill ring is more sophisticated than a clipboard, because you can store **several** things in there.
+
+To understand why it's called the kill **ring**, consider the following scenario:
+
+> First, I kill "Kermit".
+> Then, I kill "Ms. Piggy".
+> Then, I kill "Gonzo".
+>
+> Next, I yank from my kill ring.
+> Emacs will first yank "Gonzo".
+> If I use `M-y` to circle through my previous kills, Emacs will yank "Ms. Piggy".
+> If I use `M-y` again, Emacs will yank "Kermit".
+>
+> If I use `M-y` **again**, Emacs will yank "Gonzo" again.
+
+You can circle through your kill ring as necessary to find previously killed content.
+Emacs will simply replace the yanked text with the next thing from the kill ring.
+
+#### Multiple Buffers and Windows
+
+You can have several different files open in Emacs at once.
+Simply use `C-x C-f` to open a new file into a new buffer.
+By default, you can only see one buffer at a time.
+
+You can switch between the buffers using `C-x b`.
+Emacs will open a prompt asking for the name of the buffer you want to switch to.
+You have several options for entering that name:
+
+1. Type it! Tab-completion works, so that's handy.
+2. Use your arrow keys to scroll through the names of the buffers.
+
+If you're done with a buffer, you can kill[^violent] it (close it) using `C-x k`.
+
+You can also see a list of buffers using `C-x C-b`.
+This will open a new **window** in Emacs.
+
+You can switch between windows using `C-x o`.
+This is convenient if you want to, say, have a `.h` file and a `.cpp` file open at the same time.
+`C-x b` works the same for switching buffers, so you can tell Emacs which buffer to show in each window.
+
+You can open windows yourself, too:
+
+- `C-x 2` (runs `split-window-below`) splits the current window in half by drawing a line left-to-right.
+- `C-x 3` (runs `split-window-right`) splits the current window in half by drawing a line top-to-bottom.
+
+And, of course, you can close windows, too.
+
+- `C-x 0` closes the current window
+- `C-x 1` closes every window **except** the current window.
+   This command is **very** handy if Emacs opens too much junk.
+
+#### Configuration and Packages
+
+Emacs stores all of its configuration using a dialect of the Lisp programming language.
+The default location of its configuration file is in your home directory in `.emacs/init.el`.
+The `init.el` file contains Lisp code that Emacs runs on start up (**init**ialization).
+This runs code and sets variables within Emacs to customize how it behaves.
+
+Although you can (and sometimes have to) write your own Lisp code, it's usually easier to let Emacs do it for you.
+Running the `customize` command (`M-x customize`) will start the customization tool.
+You can use your normal moving-around keybindings and the Enter key to navigate through the `customize` menus.
+You can also search for variables to change.
+
+For example:
+
+1. Run the `customize` command (`M-x customize`)
+2. In the search bar, type "indent-tabs". Then move your cursor to `[ Search ]` and press Enter.
+3. Locate the `Indent Tabs Mode` option and press the `[Toggle]` button by placing your cursor on it and pressing Enter.
+   You'll notice that the State changes from `STANDARD` to `EDITED`.
+4. Press the `[ State ]` button and choose option `1` for Save for Future Sessions.
+
+These steps will modify your `init.el` file, so that Emacs will use spaces instead of tab characters whenever you press the tab key.
+It may seem tedious, but `customize` will always write correct Lisp code to your `init.el` file.
+
+`customize` and other more advanced commands are available by default in Emacs.
+As further evidence that it is nearly its own operating system, you can install packages in Emacs using its built-in package manager.
+
+If you run the `list-packages` command (`M-x list-packages`), you can see a list of packages available for install.
+Simply scroll through the list like you would any old buffer.
+For instructions on installing packages and searching for packages in unofficial software repositories, refer to the Emacs wiki.
+
 ### Vim
 
 Vim is a command-line and GUI[^gvim] text editor for Linux, Windows, and macOS.
@@ -434,8 +703,6 @@ set tabstop=4
 set expandtab
 ```
 
-### Emacs
-
 ## Questions
 
 **Note**: Because this is your first pre-lab, questions will be answered in class.
@@ -485,3 +752,6 @@ Some terminals didn't even have arrow keys as a result!
 Second, when Bill Joy wrote `vi` (which inspired `vim`), he was using a Lear Siegler ADM-3A terminal, which didn't have individual arrow keys.
 Instead, the arrow keys were placed on the h, j, k, and l keys.
 This keyboard is also the reason for why ~ refers to your home directory in Linux: ~ and Home are on the same key on an ADM-3A terminal.
+[^emacs-gui]: For example, if you are using X forwarding, Emacs can detect the ability to open a GUI for you.
+[^shorter-letter]: Well, the `nw` in `-nw` stands for no window, but Emacs takes it much more dramatically.
+[^violent]: Don't ask why Emacs has such violent terms. There's no keyboard-related excuse for that one.
