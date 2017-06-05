@@ -387,7 +387,7 @@ Keybindings are read right to left using the following notation:
 Here are a handful of examples:
 
 - `C-f` (\keys{\ctrl+f}) -- Move your cursor forward one character
-- `M-w` (\keys{\alt+w})-- Copy a region
+- `M-w` (\keys{\Alt+w})-- Copy a region
 - `C-x C-c` (\keys{\ctrl+x} followed by \keys{\ctrl+c}) -- Exit Emacs
 - `C-u 8 r` (\keys{\ctrl+u} followed by \keys{8} followed by \keys{r}) -- Type 8 lowercase `r`'s in a row.
 
