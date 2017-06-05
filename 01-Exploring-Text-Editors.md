@@ -309,6 +309,131 @@ Some handy options:
 
 ### Vim
 
+Vim is a command-line and GUI[^gvim] text editor for Linux, Windows, and macOS.
+It is popular for its power, configurability, and the composability of its commands.
+
+For example, rather than having separate commands for deleting words, lines, paragraphs, and the like,
+Vim has a single delete command (`d`) that can be combined with motion commands to delete a word (`w`), line (`d`), paragraph (`{`), etc.
+In this sense, learning to use Vim is like learning a language: difficult at first, but once you become fluent it's easy to express complex tasks.
+
+Vim offers a tutorial: at a command prompt, run `vimtutor`.
+You can also access help in Vim by typing `:help <thing you want help with>`.
+The help search can be tab-completed.
+To close the help window, type `:q`.
+
+#### Getting into Insert mode
+
+Vim is what's known as a 'modal editor'; keys have different meanings in different modes.
+When you start Vim, it is in 'normal' mode; here, your keys will perform different commands -- no need to press \keys{\ctrl} all the time!
+However, usually when you open a text file, you want to, you know, type some text into it.
+For this task, you want to enter 'insert' mode.
+There are a number of ways to put `vim` into insert mode, but the simplest is just to press \keys{i}.
+
+Some other ways to get into insert mode:
+
+- \keys{I}: Insert at beginning of line
+- \keys{a}: Insert after cursor (append at cursor)
+- \keys{A}: Insert at end of line (Append to line)
+- \keys{o}: Insert on new line below cursor
+- \keys{O}: Insert on new line above cursor
+
+When in insert mode, you can move around with the arrow keys.
+
+To get back to normal mode, press \keys{\esc} or \keys{\ctrl + c}.
+(Many people who use `vim` swap \keys{Caps Lock} and \keys{\esc} to make switching modes easier.)
+
+#### Moving around in Normal mode
+
+In normal mode, you can move around with the arrow keys, but normal mode also features a number of motion commands for efficiently moving around files.
+Motion commands can also be combined with other commands, as we will see later on.
+
+Some common motions:
+
+- \keys{j}/\keys{k}/\keys{h}/\keys{l}: up/down/left/right[^hjkl]
+- \keys{\^{}}/\keys{\$}: Beginning/end of line
+- \keys{w}: Next word
+- \keys{e}: End of current word, or end of next word
+- \keys{b}: Back one word
+- \keys{\%}: Matching brace, bracket, or parenthesis
+- \keys{gg}/\keys{G}: Top/bottom of document
+
+Commands can be repeated a number of times; for instance, `3w` moves forward three words.
+
+One very handy application of the motion keys is to change some text with the \keys{c} command.
+For example, typing `c$` in normal mode deletes from the cursor to the end of the line and puts you in insert mode
+so you can type your changes.
+Repeating a command character twice usually applies it to the whole current line; so `cc` changes the whole current line.
+
+#### Selecting text in Visual mode
+
+Vim has a visual mode for selecting text; usually this is useful in conjunction with the change, yank, or delete commands.
+\keys{v} enters visual mode; motion commands extend the selection.
+If you want to select whole lines, \keys{V} selects line-by-line instead.
+
+Vim also has a block select mode: \keys{\ctrl+v}.
+In this mode, you can select and modify blocks of text similar to Notepad++'s column selection feature.
+Pressing \keys{I} will insert at the beginning of the selection.
+After returning to normal mode, whatever you insert on the first row is propagated to all other rows.
+Likewise, \keys{c} can be used to change the contents of a bunch of rows in one go.
+
+<!-- TODO pictures of this -->
+
+#### Undo and Redo
+
+To undo a change, type \keys{u}. \keys{U} undoes all changes on the current line.
+
+To redo (undo an undo), press \keys{\ctrl + r}.
+
+#### Saving and Quitting
+
+In normal mode, you can save a file by typing `:w`.
+To save and quit, type `:wq` or `ZZ`.
+
+If you've saved your file already and just want to quit, `:q` quits; `:q!` lets you quit without saving changes.
+
+#### Copy and Paste
+
+Vim has an internal clipboard like `jpico`. The command to copy (yank, in Vim lingo) is \keys{y}.
+Combine this with a motion command; `yw` yanks one word and `y3j` yanks 4 lines.
+As with `cc`, `yy` yanks the current line.
+
+In addition to yank there is the \keys{d} command to cut/delete text; it is used in the same way.
+
+Pasting is done with \keys{p} or \keys{P}; the former pastes the clipboard contents after the character the cursor is on, the latter pastes before the cursor.
+
+While Vim lacks a killring, it does allow you to use multiple paste registers with the \keys{''} key.
+Paste registers are given one-character names; for example, `"ayy` yanks the current line into the `a` register.
+`"ap` would then paste the current line elsewhere.
+
+If you want to copy to the system clipboard, the paste register name for that is `+`. So `"+p` would paste from the system clipboard.
+(To read about this register and other special registers, type `:help registers`.)
+
+#### Indenting
+
+You can indent code one level with \keys{$>$} and outdent with \keys{$<$}.
+Like \keys{c}, these must be combined with a motion or repeated to apply to the current line.
+For instance, `>%` indents everything up to the matching '}' (or bracket or parenthesis) one level.
+
+Vim also features an auto-indenter: \keys{=}.
+It is incredibly handy when copying code around.
+For example, `gg=G` will format an entire file (to break the command down, `gg` moves to the top of the file, then `=G` formats to the bottom).
+
+<!-- TODO Multiple Files, Search and Replace -->
+
+#### Configuration
+
+Vim's user configuration file is located at `~/.vimrc` or `~/.vim/vimrc`.
+You do not need to copy a default configuration; just create one and add the configuration values you like.
+
+Vim has a mouse mode that can be used to place the cursor or select things in visual mode.
+In your config file, enter `set mouse=a`.
+
+To use four-space tabs for indentation in Vim, the following two options should be set:
+```
+set tabstop=4
+set expandtab
+```
+
 ### Emacs
 
 ## Questions
@@ -324,6 +449,14 @@ Some handy options:
 
 ## Further Reading
 
+### Notepad++
+
+
+### JPico
+
+
+### Vim
+
 - Helpful URLs (main website, downloads, package index, tutorial, etc.) / tutorial mode
 
 
@@ -336,7 +469,7 @@ Some handy options:
 [^npp-plugins]: [http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central)
 [^joe]: [http://joe-editor.sourceforge.net](http://joe-editor.sourceforge.net)
 [^pico]: [http://www.guckes.net/pico/](http://www.guckes.net/pico/)
-[^news]: A newsreader is a program for reading usenet posts. Imagine reddit, but in the 1980s.
+[^news]: A newsreader is a program for reading Usenet posts. Imagine Reddit, but in the 1980s.
 [^nerds]: Well, easy to use for people (sometimes known as 'humanitty') who were already used to using Unix terminal programs!
 [^esc]: In the '60s and '70s, \keys{\ctrl} cleared the top three bits of the ASCII code of whatever key you pressed.
 The ASCII code for \keys{\esc} is `0x1B` or `0b00011011` and the ASCII code for \keys{[} is `0x5b` or `0b01011011`.
@@ -347,3 +480,8 @@ They were incredibly slow to output anything, and there was no way to erase what
 (how would you show it?).
 Some terminals didn't even have arrow keys as a result!
 [^jpico-mouse]: [https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md#xterm-mouse-support](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md#xterm-mouse-support)
+[^gvim]: The graphical version is cleverly named `gvim`.
+[^hjkl]: Why these letters? Two reasons: first, they're on the home row of a QWERTY keyboard, so they're easy to reach.
+Second, when Bill Joy wrote `vi` (which inspired `vim`), he was using a Lear Siegler ADM-3A terminal, which didn't have individual arrow keys.
+Instead, the arrow keys were placed on the h, j, k, and l keys.
+This keyboard is also the reason for why ~ refers to your home directory in Linux: ~ and Home are on the same key on an ADM-3A terminal.
