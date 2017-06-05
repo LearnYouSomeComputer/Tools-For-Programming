@@ -66,10 +66,12 @@ Other shortcuts indent or outdent[^outdent] blocks of code or insert or remove c
 In addition to those shortcuts, if your cursor is on a brace, bracket, or parenthesis, you can jump to the matching brace, bracket, or parenthesis with \keys{\ctrl+b}.
 
 ##### Word-based shortcuts
+
 - \keys{\ctrl+\arrowkeyleft} / \keys{\arrowkeyright}: Move cursor forward or backward by one word
 - \keys{\ctrl+\backdel}: Delete to start/end of word
 
 ##### Line-based shortcuts
+
 - \keys{\ctrl+\shift+\backspace}: Delete to start/end of line
 - \keys{\ctrl+l}: Delete current line
 - \keys{\ctrl+t}: Transpose (swap) current and previous lines
@@ -229,6 +231,7 @@ Some programs, including `jpico`, don't just have *a* clipboard--they have a who
 of everything you've cut that you can cycle through!
 
 There are a number of ways to cut (or delete) things:
+
 - \keys{\ctrl + d}: Cut a character
 - \keys{\esc},\keys{d}: Cut from the cursor to the end of the current word
 - \keys{\esc},\keys{h}: Cut from the cursor to the beginning of the current word
@@ -253,6 +256,7 @@ To paste something else from the killring, press \keys{\ctrl+u}, then press \key
 `(I)gnore (R)eplace (B)ackwards Bloc(K) (A)ll files NNN (^C to abort):`
 
 From here, you can:
+
 - Press \keys{\enter} to search forwards
 - Press \keys{i} to search forward and ignore the case (so searching for "bob" will match "Bob" as well)
 - Press \keys{b} to search backwards
