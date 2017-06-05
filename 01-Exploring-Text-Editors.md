@@ -691,7 +691,33 @@ Vim also features an auto-indenter: \keys{=}.
 It is incredibly handy when copying code around.
 For example, `gg=G` will format an entire file (to break the command down, `gg` moves to the top of the file, then `=G` formats to the bottom).
 
-<!-- TODO Multiple Files, Search and Replace -->
+#### Multiple files
+
+In Vim terminology, every open file is a 'buffer'. Buffers can be active (visible) or hidden (not on the screen).
+When you start Vim, it has one window open; each window can show a buffer.
+
+Working with buffers:
+
+- `:e <filename>` opens (edits) a file in a new buffer. You can use tab completion here!
+- `:bn` and `:bp` switch the current window to show the next or previous buffer
+- `:b <filename>` switches to a buffer matching the given filename (tab completion also works here)
+- `:buffers` shows a list of open buffers
+
+Working with windows:
+
+- `:split` splits the current window in half horizontally
+- `:vsplit` splits the current window vertically
+- \keys{\ctrl+w} \keys{w} switches focus to the next window
+- \keys{\ctrl+w} \keys{h}/\keys{j}/\keys{k}/\keys{l} switches focus to the window above/left/right/below the current window
+
+Vim also has tabs!
+
+- `:tabe` edits a file in a new tab
+- `gt` and `gT` switch forward and backward through tabs
+
+To close a window/tab, type `:q`. `:qall` or `:wqall` let you close / save and close all buffers in one go.
+
+<!-- TODO Search and Replace -->
 
 #### Configuration
 
