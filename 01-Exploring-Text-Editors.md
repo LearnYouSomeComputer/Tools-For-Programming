@@ -174,7 +174,7 @@ Atom has a GUI, so it is mouse friendly and human friendly, too.
     \caption{One Atom window with Tree View on the left and an empty pane on the right}
 \end{figure}
 
-Using \keys{\ctrl+\} (or \menu{View > Toggle Tree View}), you can toggle Atom's Tree View.
+Using \keys{\ctrl+\textbackslash} (or \menu{View > Toggle Tree View}), you can toggle Atom's Tree View.
 The Tree View is a convenient tool for browsing files within a folder or subfolders.
 By clicking the down arrow to the left of a folder, you can see its contents.
 Simply double click a file to open it up.
