@@ -8,6 +8,8 @@ A shell is a hard outer layer of a marine animal, found on beaches.
 
 Now that that's cleared up, on to some cool shell facts.
 Did you know that shells play a vital role in the Linux operating system?
+PuTTY lets you type stuff to your shell and shows you what the shell outputs.
+
 When you log in to one of these machines, a program named `login` asks you for your username and password.
 After you type in the right username and password, it looks in a particular file, `/etc/passwd`, which lists useful things about you like where your home directory is located.
 This file also has a program name in it -- the name of your shell.
