@@ -217,19 +217,84 @@ g++ lots_o_errors.cpp 2>&1 | less
 Name: `______________________________`
 
 1. What does a shell do?
-\vspace{7em}
+\vspace{10em}
 
 2. How would you print all header (`.h`) files in the `/tmp` directory?
-\vspace{7em}
+\vspace{10em}
 
 3. How would you move a file named "bob.txt" to a folder in your home directory named "odd" and rename "bob.txt" to "5.txt"?
-\vspace{7em}
+\vspace{10em}
 
 4. Suppose you have a file containing a bunch of scores, one score per line (like so: "57 Jenna").
 How would you print the top three scores from the file?
 \newpage
 
 ## Quick Reference
+
+`ls [Directory or Files]`: List the contents of a directory or information about files
+
+- `-l` Detailed listing of file details
+- `-h` Show human-readable modification times
+- `-a` Show hidden files (files whose name starts with `.`)
+
+`pwd`: Print current working directory
+
+`cd [Directory]`: Change current working directory
+
+- `cd` with no arguments changes to the home directory
+- `cd -` switches to the previous working directory
+
+`mv [source] [destination]`: Move or rename a file or directory
+
+- `-i`: Interactively prompt before overwriting files
+- `-n`: Never overwrite files
+
+`cp [source] [destination]`: Copy a file or directory
+
+- `-r`: Recursively copy directory (must be used to copy directories)
+- `-i`: Interactively prompt before overwriting files
+- `-n`: Never overwrite files
+
+`rm [file]`: Removes a file or directory
+
+- `-r`: Recursively remove directory (must be used to remove directories)
+- `-i`: Interactively prompt before removing files
+
+`mkdir [directory]`: Make a new directory
+
+- `-p`: Make all directories missing in a given path
+
+`cat [filenames]`: Output contents of files
+
+`less [filename]`: Interactively scroll through long files
+
+`head [filename]`: Display lines from beginning of a file
+
+- `-n num_lines`: Display `num_lines` lines, rather than the default of 10
+
+`tail [filename]`: Display lines from the end of a file
+
+- `-n num_lines`: Display `num_lines` lines, rather than the default of 10
+
+`man [command]`: Display manual page for a command
+
+Special Filenames:
+
+- `.`: Current directory
+- `..`: Parent directory
+- `~`: Home directory
+- `/`: Root directory
+
+Glob patterns:
+
+- `*`: Match 0 or more characters of a file or directory name
+- `?`: Match exactly 1 character of a file or directory name
+
+IO Redirection:
+
+- `cmd1 | cmd2`: Redirect output from `cmd1` to the input of `cmd2`
+- `cmd > filename`: Redirect output from `cmd` into a file
+- `cmd 2>&1`: Redirect the error output from `cmd` into its regular output
 
 ## Further Reading
 
