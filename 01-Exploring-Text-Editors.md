@@ -845,6 +845,7 @@ For each of the following editors...
 
 - Notepad++
 - Atom
+- JPico
 - Vim
 - Emacs
 
@@ -870,6 +871,8 @@ For each of the following editors...
     -     How do you change settings? (Tab width, cleanup trailing whitespace, UI colors, etc.)
 
 \newpage
+Name: `______________________________`
+
 For each editor, answer the following questions:
 
 - What do you like about it?
