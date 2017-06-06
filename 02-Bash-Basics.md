@@ -296,12 +296,10 @@ Name: `______________________________`
 1. What does a shell do?
 \vspace{10em}
 
-<!-- TODO Are you looking for a command? Are they printing the *names* of the files or the contents? -->
-2. How would you print all header (`.h`) files in the `/tmp` directory?
+2. What command would you use to print the names of all header (`.h`) files in the `/tmp` directory?
 \vspace{10em}
 
-<!-- "bob.txt" is in their pwd? -->
-3. How would you move a file named "bob.txt" to a folder in your home directory named "odd" and rename "bob.txt" to "5.txt"?
+3. How would you move a file named "bob.txt" (in your current directory) to a folder in your home directory named "odd" and rename "bob.txt" to "5.txt"?
 \vspace{10em}
 
 4. Suppose you have a file containing a bunch of scores, one score per line (like so: "57 Jenna").
