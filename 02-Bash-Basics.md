@@ -189,7 +189,7 @@ We'll need a couple new utilities:
 
 So, we can do `cat myFile.txt | sort | uniq | wc` to sort the lines in 'myFile.txt', then remove all the duplicates, then count the number of lines, words, and characters in the deduplicated output!
 
-![uniqe](02/7.png)\
+![unique](02/7.png)\
 
 Another common use for piping is to scroll through the output of a command that prints out a lot of data: `my_very_talkative_program | less`.
 
@@ -202,16 +202,45 @@ nmjxv3@rc02xcs213:~$ cat hello.txt
 hello world
 ```
 
+Now for a bit about STDERR.
+Bash numbers its output streams: STDOUT is `1` and STDERR is `2`.
+If you want to do pipe STDERR to other programs, you need to redirect it to STDOUT first.
+This is done like so: `2>&1`.
+
+So, for example, if you have a bunch of compiler errors that you want to look through with `less`, you'd do this:
+```
+g++ lots_o_errors.cpp 2>&1 | less
+```
+
+\newpage
 ## Questions
+Name: `______________________________`
+
+1. What does a shell do?
+\vspace{7em}
+
+2. How would you print all header (`.h`) files in the `/tmp` directory?
+\vspace{7em}
+
+3. How would you move a file named "bob.txt" to a folder in your home directory named "odd" and rename "bob.txt" to "5.txt"?
+\vspace{7em}
+
+4. Suppose you have a file containing a bunch of scores, one score per line (like so: "57 Jenna").
+How would you print the top three scores from the file?
+\newpage
 
 ## Quick Reference
 
 ## Further Reading
 
+[List of Bash Commands](https://ss64.com/bash/)
+[Bash Reference Manual](https://www.gnu.org/software/bash/manual/bashref.html)
+[All About Pipes](http://www.linfo.org/pipe.html)
+
 [^bash]: The 'Bourne Again Shell', known for intense action sequences, intrigue, and being derived from the 'Bourne shell'.
 [^old]: Thanks, old curmudgeons who can't be bothered to learn to type 'list'.
 [^globs]: We'll talk more about `*.cpp` later on in this chapter.
-[^dotfiles]: This convention stems from a bug in `ls`.
+[^dotfiles]: This convention stems from a "bug" in `ls`.
 When `.` and `..` were added to filesystems as shorthand for "current directory" and "parent directory",
 the developers of Unix thought that people wouldn't want to have these files show up in their directory listings.
 So they added a bit of code to `ls` to skip them: `if(name[0] == '.') continue;`.
