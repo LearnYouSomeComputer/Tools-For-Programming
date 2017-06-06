@@ -2,7 +2,7 @@
 
 ## Motivation
 
-At this point your Computer Science career, you've worked with at least one text editor: `jpico`.
+At this point in your Computer Science career, you've worked with at least one text editor: `jpico`.
 Love it or hate it, `jpico` is a useful program for reading and writing **plain ASCII text**.
 C++ programs[^others-too] are written in plain ASCII text.
 ASCII is a convenient format for humans and programs[^compilers] alike to read and process.
@@ -11,7 +11,7 @@ Because of its simple and featureless interface, many people find editors like `
 Many users miss the ability to use a mouse or simply copy/paste lines from files without bewildering keyboard shortcuts.
 
 Fortunately, there are myriad text editors available.
-Many of the more popular options are available to you on campus machines and can be installed on your personal computers as well!
+Many popular options are available to you on campus machines and can be installed on your personal computers as well!
 These editors offer many features that may (hopefully) already be familiar to you.
 Such features include:
 

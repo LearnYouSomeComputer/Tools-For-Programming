@@ -30,6 +30,77 @@ There are others, however! `zsh` and `fish` are both popular.
 
 ## Walkthrough
 
+### My Dinner with Bash
+
+To use bash, you simply enter commands and press \keys{\enter}.
+Bash will run the corresponding program and show you the resulting output.
+
+Some commands are very simple to run.
+Consider `pwd`:
+
+~~~ shell
+nmjxv3@rc02xcs213:~$ pwd
+/usr/local/home/njmxv3
+~~~
+
+When you type `pwd` and press \keys{\enter}, bash runs `pwd` for you.
+In turn, `pwd` outputs your present working directory (eh? eh?) and bash shows it to you.
+
+#### Arguments
+
+Some commands are more complex.
+Consider `g++`:
+
+~~~ shell
+nmjxv3@rc02xcs213:~$ g++ main.cpp
+~~~
+
+`g++` needs more information than `pwd`.
+After all, it needs *something* to compile.
+
+In this example, we call `main.cpp` a **command line argument**.
+Many programs require command line arguments in order to work.
+If a program requires more than one argument, we simply separate them with spaces.
+
+#### Flags
+
+In addition to command line arguments, we have **flags**.
+A flag starts with one or more `-` and may be short or long.
+Consider `g++` again:
+
+~~~ shell
+nmjxv3@rc02xcs213:~$ g++ -Wall main.cpp
+~~~
+
+Here, we pass a command line argument to `g++`, as well as a flag: `-Wall`.
+`g++` has a set of flags that it knows.
+Each flag turns features on or off.
+In this case, `-Wall` asks `g++` to turn on *all warnings*.
+If *anything* looks fishy in `main.cpp`, we want to see a compiler warning about it.
+
+#### Reading Commands in this Course
+
+Some flags are optional; some command line arguments are optional.
+In this course, you will see **many** different commands that take a variety of flags and arguments.
+We will use the following notation with regard to optional or required flags and arguments:
+
+- If it's got angle brackets (`<>`) around it, it's a placeholder.
+  **You** need to supply a value there.
+- If it's got square brackets (`[]`) around it, it's optional.
+- If it doesn't have brackets, it's required.
+
+For example:
+
+- `program1 -f <filename>`
+    - A `filename` argument is required, but you have to provide it in the specified space
+- `program2 [-l]`
+    - The `-l` flag is optional. Pass it only if you want/need to.
+- `program3 [-l] <filename> [<number of cows>]`
+    - The `-l` flag is optional. Pass it only if you want/need to.
+    - A `filename` argument is required, but you have to provide it in the specified space
+    - The `number of cows` argument is optional.
+      If you want to provide it, it's up to you to decide.
+
 ### Filesystem Navigation
 
 Close your eyes. It's May 13, 1970.
@@ -42,6 +113,8 @@ Before you know it, you're done with your work and are off in your VW Beetle to 
 
 Open your eyes. It's today again, and despite being 40 years in the future, all these short command names still persist[^old].
 Such is life!
+
+#### Look Around You with `ls`
 
 If you want to see (list) what files exist in a directory, `ls` has got you covered.
 Just running `ls` shows what's in the current directory, or you can give it a path to list, such as `ls cool_code/sudoku_solver`.
@@ -71,7 +144,9 @@ Another `ls` option lets you show hidden files. In Linux, every file whose name 
 To include these files in a directory listing, use the `-a` flag.
 You may be surprised by how many files show up if you run `ls -a` in your home directory!
 
-Speaking of directories, if you ever forget which directory you are in, `pwd` (short for "print working directory") will remind you.
+#### Change your Location with `cd`
+
+Speaking of directories, if you ever forget which directory you are currently in, `pwd` (short for "print working directory") will remind you.
 
 You can change your directory with `cd`, e.g. `cd mycooldirectory`.
 `cd` has a couple tricks:
@@ -81,7 +156,7 @@ You can change your directory with `cd`, e.g. `cd mycooldirectory`.
 
 ### Shorthand
 
-Linux has some common shorthand for specific files:
+Linux has some common shorthand for specific directories:
 
 - `.` refers to the current directory
 - `..` refers to the parent directory; use `cd ..` to go up a directory
@@ -219,9 +294,11 @@ Name: `______________________________`
 1. What does a shell do?
 \vspace{10em}
 
+<!-- TODO Are you looking for a command? Are they printing the *names* of the files or the contents? -->
 2. How would you print all header (`.h`) files in the `/tmp` directory?
 \vspace{10em}
 
+<!-- "bob.txt" is in their pwd? -->
 3. How would you move a file named "bob.txt" to a folder in your home directory named "odd" and rename "bob.txt" to "5.txt"?
 \vspace{10em}
 
