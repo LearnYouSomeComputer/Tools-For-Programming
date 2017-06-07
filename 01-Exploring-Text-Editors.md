@@ -161,7 +161,7 @@ Designed with customization in mind, Atom is built on top of the engine that dri
 Atom allows users to customize just about every feature that it offers.
 Style can be changed using cascading style sheets[^css] and behavior can be changed using JavaScript[^javascript].
 
-Additionally, being a hip-and-trendy \texttrademark piece of software, you can install community packages written by other developers.
+Additionally, being a hip-and-trendy\texttrademark  piece of software, you can install community packages written by other developers.
 In fact, if you find that Atom is missing some particular behavior, you can create a package and make it available to the world, as well[^rich]!
 
 Atom has a GUI, so it is mouse friendly and human friendly, too.
@@ -247,7 +247,7 @@ These are *very* handy, as they can save you a lot of command typing.
     \caption{Atom's settings open in a new tab. You can search through its keybindings here.}
 \end{figure}
 
-If you open up Atom's settings (using a the menu or command palette), you'll find quite a few bells and whistles that you can customize.
+If you open up Atom's settings (using the menu or command palette), you'll find quite a few bells and whistles that you can customize.
 As you explore these options, take note that you can search for keybindings here.
 Atom has a helpful search tool that makes it easy to quickly find the keybinding for a particular command.
 
@@ -476,11 +476,11 @@ It is really worth your time to get familiar with Emacs before you jump in blind
 To use Emacs (at all, really) you need to know its keybindings.
 Keybindings are important enough that this little bit of information deserves its own section.
 
-Keybindings can be thought of one or more keyboard shortcut.
+Keybindings can be thought of as one or more keyboard shortcut.
 You may have to type a **series** of things in order to get things to work.
 What's more -- if you mess up, you'll likely have to start again from scratch.
 
-Keybindings are read right to left using the following notation:
+Keybindings are read left to right using the following notation:
 
 - The `C-` prefix indicates you need to hold the Control key while you type
 - The `M-` prefix indicates you need to hold the Alt key (formerly Meta key) while you type
@@ -489,7 +489,7 @@ Keybindings are read right to left using the following notation:
 Here are a handful of examples:
 
 - `C-f` (\keys{\ctrl+f}) -- Move your cursor forward one character
-- `M-w` (\keys{\Alt+w})-- Copy a region
+- `M-w` (\keys{\Alt+w}) -- Copy a region
 - `C-x C-c` (\keys{\ctrl+x} followed by \keys{\ctrl+c}) -- Exit Emacs
 - `C-u 8 r` (\keys{\ctrl+u} followed by \keys{8} followed by \keys{r}) -- Type 8 lowercase `r`'s in a row.
 
