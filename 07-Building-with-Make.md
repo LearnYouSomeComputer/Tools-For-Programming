@@ -1,3 +1,13 @@
 # Building with Make
 
-Blap blap blap
+## Motivation
+
+### Takeaways
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading

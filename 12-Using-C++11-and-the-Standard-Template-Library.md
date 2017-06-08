@@ -1,3 +1,13 @@
 # Using C++11 and the Standard Template Library
 
-Blap blap blap
+## Motivation
+
+### Takeaways
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading

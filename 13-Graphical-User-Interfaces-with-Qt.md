@@ -1,3 +1,13 @@
 # Graphical User Interfaces with Qt
 
-Blap blap blap
+## Motivation
+
+### Takeaways
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading

@@ -1,3 +1,13 @@
 # Debugging with GDB
 
-Blap blap blap
+## Motivation
+
+### Takeaways
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading

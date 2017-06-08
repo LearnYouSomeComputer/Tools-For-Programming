@@ -1,3 +1,13 @@
 # Integrated Development Environments
 
-Blap blap blap
+## Motivation
+
+### Takeaways
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading

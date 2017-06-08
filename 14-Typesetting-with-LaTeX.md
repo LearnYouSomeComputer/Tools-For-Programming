@@ -1,3 +1,13 @@
 # Typesetting with LaTeX
 
-Blap blap blap
+## Motivation
+
+### Takeaways
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading

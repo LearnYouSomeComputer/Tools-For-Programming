@@ -1,3 +1,13 @@
 # Locating memory leaks with Memcheck
 
-Blap blap blap
+## Motivation
+
+### Takeaways
+
+## Walkthrough
+
+## Questions
+
+## Quick Reference
+
+## Further Reading
