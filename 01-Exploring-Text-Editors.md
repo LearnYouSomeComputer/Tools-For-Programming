@@ -508,12 +508,6 @@ According to the Emacs help page...
 
 As mentioned, you can also use `C-g` to get your fill of beeps.
 
-\begin{figure}
-\centering
-	\includegraphics[height=0.3\textheight]{01/mxdonuts}
-\caption{Emacs has shortcuts for all kinds of things!}
-\end{figure}
-
 #### Executing Extended Commands
 
 It is worth mention that every keybinding just runs a function in Emacs.
@@ -526,6 +520,12 @@ For example, if you typed `M-x` and entered `forward-char` in the prompt and pre
 Granted, that requires... 13?... More keystrokes than `C-f`, but by golly, you can do it!
 
 `M-x` is *very* useful for invoking commands that don't actually have keybindings.
+
+\begin{figure}
+\centering
+	\includegraphics[height=0.3\textheight]{01/mxdonuts}
+\caption{Emacs has commands for all kinds of things!}
+\end{figure}
 
 #### Moving Around
 
