@@ -129,7 +129,7 @@ Currently, your repository has no timeline, and Git is not watching any of the f
 Before we get too involved, let's see what's in our repository so far.
 Try running `ls -a` within `my-fancy-project`
 
-~~~shell
+~~~bash
 $ ls -a
 .    ..   .git
 ~~~
@@ -146,7 +146,7 @@ Let's try asking Git to watch some files for us.
 
 Create a very simple Hello World C++ program and name it `hello.cpp`
 
-~~~shell
+~~~bash
 # Let's see what's in here, first...
 $ ls -a
 .    ..   .git
@@ -161,7 +161,7 @@ $ ls -a
 
 Now, let's use the `git status` command to ask Git for the **status** of the repository.
 
-~~~ shell
+~~~bash
 $ git status
 On branch master
 
@@ -179,7 +179,7 @@ Git is telling us that it sees a new file `hello.cpp` that is currently **untrac
 This means that Git has never seen this file before, and that Git has not been told to track the changes made to it.
 Let's use the `git add` command to ask Git to do just that.
 
-~~~shell
+~~~bash
 $ git add hello.cpp
 
 $ git status
@@ -209,7 +209,7 @@ Now that `hello.cpp` is staged for commit, let's try committing it.
 
 First, let's see what `git status` says
 
-~~~shell
+~~~bash
 $ git status
 On branch master
 
@@ -226,7 +226,7 @@ OK, that looks good.
 Let's also take a look at our current timeline of commits.
 We'll use `git log` to ask Git to show us our current history.
 
-~~~ shell
+~~~bash
 $ git log
 fatal: your current branch 'master' does not have any commits yet
 ~~~
@@ -237,7 +237,7 @@ It makes sense that we don't see any commits in our history yet.
 Before we commit our changes, we need to tell Git who we are.
 If we don't do this first, Git will refuse to commit anything for us!
 
-~~~shell
+~~~bash
 # Please use your first and last name for the sake of grading.
 $ git config --global user.name "<your_name>"
 
@@ -251,7 +251,7 @@ $ git config --global core.editor <editor_command>
 
 Now we can finally commit our changes using the `git commit` command.
 
-~~~shell
+~~~bash
 # It's always a good idea to run `git status` before running `git commit`
 # just so we can see what we're including in our commit.
 $ git status
@@ -277,7 +277,7 @@ If you use garbage commit messages[^garbage], you will only hurt your future sel
 
 Let's see what our repository status looks like now.
 
-~~~shell
+~~~bash
 $ git status
 On branch master
 nothing to commit, working tree clean
@@ -289,7 +289,7 @@ We added `hello.cpp`, committed it, and we haven't changed anything since that c
 
 What about the log?
 
-~~~ shell
+~~~bash
 $ git log
 commit 648203a12a0b8ab1e0e37336d891b0420994739d (HEAD -> master)
 Author: Homer Simpson <simpsonh@lardlad.donuts>
@@ -334,7 +334,7 @@ Here you are with your fancy repository.
 If you visit the webpage for `my-fancy-project` on GitLab, you'll notice that there's still nothing up there.
 We need to **push** our new commit to GitLab first.
 
-~~~shell
+~~~bash
 # Enter your Single Sign-on credentials when prompted
 $ git push
 ~~~
