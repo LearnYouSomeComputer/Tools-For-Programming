@@ -508,7 +508,11 @@ According to the Emacs help page...
 
 As mentioned, you can also use `C-g` to get your fill of beeps.
 
-![Emacs has shortcuts for all kinds of things](01/mxdonuts.jpg)
+\begin{figure}
+\centering
+	\includegraphics[height=0.3\textheight]{01/mxdonuts}
+\caption{Emacs has shortcuts for all kinds of things!}
+\end{figure}
 
 #### Executing Extended Commands
 
