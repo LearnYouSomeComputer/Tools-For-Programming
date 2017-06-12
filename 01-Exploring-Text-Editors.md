@@ -508,6 +508,8 @@ According to the Emacs help page...
 
 As mentioned, you can also use `C-g` to get your fill of beeps.
 
+![Emacs has shortcuts for all kinds of things](01/mxdonuts.jpg)
+
 #### Executing Extended Commands
 
 It is worth mention that every keybinding just runs a function in Emacs.
