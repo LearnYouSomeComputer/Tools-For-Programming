@@ -6,6 +6,9 @@ institute: Missouri University of Science and Technology
 
 documentclass: book
 toc: true
+
+header-includes:
+- \usepackage[os=win]{menukeys}
 ...
 
 \chapter*{Introduction}

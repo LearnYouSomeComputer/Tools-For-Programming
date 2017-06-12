@@ -20,8 +20,8 @@ all: cs1001_prelab.pdf
 
 tex: cs1001_prelab.tex
 
-cs1001_prelab.pdf: ${MD_PIECES} packages.tex
-	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf --include-in-header packages.tex ${MD_PIECES}
+cs1001_prelab.pdf: ${MD_PIECES}
+	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf ${MD_PIECES}
 
-cs1001_prelab.tex: ${MD_PIECES} packages.tex
-	pandoc --from markdown+raw_tex --output cs1001_prelab.tex --include-in-header packages.tex ${MD_PIECES}
+cs1001_prelab.tex: ${MD_PIECES}
+	pandoc --from markdown+raw_tex --output cs1001_prelab.tex ${MD_PIECES}
