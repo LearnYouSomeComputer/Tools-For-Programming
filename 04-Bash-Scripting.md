@@ -148,11 +148,11 @@ That way, you can specify which type of comparison to use, rather than hoping th
 Comparing Strings:
 
 - `=`,`==`: Either
-  - String equality, if both operands are strings, or
-  - Pattern (glob) matching, if the RHS is a glob.
+	- String equality, if both operands are strings, or
+	- Pattern (glob) matching, if the RHS is a glob.
 - `!=`: Either
-  - String ineqaulity, if both operands are strings, or
-  - Glob fails to match, if the RHS is a glob.
+	- String ineqaulity, if both operands are strings, or
+	- Glob fails to match, if the RHS is a glob.
 - `<`: The LHS sorts before the RHS.
 - `>`: The LHS sorts after the RHS.
 - `-z`: The string is empty (length is zero).
@@ -188,7 +188,7 @@ Boolean Logic:
 You can also group statements using parentheses:
 
 ```bash
-#! /bin/bash
+#!/bin/bash
 
 num=5
 
@@ -208,7 +208,7 @@ fi
 When working with `(( ))`,  you do not need to prefix variable names with `$`:
 
 ```bash
-#! /bin/bash
+#!/bin/bash
 
 x=5
 y=7
@@ -280,7 +280,7 @@ Inside `(( ))`, you do not need to prefix variable names with `$`!
 
 For example,
 ```bash
-#! /bin/bash
+#!/bin/bash
 
 x=5
 y=7
@@ -311,7 +311,7 @@ done
 Or sum all command-line arguments:
 
 ```bash
-#! /bin/bash
+#!/bin/bash
 
 sum=0
 
@@ -380,7 +380,7 @@ parrot These are "several arguments"
 To return something, the easiest solution is to `echo` it and have the caller catch the value:
 
 ```bash
-#! /bin/bash
+#!/bin/bash
 
 average() {
 	sum=0
