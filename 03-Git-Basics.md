@@ -344,6 +344,83 @@ If you refresh the project page for `my-fancy-project` on GitLab, you should see
 
 Take some time to explore your remote repository on GitLab.
 
+### Oh, Fork.
+
+Close your eyes again[^half-closed].
+
+Here you are working on that Next Big Thing again.
+As you code, you see a beautiful person emerge[^emerge] from the field's tall grass.
+
+"I am a muse," they say.
+"Your program is terrible."
+
+You grimace.
+
+![Grimace](03/grimace.png)
+
+The muse proceeds to explain in great detail how your program can be so much better than it is.
+You agree.
+This is a muse after all.
+Inspiration is their job[^tony-robins].
+
+Now here's your predicament.
+The changes proposed by the muse are going to require you to *totally* rework your program.
+Meanwhile, you need to continue to fix bugs in your existing program to keep your customers happy.
+
+You have two choices:
+
+- Buck up and commit to redoing your entire project, leaving your customers grumpy about the bugs you need to fix.
+- Ignore the idea from the muse and fix continue the bugs, throwing the muse's loud, awe-inspiring ideas in the garbage.
+
+Open your eyes.
+
+Alright, so I lied to you.
+There are a couple more choices actually.
+
+- You *could* copy your entire local repository into a second one and name it `muse_version`, but that sounds like a bad idea.
+  Soon we'll end up with the same woes we had when we were copying our code into new folders to back it up.
+- You *could* let Git manage two parallel lines of development.
+
+That second option sounds **much** better.
+
+One of Git's most powerful features is its ability to **branch** your code's timeline.
+No, it's not like Primer[^Primer].
+You're not going to have separate crazy timelines going back and forth and every which way.
+
+It's more like having parallel universes.
+Your original universe (branch) is called `master`.
+
+You tell Git to branch at a specific commit, and from there on out, what happens on that branch is separate from other branches.
+In other words, you enter an alternate universe, and all changes only affect the alternate universe, not the original (`master`) universe.
+
+Now that's dandy, but let's say that we're happy with our experimental branch.
+How can we integrate that back into the branch of stable code (`master`) again?
+Well, Git has the ability to **merge** one branch into another.
+When you merge two branches together, Git will figure out what's different between the two branches, and copy the important stuff from your experimental branch into your stable branch (`master`).
+
+Branching is incredibly useful.
+Here are just a handful of cases where it comes in handy:
+
+- You want to keep experimental code away from stable, working code.
+- You want to keep your work separate from your teammates' code.
+- You want to keep your commit history clean by clearly showing where new features were added.
+
+Now, here you are in real life sitting in your leather chair[^assume1], smoking a pipe[^assume2], sipping on bourbon[^given], and wondering what commands you use to actually work with branches in Git.
+It's time to get your hands dirty.
+
+Instead of asking you to create a bunch of commits and branches by hands, we're going to use an online tool to work with branches.
+It's a game, actually.
+
+Pop open a browser and pull up http://learngitbranching.js.org/
+Then, work through the following exercises:
+
+- 1.1: Introduction to Git Commits
+- 1.2: Branching in Git
+- 1.3: Merging in Git
+
+Be sure to read the stuff that pops up!
+This is a *very* good learning resource.
+
 ### Your Git Workflow
 
 Your workflow will be something like this:
@@ -365,21 +442,18 @@ Don't lose points for something so simple.
 Name: `______________________________`
 
 1. What is the **full** command you ran to clone your `my-fancy-project` repository? (Note, we **don't** want your username/password... we just want the command.)
-\vspace{10em}
+\vspace{8em}
 
-2. What is the URL on GitLab that shows your commits as a graph? Hint: Check the Repository tab.
-\vspace{10em}
-
-3. View your `hello.cpp` file on GitLab. Notice that the lines are numbered on the left side of your code. Click on the `3` for line 3.
+2. View your `hello.cpp` file on GitLab. Notice that the lines are numbered on the left side of your code. Click on the `3` for line 3.
 
     a. What happens to that line of code?
-       \vspace{10em}
+       \vspace{8em}
 
-    b. What is added to the end of the URL for this page?
-       \vspace{10em}
+    b. Copy the URL for the page and paste it in a new browser tab. What does that link point to?
+       \vspace{8em}
 
-    c. Copy the URL for the page and paste it in a new browser tab. What does that link point to?
-       \vspace{10em}
+3. What is the series of commands you used to get through Level 1.3 of http://learngitbranching.js.org/ ? Hint: It's possible to do it in 5 commands.
+\vspace{10em}
 
 \newpage
 
@@ -398,6 +472,7 @@ Name: `______________________________`
 `git status`
 
 - Allows you to check the status of your repository
+- Shows which branch you are currently on.
 - Files can be **untracked**, **unstaged**, **staged**, or **unchanged**
 - It's a good practice to check the status of your repository before you commit.
 
@@ -409,6 +484,21 @@ Name: `______________________________`
 
 - Pushes new **commits** to from a local repository to a remote repository.
 - You cannot push files, you can only push commits.
+
+`git checkout`
+
+- Can be used to check out different branches.
+- Can be used to *create* a new branch.
+- Can be used (with great caution!) to check out specific commits.
+
+`git branch`
+
+- Can be used to create or delete branches.
+- Can be used to list all local and remote branches.
+
+`git merge`
+
+- Merges two branches together.
 
 
 ## Further Reading
@@ -424,3 +514,10 @@ Name: `______________________________`
 [^experimental]: Maybe you're rewriting a function, and you don't know if it'll work. It's convenient to take a snapshot, so that if things go bad, you can always revert back to a working state.
 [^services]: GitLab, GitHub, BitBucket, etc.
 [^garbage]: Such as "asdf", "stuff", "work", or "finished the lab".
+[^half-closed]: Maybe just half-closed this time.
+[^emerge]: It's as though they were laying there in the grass the whole time. So weird.
+[^tony-robins]: You later realize that the muse was just Tony Robbins getting you super amped about everything.
+[^Primer]: Although you should *absolutely* see it if you haven't. Who doesn't love a good indie time travel movie?
+[^assume1]: I assume.
+[^assume2]: I reckon.
+[^given]: That's a given.
