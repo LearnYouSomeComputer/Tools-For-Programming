@@ -10,7 +10,7 @@ ASCII is a convenient format for humans and programs[^compilers] alike to read a
 Because of its simple and featureless interface, many people find editors like `jpico` to be frustrating to use.
 Many users miss the ability to use a mouse or simply copy/paste lines from files without bewildering keyboard shortcuts.
 
-Fortunately, there are myriad text editors available.
+Fortunately, there are myriad text editors available.[^standard]
 Many popular options are available to you on campus machines and can be installed on your personal computers as well!
 These editors offer many features that may (hopefully) already be familiar to you.
 Such features include:
@@ -421,7 +421,7 @@ Some have taken this to an extreme and shown as a proof of concept that you can 
 Although that's a fun fact, you shouldn't actually do that.
 
 Emacs was originally developed using a keyboard known as the [space-cadet keyboard](https://en.wikipedia.org/wiki/Space-cadet_keyboard).
-Its layout is similar to, though notably different from today's typical keyboard layout.
+Its layout is similar to, though notably different from, today's typical keyboard layout.
 One such difference is that the space-cadet had a Meta key, which we no longer have today.
 Another difference is the layout of modifier keys.
 Many of the Emacs keybindings (keyboard shortcuts, sort of) felt natural for space-cadet users but feel like insane acrobatics today.
@@ -927,6 +927,7 @@ Once you get comfortable with an editor, check out “plugins” for various lan
 
 [^others-too]: And many other programming languages, for that matter.
 [^compilers]: Including compilers.
+[^standard]: If you are reading this, you may ignore the rest of this chapter and instead learn `ed`, [the standard editor](https://www.gnu.org/fun/jokes/ed-msg.html).
 [^globe]: Thanks to cloud computing, this is becoming commonplace, yo.
 [^npp]: Website: [https://notepad-plus-plus.org/](https://notepad-plus-plus.org/)
 [^large]: Of course, this feature might encourage making large files rather than multiple manageable files...

@@ -424,7 +424,7 @@ Name: `______________________________`
 1. What does the `let` builtin do?
 \vspace{10em}
 
-2. Write a script that prints "fizz" if the first argument is divisible by 3, "buzz" if it is divisible by 5, and "fizzbuzz" if it is divisible by both 3 and 5.
+2. Write a script that prints "fizz" if the first argument is divisible by 3, "buzz" if it is divisible by 5, and "fizzbuzz" if it is divisible by both 3 and 5.[^interview]
 \vspace{20em}
 
 3. Write a script that prints "directory" if the first argument is a directory and "file" if the first argument is a file.
@@ -455,3 +455,4 @@ the only case you'd care about using `[ ]` is if you're writing scripts that hav
 In this book, we'll use `[[ ]]` because it has fewer gotchas.
 [^javascript2]: If you know some JavaScript you might be familiar with the problem of too-permissive operators:
 in JS, `"4" + 1 == "41"`, but `"4" - 1 == 3`.
+[^interview]: Also, why do so many people ask this as an interview question!?

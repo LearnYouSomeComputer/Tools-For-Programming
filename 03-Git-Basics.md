@@ -2,7 +2,7 @@
 
 ## Motivation
 
-Close your eyes.
+Close your eyes[^open].
 
 Imagine yourself standing in a wide, open field.
 In that field stands a desk, and on that desk, a computer.
@@ -507,6 +507,7 @@ Name: `______________________________`
 - [Git Branching Tutorial](http://learngitbranching.js.org/)
 - [GitHub's Git Tutorial](https://try.github.io/levels/1/challenges/1)
 
+[^open]: Now open them again, because it's hard to read with your eyes shut.
 [^next-big-thing]: This is your daydream, friend. I have no idea what this program is or does.
 [^daydream]: Yes, you're daydreaming about work.
 [^remote]: And other things. Remotes are actually *extremely* useful.
