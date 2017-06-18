@@ -167,6 +167,7 @@ We can do so much more with regular expressions, though!
 `sed` is noninteractive; while you *can* use it to perform any old edit, it's best for situations where you want to automate editing.
 
 Some handy `sed` flags:
+
 - `-r`: Use extended regular expressions. **NOTE**: even with extended regexes, `sed` is missing some character classes, such as `\d`.
 - `-n`: Only print lines that match (handy for debugging).
 
@@ -278,6 +279,7 @@ Regex:
 ## Further Reading
 
 - [Regex reference](http://www.rexegg.com/regex-quickstart.html#ref)
+- [Regex Crossword Puzzles](https://regexcrossword.com/)
 - [`grep` manual](https://www.gnu.org/software/grep/manual/grep.html)
 - [`sed` manual](https://www.gnu.org/software/sed/manual/sed.html)
 - [`sed` tutorial](http://www.grymoire.com/Unix/Sed.html)
