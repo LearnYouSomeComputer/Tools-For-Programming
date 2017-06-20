@@ -26,7 +26,7 @@ book: cs1001_prelab.pdf
 	@echo -e "\n\nDone! Be sure to print that bad-boy using short-edge duplexing."
 
 cs1001_prelab.pdf: ${MD_PIECES}
-	pandoc --from markdown+raw_tex --output cs1001_prelab.pdf ${MD_PIECES}
+	pandoc --template=template.tex --from markdown+raw_tex --output cs1001_prelab.pdf ${MD_PIECES}
 
 cs1001_prelab.tex: ${MD_PIECES}
-	pandoc --from markdown+raw_tex --output cs1001_prelab.tex ${MD_PIECES}
+	pandoc --template=template.tex --standalone --from markdown+raw_tex --output cs1001_prelab.tex ${MD_PIECES}
