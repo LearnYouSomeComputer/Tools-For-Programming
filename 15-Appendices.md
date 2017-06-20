@@ -134,14 +134,14 @@ Find **Xming** within your start menu (as in Figure \ref{xming-start-menu}) and 
 Don't start XLaunch or anything else.
 We just want Xming.
 
-![We want to start Xming. **Not** XLaunch or anything else. Xming. \label{xming-start-menu}](15/xming-start-menu.png)
+![We want to start Xming. **Not** XLaunch or anything else. Xming. \label{xming-start-menu}](15/xming-start-menu.png){ width=60% }
 
 You only need to do this one time after you log in.
 Xming will run in the background until you stop it or log off.
 You can check to see if Xming is running by looking in your task bar as shown in Figure \ref{xming-running}.
 If you see the logo down there, there's no need to start Xming again.
 
-![You can check your task bar to see if Xming is running. \ref{xming-running}](15/xming-running.png)
+![You can check your task bar to see if Xming is running. \ref{xming-running}](15/xming-running.png){ width=60% }
 
 Now that Xming is running, we need to tell PuTTY to send all that display data to Xming.
 After you load a Putty configuration but before you connect, you need to **make sure** that X11 Forwarding is enabled.
@@ -153,7 +153,7 @@ So:
 3. Click the \menu{Load} button
 4. Find the X11 Forwarding configuration and make sure it is enabled as shown in Figure \ref{putty-enable-x-forwarding}.
 
-![Make **sure** that X11 Forwarding is enabled! \label{putty-enable-x-forwarding}](15/putty-enable-x-forwarding.png)
+![Make **sure** that X11 Forwarding is enabled! \label{putty-enable-x-forwarding}](15/putty-enable-x-forwarding.png){ width=60% }
 
 If Xming is running and X11 Forwarding is enabled, you can start your PuTTY connection by pressing the \menu{Open} button.
 PuTTY will open a shell like normal.
@@ -163,7 +163,7 @@ Try running `gedit` (a GUI text editor for Linux), `firefox`, or `chromium-brows
 These are all GUI programs and should start up.
 Figure \ref{xming-started-gui}
 
-![The Chromium Browser forwarded to our Windows computer. Remember that Chromium is running *on the Linux computer*. PuTTY is forwarding the display data, and Xming is drawing the browser window for us. \label{xming-started-gui}](15/xming-started-gui.png)
+![The Chromium Browser forwarded to our Windows computer. Remember that Chromium is running *on the Linux computer*. PuTTY is forwarding the display data, and Xming is drawing the browser window for us. \label{xming-started-gui}](15/xming-started-gui.png){ width=60% }
 
 It's important to keep in mind that while your GUI program is running, your shell will be busy.
 It's just like any other program you start in your shell.
