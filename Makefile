@@ -12,7 +12,8 @@ MD_PIECES = 00-FrontMatter.md	\
 	11-Unit-testing-with-Boost-Unit-Test-Framework.md	\
 	12-Using-C++11-and-the-Standard-Template-Library.md	\
 	13-Graphical-User-Interfaces-with-Qt.md	\
-	14-Typesetting-with-LaTeX.md
+	14-Typesetting-with-LaTeX.md \
+	15-Appendices.md
 
 .PHONY: all tex
 
