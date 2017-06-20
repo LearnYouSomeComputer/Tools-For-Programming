@@ -5,10 +5,18 @@ author: Nathan Jarus and Michael Wisely
 institute: Missouri University of Science and Technology
 
 documentclass: book
+papersize: letter
+
 toc: true
+toc-depth: 0
 
 header-includes:
 - \usepackage[os=win]{menukeys}
+
+thanks: |
+    Thanks to those who put up with our nonsense and those who paid us
+    to write a book that is full of it.
+
 ...
 
 \chapter*{Introduction}
