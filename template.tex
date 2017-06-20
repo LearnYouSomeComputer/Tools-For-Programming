@@ -196,10 +196,10 @@ $if(dir)$
 \fi
 $endif$
 
-% set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
+% set default figure placement to H
+\usepackage{float}
+\floatplacement{figure}{H}
+\floatplacement{table}{H}
 
 $for(header-includes)$
 $header-includes$
