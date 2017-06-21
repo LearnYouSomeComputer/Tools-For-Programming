@@ -30,7 +30,7 @@ There's no need to open a terminal to run `g++` or anything like that unless you
 We know, we know.
 You're *really* going to miss `g++`.
 
-Just bare with us for this lab.
+Just bear with us for this lab.
 Then you can travel back to 1980 when things were actually good[^reagan].
 
 ### Takeaways
@@ -142,13 +142,13 @@ After you create a project...
 
 ### Geany
 
-- Geany Project Homepage: http://www.geany.org/
-- Geany Plugins: http://plugins.geany.org/downloads.html
+- Geany Project Homepage: [http://www.geany.org/](http://www.geany.org/)
+- Geany Plugins: [http://plugins.geany.org/downloads.html](http://plugins.geany.org/downloads.html)
 
 ### Code::Blocks
 
-- Code::Blocks Project Homepage: http://www.codeblocks.org
-- Tutorial from cplusplus.com: http://www.cplusplus.com/doc/tutorial/introduction/codeblocks/
+- Code::Blocks Project Homepage: [http://www.codeblocks.org](http://www.codeblocks.org)
+- Tutorial from cplusplus.com: [http://www.cplusplus.com/doc/tutorial/introduction/codeblocks/](http://www.cplusplus.com/doc/tutorial/introduction/codeblocks/)
 
 ### Other IDEs
 
@@ -156,8 +156,8 @@ There are a bunch of other IDEs out there.
 Some are free; some are not.
 If you like the IDEa of an IDE, but you don't like Geany or Code::Blocks, you may give one of these guys a try.
 
-- Visual Studio Code: https://code.visualstudio.com/
-- CLion: https://www.jetbrains.com/clion/
+- Visual Studio Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+- CLion: [https://www.jetbrains.com/clion/](https://www.jetbrains.com/clion/)
 
 [^reagan]: Something something Ronald Reagan something something Breakfast Club something something.
 [^not-always-GUI]: Depending who you ask, IDEs are not necessarily GUI programs. If you install enough plugins in vim or Emacs, some people would call those IDEs, as well.
