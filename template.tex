@@ -209,7 +209,16 @@ $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
 $endif$
 $if(subtitle)$
-\providecommand{\subtitle}[1]{}
+\ifcsname subtitle\endcsname%
+\else%
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip5em}%
+}
+\fi%
 \subtitle{$subtitle$}
 $endif$
 $if(author)$
