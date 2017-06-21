@@ -25,8 +25,8 @@ book: cs1001_prelab.pdf
 	pdfbook --short-edge --letterpaper cs1001_prelab.pdf
 	@echo -e "\n\nDone! Be sure to print that bad-boy using short-edge duplexing."
 
-cs1001_prelab.pdf: ${MD_PIECES}
+cs1001_prelab.pdf: ${MD_PIECES} template.tex
 	pandoc --template=template.tex --from markdown+raw_tex --output cs1001_prelab.pdf ${MD_PIECES}
 
-cs1001_prelab.tex: ${MD_PIECES}
+cs1001_prelab.tex: ${MD_PIECES} template.tex
 	pandoc --template=template.tex --standalone --from markdown+raw_tex --output cs1001_prelab.tex ${MD_PIECES}
