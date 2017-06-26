@@ -2,7 +2,7 @@
 
 ## Motivation
 
-Wow. You've made it seven chapters through this book. And probably some appendices too. And yet you have made not one sandwich. Not one!
+Wow. You've made it six chapters through this book. And probably some appendices too. And yet you have made not one sandwich. Not one!
 
 Let's fix that. Time for a classic pastrami on rye.
 You go to fetch ingredients from the refrigerator, but alas! It is empty.
@@ -98,7 +98,7 @@ It has other uses, too: this book is built with `make`!
 
 ### A bit about compiling and linking
 
-Ok so before we can set up a makefile for a C`++` project, we need to talk about compiling and linking code.
+Before we can set up a makefile for a C`++` project, we need to talk about compiling and linking code.
 "Compiling" refers to the process of turning C`++` code into machine instructions.
 Each `.cpp` file gets compiled separately, so if you use something defined in another file or library -- for example, `cin` --
 the compiler leaves itself a note saying "later on when you figure out where `cin` is, put its address here".
@@ -147,8 +147,7 @@ On the next line, indented one tab, is the command that, when run, produces a fi
 **NOTE:** Unlike most programs, `make` *requires* that you use tabs, not spaces, to indent.[^tabs]
 If you use spaces, you'll get a very strange error message. So make sure to set your editor to put actual tabs in your makefiles.
 
-Once you've put this rule in your makefile, you can tell `make` to build `program` by running `make program`.
-(Note that you don't execute the makefile itself!)
+Once you've put this rule in your makefile, you can tell `make` to build `program` by running `make program`.[^execute]
 You can also just run `make`; if you don't specify a target name, `make` will build the first target in your makefile.
 
 Now, if you edit your code and run `make program` again, you'll notice a problem:
@@ -198,7 +197,7 @@ then build `program`.
 2. Each of our object file targets depends on `funcs.h`. This is because both `main.cpp` and `funcs.cpp` include `funcs.h`, so if the header changes,
 both object files may need to be rebuilt.
 
-File targets are the meat and potatoes of a healthy `make` breakfast.
+File targets are the meat and potatoes[^tofu] of a healthy `make` breakfast.
 Most of your makefiles will consist of describing the different files you want to build, which files those files are built from, and what commands need to be run
 to build those files.
 Later on in this chapter we'll discuss how to automate common patterns, like for the object files in the above example.
@@ -231,8 +230,8 @@ funcs.o: funcs.cpp funcs.h
 .PHONY: clean
 
 clean:
-	-@rm program
-	-@rm *.o
+	-@rm -f program
+	-@rm -f *.o
 ```
 
 Now when you run `make clean`, it will delete any object files, as well as your compiled program.[^anger]
@@ -254,7 +253,7 @@ It is common to use variables to hold lists of files, compiler flags, and even p
 Here's the syntax for variables:
 
 - `var=value` sets `var` to `value.
-- `${var}` or `$(var)` accesses the value of `var`
+- `${var}` or `$(var)` accesses the value of `var`.[^vars]
 - The line `target: var=thing` sets the value of `var` to `thing` when building `target` and its dependencies.
 
 For example, let's suppose we want to add some flags to `g++` in our example.
@@ -284,7 +283,7 @@ funcs.o: funcs.cpp funcs.h
 	g++ ${CFLAGS} -c funcs.cpp
 
 clean:
-	-@ rm program *.o
+	-@ rm -f program *.o
 ```
 
 Note that the `debug` target doesn't actually have any commands to run; it just changes the `CFLAGS` variable and then builds the `program` target.
@@ -346,11 +345,45 @@ With this pattern rule, you won't need to update your makefile if you add more f
 - `-B` makes targets even if they seem up-to-date. Useful if you forget a dependency or don't want to run `make clean`!
 - `-f <filename>` uses a different makefile other than one named `makefile` or `Makefile`.
 
+\newpage
 ## Questions
+Name: `______________________________`
+
+Consider the following makefile:
+
+```makefile
+default: triangles
+
+triangles: main.o TrianglePrinter.o funcs.o
+	g++ $^ -o triangles
+
+main.o: main.cpp TrianglePrinter.h funcs.h
+	g++ -c main.cpp
+
+TrianglePrinter.o: TrianglePrinter.cpp TrianglePrinter.h funcs.h
+	g++ -c TrianglePrinter.cpp
+
+funcs.o: funcs.cpp funcs.h
+	g++ -c funcs.cpp
+```
+
+1. If you run `make`, what files get built?
+\vspace{10em}
+
+2. If you change `TrianglePrinter.h`, what targets will need to be rebuilt?
+\newpage
 
 ## Quick Reference
 
 ## Further Reading
+
+- [The GNU Make Manual](https://www.gnu.org/software/make/manual/html_node/index.html)
+- [Special Variables](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html#Automatic-Variables)
+
+There are a couple of programs that can help generate makefiles for you:
+
+- [`makedepend`](http://linux.die.net/man/1/makedepend) computes dependencies in C and C`++` code
+- [`CMake`](https://cmake.org/) generates makefiles and various IDE project files
 
 [^bike]: Velocipede (n): A bicycle for authors with access to a thesaurus.
 [^code]: And your code is a sandwich: oodles of savory instructions sandwiched between the ELF header and your static variables.
@@ -364,7 +397,7 @@ With this pattern rule, you won't need to update your makefile if you add more f
 [^exaggerating]: I am not exaggerating here; linking executables is surprisingly full of arcane, system-dependent edge cases.
 Fortunately some other poor soul (i.e., your compiler maintainer) has figured this out already and you should never need to worry about it.
 [^lovecraft]: This Christmas chapter brought to you by H. P. Lovecraft.
-[^tabs]: Stuart Feldman, the author of `make`, explains why:
+[^tabs]: Stuart Feldman, the author of `make`, explains:
 
 	> Why the tab in column 1? Yacc was new, Lex was brand new. I hadn't tried
 > either, so I figured this would be a good excuse to learn. After getting myself
@@ -384,3 +417,6 @@ Maybe re-doing the whole process from scratch will fix things.
 If you're interested in more accurately calculating dependencies, check out the `makedepend` program.
 [^cores]: The general rule of thumb for the fastest builds is to use one more job than you have CPU cores.
 This makes sure there's always a job ready to run even if some of them need to load files off the hard drive.
+[^tofu]: Or tofu and potatoes, if that's your thing.
+[^vars]: Be careful not to confuse this with `bash`'s `$()`, which executes whatever is between the parentheses.
+[^execute]: Don't try to execute the makefile itself. `bash` is confused enough without trying to interpret `make`'s syntax!
