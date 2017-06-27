@@ -223,7 +223,7 @@ Depending how many functions you've called, you'll see deeper and deeper traces.
 In this case, we've only called `main()`, so that's the only line we see.
 You can also see the file name and line number.
 
-You can also use `list` ask `gdb` to show you some source code to give you context.
+You can also use `list` to ask `gdb` to show you some source code to give you context.
 Sometimes a line number isn't enough if you're too lazy to tab over to your text editor.
 
 ~~~
