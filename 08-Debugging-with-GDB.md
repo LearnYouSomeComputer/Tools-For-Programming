@@ -319,7 +319,7 @@ Name: `______________________________`
 1. What was the output from using the `run` command?
 \vspace{10em}
 
-2. How would you set a breakponit for line 10 of file butts.cpp
+2. How would you set a breakponit for line 10 of file `my_funcs.cpp`?
 \vspace{10em}
 
 3. What line number did you end up on after you ran `step` three times?
