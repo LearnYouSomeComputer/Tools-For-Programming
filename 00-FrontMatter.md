@@ -12,6 +12,8 @@ toc-depth: 0
 
 header-includes:
 - \usepackage[os=win]{menukeys}
+- \usepackage{newunicodechar}
+- \newunicodechar{↩}{$\color{blue}\scriptstyle\hookleftarrow$}
 
 thanks: |
     Thanks to those who put up with our nonsense and those who paid us
