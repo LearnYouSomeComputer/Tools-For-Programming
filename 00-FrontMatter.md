@@ -6,6 +6,7 @@ institute: Missouri University of Science and Technology
 
 documentclass: book
 papersize: letter
+colorlinks: true
 
 toc: true
 toc-depth: 0
