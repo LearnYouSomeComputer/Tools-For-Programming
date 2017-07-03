@@ -23,8 +23,8 @@ Many of these bugs allow for arbitrary code execution, where the attacker inject
 The first widespread internet worm, the [Morris worm](https://en.wikipedia.org/wiki/Morris_worm), used a memory safety bug to infect other machines in 1988.
 Unfortunately, even after almost *thirty years*, memory safety bugs are incredibly common in popular software and many viruses still use memory safety bugs.
 For one example, the [WannaCry](https://en.wikipedia.org/wiki/WannaCry_ransomware_attack) and [Petya](https://en.wikipedia.org/wiki/2017_NotPetya_cyberattack)
-use a memory safety exploit called [EternalBlue](https://www.rapid7.com/db/modules/exploit/windows/smb/ms17_010_eternalblue) "allegedly" developed by the NSA
-and released by "Russian" hackers early in 2017.
+viruses use a memory safety exploit called [EternalBlue](https://www.rapid7.com/db/modules/exploit/windows/smb/ms17_010_eternalblue) "allegedly" developed
+by the NSA and released by "Russian" hackers early in 2017.
 
 ![Smokey Says: "Only You Can Prevent Ransomware"](09/Smokey3.jpg){height=35%}
 
@@ -457,7 +457,102 @@ a pointer has been `delete`d yet.
 
 ### Memory Leaks
 
+Last, but certainly not least, are memory leaks.
+While these pose less potential for security flaws, nobody likes programs that hog memory.
+Just like it's good practice to close files when you're done accessing them, it's good practice to deallocate memory when you're done using it.
+
+There are two kinds of memory leaks: direct and indirect.
+A direct memory leak occurs when you have allocated a block of memory but no longer have a pointer pointing to it.
+An indirect memory leak occurs when the only pointers to an allocated block of memory are in a block of memory that has been leaked.
+The distinction is drawn because typically indirect memory leaks occur due to not running a destructor on some directly leaked object.
+
+Both Valgrind and Address Sanitizer can detect memory leaks.
+Let's look at a simple example that has one directly leaked block and one indirectly leaked block:
+```c++
+struct List
+{
+  int value;
+  List* next;
+};
+
+int main()
+{
+  List l;
+  l.value = 5;
+  l.next = new List;
+
+  l.next->value = 6;
+  l.next->next = new List;
+
+  //These two lines would fix the memory leaks
+  //delete l.next->next;
+  //delete l.next;
+
+  return 0;
+}
+```
+
+When using Valgrind to debug memory leaks, the `--leak-check=full` option shows where each leaked block was allocated.
+
+Valgrind's output, with a full leak check, is shown below:
+
+```
+==649== HEAP SUMMARY:
+==649==     in use at exit: 72,736 bytes in 3 blocks
+==649==   total heap usage: 3 allocs, 0 frees, 72,736 bytes allocated
+==649== 
+==649== 32 (16 direct, 16 indirect) bytes in 1 blocks are definitely ↩
+          lost in loss record 2 of 3
+==649==    at 0x4C2E0EF: operator new(unsigned long)
+==649==    by 0x40060F: main (leak.cpp:11)
+==649== 
+==649== LEAK SUMMARY:
+==649==    definitely lost: 16 bytes in 1 blocks
+==649==    indirectly lost: 16 bytes in 1 blocks
+==649==      possibly lost: 0 bytes in 0 blocks
+==649==    still reachable: 72,704 bytes in 1 blocks
+==649==         suppressed: 0 bytes in 0 blocks
+```
+
+On some systems, including this one, the system runtime library allocates some memory and does not deallocate it.[^lazy]
+This memory will appear in the "still reachable" section of Valgrind's output.
+Do not worry yourself too much about it.
+
+The big thing we're disturbed to see is that we have leaked 32 bytes: 16 directly and 16 indirectly.
+The directly-leaked block that leaks our indirectly-leaked block was allocated on line 11 (`l.next = new List`).
+Valgrind does not show the location that indirectly-leaked blocks are allocated.
+
+Address Sanitizer also has a leak checker; it does not track "still reachable" memory, so
+there are no false positives here:
+```
+==733==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e3b152532 in operator new(unsigned long)
+    #1 0x4008cf in main leak.cpp:11
+    #2 0x7f4e3ad0f82f in __libc_start_main
+
+Indirect leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x7f4e3b152532 in operator new(unsigned long)
+    #1 0x40091c in main leak.cpp:14
+    #2 0x7f4e3ad0f82f in __libc_start_main
+
+SUMMARY: AddressSanitizer: 32 byte(s) leaked in 2 allocation(s).
+```
+
+As opposed to Valgrind, Address Sanitizer shows where both directly and indirectly leaked blocks are allocated.
+
+\newpage
 ## Questions
+Name: `______________________________`
+
+1. In your own words, what is a use-after-free error?
+\vspace{10em}
+2. What does `--track-origins=yes` do when used with Valgrind?
+\vspace{10em}
+3. What bug does Address Sanitizer catch that Valgrind does not?
+
+\newpage
 
 ## Quick Reference
 
@@ -480,3 +575,6 @@ It's best to make a special `asan` makefile target that turns on the relevant co
 [^exploit]: Since this is not a book on exploiting software, we won't go into further detail; writing exploits is its own universe of rabbit holes.
 [^implementation]: The implementation of `delete []` isn't specified, but the size of the allocation is stored somewhere;
 depending on where it is stored, various Bad Things can happen if you try to `delete []` something that wasn't intended to be.
+[^lazy]: It's not fair to say that the runtime developers are lazy, though.
+There are some technical difficulties with freeing this memory, and since it is in use up until your program exits anyway,
+there is little benefit to going to the effort of freeing it since the operating system deallocates it once your program exits anyway.
