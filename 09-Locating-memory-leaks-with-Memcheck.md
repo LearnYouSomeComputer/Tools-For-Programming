@@ -161,7 +161,7 @@ Then when you run your program, the instrumentation tracks memory information mu
 `asan` is much faster than Valgrind, but requires special compiler flags to work.
 
 To enable address sanitizer, you must use the following flags to `g++`: `-g -fsanitize=address -fno-omit-frame-pointer`.[^vg]
-Furthermore, you need to set two environment variables if you want function names and line numbers to appear in `asan`'s output:
+Furthermore, you need to set two environment variables[^llvm] if you want function names and line numbers to appear in `asan`'s output:
 
 ```bash
 export ASAN_SYMBOLIZER_PATH=`which llvm-symbolizer`
@@ -556,7 +556,30 @@ Name: `______________________________`
 
 ## Quick Reference
 
+Using Valgrind: `valgrind [valgrind flags] program-to-run`
+
+- `--track-origins=yes`: Show where undefined variables are declared.
+- `--leak-check=full`: Show where directly leaked blocks are allocated.
+
+
+Using Address Sanitizer:
+
+- Compile your code with the `-g -fsanitize=address -fno-omit-frame-pointer` flags.
+- Set the following environment variables:[^llvm]
+
+	```bash
+export ASAN_SYMBOLIZER_PATH=`which llvm-symbolizer`
+export ASAN_OPTIONS=symbolize=1
+```
+
+- Run your code as you normally would.
+
 ## Further Reading
+
+- [Valgrind Memcheck Manual](http://valgrind.org/docs/manual/mc-manual.html)
+- [Address Sanitizer Wiki](https://github.com/google/sanitizers/wiki/AddressSanitizer)
+- [GCC `-fsanitize=address` documentation](https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html#index-fsanitize_003daddress)
+- [Paper on Address Sanitizer](https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf)
 
 [^term]: And the computer it is running on, being that it's the 21st century and all.
 [^joint]: It's a joint effort between how the compiler compiles your code and the operating system.
@@ -578,3 +601,4 @@ depending on where it is stored, various Bad Things can happen if you try to `de
 [^lazy]: It's not fair to say that the runtime developers are lazy, though.
 There are some technical difficulties with freeing this memory, and since it is in use up until your program exits anyway,
 there is little benefit to going to the effort of freeing it since the operating system deallocates it once your program exits anyway.
+[^llvm]: This requires `llvm` to be installed. Also, depending on the system you are running, you may need to append a version number, e.g., ``export ASAN_SYMBOLIZER_PATH=`which llvm-symbolizer-3.9` ``
