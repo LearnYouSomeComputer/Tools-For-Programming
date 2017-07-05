@@ -393,6 +393,12 @@ Name: `______________________________`
 1. Use `time` to time the execution of a simple Hello World program. What were the values for `real`, `user`, and `sys`? Do those values make sense?
 \vspace{8em}
 
+2. Briefly explain, in your own words, the difference between the way `gprof` (`g++ -pg`) and `callgrind` profile programs.
+\vspace{8em}
+
+2. Briefly summarize the output you get when you use `time`, `gprof`, and `callgrind_annotate` to profile a program.
+\vspace{8em}
+
 \newpage
 
 ## Quick Reference
