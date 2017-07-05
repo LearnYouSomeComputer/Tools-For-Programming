@@ -308,16 +308,92 @@ The breakdown shows the amount of time spent running code in `func1`, as well as
 Although this example does not demonstrate it, `gprof` has the ability to show you details for more complicated call graphs.
 For example, if both `func1` and `func2` called `new_func1`, `gprof` would show you how much time you're spending in `new_func1` when it's called by `func1` and when it's called by `func2`.
 
-If you have a situation where calling context changes its run time, you may find this extra information useful.
+If you have a situation where calling context changes its running time, you may find this extra information useful.
 Perhaps `new_func1` is very fast when `func1` calls it, but it's very slow when `func2` calls it.
 You could use this information as a clue to figure out why `new_func1` is sometimes slow.
 
+### Profiling with `callgrind`
+
+`gprof`'s approach to take samples every 0.01 seconds works for many people when they're trying to identify slow spots in their code.
+However, it is not perfect.
+
+Remember our film predicament?
+`gprof` is like looking at every 50th frame.
+It gives you a *good* idea of how much movie time we spend looking at Mr. St. Rumpterfrabble, but it's not perfect.
+If we take the time to go frame-by-frame, that's the most detailed we can possibly get.
+
+`callgrind` is our frame-by-frame approach.
+Instead of going fame-by-frame, we're going instruction-by-instruction.
+`callgrind` is one of several tools built using the Valgrind framework.
+Tools built using Valgrind can see *every single instruction* that is run by a program.
+This level of detail can be very powerful, but it can also be pretty slow.
+
+Let's consider our program from the `gprof` section, but let's use ten thousand iterations for each for-loop instead of two billion.
+This time when we compile it, we need to pass the `-g` flag instead of `-pg`.
+Then we'll run our program through `callgrind` as shown.
+
+~~~shell
+$ g++ -g -o main main.cpp
+$ valgrind --tool=callgrind ./main
+~~~
+
+Like `gprof`, callgrind will generate a data file for us.
+However, the output file does not always have the same name.
+Each `callgrind.out.NNNN` file is named according to its process ID.
+When we use `callgrind_annotate` to view the profile information, we need to make sure we pass the right `callgrind.out.NNNN`.
+
+~~~shell
+# Be careful! The process ID (31147 in this case) will change!
+$ callgrind_annotate --auto=yes callgrind.out.31147
+~~~
+
+In its output, `callgrind_annotate` will show you how many CPU instructions were run for each line of code.
+Let's have a look at the annotated source for `main`.
+
+~~~
+.      int main(void)
+3      {
+16         cout << "Inside main" << endl;
+8,991  => ???:std::ostream::operator<<(std::ostream& (*)(std::ost...
+2,425  => /build/eglibc-SvCtMH/eglibc-2.19/elf/../sysdeps/x86_64/...
+4,735  => ???:std::basic_ostream<char, std::char_traits<char> >& ...
+.
+30,004     for (int i = 0; i < 10000; i++) {
+.          }
+.
+1          func1();
+61,383 => main.cpp:func1() (1x)
+1          func2();
+30,672 => main.cpp:func2() (1x)
+.
+1          return 0;
+20     }
+~~~
+
+Let's break this down a bit:
+
+- We spend 16 CPU instructions printing `"Inside main"` to the console.
+  In reality, though, those 16 instructions simply make calls to other functions thanks to `cout` and the `<<` operator.
+  We actually spend 16 + 8,991 + 2,425 + 4,735 instructions printing to the console if you count the functions that we called.
+- We spent a total of 30,004 CPU instructions instantiating an int called `i`, checking that it's less than 10,000, and incrementing it.
+  All 30,004 of those instructions were used to perform the loop initialization, check, and post-loop actions.
+  Zero instructions were used in the body of the for-loop.
+- It took 1 CPU instruction to call `func1` one time (`1x`), but running `func1` used 61,383 instructions.
+- It took 1 CPU instruction to call `func2` one time (`1x`), but running `func2` used 30,672 instructions.
+
+As you can see, `callgrind` gives us different details that `gprof` cannot.
+Based on where you run the most instructions, you can identify parts of your code that may need to be rewritten.
+
+
+\newpage
 ## Questions
 
 Name: `______________________________`
 
 1. Use `time` to time the execution of a simple Hello World program. What were the values for `real`, `user`, and `sys`? Do those values make sense?
 \vspace{8em}
+
+\newpage
 
 ## Quick Reference
 
