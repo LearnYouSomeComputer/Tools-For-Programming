@@ -1,4 +1,4 @@
-# Unit testing with Boost Unit Test Framework
+# Unit Testing
 
 ## Motivation
 
