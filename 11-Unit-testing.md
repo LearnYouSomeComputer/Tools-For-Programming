@@ -2,12 +2,280 @@
 
 ## Motivation
 
+You're the quality control manager for the Confabulator, a hot new product in development by Acme Inc. LLC.
+Every day, engineers give you new prototype confabulators to test and make sure they meet the ill-defined
+and entirely made-up requirements upper management has set for the product.
+You put each confabulator through its paces to the best of your memory of what those paces are
+and make a report for the designers telling them what works and what doesn't.
+
+Usually they give you the same prototype back with some fixes for the problems you reported the previous day.
+Testing confabulators takes up time you could otherwise use productively, maybe for complaining about life to your coworkers or taking extended lunch breaks.
+So you don't always put the fixed-up prototype through the full battery of tests--you just test the stuff that got fixed.
+Unfortunately, sometimes (as engineers are wont to do) a fix gets added that affects something else in an entirely different spot in the system!
+You'll never forget the endless meetings after it took you a week to discover that a fix to the frobnicator interfered with the rotagration arm.
+Those engineers were *mad*. How could you tell them everything is fine when something was broken?
+
+Even worse, it's hard to remember exactly what all tests you do each time, and management seems to keep changing their minds
+on exactly what all features a confabulator is supposed to do.
+Last month it was just supposed to be for annularity congruification, but then a contract with Statorfile Exceed GmbH. came through
+and now it also has to calabricate the vibrosity of splinal conformities.
+The number of things you have to check for just seems to get bigger and bigger, and of course once you add on a vibrous harmonicator,
+you have to check that it works regarless of whether the radiometer intensimission is engaged or disengaged.
+It seems like every new whizbang adds a half a dozen whatsits and thus a gross more tests[^gross] for you.
+
+But the worst thing of all is that you have to do this all by hand, day in and day out.
+Nothing rots the brain faster than the dull monotony of doing something you're ambivalent about.
+Heck, if you're going to be experiencing dull monotony either way, the least your boss could do is let you watch some reality TV.
+But nooooo, apparently all the monotony must be job-inflicted.
+
+Fortunately, computers have solved this problem!
+Instead of manually testing your program, you can write *unit tests* that test each piece for you.
+Once you add a new feature and write tests for it, you can run your program through a full test suite to make sure everything works as intended.
+Rather than mind-numbingly checking everything by hand, you can experience the monotony of writing a test once and then forget about it forever
+(or at least until it fails and you have to figure out what you broke).
+
+Unit testing is widely used in industry because it is quite effective at keeping bugs out of code.[^pedantry]
+You can even measure how much of your code is tested by unit tests--100% code coverage means that you've found
+at least most of the obvious bugs!
+
+This chapter will focus on the Catch unit testing framework for C++.
+There are a number of popular unit testing frameworks; Boost has one (of course it does), Google makes one called `gtest`, etc.
+However, Catch is easy to install, easy to write tests in, and downright beautiful compared to Boost's test framework.
+(It's also popular, in case you were wondering.)
+
 ### Takeaways
 
+- Learn how to write unit tests with Catch
+- Organize your code and tests to preserve your sanity
+- Measure how much of your code is covered by the tests you've written
+
 ## Walkthrough
+
+### Setting up Catch
+
+Catch is distributed as a single `.hpp` file that you can download and include in your project.
+Download it from [github](https://github.com/philsquared/Catch) -- the link to the single header is in the `README`.
+
+In *exactly one* `.cpp` file, you must include the following lines:
+
+```c++
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+```
+
+This generates a `main()` function that runs your unit tests.
+You will have two programs now -- your actual program, and a program that runs your unit tests.
+
+Every other file you write tests in should include Catch:
+
+```c++
+#include "catch.hpp"
+```
+
+Later, we'll discuss how best to organize your tests, so don't worry too much about the "right" place to put the main function yet.
+
+### Basic Tests
+
+Alright, let's write some unit tests!
+We are going to test a function that generates Fibonacci numbers (1, 1, 2, 3, 5, 8, ...).
+Here's our function:
+
+```c++
+/* Generate the Nth Fibonacci number */
+int fibonacci(int n)
+{
+	if(n <= 1)
+	{
+		return n;
+	}
+	else
+	{
+		return fibonacci(n - 1) + fibonacci(n - 2);
+	}
+}
+```
+
+In Catch, every test lives inside a `TEST_CASE` block.
+You can make these as fine-grained as you want, but generally you'll find it easy to collect a bunch of related checks
+into one `TEST_CASE`.
+Each test case has a name and a tag; generally you'll tag all test cases for a function/class with the same tag.
+(You can tell Catch to run only tests with specific names or tags if you like.)
+
+Inside a test case, you can put one or more `REQUIRE` or `CHECK` assertions.
+A `REQUIRE` statement checks that a certain condition holds and if it does not, it reports a test failure and stops the execution of that test case.
+`CHECK` is similar to require, but if the condition does not hold, it reports a test failure but keeps running the test case.
+Usually you use `REQUIRE` when something is broken enough that it does not make sense to keep going with the test.
+
+Here's a test for our Fibonacci function:
+```c++
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+
+TEST_CASE("Fibonacci", "[Fibonacci]") // Test name and tag
+{
+	CHECK(fibonacci(0) == 1);
+	CHECK(fibonacci(1) == 1);
+	CHECK(fibonacci(2) == 2);
+	CHECK(fibonacci(5) == 8);
+}
+```
+
+If we compile and run this code, we get the following output:
+
+```
+fibonacci.cpp:19: FAILED:
+  CHECK( fibonacci(0) == 1 )
+with expansion:
+  0 == 1
+
+fibonacci.cpp:21: FAILED:
+  CHECK( fibonacci(2) == 2 )
+with expansion:
+  1 == 2
+
+fibonacci.cpp:22: FAILED:
+  CHECK( fibonacci(5) == 8 )
+with expansion:
+  5 == 8
+
+===================================
+test cases: 1 | 1 failed
+assertions: 4 | 1 passed | 3 failed
+```
+
+Oh no! We have a bug!
+In fact, it is in the `return n;` statement in our function--it should be `return 1;` instead.
+If we fix that and re-run our tests, everything is kosher:
+```
+All tests passed (4 assertions in 1 test case)
+```
+
+Now, you may notice that Catch expands the thing inside the CHECK function -- it prints the value that `fibonacci` returns.
+It does this by using *template magic*.
+This magic is only so powerful.
+So, if you want to write a more complex expression, you'll need to either break it into individual assertions or tell Catch to not attempt to expand it.
+For 'and' statements, rather than `CHECK(x && y);`, write `CHECK(x); CHECK(y);`.
+For 'or' statements, enclose your expression in an extra pair of parentheses: `CHECK((x || y));`.
+(The extra parens tell Catch to not attempt to expand the expression; you can do this with 'and' statements as well, but expansion is nice to have.)
+
+There are also matching assertions `REQUIRE_FALSE` and `CHECK_FALSE` that check to make sure a statement is false, rather than true.
+
+### Testing Exceptions
+
+Let's modify our Fibonacci function to throw an exception if the user passes us a number that's not within the range our function works for.
+```c++
+#include<stdexcept> // for domain_error
+using namespace std;
+
+/* Generate the Nth Fibonacci number */
+int fibonacci(int n)
+{
+	if(n < 0)
+	{
+		throw domain_error("Fibonacci not defined for negative indices");
+	}
+	else if(n <= 1)
+	{
+		return n;
+	}
+	else
+	{
+		return fibonacci(n - 1) + fibonacci(n - 2);
+	}
+}
+```
+
+Catch provides a number of assertions for testing whether expressions throw exceptions and what kinds of exceptions are thrown.
+As before, each assertion comes in a `CHECK` and a `REQUIRE` flavor.
+
+- `CHECK_NOTHROW(expression)`: Asserts the expression does not throw an exception.
+- `CHECK_THROWS(expression)`: Asserts the expression throws an exception. Any ol' exception will do; it just has to throw something.
+- `CHECK_THROWS_AS(expression, exception_type)`: Asserts the expression throws an exception of a specified type.
+- `CHECK_THROWS_WITH(expression, string)`: Asserts that the expression thrown, when converted to a string, matches the specified string.[^matcher]
+
+For example, we can check that our Fibonacci function properly verifies that its input is in the domain by testing when it throws exceptions
+and what exceptions it throws:
+
+```c++
+TEST_CASE("Fibonacci Domain", "[Fibonacci]")
+{
+  CHECK_NOTHROW(fibonacci(0));
+  CHECK_NOTHROW(fibonacci(10));
+  CHECK_THROWS_AS(fibonacci(-1), domain_error);
+  CHECK_THROWS_WITH(fibonacci(-1), "Fibonacci not defined for negative indices");
+}
+```
+
+### Organizing Your Tests
+
+At this point you know enough to start writing tests for functions.
+Before you go too hog-wild, shoving test cases every which where, let's talk about how to organize tests so they're easy to find and use.
+
+First, we can't have our `main()` function and Catch's auto-generated `main()` in the same program.
+So make your program's `main()` as small as possible and have it call other functions that can be unit tested.
+
+Second, we don't want our test code included in our actual program.
+A generally good pattern to follow is to divide your code into multiple files as usual,
+then make a separate test file for each implementation file.
+
+For example, if we made `fibonacci.h` and `fibonacci.cpp` files for our function above, we'd also make a `test_fibonacci.cpp` file
+that contains our unit tests.
+
+Third, compiling Catch's auto-generated `main()` function takes a while.
+This is doubly annoying because it never changes!
+Rather than rebuilding it all the time, we can harness the power of incremental compilation by making a separate `test_main.cpp` file
+that just contains Catch's `main()`.
+This file looks exactly like this:
+
+```c++
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+```
+
+Then in `test_fibonacci.cpp`, we just have the following includes:
+```c++
+#include "fibonacci.h"
+#include "catch.hpp"
+
+// insert unit tests here
+```
+
+Building this code is done as follows:
+
+```
+$ g++ -c test_main.cpp
+$ g++ -c test_fibonacci.cpp
+$ g++ test_main.o test_fibonacci.o -o testsuite
+```
+
+Now you can add new unit tests and just recompile `test_fibonacci.cpp` and re-link the test suite.
+Much faster!
+(Hint: a Makefile is *very* handy for this process!)
+
+### Testing Classes
+
+- Setting up objects
+- SECTION
+
+### Advanced Tests
+
+- Floating Point
+- Matcher Expressions
+
+### Code Coverage
+
+- Template Classes
+- Branch coverage
 
 ## Questions
 
 ## Quick Reference
 
 ## Further Reading
+
+[^gross]: That is, 144 more disgusting tests.
+[^pedantry]: Pedantry: unit tests technically cannot show the absence of all bugs; they can just show that under certain circumstances your program does not have bugs.
+In logical terms, unit tests are a bunch of "there exists" statements; whereas a proof of correctness is a "for all" statement.
+Unfortunately, proving programs correct is a difficult task and the tools to do so are not exactly ready for widespread use yet.
+In the meantime, while we wait for math and logic to catch up to the needs of engineering, we'll have to settle for thorough unit testing.
+[^matcher]: You can also use a string matcher; we'll talk about these later in the chapter.
