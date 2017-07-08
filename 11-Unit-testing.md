@@ -106,7 +106,8 @@ A `REQUIRE` statement checks that a certain condition holds and if it does not, 
 `CHECK` is similar to require, but if the condition does not hold, it reports a test failure but keeps running the test case.
 Usually you use `REQUIRE` when something is broken enough that it does not make sense to keep going with the test.
 
-Here's a test for our Fibonacci function:
+In general, when writing tests, you want to test every path through your code at least once.
+Here's a pretty good test for our Fibonacci function:
 ```c++
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -143,7 +144,7 @@ test cases: 1 | 1 failed
 assertions: 4 | 1 passed | 3 failed
 ```
 
-Oh no! We have a bug!
+Oh no! We have a bug![^hand]
 In fact, it is in the `return n;` statement in our function--it should be `return 1;` instead.
 If we fix that and re-run our tests, everything is kosher:
 ```
@@ -212,6 +213,7 @@ At this point you know enough to start writing tests for functions.
 Before you go too hog-wild, shoving test cases every which where, let's talk about how to organize tests so they're easy to find and use.
 
 First, we can't have our `main()` function and Catch's auto-generated `main()` in the same program.
+You'll need to organize your code so that you can compile your test cases without including your `main()` function.
 So make your program's `main()` as small as possible and have it call other functions that can be unit tested.
 
 Second, we don't want our test code included in our actual program.
@@ -254,8 +256,98 @@ Much faster!
 
 ### Testing Classes
 
-- Setting up objects
-- SECTION
+Testing classes works more-or-less like testing functions.
+You'll still write `TEST_CASE`s with various `CHECK` and `REQUIRE` statements.
+
+However, when testing classes, it's common to need to set up a class instance to run a bunch of tests on.
+For example, let's suppose we have a Vector class with the following declaration:
+
+```c++
+template<class T>
+class Vector
+{
+  public:
+    // Constructor
+    Vector();
+
+    // Copy Constructor
+    Vector(const Vector<T>& v);
+
+    // Destructor
+    ~Vector();
+
+    // Add elements to the vector
+    void push_back(T v);
+
+    // Access elements of the vector
+    T& operator[](const unsigned int idx);
+
+    // Number of elements in the vector
+    unsigned int length() const;
+
+    // Capacity of the underlying array
+    unsigned int capacity() const;
+
+  private:
+    unsigned int len;
+    unsigned int cap;
+    T* array;
+};
+```
+
+To test the `[]` operator or the copy constructor, we need to make a vector that contains elements to access or copy.
+You could write a bunch of test cases and duplicate the same test setup code in each, but there is a better option!
+Each `TEST_CASE` can be split into multiple `SECTION`s, each of which has a name.
+For each section, Catch runs the test case from the beginning but only executes one section each run.
+
+We can use this to set up a test vector once to test the constructor and accessor functions:
+
+```c++
+TEST_CASE("Vector Elements", "[vector]")
+{
+  Vector<int> v; // Re-initialized for each section
+
+  for(int i = 0; i < 5; i++)
+  {
+    v.push_back(i);
+  }
+
+  SECTION("Elements added with push_back are accessible")
+  {
+    for(int i = 0; i < 5; i++)
+    {
+      CHECK(v[i] == i);
+    }
+  }
+
+  Vector<int> copy(v); // Only run before the sections below it
+
+  SECTION("A copied vector is identical")
+  {
+    for(int i = 0; i < v.length(); i++)
+    {
+      CHECK(v[i] == copy[i]);
+    }
+  }
+
+  SECTION("Vector copies are deep copies")
+  {
+    for(int i = 0; i < v.length(); i++)
+    {
+      v[i] = -1;
+      CHECK(v[i] != copy[i]);
+    }
+  }
+}
+```
+
+Since we get a fresh `v` vector for each section, the code inside each section can mutate `v` however it likes without impacting any of the other
+sections' tests!
+Even better, we can add more setup as we go through the test case; our `copy` vector is only created for the sections that test the copy constructor.
+
+In general, you'll want to group related tests into one `TEST_CASE` with multiple `SECTION`s that provide more fine-grained organization of your
+test assertions.
+
 
 ### Advanced Tests
 
@@ -264,10 +356,94 @@ Much faster!
 
 ### Code Coverage
 
-- Template Classes
-- Branch coverage
+Unit tests are most valuable when all your important code is tested.
+You can check this by hand, but that's no fun especially on a big codebase.
+Fortunately, there are tools to check for you!
+We'll use `gcov` to generate code coverage reports for us.
 
+First, a few words about template classes.
+`gcov` only gives meaningful results if each function in the template class is actually generated one place or another.
+Fortunately, you can explicitly ask the compiler to instantiate a copy of every template class function.
+For example, at the top of our `test_vector.cpp` file, we would put
+
+```c++
+template class Vector<int>;
+```
+
+so that `gcov` properly reports if we forget to test any member functions of our `Vector` class.
+
+As with Address Sanitizer and `gprof`, `gcov` requires some compile-time instrumentation.
+Compile your test files with the `--coverage` flag.
+
+Once you have compiled your tests, execute them as normal.
+In addition to running your tests, your executable will also produce a number of files ending in `.gcda` and `.gcno`.
+These are data files for `gcov`. They're binary, so opening them in a text editor will not be particularly enlightening.
+To get meaningful coverage statistics, you run `gcov` and give it a list of `.cpp` files whose behavior you want to see.
+(Generally this will be all your `.cpp` files.)
+
+There are a couple of flags that you definitely want to use for `gcov`:
+
+- `-m`: De-mangle C`++` names. For whatever reason, C`++` names are mangled by the compiler and look very odd unless you tell programs to demangle them.
+- `-r`: Only generate information for files in the current directory and sub-directories. This prevents you from generating coverage information about stuff in the standard library, which I hope you are not attempting to unit test.
+
+So, for our Vector example above, we would do something like the following:
+
+```
+$ g++ --coverage -c test_vector.cpp
+$ g++ --coverage -c test_main.cpp
+$ g++ --coverage test_main.o test_vector.o -o testsuite
+
+$ testsuite
+================================================
+All tests passed (25 assertions in 2 test cases)
+
+$ gcov -mr test_vector.cpp
+File 'test_vector.cpp'
+Lines executed:100.00% of 39
+Creating 'test_vector.cpp.gcov'
+
+File 'catch.hpp'
+Lines executed:62.50% of 64
+Creating 'catch.hpp.gcov'
+
+File 'vector.hpp'
+Lines executed:100.00% of 34
+Creating 'vector.hpp.gcov'
+```
+
+(Hint the second: *makefiles are very nice for automating this process*.)
+
+When looking at `gcov`'s output, you are mostly concerned that all the code you set out to test is being executed.
+In this case, that means we are looking for `vector.hpp` to be 100% executed, and it is!
+
+If you are curious, you can open `vector.hpp.gcov` and see the number of times each line is executed.
+Here's a snippet for `Vector`'s constructor:
+
+```
+       16:    3:Vector<T>::Vector()
+        -:    4:{
+       16:    5:  cap = 4;
+       16:    6:  len = 0;
+       16:    7:  array = new T[cap];
+       16:    8:}
+```
+
+The numbers in the left margin are the number of times each line is executed.
+If a line isn't executed, you will see `####` in the left column instead.
+This makes it easy to spot code that isn't covered by your tests!
+
+\newpage
 ## Questions
+
+Name: `______________________________`
+
+1. In your own words, what is the goal of unit testing? How do you know you have written good tests?
+\vspace{8em}
+2. What is the difference between the `CHECK` and `REQUIRE` test assertions?
+\vspace{8em}
+3. Write the test assertion you would use if you wanted to assert that a call to `frobnicate()` throws an exception of type `bad_joke`
+and to bail out of the test case if it does not?
+\newpage
 
 ## Quick Reference
 
@@ -279,3 +455,4 @@ In logical terms, unit tests are a bunch of "there exists" statements; whereas a
 Unfortunately, proving programs correct is a difficult task and the tools to do so are not exactly ready for widespread use yet.
 In the meantime, while we wait for math and logic to catch up to the needs of engineering, we'll have to settle for thorough unit testing.
 [^matcher]: You can also use a string matcher; we'll talk about these later in the chapter.
+[^hand]: Yes, you with your hand up in the back? You saw the bug before the test failed? Yes, yes, you're very clever.
