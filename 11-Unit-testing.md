@@ -351,8 +351,30 @@ test assertions.
 
 ### Advanced Tests
 
-- Floating Point
-- Matcher Expressions
+Catch provides some advanced features that come in handy when testing code that uses strings and floating point arithmetic.
+
+When testing code that produces strings, sometimes you do not know what the entire string produced will be,
+but you want to check that it contains some particular substring.
+Catch offers a pair of assertions, `CHECK_THAT` and `REQUIRE_THAT`, that use a *matcher* to check only parts of strings.
+For instance, we can test that a string starts with "Dear Prudence" like so:
+
+```
+REQUIRE_THAT(my_string, StartsWith("Dear Prudence"));
+```
+
+In addition to the `StartsWith` matcher, there is an `EndsWidth` matcher and a `Contains` matcher.
+These matchers can be combined using logical operators, for example:
+
+```
+REQUIRE_THAT(my_string, StartsWith("Dear Prudence") && !Contains("Sincerely"));
+```
+
+These matchers can also be used in the `THROWS_WITH` assertions!
+
+Testing floating point code presents a challenge because floating point operations may have some round-off that prevents exact equality checks from working.
+Catch provides a class named `Approx` that performs approximate equality checks; for instance, `CHECK(PI == Approx(3.14));`.
+By default, the comparison can be off by 0.001%, but you can change this!
+For a more precise comparison, you can set the `epsilon` to a smaller percentage: `CHECK(PI = Approx(3.1415).epsilon(0.0001));`.
 
 ### Code Coverage
 
@@ -447,7 +469,48 @@ and to bail out of the test case if it does not?
 
 ## Quick Reference
 
+### Assertions
+
+Boolean:
+
+- `CHECK`/`REQUIRE`: Assert that an expression is true
+- `CHECK_FALSE`/`REQUIRE_FALSE`: Assert that an expression is false
+
+Exceptions:
+
+- `CHECK_NOTHROW`/`REQUIRE_NOTHROW`: Assert that no exception is thrown
+- `CHECK_THROWS`/`REQUIRE_THROWS`: Assert that an exception is thrown
+- `CHECK_THROWS_AS`/`REQUIRE_THROWS_AS`: Assert that an exception of a specific type is thrown
+- `CHECK_THROWS_WITH`/`REQUIRE_THROWS_WITH`: Assert that an exception with a specific error string is thrown
+
+String Matchers:
+
+- `CHECK_THAT`/`REQUIRE_THAT`: Assert that a string satisfies a match expression
+- `StartsWith`: Verify that a string starts with a given string
+- `EndsWith`: Verify that a string ends with a given string
+- `Contains`: Verify that a string contains a given string
+
+Floating Point:
+
+- `Approx`: Perform approximate floaing point comparison (by default up to 0.001% error)
+
+### Coverage
+
+- Compile your tests with the `--coverage` flag
+- Run your test suite executable
+- Run `gcov -mr [.cpp files]` with all `.cpp` files in your project to compute code coverage
+
 ## Further Reading
+
+- [Catch Tutorial](https://github.com/philsquared/Catch/blob/master/docs/tutorial.md)
+- [Catch Manual](https://github.com/philsquared/Catch/blob/master/docs/Readme.md)
+- [Floating Point Comparisons](https://github.com/philsquared/Catch/blob/master/docs/assertions.md#floating-point-comparisons)
+- [Matcher Expressions](https://github.com/philsquared/Catch/blob/master/docs/matchers.md)
+- [Catch GitHub Repository](https://github.com/philsquared/Catch)
+
+<!-- -->
+
+- [`gcov` Manual](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html)
 
 [^gross]: That is, 144 more disgusting tests.
 [^pedantry]: Pedantry: unit tests technically cannot show the absence of all bugs; they can just show that under certain circumstances your program does not have bugs.
