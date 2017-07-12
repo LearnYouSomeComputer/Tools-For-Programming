@@ -221,8 +221,8 @@ Here's a quick list of things you can use a for-each loop with:
 
 - arrays
 - certain classes (you have to have certain member functions)
-    - std::vector
-    - std::map
+    - `std::vector`
+    - `std::map`
     - any other type with `begin()` and `end()` member functions
 
 Refer to the further reading section to get an idea of what's required to use a type with for-each loops.
@@ -471,8 +471,27 @@ cout << costs["orange juice"] << endl;
 
 You might expect the `std::map` to say "Hey man. I don't know what that is" and throw an exception at your face.
 That's not what happens.
+Instead, you're responsible for checking that a key exists before you try to access it.
+Here are a couple of ways to do that:
 
-Watch out for that.
+~~~cpp
+// We can use the count() member function to see if the key is there
+if(costs.count("beer") > 0)
+{
+  // We need to use the bracket operator to actually get the value
+  cout << "beer costs " << costs["beer"] << endl;
+}
+
+// Or we can use the find() member function.
+// If the item is in the map, find() returns an iterator (that pointer-y thing)
+// that points to the item, otherwise it returns to past-the-end iterator
+map<string, float>::iterator iter = costs.find("beer");
+if(iter != costs.end())
+{
+  // We can just use the iterator to access the item
+  cout << "beer costs " << *iter << endl;
+}
+~~~
 
 Like a `std::vector`, you can iterate over a `std::map`.
 One way to do this is using a `std::map::iterator`.
