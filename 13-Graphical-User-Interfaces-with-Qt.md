@@ -348,7 +348,7 @@ To create your menus (File, Edit, whatever you want) you need to add them to you
 `menuBar()` is a member function that returns a pointer to the menubar, which you can use to add new menus.
 Similarly, `addToolBar()` is a member function that  creates a new toolbars.
 
-Since it's common to have a toolbar item that does the same thing as a menu item (like a save button and save menu option), there's a qay to reduce the amount of code repetition.
+Since it's common to have a toolbar item that does the same thing as a menu item (like a save button and save menu option), there's a way to reduce the amount of code repetition.
 Using a `QAction`s, you can add the same action to a menu and a toolbar.
 Then you can connect that one action to various slots.
 
