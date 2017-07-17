@@ -352,7 +352,18 @@ Since it's common to have a toolbar item that does the same thing as a menu item
 Using a `QAction`s, you can add the same action to a menu and a toolbar.
 Then you can connect that one action to various slots.
 
+\newpage
 ## Questions
+
+Name: `______________________________`
+
+1. Briefly explain (in your own words) the relationship between the `moc`, `qmake`, and `make`. That is, what are they each used for, and how do they relate?
+\vspace{8em}
+2. Briefly explain (in your own words) what signals and slots are.
+\vspace{8em}
+3. Let's say we have an object called `zoidberg` that emits a signal called `powerful_stench()`. Whenever `zoidberg` emits `powerful_stench()`, we want another object (`everyone_nearby`) to execute a slot (`barf()`). Write a `connect()` call that connects the `powerful_stench()` signal emitted by `zoidberg` to the `barf()` slot of `everyone_nearby`.
+\vspace{8em}
+\newpage
 
 ## Quick Reference
 
