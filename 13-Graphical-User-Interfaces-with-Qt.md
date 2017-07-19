@@ -100,7 +100,7 @@ We then ask Qt to display our text editor window using the `.show()` member func
 So we've got an **application** set up with a text editing **widget**, and we've asked Qt to show it.
 In order to see our application in action, we need to ask it to run using `app.exec()`.
 
-![Our first app! Boy howdy. That sure ain't vim.](13/not_vim.tiff)
+![Our first app! Boy howdy. That sure ain't vim.](13/not_vim)
 
 ### Laying out your App
 
@@ -116,7 +116,7 @@ To tell Qt how we want our widgets positioned, we use **layouts**.
 For example, let's say we want to put a quit button above our text editor (in the same window of course).
 We can use a `QVBoxLayout` to **vertically** (hence the `V`) stack our widgets.
 
-![We can organize the widgets in our application by creating a vertical stack. First we add the button (to the top) then we add the text editor (beneath the button).](13/layout.tiff)
+![We can organize the widgets in our application by creating a vertical stack. First we add the button (to the top) then we add the text editor (beneath the button).](13/layout)
 
 ~~~cpp
 // #includes left out for the sake of brevity
