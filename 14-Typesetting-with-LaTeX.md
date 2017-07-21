@@ -143,7 +143,7 @@ And here is a brand new paragraph!
 ``# $ % ^ & _ { } ` ~`` and ``\`` are reserved characters.
 (Of note: `%` starts a one-line comment, much as `//` does in C`++`.)
 
-You can write them using the escape sequences ``\# \$ \% \^{} \& \_ \{ \} \`{} \~{}`` and ``\textasciibackslash{}``.[^caret]
+You can write them using the escape sequences ``\# \$ \% \^{} \& \_ \{ \} \`{} \~{}`` and ``\textbackslash{}``.[^caret]
 
 Opening quotes are written with the `` ` `` character and close quotes with the `'` character.
 So, ``` ``text in double quotes''``` renders like "text in double quotes".
