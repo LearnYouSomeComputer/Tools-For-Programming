@@ -1,8 +1,13 @@
 # CS 1001 Prelab Book
 
+## Compiling
+
+- You'll need Pandoc 1.19 or later.
+- `make` builds a final copy of the book.
+- `make quick` runs `pdflatex` only once; it's faster for checking some things but labels, images, etc. may not be correct.
+
 ## Project Wishlist
 
-- Table of contents
 - Build an index
 - Glossary
 - Build teacher edition / student edition
