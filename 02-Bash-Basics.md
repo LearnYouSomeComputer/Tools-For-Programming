@@ -470,6 +470,7 @@ IO Redirection:
 - [List of Bash Commands](https://ss64.com/bash/)
 - [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bashref.html)
 - [All About Pipes](http://www.linfo.org/pipe.html)
+- [Software Carpentry Shell Tutorial](http://swcarpentry.github.io/shell-novice/)
 
 [^bash]: The 'Bourne Again Shell', known for intense action sequences, intrigue, and being derived from the 'Bourne shell'.
 [^old]: Thanks, old curmudgeons who can't be bothered to learn to type 'list'.
