@@ -33,3 +33,6 @@ cs1001_prelab.pdf: ${MD_PIECES} template.tex
 
 cs1001_prelab.tex: ${MD_PIECES} template.tex
 	pandoc --template=template.tex --standalone --from markdown+raw_tex --output cs1001_prelab.tex ${MD_PIECES}
+
+%.pdf: 00-FrontMatter.md %*.md
+	pandoc --template=template.tex --from markdown+raw_tex --output $@ $^
