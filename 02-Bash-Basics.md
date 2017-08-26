@@ -24,7 +24,7 @@ A shell gives you a way to run programs and view their output.
 Typically they provide some built-in features as well.
 Shells also keep track of things such as which directory you are currently in.
 
-The standard interactive shell is `bash`[^bash].
+The standard interactive shell is `bash`.[^bash]
 There are others, however! `zsh` and `fish` are both popular.
 
 ### Takeaways
@@ -117,14 +117,14 @@ The sun is setting, and you haven't got time for tomfoolery such as typing in lo
 Fortunately, the authors of Unix were thoughtful enough to give their programs short names to make your life easier!
 Before you know it, you're done with your work and are off in your VW Beetle to nab some tickets to the Grateful Dead show this weekend.
 
-Open your eyes. It's today again, and despite being 40 years in the future, all these short command names still persist[^old].
+Open your eyes. It's today again, and despite being 40 years in the future, all these short command names still persist.[^old]
 Such is life!
 
 #### Look Around You with `ls`
 
 If you want to see (list) what files exist in a directory, `ls` has got you covered.
 Just running `ls` shows what's in the current directory, or you can give it a path to list, such as `ls cool_code/sudoku_solver`.
-Or, let's say you want to list all the `cpp` files in the current directory: `ls *.cpp`[^globs].
+Or, let's say you want to list all the `cpp` files in the current directory: `ls *.cpp`.[^globs]
 
 But of course there's more to `ls` than just that. You can give it command options to do fancier tricks.
 
@@ -145,7 +145,7 @@ drwx------ 2 nmjxv3 mst_users   0 Dec 28  2015 oclint-0.10.2
 
 The first column shows file permissions --- who can read, write, or execute your files; the fifth file size; the sixth the last time the file was modified; and the last the name of the file itself.
 
-Another `ls` option lets you show hidden files. In Linux, every file whose name begins with a `.` is a 'hidden' file[^dotfiles].
+Another `ls` option lets you show hidden files. In Linux, every file whose name begins with a `.` is a 'hidden' file.[^dotfiles]
 (This is the reason that many configuration files, such as `.vimrc`, are named starting with a `.`.)
 To include these files in a directory listing, use the `-a` flag.
 You may be surprised by how many files show up if you run `ls -a` in your home directory!
@@ -188,7 +188,7 @@ You can move directories in a similar fashion.
 If you want to make sure this doesn't happen, `mv -i` interactively prompts you if you're about to overwrite a file, and `mv -n` never overwrites files.
 
 To copy files, use the `cp` command. It is similar to the `mv` command, but it leaves the source file in place.
-When using `cp` to copy directories, you must specify the 'recursive' flag; for instance: `cp -r cs1585-TAs cool-people`[^recursive].
+When using `cp` to copy directories, you must specify the 'recursive' flag; for instance: `cp -r cs1585-TAs cool-people`.[^recursive]
 
 You can remove (delete) files with `rm`. As with `cp`, you must use `rm -r` to delete directories.
 
@@ -202,7 +202,7 @@ No need to call `mkdir` one directory at a time!
 `cat` prints out file contents. It's name is short for "concatenate", so called because it takes any number of input files and prints all their contents out.
 
 Now, if you `cat` a big file, you'll probably find yourself wanting to scroll through it.
-The program for this is `less`[^less].
+The program for this is `less`.[^less]
 You can scroll up and down in `less` with the arrow keys, \keys{PgUp} and \keys{PgDn}, or \keys{j} and \keys{k} (like Vim).
 Pressing \keys{Space} scrolls one page.
 If you want to explore more `less` features, \keys{h} shows a help screen with a summary of various commands.
@@ -308,7 +308,7 @@ nmjxv3@rc02xcs213:~$ echo "I love to program" | wc
       1       4      18
 ```
 
-Piping lets us compose all the utilities Linux comes with into more complex programs[^parallel].
+Piping lets us compose all the utilities Linux comes with into more complex programs.[^parallel]
 For a more complex example, let's suppose we want to count the number of unique lines in a file named 'myFile.txt'.
 We'll need a couple new utilities:
 
