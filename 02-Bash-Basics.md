@@ -38,6 +38,16 @@ There are others, however! `zsh` and `fish` are both popular.
 
 ### My Dinner with Bash
 
+When you first log in, bash shows you a prompt, indicating that you can type a command to it.
+In this book, we'll show the prompt like so:
+
+~~~ shell
+$
+~~~
+
+Yours will probably have some additional information, such as your username, the name of the computer you're logged into,
+and the directory you're in.
+
 To use bash, you enter commands and press \keys{\enter}.
 Bash will run the corresponding program and show you the resulting output.
 
@@ -45,7 +55,7 @@ Some commands are very simple to run.
 Consider `pwd`:
 
 ~~~ shell
-nmjxv3@rc02xcs213:~$ pwd
+$ pwd
 /usr/local/home/njmxv3
 ~~~
 
@@ -58,7 +68,7 @@ Some commands are more complex.
 Consider `g++`:
 
 ~~~ shell
-nmjxv3@rc02xcs213:~$ g++ main.cpp
+$ g++ main.cpp
 ~~~
 
 `g++` needs more information than `pwd`.
@@ -75,7 +85,7 @@ A flag starts with one or more `-` and may be short or long.
 Consider `g++` again:
 
 ~~~ shell
-nmjxv3@rc02xcs213:~$ g++ -Wall main.cpp
+$ g++ -Wall main.cpp
 ~~~
 
 Here, we pass a command line argument to `g++`, as well as a flag: `-Wall`.
@@ -133,7 +143,7 @@ Sizes are listed in terms of bytes; for human readable sizes (kilobytes, megabyt
 
 Here's a sample of running `ls -lh`:
 ```
-nmjxv3@rc02xcs213:~/SDRIVE/cs1001/leak$ ls -lh
+$ ls -lh
 total 29M
 -rwxr-xr-x 1 nmjxv3 mst_users 18K Jan 15  2016 a.out
 -rwxr-xr-x 1 nmjxv3 mst_users 454 Jan 15  2016 main.cpp
@@ -270,7 +280,7 @@ For example, `echo` only produces output -- it writes whatever arguments you giv
 
 By default, STDOUT gets sent to your terminal:
 ```
-nmjxv3@rc02xcs213:~$ echo "hello"
+$ echo "hello"
 hello
 ```
 
@@ -304,7 +314,7 @@ If we type `echo "I love to program" | wc`, the `|` will redirect `echo`'s outpu
 \end{figure}
 
 ```
-nmjxv3@rc02xcs213:~$ echo "I love to program" | wc
+$ echo "I love to program" | wc
       1       4      18
 ```
 
@@ -337,8 +347,8 @@ We can use `>` to write program output to files instead.
 
 For example:
 ```
-nmjxv3@rc02xcs213:~$ echo "hello world" > hello.txt
-nmjxv3@rc02xcs213:~$ cat hello.txt
+$ echo "hello world" > hello.txt
+$ cat hello.txt
 hello world
 ```
 
@@ -349,7 +359,7 @@ This is done like so: `2>&1`.
 
 So, for example, if you have a bunch of compiler errors that you want to look through with `less`, you'd do this:
 ```
-g++ lots_o_errors.cpp 2>&1 | less
+$ g++ lots_o_errors.cpp 2>&1 | less
 ```
 
 \begin{figure}[!h]
