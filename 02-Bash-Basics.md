@@ -242,14 +242,30 @@ as well as a `BUGS` section which typically informs you that yes, this is softwa
 ### I/O Redirection
 
 When a program runs, it has access to three different 'streams' for IO:
-![Default IO Streams](02/1.png)
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	\node (p) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{my\_program\strut}};
+	\draw[{Stealth[length=5pt]}-] (p.west) -- node[above] {\texttt{STDIN}} +(-2,0);
+	\draw[-{Stealth[length=5pt]}] ($(p.east) + (0,0.25)$) -- node[above] {\texttt{STDOUT}} +(2,0);
+	\draw[-{Stealth[length=5pt]}] ($(p.east) + (0,-0.25)$) -- node[above] {\texttt{STDERR}} +(2,0);
+\end{tikzpicture}
+\end{figure}
+
 
 In C++, you read the STDIN stream using `cin`, and you write to STDOUT and STDERR through `cout` and `cerr`, respectively.
 For now, we'll ignore STDERR (it's typically for printing errors and the like).
 
 Not every program reads input or produces output!
 For example, `echo` only produces output -- it writes whatever arguments you give it back on stdout.
-![echo](02/2.png)
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	\node (p) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{echo\strut}};
+	\draw[-{Stealth[length=5pt]}] (p.east) -- node[above] {\texttt{STDOUT}} +(2,0);
+\end{tikzpicture}
+\end{figure}
 
 
 By default, STDOUT gets sent to your terminal:
@@ -266,11 +282,26 @@ But, we can redirect this output to files or to other programs!
 For example, let's take a look at the `wc` command.
 It reads input on STDIN, counts the number of lines, words, and characters, and prints those statistics to STDOUT.
 
-![wc](02/5.png)\
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	\node (p) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{wc\strut}};
+	\draw[{Stealth[length=5pt]}-] (p.west) -- node[above] {\texttt{STDIN}} +(-2,0);
+	\draw[-{Stealth[length=5pt]}] (p.east) -- node[above] {\texttt{STDOUT}} +(2,0);
+\end{tikzpicture}
+\end{figure}
 
 If we type `echo "I love to program" | wc`, the `|` will redirect `echo`'s output to `wc`'s input:
 
-![echo to wc](02/6.png)\
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	\node (e) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{echo ``I love to program''\strut}};
+	\node (w) [shape=rectangle,inner sep=8pt,draw,rounded corners] at ($(e.east) + (2,0)$) {\texttt{wc\strut}};
+	\draw[-{Stealth[length=5pt]}] (e.east) -- (w.west);
+	\draw[-{Stealth[length=5pt]}] (w.east) -- node[above] {\texttt{STDOUT}} +(2,0);
+\end{tikzpicture}
+\end{figure}
 
 ```
 nmjxv3@rc02xcs213:~$ echo "I love to program" | wc
@@ -286,7 +317,19 @@ We'll need a couple new utilities:
 
 So, we can do `cat myFile.txt | sort | uniq | wc` to sort the lines in 'myFile.txt', then remove all the duplicates, then count the number of lines, words, and characters in the deduplicated output!
 
-![unique](02/7.png)\
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	\node (c) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{cat myFile.txt\strut}};
+	\node (s) [shape=rectangle,inner sep=8pt,draw,rounded corners] at ($(c.east) + (1.5,0)$) {\texttt{sort\strut}};
+	\node (u) [shape=rectangle,inner sep=8pt,draw,rounded corners] at ($(s.east) + (1.5,0)$) {\texttt{uniq\strut}};
+	\node (w) [shape=rectangle,inner sep=8pt,draw,rounded corners] at ($(u.east) + (1.5,0)$) {\texttt{wc\strut}};
+	\draw[-{Stealth[length=5pt]}] (c.east) -- (s.west);
+	\draw[-{Stealth[length=5pt]}] (s.east) -- (u.west);
+	\draw[-{Stealth[length=5pt]}] (u.east) -- (w.west);
+	\draw[-{Stealth[length=5pt]}] (w.east) -- node[above] {\texttt{STDOUT}} +(2,0);
+\end{tikzpicture}
+\end{figure}
 
 Another common use for piping is to scroll through the output of a command that prints out a lot of data: `my_very_talkative_program | less`.
 

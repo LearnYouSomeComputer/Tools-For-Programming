@@ -17,6 +17,8 @@ header-includes:
 - \usepackage[os=win]{menukeys}
 - \usepackage{newunicodechar}
 - \newunicodechar{↩}{$\color{blue}\scriptstyle\hookleftarrow$}
+- \usepackage{tikz}
+- \usetikzlibrary{positioning,arrows.meta,calc}
 
 include-before: |
     \pagestyle{empty}
