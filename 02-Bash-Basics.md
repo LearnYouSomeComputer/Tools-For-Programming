@@ -38,7 +38,7 @@ There are others, however! `zsh` and `fish` are both popular.
 
 ### My Dinner with Bash
 
-To use bash, you simply enter commands and press \keys{\enter}.
+To use bash, you enter commands and press \keys{\enter}.
 Bash will run the corresponding program and show you the resulting output.
 
 Some commands are very simple to run.
@@ -50,7 +50,7 @@ nmjxv3@rc02xcs213:~$ pwd
 ~~~
 
 When you type `pwd` and press \keys{\enter}, bash runs `pwd` for you.
-In turn, `pwd` outputs your present working directory (eh? eh?) and bash shows it to you.
+In turn, `pwd` outputs your **p**resent **w**orking **d**irectory (eh? eh?) and bash shows it to you.
 
 #### Arguments
 
@@ -66,7 +66,7 @@ After all, it needs *something* to compile.
 
 In this example, we call `main.cpp` a **command line argument**.
 Many programs require command line arguments in order to work.
-If a program requires more than one argument, we simply separate them with spaces.
+If a program requires more than one argument, we simply separate them with spaces.[^spaces]
 
 #### Flags
 
@@ -129,7 +129,7 @@ Or, let's say you want to list all the `cpp` files in the current directory: `ls
 But of course there's more to `ls` than just that. You can give it command options to do fancier tricks.
 
 `ls -l` displays a detailed list of your files, including their permissions, sizes, and modification date.
-Sizes are listed in terms of bytes; for human readable sizes, use `-h`.
+Sizes are listed in terms of bytes; for human readable sizes (kilobytes, megabytes, big gulps, etc.), use `-h`.
 
 Here's a sample of running `ls -lh`:
 ```
@@ -138,12 +138,12 @@ total 29M
 -rwxr-xr-x 1 nmjxv3 mst_users 18K Jan 15  2016 a.out
 -rwxr-xr-x 1 nmjxv3 mst_users 454 Jan 15  2016 main.cpp
 drwx------ 2 nmjxv3 mst_users   0 Dec 28  2015 oclint-0.10.2
--rwxr-xr-x 1 nmjxv3 mst_users 29M Dec 28  2015 oclint-0.10.2-x86_64.tar.gz
+-rwxr-xr-x 1 nmjxv3 mst_users 29M Dec 28  2015 oclint-0.10.2.tar.gz
 -rwxr-xr-x 1 nmjxv3 mst_users 586 Jan 15  2016 vector.h
 -rwxr-xr-x 1 nmjxv3 mst_users 960 Jan 15  2016 vector.hpp
 ```
 
-The first column shows file permissions; the fifth file size; the sixth the last time the file was modified; and the last the name of the file itself.
+The first column shows file permissions --- who can read, write, or execute your files; the fifth file size; the sixth the last time the file was modified; and the last the name of the file itself.
 
 Another `ls` option lets you show hidden files. In Linux, every file whose name begins with a `.` is a 'hidden' file[^dotfiles].
 (This is the reason that many configuration files, such as `.vimrc`, are named starting with a `.`.)
@@ -179,20 +179,20 @@ So, you could do `ls array*` to list all files starting with 'array' in the curr
 
 ### Rearranging Files
 
-If you want to move a file, use the `mv` command. For instance, if you want to rename `bob.txt` to `beth.txt`, you'd type `mv bob.txt beth.txt`.
+If you want to move or rename a file, use the `mv` command. For instance, if you want to rename `bob.txt` to `beth.txt`, you'd type `mv bob.txt beth.txt`.
 Or, if you wanted to put Bob in your directory of cool people, you'd type `mv bob.txt cool-people/`.
 You can move directories in a similar fashion.
 
-**Note:** Be careful with `mv` (and `cp`, `rm`, etc.)! Linux has no trash bin or recycle can, so if you move one file over another, the file you overwrote is gone forever!
+**Note:** Be careful with `mv` (and `cp`, `rm`, etc.)! Linux has no trash bin, recycle can, ashtray, or other garbage receptacle,[^recycle] so if you move one file over another, the file you overwrote is gone forever!
 
 If you want to make sure this doesn't happen, `mv -i` interactively prompts you if you're about to overwrite a file, and `mv -n` never overwrites files.
 
 To copy files, use the `cp` command. It is similar to the `mv` command, but it leaves the source file in place.
-When using `cp` to copy directories, you must specify the 'recursive' flag; for instance: `cp -r cs1001-TAs cool-people`[^recursive].
+When using `cp` to copy directories, you must specify the 'recursive' flag; for instance: `cp -r cs1585-TAs cool-people`[^recursive].
 
 You can remove (delete) files with `rm`. As with `cp`, you must use `rm -r` to delete directories.
 
-To make a new directory, use `mkdir new_directory_name`.
+To make a new directory, use `mkdir <new directory name>`.
 If you have a bunch of nested directories that you want to make, the `-p` flag has got you covered:
 `mkdir -p path/with/directories/you/want/to/create` creates all the missing directories in the given path.
 No need to call `mkdir` one directory at a time!
@@ -203,8 +203,9 @@ No need to call `mkdir` one directory at a time!
 
 Now, if you `cat` a big file, you'll probably find yourself wanting to scroll through it.
 The program for this is `less`[^less].
-You can scroll up and down in `less` with the arrow keys or \keys{j} and \keys{k} (like Vim).
+You can scroll up and down in `less` with the arrow keys, \keys{PgUp} and \keys{PgDn}, or \keys{j} and \keys{k} (like Vim).
 Pressing \keys{Space} scrolls one page.
+If you want to explore more `less` features, \keys{h} shows a help screen with a summary of various commands.
 Once you're done looking at the file, press \keys{q} to quit.
 
 Other times, you just want to see the first or last bits of a file.
@@ -214,15 +215,29 @@ So `head -n 5 main.cpp` prints the first five lines of `main.cpp`.
 
 ### The Manual
 
-Many programs include help text; typically `--help` or `-h` display this text.
+Many programs include help text; typically `--help` or `-h` displays this text.
 It can be a good quick reference of common options.
 
 If you need more detail, Linux includes a manual: `man`.
-Typically the way you use this is `man program_name` (try out `man ls`).
+Typically the way you use this is `man <program name>` (try out `man ls`).
 You can scroll like you would with `less`, and \keys{q} quits the manual.
 
 Inside `man`, `/search string` searches for some text in the man page.
 Press \keys{n} to go to the next match and \keys{N} to go to the previous match.
+
+Man pages look intimidating the first few times you look at them[^still], but don't worry.
+They are split into several sections.
+First, there's the `NAME` section that lists the name of the program.
+Following that is a `SYNOPSIS` section which very, very briefly summarizes the different arguments the program takes.
+Typically the section you want is the `DESCRIPTION` or `OPTIONS` section, which explains what each option does.
+Sometimes, interactive programs (such as `less` or `vim`) have a section on how to use the interactive features as well.
+
+If you're just trying to remember the name of one option, it's best to use the search feature to look for interesting keywords.
+Otherwise, take your time and peruse the various features.
+
+At the end of each man page, it may list related `FILES` or other commands and documentation that you should `SEE ALSO`.
+Following those sections is the `AUTHOR` section so you know whose name to curse when the program misbehaves,
+as well as a `BUGS` section which typically informs you that yes, this is software and yes, it has bugs in it.
 
 ### I/O Redirection
 
@@ -236,7 +251,8 @@ Not every program reads input or produces output!
 For example, `echo` only produces output -- it writes whatever arguments you give it back on stdout.
 ![echo](02/2.png)
 
-By default, STDOUT gets sent to your shell:
+
+By default, STDOUT gets sent to your terminal:
 ```
 nmjxv3@rc02xcs213:~$ echo "hello"
 hello
@@ -248,7 +264,7 @@ But, we can redirect this output to files or to other programs!
 - `>` and `>>` redirect program output to files. Quite handy if you have a program that spits out a lot of text that you want to look through later
 
 For example, let's take a look at the `wc` command.
-It reads input on STDIN, counts the number of characters, words, and lines, and prints those statistics to STDOUT.
+It reads input on STDIN, counts the number of lines, words, and characters, and prints those statistics to STDOUT.
 
 ![wc](02/5.png)\
 
@@ -285,7 +301,7 @@ hello world
 
 Now for a bit about STDERR.
 Bash numbers its output streams: STDOUT is `1` and STDERR is `2`.
-If you want to do pipe STDERR to other programs, you need to redirect it to STDOUT first.
+If you want to pipe both STDERR and STDOUT into another program, you need to redirect STDERR to STDOUT first.
 This is done like so: `2>&1`.
 
 So, for example, if you have a bunch of compiler errors that you want to look through with `less`, you'd do this:
@@ -293,26 +309,45 @@ So, for example, if you have a bunch of compiler errors that you want to look th
 g++ lots_o_errors.cpp 2>&1 | less
 ```
 
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	\node (p) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{g++ lots\_o\_errors.cpp\strut}};
+	\node (r) at ($(p.east) + (2,-0.25)$) {\texttt{2>\&1}};
+	\node (l) [shape=rectangle,inner sep=8pt,draw,rounded corners] at ($(p.east) + (3.5,0)$) {\texttt{less\strut}};
+
+	\draw[-{Stealth[length=5pt]}] ($(p.east) + (0,0.25)$) -- node(o)[above] {\texttt{1}} ($(l.west) + (0,0.25)$);
+	\draw[-{Stealth[length=5pt]}] ($(p.east) + (0,-0.25)$) -- node[above] {\texttt{2}} (r.west);
+	\draw[-{Stealth[length=5pt]}] (r.north) -- (r |- o.south);
+	\draw[-{Stealth[length=5pt]}] (l.east) -- node[above] {\texttt{STDOUT}} +(2,0);
+\end{tikzpicture}
+\end{figure}
+
+Output redirection is one of those things that seems a little odd when you first learn it,
+but once you get used to using it, you'll wonder how you lived without it.
+We'll see plenty of examples where output redirection comes in handy throughout the rest of this book.
+
 \newpage
 ## Questions
 Name: `______________________________`
 
-1. What does a shell do?
+1. In your own words, what does a shell do?
 \vspace{10em}
 
 2. What command would you use to print the names of all header (`.h`) files in the `/tmp` directory?
 \vspace{10em}
 
-3. How would you move a file named "bob.txt" (in your current directory) to a folder in your home directory named "odd" and rename "bob.txt" to "5.txt"?
+3. Let's say you're in some directory deep in your filesystem and you discover a file in your current directory named "cow.txt".
+What command would you run to move this file to a directory named "animals" that is located in your home directory?
 \vspace{10em}
 
-4. Suppose you have a file containing a bunch of scores, one score per line (like so: "57 Jenna").
+4. Suppose you have a file containing a bunch of scores and names, one score per line (like so: "57 Jenna").
 How would you print the top three scores from the file?
 \newpage
 
 ## Quick Reference
 
-`ls [Directory or Files]`: List the contents of a directory or information about files
+`ls [<directory or files>]`: List the contents of a directory or information about files
 
 - `-l` Detailed listing of file details
 - `-h` Show human-readable modification times
@@ -320,44 +355,44 @@ How would you print the top three scores from the file?
 
 `pwd`: Print current working directory
 
-`cd [Directory]`: Change current working directory
+`cd [<directory>]`: Change current working directory
 
 - `cd` with no arguments changes to the home directory
 - `cd -` switches to the previous working directory
 
-`mv [source] [destination]`: Move or rename a file or directory
+`mv <source> <destination>`: Move or rename a file or directory
 
 - `-i`: Interactively prompt before overwriting files
 - `-n`: Never overwrite files
 
-`cp [source] [destination]`: Copy a file or directory
+`cp <source> <destination>`: Copy a file or directory
 
 - `-r`: Recursively copy directory (must be used to copy directories)
 - `-i`: Interactively prompt before overwriting files
 - `-n`: Never overwrite files
 
-`rm [file]`: Removes a file or directory
+`rm <file>`: Removes a file or directory
 
 - `-r`: Recursively remove directory (must be used to remove directories)
 - `-i`: Interactively prompt before removing files
 
-`mkdir [directory]`: Make a new directory
+`mkdir <directory or path>`: Make a new directory
 
 - `-p`: Make all directories missing in a given path
 
-`cat [filenames]`: Output contents of files
+`cat [<filenames>]`: Output contents of files or STDIN
 
-`less [filename]`: Interactively scroll through long files
+`less [<filename>]`: Interactively scroll through long files or STDIN
 
-`head [filename]`: Display lines from beginning of a file
-
-- `-n num_lines`: Display `num_lines` lines, rather than the default of 10
-
-`tail [filename]`: Display lines from the end of a file
+`head [<filename>]`: Display lines from beginning of a file or STDIN
 
 - `-n num_lines`: Display `num_lines` lines, rather than the default of 10
 
-`man [command]`: Display manual page for a command
+`tail [<filename>]`: Display lines from the end of a file or STDIN
+
+- `-n num_lines`: Display `num_lines` lines, rather than the default of 10
+
+`man <command>`: Display manual page for a command
 
 Special Filenames:
 
@@ -379,9 +414,9 @@ IO Redirection:
 
 ## Further Reading
 
-[List of Bash Commands](https://ss64.com/bash/)
-[Bash Reference Manual](https://www.gnu.org/software/bash/manual/bashref.html)
-[All About Pipes](http://www.linfo.org/pipe.html)
+- [List of Bash Commands](https://ss64.com/bash/)
+- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bashref.html)
+- [All About Pipes](http://www.linfo.org/pipe.html)
 
 [^bash]: The 'Bourne Again Shell', known for intense action sequences, intrigue, and being derived from the 'Bourne shell'.
 [^old]: Thanks, old curmudgeons who can't be bothered to learn to type 'list'.
@@ -396,3 +431,9 @@ however, copying a directory requires `cp` to copy every file in the directory a
 (or at least it was in the '70s).
 [^less]: `less` is a successor to `more`, another paging utility, or as the authors would put it, `less` is `more`.
 [^parallel]: And each program in a pipeline can run in parallel with the others, so you can even take advantage of multiple CPU cores!
+[^spaces]: What if you want to pass an argument with a space in it? No dice, my friend. Adjust your wants accordingly.
+
+    ...okay, fine, you can put single quotes (`'`) or double quotes (`"`) around your argument with spaces. We'll talk about this more in a later chapter.
+[^recycle]: Unless you want to count the whole computer as garbage. We won't argue that point with you.
+[^still]: Okay, they never really stop looking scary, but after a while they start to feel less like a horror movie jump scare
+and more like the monster you just know is there in the hall waiting to eat you if you were to get out of bed.
