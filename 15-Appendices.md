@@ -271,12 +271,211 @@ Or, you can write your own!
 
 # Submitting homework with Git
 
+Your instructor may have you submit your assignments using Git and GitLab.
+These tools (or tools like them) are commonly used in industry, so getting accustomed to them early will pay off in the long run.
+
+Git is an open source, distributed version control system that allows programmers to track changes made to source files and share those changes with collaborators.
+It was created by Linus Torvalds (the Linux guy) and has become hugely popular in the last several years.
+
+GitLab is an open source web application that makes it a bit easier for programmers to collaborate on programming projects.
+GitLab lets users create repositories (projects) on a central server.
+Users can then push their code to GitLab using git.
+From there, users can clone their code to other machines, push up new changes, etc.
+You could think of it (kind of) like Dropbox – GitLab is a central place to store your code.
+
+In addition to storing code, GitLab has many features to help users collaborate with others.
+Users can share projects with other users, giving them the ability to push/pull code to/from the project.
+There are also bug tracking utilities, code review tools, and much more.
+
+In this class, we'll be using just the git parts of GitLab, so don't worry if the fancier features sound difficult.
+All you need to be able to do is
+
+- View the GitLab website.
+- Retrieve (clone) the lab assignments.
+- Record (commit) your solutions to those assignments.
+- Upload (push) those solutions back to GitLab.
+
+Once you are done with an assignment, you should **always** check GitLab to make sure that your solutions are properly uploaded.
+
+## Warning
+
+Do not blindly copy and paste git commands from the internet and run them.
+(This isn't specific to git --- that's just plain ol' good life advice right there.)
+While all the common git commands are quite good at not losing your hard work, there *are* commands that can wreak havoc if used improperly.
+If you don't know what a command does, take a few minutes to read some documentation on it first.
+
+If things are not working right, first check `git status` and `git log` to see what git thinks has happened.
+When that doesn't clear things up, have a look on your favorite search engine and/or ask a friend or your instructor for help.
+*Definitely* ask someone if the internet is recommending you run unfamiliar git commands!
+
+## Configuring Git
+
+Before you can use git, you need to configure a couple of things.
+
+### Who Are You?
+
+Don't worry, no need for an existential crisis.
+Git just wants to know your name and your email address.
+
+Open a terminal (i.e., PuTTY) and run these commands (substituting your own name and email, of course):
+
+```
+$ git config --global user.name "Hank Chicken"
+$ git config --global user.email hank@chickens.com
+```
+
+Git probably won't say anything when you run these commands; it's the strong silent type.
+Don't worry, you're fine.
+
+### Editing
+
+Git sometimes will open a text editor so you can type in certain things (mainly commit messages).
+The default editor it uses is joe, which almost no one knows how to use.[^exit-joe]
+You will most likely want to set the editor to one you know and love.
+
+To change the editor to `jpico`, run the following command (substitute a different editor if you like):
+
+```
+$ git config --global core.editor jpico
+```
+
+<!--
+### Authentication (optional)
+
+GitLab supports two forms of authentication: HTTPS and SSH.
+HTTPS authentication "just works" - - - there's no setup needed.
+It does, however, require you to enter your username and password each time you pull or push.
+
+SSH authentication requires some setup and still won't work out of the box on the CLC machines.
+So just give up and use HTTPS, because computers are terrible.
+
+If you do want to use it, though, read [this guide](https://git-classes.mst.edu/help/ssh/README).
+-->
+
+## Working on assignments
+
+Here's the gist of how to do assignments:
+
+1. Get the assignment
+    - Clone the repository
+    - Open the assignment directions
+2. Do the assignment
+    - Commit changes as you go
+    - Push to GitLab if you like
+3. Turn it in
+    - Push all your work to GitLab
+    - Check the GitLab website to make sure your submission looks right
+
+### Getting the assignment (`git clone`)
+
+For each lab assignment you will be granted access to a git repository on GitLab that contains starter code and examples.
+These repositories are visible only to you and the instructor and graders.
+You will be granted [developer](http://docs.gitlab.com/ce/user/permissions.html) permissions to your repositories.
+This will allow you to view the project and push changes to it.
+
+When you start an assignment, the first thing you must do is download a copy of the repository so you can make changes to it.
+
+1. Log in to [https://git-classes.mst.edu](https://git-classes.mst.edu).
+2. Navigate to the project that you want retrieve.
+3. Copy your repository’s URL from the text box in the middle of the page beneath the assignment name.
+    - If you don't see it, try making your browser window wider. Hooray responsive web design!
+    - Cloning over HTTPS (easy):
+          1. Select 'HTTPS' from the dropdown next to the text box.
+          2. Copy the URL from the text box. It should start with `https://git-classes.mst.edu`.
+    - Cloning over SSH (if you have [ssh keys](https://git-classes.mst.edu/help/ssh/README) configured):
+          1. Select 'SSH' from the dropdown next to the text box.
+          2. Copy the URL from the text box. It should start with `git@git-classes.mst.edu`.
+4. Open up a terminal (i.e., PuTTY) and navigate to the directory (using `cd`) where you want to put your copy of the repository.
+5. Run `git clone <URL you copied in step 3>`.
+
+That’s it! Now you’ve cloned your repository down, and you’re ready to get started.
+
+**Resources:**
+
+* [Pro Git: Cloning an Existing Repository](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository)
+* [Atlassian Git Tutorials: git clone](https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone)
+
+### Working on the assignment
+
+As far as working on the files go, there’s nothing special you have to do. Edit them, compile them, have fun with them. When you’re ready to commit (take a snapshot of) your code, you’ll need to interact with git.
+
+#### Committing code (`git commit`)
+
+1. Run `git status` to see which files are **staged**, **modified**, or **untracked**.
+    - **staged** files will be included in the next commit.
+    - **modified** files have been modified, but they haven’t been staged for commit.
+    - **untracked** files are unfamiliar to git. They exist in the folder, but git isn’t paying any attention to changes made to them.
+2. Stage all changes that you want to commit.
+    - Stage files by using the `git add` command.
+    - For example: `git add main.cpp`.
+3. Run `git status` again to make sure that the correct files are staged for commit.
+4. Run `git commit`. This will create a snapshot – recording the staged changes.
+5. Enter a meaningful commit message in the text editor that opens. Then save and close it.
+
+Now your changes have been committed!
+
+**Resources:**
+
+* [Pro Git: Recording Changes](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Checking-the-Status-of-Your-Files)
+* [Atlassian Git Tutorials: Saving changes](https://www.atlassian.com/git/tutorials/saving-changes)
+
+
+#### Looking through your Repository (`git status`, `git log`)
+
+There are a couple of commands that come in handy for viewing the state of your repository:
+
+- `git status`: View the current state of files. What has changed? What’s new in the repository?
+- `git log`: Shows a timeline of commits. See a history of changes made to a repository.
+
+**Resources:**
+
+* [Atlassian Git Tutorials: Inspecting a repository](https://www.atlassian.com/git/tutorials/inspecting-a-repository)
+
+
+#### Pushing your Commits (`git push`)
+
+After you’ve committed something, you can push it to GitLab with git push.
+We recommend pushing frequently, just for peace of mind.
+
+1. Run `git push`
+    - If you cloned over HTTPS, Git will ask for your username and password. Those are the same as the ones you use to log into GitLab.
+2. Check GitLab to ensure your code looks as expected.
+    - This step isn’t strictly required. However, if you’re not used to working with Git, it is in your best interest to ensure your code looks right. We’re going to grade what’s in GitLab, after all.
+
+**Resources:**
+
+* [Pro Git: Pushing to your Remotes](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes#Pushing-to-Your-Remotes)
+* [Atlassian Git Tutorials: git push](https://www.atlassian.com/git/tutorials/syncing/git-push)
+
+
+### Turning in your assignment (`git push`)
+
+Once you've completed your assignment, make sure to commit and push all your work!
+If your work isn't on GitLab, we can't grade it.
+You should also check GitLab to make sure your submission isn't missing any files.
+
+## Helpful Resources
+
+These are some nice resources for learning more about Git:
+
+* [In-browser Git Tutorial](https://try.github.io/levels/1/challenges/1)
+  (**Do this one.** It's a nice tutorial.)
+* [Atlassian's Git Tutorials](https://www.atlassian.com/git/tutorials)
+* [Pro Git](https://www.git-scm.com/book/en/v2)
+* [GitLab's Help Pages](https://git-classes.mst.edu/help/gitlab-basics/README.md)
+  (You may need to log into git-classes.mst.edu for that to work.)
+* [Introductory Videos from GitHub](https://git-scm.com/videos)
+
+If you see mentions of BitBucket or GitHub around, they're just web applications like GitLab.
+Same basic idea, created different people.
+
 
 [^another]: Windows is also an operating system.
 [^google]: Uh... Google it.
 [^pun]: Pun intended.
 [^2d]: Yep, it's a two-dimensional array. We use `char**` rather than something like `char[][100]` since we don't know how big the array or its subarrays will be;
 the operating system works this out when it runs your program.
+[^exit-joe]: By the way, \keys{\ctrl + k + x} will exit joe, should you forget to configure your editor before using git.
 
 <!--  LocalWords:  PuTTY
  -->
