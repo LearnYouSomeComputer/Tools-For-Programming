@@ -2,17 +2,17 @@
 
 ## Motivation
 
-Close your eyes[^open].
+Close your eyes.[^open]
 
 Imagine yourself standing in a wide, open field.
 In that field stands a desk, and on that desk, a computer.
-You sit down at the desk ready to code up the Next Big Thing[^next-big-thing].
+You sit down at the desk ready to code up the Next Big Thing.[^next-big-thing]
 
 You start programming and find yourself ready to start writing a cool new feature.
 "I better back up my code," you think to yourself. "Just in case I really goof it up."
 You create a new folder, name it "old_version" and continue on your way.
 
-As you work and work[^daydream], you find yourself with quite a few of these backups.
+As you work and work,[^daydream] you find yourself with quite a few of these backups.
 You see "old_version" and "old_version2" alongside good old "sorta_works" and "almost_done"
 "Good thing I made these backups", you say. "Better safe than sorry."
 
@@ -24,7 +24,7 @@ Boy, it's a good thing you kept those backups.
 But wait... which of these backups actually worked?
 What's different in *this* version that's breaking your project?
 
-Open your eyes.
+Open your eyes.[^close]
 
 If you haven't already experienced this predicament outside of a daydream, you certainly will.
 It's a fact that as you work on a programming project, you will add features to your code, change the way it works, and sometimes introduce bugs.
@@ -39,8 +39,8 @@ As a result, you **develop a timeline** of your code's state.
 
 With a timeline of your code's state, your version control system can:
 
-- help you figure out where bugs were introduced
-- make it easier to collaborate with other coders
+- help you figure out where bugs were introduced.
+- make it easier to collaborate with other coders.
 - keep your experimental code away from your stable, working code.
 - do much, much more than three things.
 
@@ -64,7 +64,7 @@ It's also fun, so that's cool.
 When you using Git, you work within a Git **repository**.
 A repository is essentially a folder for which Git has been tracking the history.
 We call that folder containing files and history your **local** copy of a repository.
-We say it's local because it's stored locally -- in a place where you can access its contents just like any other folder.
+We say it's local because it's stored locally --- in a place where you can access its contents just like any other folder.
 
 This is the part where I want to compare Git to Dropbox or Google Drive, but this is a dangerous comparison.
 Realize[^mind] that Git will feel similar to these services in some ways, but there are many features that make them *very* different.
@@ -81,20 +81,20 @@ When you work with a local Git repository, you will:
 Notice that each of these actions require **you** to ask Git to do stuff.
 Git does not do these things by itself.
 Because it's not automatic, you have the ability to take snapshots only when it makes sense.
-For example, it's common to take snapshots whenever you finish a feature or before you start working on experimental code[^experimental].
+For example, it's common to take snapshots whenever you finish a feature or before you start working on experimental code.[^experimental]
 
 ### Trying out GitLab
 
 To backup[^remote] work stored in a local repository, people often use an online service to store their repositories remotely.
 In this course, we will be using a campus-hosted service called **GitLab**.
 
-GitLab, like other git hosting services[^services], allows you to log into a website to create a **remote repository**.
+GitLab, like other git hosting services,[^services] allows you to log into a website to create a **remote repository**.
 Once created, you can **clone** (or download) your new repository into a **local copy**, so that you can begin to work.
 An empty repository will contain no files and an empty timeline (with no snapshots).
 
 Try the following to create your own, empty repository on GitLab:
 
-1. Log in to https://git-classes.mst.edu/ using your Single Sign-on credentials.
+1. Log in to [https://git-classes.mst.edu/](https://git-classes.mst.edu/) using your Single Sign-On credentials.
 2. Click the `+` (New Project) button in the upper right to create a new repository on GitLab.
 3. Under Project Name, give your project a good name. Let's call it `my-fancy-project`.
     - You can enter a description if you like, or you can leave it blank.
@@ -172,7 +172,8 @@ Untracked files:
 
     hello.cpp
 
-nothing added to commit but untracked files present (use "git add" to track)
+nothing added to commit but untracked files present (use "git add"↩
+  to track)
 ~~~
 
 Git is telling us that it sees a new file `hello.cpp` that is currently **untracked**.
@@ -196,6 +197,7 @@ Changes to be committed:
 Now, you can see that `hello.cpp` is listed under "Changes to be committed".
 In Git terminology, we would say that `hello.cpp` is **staged for commit**.
 In other words, `hello.cpp` is **ready to be included in the next snapshot**.
+The `git add` command does two things: it tells Git to track that file, if Git isn't already tracking it, and it stages the changes in that file for the next commit.
 
 Whenever you take a snapshot, Git will only include the changes that are staged.
 By staging changes for commit, you're essentially picking and choosing what you want to include.
@@ -236,24 +238,26 @@ It makes sense that we don't see any commits in our history yet.
 
 Before we commit our changes, we need to tell Git who we are.
 If we don't do this first, Git will refuse to commit anything for us!
+You only need to do this the first time you use Git on a machine.
+Git stores your configuration in a file (`~/.gitconfig`).
 
 ~~~bash
 # Please use your first and last name for the sake of grading.
 $ git config --global user.name "<your_name>"
 
-# Please use your university email address, again, for the sake of grading.
+# Please use your university email address, again, for the grader.
 $ git config --global user.email "<your_email>"
 
 # Let's also tell Git which text editor you prefer to use.
-# You will need to choose a console editor such as jpico, emacs, or vim.
+# You need to choose a console editor such as jpico, emacs, or vim.
 $ git config --global core.editor <editor_command>
 ~~~
 
 Now we can finally commit our changes using the `git commit` command.
 
 ~~~bash
-# It's always a good idea to run `git status` before running `git commit`
-# just so we can see what we're including in our commit.
+# It's always a good idea to run `git status` before running
+# `git commit` just so we can see what we're including in our commit.
 $ git status
 On branch master
 
@@ -273,7 +277,7 @@ You **must** include a commit message here in order to commit.
 Simply enter a meaningful message (like `Add hello.cpp`), save the message, and exit the text editor.
 
 Make sure your message is meaningful!
-If you use garbage commit messages[^garbage], you will only hurt your future self and your grade.
+If you use garbage commit messages,[^garbage] you will only hurt your future self and your grade.
 
 Let's see what our repository status looks like now.
 
@@ -346,7 +350,7 @@ Take some time to explore your remote repository on GitLab.
 
 ### Oh, Fork.
 
-Close your eyes again[^half-closed].
+Close your eyes again.[^half-closed]
 
 Here you are working on that Next Big Thing again.
 As you code, you see a beautiful person emerge[^emerge] from the field's tall grass.
@@ -359,7 +363,7 @@ You grimace.
 The muse proceeds to explain in great detail how your program can be so much better than it is.
 You agree.
 This is a muse after all.
-Inspiration is their job[^tony-robins].
+Inspiration is their job.[^tony-robins]
 
 Now here's your predicament.
 The changes proposed by the muse are going to require you to *totally* rework your program.
@@ -382,7 +386,7 @@ There are a couple more choices actually.
 That second option sounds **much** better.
 
 One of Git's most powerful features is its ability to **branch** your code's timeline.
-No, it's not like Primer[^Primer].
+No, it's not like Primer.[^Primer]
 You're not going to have separate crazy timelines going back and forth and every which way.
 
 It's more like having parallel universes.
@@ -403,13 +407,13 @@ Here are just a handful of cases where it comes in handy:
 - You want to keep your work separate from your teammates' code.
 - You want to keep your commit history clean by clearly showing where new features were added.
 
-Now, here you are in real life sitting in your leather chair[^assume1], smoking a pipe[^assume2], sipping on bourbon[^given], and wondering what commands you use to actually work with branches in Git.
+Now, here you are in real life sitting in your leather chair,[^assume1] smoking a pipe,[^assume2] sipping on bourbon,[^given] and wondering what commands you use to actually work with branches in Git.
 It's time to get your hands dirty.
 
 Instead of asking you to create a bunch of commits and branches by hands, we're going to use an online tool to work with branches.
 It's a game, actually.
 
-Pop open a browser and pull up http://learngitbranching.js.org/
+Pop open a browser and pull up [http://learngitbranching.js.org/](http://learngitbranching.js.org/).
 Then, work through the following exercises:
 
 - 1.1: Introduction to Git Commits
@@ -516,7 +520,8 @@ Name: `______________________________`
 [^half-closed]: Maybe just half-closed this time.
 [^emerge]: It's as though they were laying there in the grass the whole time. So weird.
 [^tony-robins]: You later realize that the muse was just Tony Robbins getting you super amped about everything.
-[^Primer]: Although you should *absolutely* see it if you haven't. Who doesn't love a good indie time travel movie?
+[^Primer]: You should *absolutely* see Primer if you haven't. Who doesn't love a good indie time travel movie?
 [^assume1]: I assume.
 [^assume2]: I reckon.
 [^given]: That's a given.
+[^close]: If you read the first footnote, close them first.
