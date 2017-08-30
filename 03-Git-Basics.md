@@ -295,9 +295,9 @@ What about the log?
 
 ~~~bash
 $ git log
-commit 648203a12a0b8ab1e0e37336d891b0420994739d (HEAD -> master)
+commit af9db9b5681ff748847eca6ddedb46069e1b0366 (HEAD -> master)
 Author: Homer Simpson <simpsonh@lardlad.donuts>
-Date:   Mon Jun 12 12:38:01 2017 -0500
+Date:   Wed Aug 30 10:58:28 2017 -0500
 
     Add hello.cpp
 ~~~
@@ -326,6 +326,80 @@ If you forget to stage changes, Git **will not include them** in your commit!
 How do you stage changes to files?
 Use `git add`.
 Even if a file is not new, you will need to stage its changes for commit using `git add`.
+
+### Seeing What Happened in a Commit
+
+Let's make another commit. Maybe we'll make our hello world program ask the user how their day is going as well.
+
+~~~bash
+$ vim hello.cpp
+$ git add hello.cpp
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+  modified:   hello.cpp
+$ git commit
+~~~
+
+Now that we've done this, let's see what our log looks like:
+
+~~~bash
+$ git log
+commit bdf0003404901363f05b14f20bb7f7becf4b2dd5 (HEAD -> master)
+Author: Homer Simpson <simpsonh@lardlad.donuts>
+Date:   Wed Aug 30 12:54:59 2017 -0500
+
+    Add Faux Politeness
+
+commit af9db9b5681ff748847eca6ddedb46069e1b0366
+Author: Homer Simpson <simpsonh@lardlad.donuts>
+Date:   Wed Aug 30 10:58:28 2017 -0500
+
+    Add hello.cpp
+~~~
+
+Neat! There are both our commits there, listed in order from newest to oldest.
+We can see who wrote them, when, and what the commit message was.
+Usually this is all you need, but sometimes you might want to see what actually changed in a commit.
+Maybe you've just cloned someone else's repository and you're confused about something they did, or maybe you just want to savor a particularly delicious line of code you wrote.
+We don't judge.
+
+If you want to inspect what changed in one commit, you need some way of identifying that commit to Git.
+Git assigns a *hash* to each commit --- that is the long string of letters and numbers on the line starting with `commit` in the log.[^sha1]
+You can refer to commits by their hash whenever you need to.
+Since it's pretty unlikely that two commit hashes start with the same handful of characters, you can refer to a commit by just the first several letters of its hash; five or so is usually plenty.[^five]
+(`git commit` shows the first seven characters in its output.)
+
+The `git show` command shows you what changes happened in a commit.
+So, if we want to see our beautiful, lovely, astute changes that we made in that latest commit, we can do that:
+
+~~~bash
+$ git show bdf00
+commit bdf0003404901363f05b14f20bb7f7becf4b2dd5 (HEAD -> master)
+Author: Homer Simpson <simpsonh@lardlad.donuts>
+Date:   Wed Aug 30 12:54:59 2017 -0500
+
+    Add Faux Politeness
+
+diff --git a/hello.cpp b/hello.cpp
+index 9a52d30..e0d3a48 100644
+--- a/hello.cpp
++++ b/hello.cpp
+@@ -5,5 +5,7 @@ using namespace std;
+ int main()
+ {
+   cout << "Hello world!" << endl;
++  cout << "How are you?" << endl;
++  //ignore user feelings and exit
+   return 0;
+ }
+~~~
+
+This shows a 'diff' of your changes. If you see a `+` in the first column, that means you added that line; a `-` means that line was removed.
+Git works line-by-line, so if you change something one one line, it shows up as you deleting one line and adding another.
+The rest of the output provides some context around your changes so you have a vague idea of where they happened.
 
 ### Uploading to GitLab
 
@@ -422,6 +496,53 @@ Then, work through the following exercises:
 
 Be sure to read the stuff that pops up!
 This is a *very* good learning resource.
+
+### Ignoring Stuff
+
+If you're working on a programming project, you'll probably end up with executables (`a.out` and friends) hanging around in your directory.
+Every time you run `git status`, you'll see something like
+
+~~~bash
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+  a.out
+
+nothing added to commit but untracked files present (use "git add" to track)
+~~~
+
+At first, you may be tempted to just go ahead and commit that executable too.
+But, this is not typically the best of ideas.
+It's very easy to forget to compile right before committing, and if you don't, you'll end up with a commit where the source code says one thing and the executable does another!
+
+The general advice is to track your source files with Git and to not track any files that you generate from those (so, executables).
+So, if you don't want to ever commit `a.out`, do you have to settle for just always seeing it show up in `git status`?
+
+No!
+
+You can tell Git to ignore files by listing their names in a file in your repository named `.gitignore`.
+So, to ignore `a.out`, you could do something like this:
+
+~~~bash
+$ echo 'a.out' > .gitignore   # or use a text editor
+$ cat .gitignore
+a.out
+
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+  .gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+~~~
+
+No more `a.out`!
+And, if your cat happens to walk across your keyboard and type `git add a.out`, Git will tell you, "Hey, you said to ignore that! No way am I tracking it!"
+
+(It's not a bad idea to commit your `.gitignore`.)
 
 ### Your Git Workflow
 
@@ -525,3 +646,6 @@ Name: `______________________________`
 [^assume2]: I reckon.
 [^given]: That's a given.
 [^close]: If you read the first footnote, close them first.
+[^sha1]: If you're curious, it's a SHA1 hash of the changes, the commit message, the author and time, the parent commit hash, and one or two other things.
+Basically, it gives you some way of turning all the interesting parts of a commit into a string that uniquely identifies that commit.
+[^five]: There are about a million 5-digit hex numbers, so unless you're the kind of person to get hit by lightning twice, odds are in your favor that you won't have two commits starting with the same 5 digits, even if you've got a couple hundred commits in your repository!
