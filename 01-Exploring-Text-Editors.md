@@ -84,7 +84,7 @@ In addition to those shortcuts, if your cursor is on a brace, bracket, or parent
 - \keys{\tab}: Indent current line/block
 - \keys{\shift+\tab}: Outdent current line/block
 - \keys{\ctrl+q}: Single-line comment/uncomment current line/selection
-- \keys{\ctrl+\shift+q}: Block comment curent line/selection
+- \keys{\ctrl+\shift+q}: Block comment current line/selection
 
 #### Column Editing
 
