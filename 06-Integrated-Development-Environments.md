@@ -40,35 +40,14 @@ Then you can travel back to 1980 when things were actually good[^reagan].
 
 ## Walkthrough
 
-We're going to try out a couple of open source[^oss] IDEs that run on Linux.
 Usually when we connect to a remote Linux machine, all we need is a shell, and PuTTY does everything we need.
 For this lab, we're going to need to setup X-forwarding as well.
 If you haven't already, be sure to reference the appendix on [X-forwarding].
 
-Before lab, make sure you're able to start the two IDEs we will be using:
-
-- Geany (`geany`) should look like Figure \ref{geany-startup}
-- Code::Blocks (`codeblocks`) should look like Figure \ref{codeblocks-startup}
-
-![Geany \label{geany-startup}](06/geany.png){ width=60% }
-
-![Code::Blocks \label{codeblocks-startup}](06/codeblocks.png){ width=60% }
-
-During your lab session, you'll be exploring some of the features of each of these IDEs.
 
 \newpage
 ## Questions
 
-1.  Click the "Build" drop-down menu in Geany. What are the sub-menu options?
-
-    Note that we want to include the grayed-out options, too.
-    Hint: there are seven of them.
-\vspace{10em}
-
-2.  Click the "Help" drop-down menu in Code::Blocks. What are the sub-menu options?
-
-    Don't worry about sub-menus.
-    Hint: there are three of them.
 \vspace{10em}
 \newpage
 
@@ -78,39 +57,8 @@ During your lab session, you'll be exploring some of the features of each of the
 ### General Tips
 
 - Make sure you start Xming before you try to forward any X11 windows!
-- You won't be able to use bash within the shell that's running `geany` or `codeblocks`.
+- You won't be able to use bash within the shell that's running `codeblocks`.
   You may find it useful to keep a couple of PuTTY windows open while you work.
-
-### Geany
-
-#### Troubleshooting
-
-- If geany complains that it’s unable to open its shell...
-    1. Go to \menu{Edit > Preferences > Tools}
-    2. Change Terminal from `x-terminal-emulator -e "/bin/sh %c"` to `xterm -e "/bin/sh %c"`
-    3. Save your changes
-
-#### Geany Features
-
-- \keys{F9} Builds the project
-- \keys{F5} Runs the project
-
-#### Building with Geany
-
-It doesn't work so well for multi-file projects.
-
-After you create a project...
-
-- Go to \menu{Project > Properties > Build}
-- Find the "Build" command (`g++ -Wall -o "%e" "%f"`)
-- Change it to `g++ -Wall -o "%e" *.cpp`
-
-#### Writing code with Geany
-
-- \keys{\ctrl + t} -- Go to function implementation
-- \keys{\ctrl + space} -- Show completions.
-- Set space preference to "Spaces" in \menu{Edit > Preferences > Editor > Indentation}
-- You can auto-close brackets and parentheses as well.
 
 ### Code::Blocks
 
@@ -137,11 +85,6 @@ After you create a project...
 - Right-click on a file and choose ‘Format this file’ to autoformat.
 
 ## Further Reading
-
-### Geany
-
-- Geany Project Homepage: [http://www.geany.org/](http://www.geany.org/)
-- Geany Plugins: [http://plugins.geany.org/downloads.html](http://plugins.geany.org/downloads.html)
 
 ### Code::Blocks
 
