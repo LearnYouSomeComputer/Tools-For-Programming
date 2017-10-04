@@ -684,6 +684,7 @@ done
 - [Bash Manual](https://www.gnu.org/software/bash/manual/)
 - [Bash Guide](http://mywiki.wooledge.org/BashGuide)
 - [Bash Tutorial](http://tldp.org/LDP/Bash-Beginners-Guide/html/)
+- [Advanced Bash Scripting Guide](http://tldp.org/LDP/abs/html/)
 
 
 [^functional]: Disclaimer: Bash may be neither full nor functional for your use case.
