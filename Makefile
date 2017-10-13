@@ -15,6 +15,8 @@ MD_PIECES = 00-FrontMatter.md	\
 	14-Typesetting-with-LaTeX.md \
 	15-Appendices.md
 
+EXTENSIONS = raw_tex+fenced_code_attributes
+
 .PHONY: all tex
 
 all: cs1001_prelab.pdf
@@ -29,10 +31,10 @@ book: cs1001_prelab.pdf
 	@echo -e "\n\nDone! Be sure to print that bad-boy using short-edge duplexing."
 
 cs1001_prelab.pdf: ${MD_PIECES} template.tex
-	pandoc --template=template.tex --from markdown+raw_tex --output cs1001_prelab.pdf ${MD_PIECES}
+	pandoc --template=template.tex --from markdown+${EXTENSIONS} --output cs1001_prelab.pdf ${MD_PIECES}
 
 cs1001_prelab.tex: ${MD_PIECES} template.tex
-	pandoc --template=template.tex --standalone --from markdown+raw_tex --output cs1001_prelab.tex ${MD_PIECES}
+	pandoc --template=template.tex --standalone --from markdown+${EXTENSIONS} --output cs1001_prelab.tex ${MD_PIECES}
 
 %.pdf: 00-FrontMatter.md %*.md
-	pandoc --template=template.tex --from markdown+raw_tex --output $@ $^
+	pandoc --template=template.tex --from markdown+${EXTENSIONS} --output $@ $^
