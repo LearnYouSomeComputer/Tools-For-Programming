@@ -22,7 +22,7 @@ and cast individual bits of type that were exactly the right size needed.
 What you need is a digital typesetting system that's equally as powerful!
 Writing one should only take a summer, so you set to work.
 
-In 1989 the first "finished" version of \TeX was completed.
+In 1989 the first "finished" version of \TeX was completed.[^further-reading]
 
 (Okay, you can stop being Don Knuth now.)
 
@@ -340,3 +340,5 @@ Name: `______________________________`
 [^logo]: Besides having a nifty command for printing out its own logo, of course.
 [^thrice]: Sometimes twice, and sometimes thrice! `pdflatex` is a one-pass parser and, well, some things just can't be done in one pass. Yes, this is poor design.
 [^caret]: Usually `\^` and `\~` are used to write accents on letters; for instance, `\~n` renders like ñ.
+[^further-reading]: See [this essay](http://www.practicallyefficient.com/2017/10/13/from-boiling-lead-and-black-art.html) for more about
+the history of mathematical typesetting.
