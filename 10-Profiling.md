@@ -49,7 +49,7 @@ I want you to go figure out **exactly** how much screen time *she* has and how m
 
 Realizing he's not going to leave until you do, you come up with a shortcut.
 You load the master reel into your preview machine and check every 50th frame to see who's in the shot.
-The film was shot at 24 frames per second, so you'll check every 2 seconds of film.
+The film was shot at 24 frames per second, so you'll check about every 2 seconds of film.
 It's not exact, but it's good enough.
 Besides, the film is mostly Puddles anyway.
 
@@ -71,6 +71,11 @@ Fortunately, you don't have to sit with your debugger counting line after line.
 There are tools called **profilers** that automate this process for you.
 You can think of them like souped-up stop watches.
 They can give you detailed breakdowns of how your program spends its time, so that you can identify areas for improvement.
+
+We'll talk about four (4)[^four] tools you have at your disposal for evaluating and analyzing your programs' performance.
+`time` will tell you how much, uh, time your programs take to run overall.
+`gprof` and `callgrind` give you a more detailed view of how long each part of your program takes to run.
+Last, but not least, `massif` will tell you about how much memory your program uses!
 
 ### Takeaways
 
@@ -112,7 +117,7 @@ System time
 In order to use it, just throw `time` in front of the program you want to run.
 It doesn't care if the program has command line arguments.
 
-~~~shell
+~~~
 # If we want to see how long it takes to list the files in /tmp
 $ time ls /tmp
 time ls -a /tmp
@@ -127,11 +132,16 @@ $ g++ -o hello hello.cpp
 $ time ./hello
 ~~~
 
+Program execution time (especially real/wall clock time) can fluctuate for a variety of reasons.
+If you just want to see how long it takes your program to run, this is fine.
+However, if you want to compare the runtime of two programs --- say you make a change to your code and want to see
+if it sped up the program's execution or not --- you should measure its execution time a few times and average them.[^stats]
+
 ### Profiling with `gprof`
 
 Although `time` is handy for determining run times, it doesn't give you any indication about which parts of your programs are slow and which parts are fast.
-However, `gprof` can do that for you.
-`gprof` samples your program as it runs to tell you how much time you're spending in function calls.
+However, `gprof` can do that for you!
+`gprof` samples your program as it runs to tell you how much time you're spending in each function.
 We'll discuss two different profiles that are included in `gprof`'s output: flat profiles and call graphs.
 
 
@@ -139,7 +149,7 @@ First, let's look at an example program.
 In this program, we have a few different functions.
 Each one has a for-loop that just wastes time for the sake of example.
 
-~~~cpp
+~~~{.cpp .numberLines}
 #include <iostream>
 using namespace std;
 
@@ -185,7 +195,8 @@ int main(void)
 
 In order to use `gprof` we have to pass an additional flag to `g++`.
 The `-pg` flag tells `g++` to record profile information whenever our compiled program runs.
-The generated file, called `gmon.out`, contains the information that is interpreted by `gprof`.
+Each time you run your program it will generate a file called `gmon.out` which contains
+information that can then be interpreted by the `gprof` command.
 
 Let's compile the program above.
 We'll assume it's called `main.cpp`.
@@ -212,7 +223,7 @@ $ ls
 gmon.out    main    main.cpp
 ~~~
 
-Now that we have `gmon.out`, we can ask gprof to show us the profile.
+Now that we have `gmon.out`, we can ask `gprof` to show us the profile.
 
 ~~~shell
 $ gprof main
@@ -234,13 +245,11 @@ For our above program, we see the following **flat profile**:
  24.99     10.98     5.37        1     5.37     5.37  new_func1()
  24.94     16.34     5.36        1     5.36    10.73  func1()
  24.89     21.69     5.35        1     5.35     5.35  func2()
-  0.00     21.69     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9new...
-  0.00     21.69     0.00        1     0.00     0.00  __static_initializati...
 ~~~
 
-When your program runs, it makes a note in `gmon.out`...
+When your program runs, it makes a note in `gmon.out` of the function name...
 
-- every time a function is called.
+- Every time a function is called.
   This ensures that our function call counts are exact.
 - Every 0.01 seconds.
   This gives us a rough idea as to how much time we're spending in each function.
@@ -251,6 +260,15 @@ That makes sense to see, given that each of those functions wastes time using th
 
 The functions are sorted by the amount of time spent running in each.
 That is, the function with the most samples is the one we spent the most time in.
+
+The columns shown contain the following information:
+
+- `% time`: The percentage of execution time spent in that function. This column should sum to 100%.
+- `cumulative seconds`: The execution time spent in this function and all functions above it in the table.
+- `self seconds`: The execution time spent in this function.
+- `calls`: The number of times this function was called.
+- `self s/call`: The average execution time spent per call. This is calculated by `self seconds`/`calls`.
+- `total s/call`: The average execution time spent per call of this function and all its descendants (functions it calls).
 
 #### The Call Graph
 
@@ -276,13 +294,6 @@ index % time    self  children    called     name
 -----------------------------------------------
                 5.35    0.00       1/1           func1() [2]
 [4]     24.6    5.35    0.00       1         new_func1() [4]
------------------------------------------------
-                0.00    0.00       1/1           __libc_csu_init [18]
-[11]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z9new_func1v [...
-                0.00    0.00       1/1           __static_initialization_an...
------------------------------------------------
-                0.00    0.00       1/1           _GLOBAL__sub_I__Z9new_func...
-[12]     0.0    0.00    0.00       1         __static_initialization_and_de...
 -----------------------------------------------
 ~~~
 
@@ -322,13 +333,13 @@ It gives you a *good* idea of how much movie time we spend looking at Mr. St. Ru
 If we take the time to go frame-by-frame, that's the most detailed we can possibly get.
 
 `callgrind` is our frame-by-frame approach.
-Instead of going fame-by-frame[^movie], we're going instruction-by-instruction.
+Instead of going fame-by-frame,[^movie] we're going instruction-by-instruction.
 `callgrind` is one of several tools built using the Valgrind framework.
 Tools built using Valgrind can see *every single instruction* that is run by a program.
 This level of detail can be very powerful, but it can also be pretty slow.
 
-Let's consider our program from the `gprof` section, but let's use ten thousand iterations for each for-loop instead of two billion[^all-day].
-This time when we compile it, we need to pass the `-g` flag instead of `-pg`[^g-pg].
+Let's consider our program from the `gprof` section, but let's use ten thousand iterations for each for-loop instead of two billion.[^all-day]
+This time when we compile it, we need to pass the `-g` flag instead of `-pg`.[^g-pg]
 Then we'll run our program through `callgrind` as shown.
 
 ~~~shell
@@ -712,12 +723,15 @@ Name: `______________________________`
 - [Massif's Manual](http://valgrind.org/docs/manual/ms-manual.html)
 
 
-[^literal]: They're literally classes with rose-colored lenses. It's not a metaphor or any such nonsense.
+[^literal]: They're literally glasses with rose-colored lenses. It's not a metaphor or any such nonsense.
 [^io]: Input/Output
 [^movie]: Since we're talking about programs... not movies.
 [^all-day]: Otherwise we'll be waiting all day for callgrind to do its thing.
 [^g-pg]: Uh... T.D.A. 2 is rated PG for Pretty Good.
 [^yay]: Yay!
+[^four]: 4 (four)
+[^stats]: Or if you really feel like being pedantic, you can throw a litany of statistical tests at it instead...
+but you probably only care about that if you're trying to do science.
 
 <!--  LocalWords:  profiler profilers gprof callgrind Rumpterfrabble
  -->
