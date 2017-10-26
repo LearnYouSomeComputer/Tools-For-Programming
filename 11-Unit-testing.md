@@ -3,30 +3,30 @@
 ## Motivation
 
 You're the quality control manager for the Confabulator, a hot new product in development by Acme Inc. LLC.
-Every day, engineers give you new prototype confabulators to test and make sure they meet the ill-defined
-and entirely made-up requirements upper management has set for the product.
-You put each confabulator through its paces to the best of your memory of what those paces are
+Every day, engineers give you new prototype confabulators to test and make sure they meet the ill--defined
+and entirely made--up requirements upper management has set for the product.
+You put each confabulator through its paces --- to the best of your memory of what those paces are ---
 and make a report for the designers telling them what works and what doesn't.
 
 Usually they give you the same prototype back with some fixes for the problems you reported the previous day.
 Testing confabulators takes up time you could otherwise use productively, maybe for complaining about life to your coworkers or taking extended lunch breaks.
-So you don't always put the fixed-up prototype through the full battery of tests--you just test the stuff that got fixed.
+So you don't always put the fixed-up prototype through the full battery of tests --- you just test the stuff that got fixed.
 Unfortunately, sometimes (as engineers are wont to do) a fix gets added that affects something else in an entirely different spot in the system!
 You'll never forget the endless meetings after it took you a week to discover that a fix to the frobnicator interfered with the rotagration arm.
 Those engineers were *mad*. How could you tell them everything is fine when something was broken?
 
-Even worse, it's hard to remember exactly what all tests you do each time, and management seems to keep changing their minds
-on exactly what all features a confabulator is supposed to do.
+Even worse, it's hard to remember exactly what tests you're supposed to do each time, and management seems to keep changing their minds
+on exactly what features a confabulator is supposed to have.
 Last month it was just supposed to be for annularity congruification, but then a contract with Statorfile Exceed GmbH. came through
 and now it also has to calabricate the vibrosity of splinal conformities.
 The number of things you have to check for just seems to get bigger and bigger, and of course once you add on a vibrous harmonicator,
-you have to check that it works regarless of whether the radiometer intensimission is engaged or disengaged.
+you have to check that it works regardless of whether the radiometer intensimission is engaged or disengaged.
 It seems like every new whizbang adds a half a dozen whatsits and thus a gross more tests[^gross] for you.
 
 But the worst thing of all is that you have to do this all by hand, day in and day out.
 Nothing rots the brain faster than the dull monotony of doing something you're ambivalent about.
 Heck, if you're going to be experiencing dull monotony either way, the least your boss could do is let you watch some reality TV.
-But nooooo, apparently all the monotony must be job-inflicted.
+But nooooo, apparently all the monotony must be job--inflicted.
 
 Fortunately, computers have solved this problem!
 Instead of manually testing your program, you can write *unit tests* that test each piece for you.
@@ -35,11 +35,11 @@ Rather than mind-numbingly checking everything by hand, you can experience the m
 (or at least until it fails and you have to figure out what you broke).
 
 Unit testing is widely used in industry because it is quite effective at keeping bugs out of code.[^pedantry]
-You can even measure how much of your code is tested by unit tests--100% code coverage means that you've found
+You can even measure how much of your code is tested by unit tests --- 100% code coverage means that you've found
 at least most of the obvious bugs!
 
 This chapter will focus on the Catch unit testing framework for C++.
-There are a number of popular unit testing frameworks; Boost has one (of course it does), Google makes one called `gtest`, etc.
+There are a number of popular unit testing frameworks; Boost has one,[^sink] Google makes one called `gtest`, etc.
 However, Catch is easy to install, easy to write tests in, and downright beautiful compared to Boost's test framework.
 (It's also popular, in case you were wondering.)
 
@@ -54,7 +54,7 @@ However, Catch is easy to install, easy to write tests in, and downright beautif
 ### Setting up Catch
 
 Catch is distributed as a single `.hpp` file that you can download and include in your project.
-Download it from [github](https://github.com/philsquared/Catch) -- the link to the single header is in the `README`.
+Download it from [GitHub](https://github.com/philsquared/Catch) --- the link to the single header is in the `README`.
 
 In *exactly one* `.cpp` file, you must include the following lines:
 
@@ -64,7 +64,7 @@ In *exactly one* `.cpp` file, you must include the following lines:
 ```
 
 This generates a `main()` function that runs your unit tests.
-You will have two programs now -- your actual program, and a program that runs your unit tests.
+You will have two programs now --- your actual program, and a program that runs your unit tests.
 
 Every other file you write tests in should include Catch:
 
@@ -73,14 +73,14 @@ Every other file you write tests in should include Catch:
 ```
 
 Later, we'll discuss how best to organize your tests, so don't worry too much about the "right" place to put the main function yet.
+For now, just throw it at the top of a `test.cpp` file, and let's write some tests!
 
 ### Basic Tests
 
-Alright, let's write some unit tests!
 We are going to test a function that generates Fibonacci numbers (1, 1, 2, 3, 5, 8, ...).
 Here's our function:
 
-```c++
+```{.cpp .numberLines}
 /* Generate the Nth Fibonacci number */
 int fibonacci(int n)
 {
@@ -102,13 +102,14 @@ Each test case has a name and a tag; generally you'll tag all test cases for a f
 (You can tell Catch to run only tests with specific names or tags if you like.)
 
 Inside a test case, you can put one or more `REQUIRE` or `CHECK` assertions.
-A `REQUIRE` statement checks that a certain condition holds and if it does not, it reports a test failure and stops the execution of that test case.
-`CHECK` is similar to require, but if the condition does not hold, it reports a test failure but keeps running the test case.
-Usually you use `REQUIRE` when something is broken enough that it does not make sense to keep going with the test.
+A `REQUIRE` statement checks that a certain condition holds; if it does not, it reports a test failure and stops the execution of that test case.
+`CHECK` is similar to require, but if the condition does not hold, it reports a test failure and keeps running the test case.
+Usually, you use `REQUIRE` when a failure indicates that the code is broken enough that it does not make sense to keep going with the test.
 
 In general, when writing tests, you want to test every path through your code at least once.
 Here's a pretty good test for our Fibonacci function:
-```c++
+
+```{.cpp .numberLines}
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
@@ -145,26 +146,27 @@ assertions: 4 | 1 passed | 3 failed
 ```
 
 Oh no! We have a bug![^hand]
-In fact, it is in the `return n;` statement in our function--it should be `return 1;` instead.
-If we fix that and re-run our tests, everything is kosher:
+In fact, it is in the `return n;` statement in our function on line 6 --- it should be `return 1;` instead.
+If we fix that and re--run our tests, everything is kosher:
+
 ```
 All tests passed (4 assertions in 1 test case)
 ```
 
-Now, you may notice that Catch expands the thing inside the CHECK function -- it prints the value that `fibonacci` returns.
-It does this by using *template magic*.
-This magic is only so powerful.
+Now, you may notice that Catch expands the thing inside the `CHECK` function --- it prints the value that `fibonacci` returns.
+It does this by the power of *template magic*.
+This magic is only so powerful.[^errors]
 So, if you want to write a more complex expression, you'll need to either break it into individual assertions or tell Catch to not attempt to expand it.
 For 'and' statements, rather than `CHECK(x && y);`, write `CHECK(x); CHECK(y);`.
 For 'or' statements, enclose your expression in an extra pair of parentheses: `CHECK((x || y));`.
-(The extra parens tell Catch to not attempt to expand the expression; you can do this with 'and' statements as well, but expansion is nice to have.)
+(The extra parentheses tell Catch to not attempt to expand the expression; you can do this with 'and' statements as well, but expansion is nice to have.)
 
 There are also matching assertions `REQUIRE_FALSE` and `CHECK_FALSE` that check to make sure a statement is false, rather than true.
 
 ### Testing Exceptions
 
-Let's modify our Fibonacci function to throw an exception if the user passes us a number that's not within the range our function works for.
-```c++
+Let's modify our Fibonacci function to throw an exception if the user passes us a number that's not within the range of our function.
+```{.cpp .numberLines}
 #include<stdexcept> // for domain_error
 using namespace std;
 
@@ -177,7 +179,7 @@ int fibonacci(int n)
 	}
 	else if(n <= 1)
 	{
-		return n;
+		return 1;
 	}
 	else
 	{
@@ -197,20 +199,21 @@ As before, each assertion comes in a `CHECK` and a `REQUIRE` flavor.
 For example, we can check that our Fibonacci function properly verifies that its input is in the domain by testing when it throws exceptions
 and what exceptions it throws:
 
-```c++
+```{.cpp .numberLines}
 TEST_CASE("Fibonacci Domain", "[Fibonacci]")
 {
   CHECK_NOTHROW(fibonacci(0));
   CHECK_NOTHROW(fibonacci(10));
   CHECK_THROWS_AS(fibonacci(-1), domain_error);
-  CHECK_THROWS_WITH(fibonacci(-1), "Fibonacci not defined for negative indices");
+  CHECK_THROWS_WITH(fibonacci(-1), "Fibonacci not defined for"
+      "negative indices");
 }
 ```
 
 ### Organizing Your Tests
 
 At this point you know enough to start writing tests for functions.
-Before you go too hog-wild, shoving test cases every which where, let's talk about how to organize tests so they're easy to find and use.
+Before you go too hog--wild, shoving test cases every which where, let's talk about how to organize tests so they're easy to find and use.
 
 First, we can't have our `main()` function and Catch's auto-generated `main()` in the same program.
 You'll need to organize your code so that you can compile your test cases without including your `main()` function.
@@ -225,17 +228,17 @@ that contains our unit tests.
 
 Third, compiling Catch's auto-generated `main()` function takes a while.
 This is doubly annoying because it never changes!
-Rather than rebuilding it all the time, we can harness the power of incremental compilation by making a separate `test_main.cpp` file
+Rather than rebuilding it all the time, we can harness the power of makefiles and incremental compilation by making a separate `test_main.cpp` file
 that just contains Catch's `main()`.
 This file looks exactly like this:
 
-```c++
+```{.cpp .numberLines}
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 ```
 
 Then in `test_fibonacci.cpp`, we just have the following includes:
-```c++
+```{.cpp .numberLines}
 #include "fibonacci.h"
 #include "catch.hpp"
 
@@ -245,9 +248,9 @@ Then in `test_fibonacci.cpp`, we just have the following includes:
 Building this code is done as follows:
 
 ```
-$ g++ -c test_main.cpp
-$ g++ -c test_fibonacci.cpp
-$ g++ test_main.o test_fibonacci.o -o testsuite
+$ g++ -c test_main.cpp                  # Compile Catch's main()
+$ g++ -c test_fibonacci.cpp             # Compile Fibonacci tests
+$ g++ test_main.o test_fibonacci.o -o testsuite  # Link testsuite
 ```
 
 Now you can add new unit tests and just recompile `test_fibonacci.cpp` and re-link the test suite.
@@ -262,7 +265,7 @@ You'll still write `TEST_CASE`s with various `CHECK` and `REQUIRE` statements.
 However, when testing classes, it's common to need to set up a class instance to run a bunch of tests on.
 For example, let's suppose we have a Vector class with the following declaration:
 
-```c++
+```{.cpp .numberLines}
 template<class T>
 class Vector
 {
@@ -302,7 +305,7 @@ For each section, Catch runs the test case from the beginning but only executes 
 
 We can use this to set up a test vector once to test the constructor and accessor functions:
 
-```c++
+```{.cpp .numberLines}
 TEST_CASE("Vector Elements", "[vector]")
 {
   Vector<int> v; // Re-initialized for each section
@@ -341,6 +344,7 @@ TEST_CASE("Vector Elements", "[vector]")
 }
 ```
 
+In this example, Catch runs lines 1--16, then starts over and runs lines 1--8 and 18--26, then lines 1--8, 18, and 28--35.
 Since we get a fresh `v` vector for each section, the code inside each section can mutate `v` however it likes without impacting any of the other
 sections' tests!
 Even better, we can add more setup as we go through the test case; our `copy` vector is only created for the sections that test the copy constructor.
@@ -363,10 +367,11 @@ REQUIRE_THAT(my_string, StartsWith("Dear Prudence"));
 ```
 
 In addition to the `StartsWith` matcher, there is an `EndsWidth` matcher and a `Contains` matcher.
-These matchers can be combined using logical operators, for example:
+These matchers can be combined using logical operators; for example:
 
 ```
-REQUIRE_THAT(my_string, StartsWith("Dear Prudence") && !Contains("Sincerely"));
+REQUIRE_THAT(my_string, StartsWith("Dear Prudence") &&
+   !Contains("Sincerely"));
 ```
 
 These matchers can also be used in the `THROWS_WITH` assertions!
@@ -379,7 +384,7 @@ For a more precise comparison, you can set the `epsilon` to a smaller percentage
 ### Code Coverage
 
 Unit tests are most valuable when all your important code is tested.
-You can check this by hand, but that's no fun especially on a big codebase.
+You can check this by hand, but that's no fun, especially on a big codebase.
 Fortunately, there are tools to check for you!
 We'll use `gcov` to generate code coverage reports for us.
 
@@ -401,7 +406,7 @@ Once you have compiled your tests, execute them as normal.
 In addition to running your tests, your executable will also produce a number of files ending in `.gcda` and `.gcno`.
 These are data files for `gcov`. They're binary, so opening them in a text editor will not be particularly enlightening.
 To get meaningful coverage statistics, you run `gcov` and give it a list of `.cpp` files whose behavior you want to see.
-(Generally this will be all your `.cpp` files.)
+(Generally this will be all your test `.cpp` files.)
 
 There are a couple of flags that you definitely want to use for `gcov`:
 
@@ -454,17 +459,50 @@ The numbers in the left margin are the number of times each line is executed.
 If a line isn't executed, you will see `####` in the left column instead.
 This makes it easy to spot code that isn't covered by your tests!
 
+### Writing Quality Unit Tests
+
+Alright, now that you know how to write unit tests, let's talk about the philosophy of writing good unit tests.
+Unit tests are most useful if you write them as you go, rather than writing a big chunk of code and then writing tests.
+Some people prefer to write their tests first, then write the code needed to make the tests pass.
+Others write the code first and then the tests.
+Either way, testing as you go will help you think through how your program ought to work and help you spot bugs
+that come from changing or refactoring your code.
+
+Tests should be small and designed to test the smallest amount of functionality possible --- typically a single function,
+or a single feature of a function.
+Typically, more code means more bugs; we do not want our unit tests to be complex enough to introduce their own bugs!
+Tests should be obviously correct as much as is possible.
+Start by testing basic functions, such as accessors and mutators.
+Once those have been tested, you can use them in more complex functionality tests;
+if one of those tests fails, you know that the bug does lies somewhere other than your basic functions.
+
+If you come across a bug in your program, write a unit test that reproduces it,
+then fix your code so that the test passes.
+This way, you won't accidentally reintroduce the bug later on!
+
+When writing tests, think about the different ways your code can be executed.
+Consider your `if` statements and loops --- how might each be executed or not?
+What side effects does your code have? Does it modify member variables? Write to a file?
+Thorough tests cover as many of these possible execution paths as is feasible.
+Think about your preconditions and postconditions and write tests that verify your interface conforms to its documentation!
+Test your edge cases, not just the "happy path" that normal execution would take.
+
+Finally, a word on code coverage.
+Like any metric, code coverage is not a perfect measure of your tests' quality.
+Practically speaking, 100% code coverage is difficult to achieve; it is better to have 90% coverage and well thought out tests
+than 100% coverage with tests that don't reflect how your code will actually be used.
+
 \newpage
 ## Questions
 
 Name: `______________________________`
 
 1. In your own words, what is the goal of unit testing? How do you know you have written good tests?
-\vspace{8em}
+\vspace{10em}
 2. What is the difference between the `CHECK` and `REQUIRE` test assertions?
-\vspace{8em}
+\vspace{10em}
 3. Write the test assertion you would use if you wanted to assert that a call to `frobnicate()` throws an exception of type `bad_joke`
-and to bail out of the test case if it does not?
+and to bail out of the test case if it does not.
 \newpage
 
 ## Quick Reference
@@ -492,7 +530,8 @@ String Matchers:
 
 Floating Point:
 
-- `Approx`: Perform approximate floaing point comparison (by default up to 0.001% error)
+- `Approx`: Perform approximate floating point comparison (by default up to 0.001% error)
+- `epsilon`: Set the precision of the comparison
 
 ### Coverage
 
@@ -517,5 +556,7 @@ Floating Point:
 In logical terms, unit tests are a bunch of "there exists" statements; whereas a proof of correctness is a "for all" statement.
 Unfortunately, proving programs correct is a difficult task and the tools to do so are not exactly ready for widespread use yet.
 In the meantime, while we wait for math and logic to catch up to the needs of engineering, we'll have to settle for thorough unit testing.
-[^matcher]: You can also use a string matcher; we'll talk about these later in the chapter.
+[^matcher]: You can also use a string matcher in place of the string if you want to match multiple strings; we'll talk about these later in the chapter.
 [^hand]: Yes, you with your hand up in the back? You saw the bug before the test failed? Yes, yes, you're very clever.
+[^sink]: Of course it would --- Boost even has a kitchen sink library.
+[^errors]: It could be made more powerful, but the downside is that the compiler errors from misuse would become even more terrifying.
