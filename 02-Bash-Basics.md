@@ -2,7 +2,7 @@
 
 ## Motivation
 What is a shell?
-A shell is a hard outer layer of a marine animal, found on beaches.
+A shell is a hard outer layer of an animal, typically found on beaches.
 
 <!--
 Licensed under CC0
@@ -80,8 +80,8 @@ If a program requires more than one argument, we simply separate them with space
 
 #### Flags
 
-In addition to command line arguments, we have **flags**.
-A flag starts with one or more `-` and may be short or long.
+In addition to command line arguments, we have **flags**.[^superficial]
+A flag starts with one or more `-` and may be short (one character) or long (more than one character).
 Consider `g++` again:
 
 ~~~ shell
@@ -178,6 +178,13 @@ Linux has some common shorthand for specific directories:
 - `..` refers to the parent directory; use `cd ..` to go up a directory
 - `~` refers to your home directory, the directory you start in when you log in to a machine
 - `/` refers to the root directory -- EVERYTHING lives under the root directory somewhere
+
+Unlike Windows, on Linux, every file lives in `/` or a subdirectory of `/`.
+There are no drive letters!
+You can refer to files via their *absolute path*: a series of directories that starts with `/` and ends with the file you are referring to,
+such as `/home/flanders/bible/john.txt`.
+You can also refer to files via a *relative path*: a series of directories that does not start with `/` and is determined relative to where you are in the filesystem.
+For example, if you are in your home directory, you can edit a homework assignment directly by typing `emacs cs1585/lab02/cool-script.sh`.
 
 If you want to refer to a group of files that all follow a pattern (e.g., all files ending in `.cpp`), you can use a "glob" to do that.
 Linux has two glob patterns:
@@ -354,8 +361,27 @@ hello world
 
 Now for a bit about STDERR.
 Bash numbers its output streams: STDOUT is `1` and STDERR is `2`.
-If you want to pipe both STDERR and STDOUT into another program, you need to redirect STDERR to STDOUT first.
+We can use these numbers with `>` to redirect specific streams to files.
+For instance, let's say you want to save your compiler errors to a file to look at later.
+If you were to run
+```
+$ g++ lots_o_errors.cpp > errors.txt
+```
+you'd be met with a screenful of errors and an empty text file. That's no good!
+By default, `>` only redirects STDOUT.
+
+To redirect STDERR instead, you'd do the following:
+```
+$ g++ lots_o_errors.cpp 2> errors.txt
+```
+
+Now you can page through your errors by running `less errors.txt`!
+
+But what if you don't want to create that intermediate file?
+With STDOUT, you could just pipe that output right into `less`.
+If you want to pipe both STDERR and STDOUT into another program, you need to *redirect* STDERR into to STDOUT first.
 This is done like so: `2>&1`.
+The `&` tells Bash that you are referring to an output stream, rather than a file named `1`.
 
 So, for example, if you have a bunch of compiler errors that you want to look through with `less`, you'd do this:
 ```
@@ -491,3 +517,4 @@ however, copying a directory requires `cp` to copy every file in the directory a
 [^recycle]: Unless you want to count the whole computer as garbage. We won't argue that point with you.
 [^still]: Okay, they never really stop looking scary, but after a while they start to feel less like a horror movie jump scare
 and more like the monster you just know is there in the hall waiting to eat you if you were to get out of bed.
+[^superficial]: The distinction is mostly superficial; under the hood they look the same to the operating system. Don't worry about it too much.
