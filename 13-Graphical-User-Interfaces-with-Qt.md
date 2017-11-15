@@ -1,10 +1,8 @@
 # Graphical User Interfaces with Qt
 <!--
 TODO
-- conclusion / wrap up
-- check questions
+- screenshots
 - fill out quick reference
-- write further reading section
 -->
 ## Motivation
 
@@ -12,13 +10,16 @@ Close your eyes.
 
 Wait, no. Open them! Look around you!
 
-Unless you're a 1337 cyber hacker, you probably don't see just characters in terminals.
+Unless you're a 1337 cyber hacker, you probably don't see just text in terminals.
 If you do, you should really see a doctor about that.
 
 Ok, this next part might be a little weird, but trust us, it's necessary for your understanding.
-You may feel some slight discomfort as you read the next line.
+You may feel some slight discomfort as you read the next bit:
 
-**INSERT SOMETHING "HORRIFYING" HERE** (maybe Zalgo text?)
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{13/zalgo.png}
+\end{figure}
 
 You lift your hands to sip your coffee, but instead of hands, you see a large mouse cursor.
 Disturbed but undeterred (coffee is important, after all), you move your cursor towards your mug, but you pause once the cursor is on the mug.
@@ -26,28 +27,33 @@ How do you sip coffee with a cursor?
 A piece of paper with the word 'Coffee' written on it suddenly appears over the mug.
 You move your ~~hand~~ cursor slightly and the paper vanishes as mysteriously as it appeared.
 
-You take a moment to do some introspection, and discover you know how to *left-click* and *right-click*.
+You take a moment for some introspection, and discover you know how to *left-click* and *right-click*.
 Oh. Of course.
+
 You left-click the coffee mug. A dashed outline appears around it.
 Obviously.
+
 Maybe right-clicking works? You try, and a board appears below the mug.
 It looks like it's made out of a cafeteria tray.
-A list of words is written on it: 'Tip Over', 'Hurl through Window', 'Upend', ... and, at last, 'Sip'.
+A list of words is written on it: 'Tip Over', 'Hurl through Window', 'Upend'... and, at last, 'Sip'.
 You finally sip your coffee. It's gotten cold. Darn.
 
 Well, time for a change of scenery.
 You lift your cursor to the heavens, where another strip of cafeteria tray material hovers.
 You select 'View', then 'Outdoors' from the board that appears.
+
 Without warning, you're dumped into the middle of a field.
 After the dizziness subsides, you look around.
 Where are you?
 What is happening?
 Why can't things just go back to being text on a screen?
+
 You would scream, but you have no menu entry for that.
 
 ### Takeaways
 
 - Experiment with Qt to build Graphical User Interfaces
+- Learn a bit about how large libraries and projects are organized
 - Appreciate the simplicity of programming Command Line Interface applications.
 
 ## Walkthrough
@@ -84,14 +90,14 @@ Once we've added this line, we can just `#include <QtWidgets>` and use all the w
 If you already have a `.pro` file, then you can just run `qmake` to generate a `Makefile`.
 Then you can run `make` to compile everything together!
 
-Lucky you!
-In this lab, your projects will come with pre-configured `.pro` files.
-So, you don't have to worry about generating those.
-
-For this lab, you just need to run `qmake` one time to generate a `Makefile`, and `make` whenever you want to build.
-
 ~~~shell
-# Just need to run this once to create your Makefile
+# Run this to create a project file
+$ qmake -project
+
+# Edit the file to enable widgets
+$ echo "QT += widgets" >> project_name.pro
+
+# Run this once to create your Makefile
 $ qmake
 
 # ... then this whenever you want to recompile
@@ -147,7 +153,7 @@ We then ask Qt to display our text editor window using the `.show()` member func
 So we've got an **application** set up with a text editing **widget**, and we've asked Qt to show it.
 In order to see our application in action, we need to ask it to run using `app.exec()`.
 
-![Our first app! Boy howdy. That sure ain't vim.](13/not_vim.png)
+![Our first app! Boy howdy. That sure ain't vim.](13/not_vim.png){width=80%}
 
 ### Laying out your App
 
@@ -575,7 +581,8 @@ Next, we need to connect our signal to our freshly--written slot.
 We'll do this in `Notepad`'s constructor, right next to `connect()`s for our `QAction`s.
 
 ~~~cpp
-  connect(this, SIGNAL(useFile(QString)), this, SLOT(setTitle(QString)));
+  connect(this, SIGNAL(useFile(QString)),
+          this, SLOT(setTitle(QString)));
 ~~~
 
 When connecting signals and slots that carry data, you must specify the types of the parameters of the signal and slot.
@@ -593,6 +600,13 @@ So, in both `open()` and `save()`, immediately after the `file.close()` line, we
 
 Here we `emit` the signal named `useFile`; the data that `useFile` should carry along with it is the contents of the `fileName` variable.
 Now whenever we open a file or save a file, the filename will appear in the title!
+
+By now, you know the basics of arranging widgets on screen and event-driven programming with signals and slots.
+There are a lot of different widgets out there!
+If you want to build more featureful GUI programs, you should definitely have a look through what Qt has to offer.
+Also, have a look through the documentation on the widgets we've used in this chapter.
+They sport a lot of features we don't have space to talk about here.
+Qt's documentation is a little daunting, but quite detailed!
 
 \newpage
 ## Questions
@@ -614,7 +628,7 @@ Name: `______________________________`
 - `qmake` is a utility that manages Qt projects and generates Makefiles automatically.
 - The `-project` flag tells Qt to generate a project file (ends in `.pro`) that configures the Makefile.
 - `qmake` will generate a Makefile
-- If you already have a `.pro` file, all you have to do to build a Qt project: run `qmake` then `make`
+- If you already have a `.pro` file, all you have to do to build a Qt project: run `qmake`, then `make`
 
 ### Signals and Slots
 
@@ -623,6 +637,11 @@ Name: `______________________________`
 - If you have a typo in your `connect()` call, the `moc` may not catch it.
 
 ## Further Reading
+
+- [A list of all Qt classes](http://doc.qt.io/qt-5/classes.html), with links to documentation for each
+- [Qt Examples and Tutorials](http://doc.qt.io/qt-5/qtexamplesandtutorials.html)
+- [`qmake` documentation](http://doc.qt.io/qt-5/qmake-manual.html)
+- [Qt Development Tools](http://doc.qt.io/qt-5/topics-app-development.html), including an IDE!
 
 [^QShortcut]: See http://doc.qt.io/qt-5/qshortcut.html#mnemonic for more about this.
 [^ObjectTrees]: See http://doc.qt.io/qt-5/objecttrees.html for more about this.
