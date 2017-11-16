@@ -22,15 +22,15 @@ and cast individual bits of type that were exactly the right size needed.
 What you need is a digital typesetting system that's equally as powerful!
 Writing one should only take a summer, so you set to work.
 
-In 1989 the first "finished" version of \TeX was completed.[^further-reading]
+In 1989 the first "finished" version of \TeX{} was completed.[^further-reading]
 
 (Okay, you can stop being Don Knuth now.)
 
-Since \TeX is relatively low-level, Leslie Lamport (a fellow known for wearing silly hats and also verification of distributed systems)
+Since \TeX{} is relatively low--level, Leslie Lamport (a fellow known for wearing silly hats and also verification of distributed systems)
 wrote a bunch of useful macros that took care of a lot of the day-to-day typesetting stuff.
-This collection came to be known as \LaTeX --- **La**mport's **\TeX{}**.
+This collection came to be known as \LaTeX{} --- **La**mport's **\TeX{}**.
 
-So, what is \LaTeX good for?[^logo]
+So, what is \LaTeX{} good for?[^logo]
 
 Do you think writing should come with more compiler errors?
 Do you ever wish HTML was more arcane and confusing?
@@ -43,28 +43,28 @@ Then you should learn \LaTeX{}!
 
 ### Takeaways
 
-- Learn how to structure \LaTeX documents
+- Learn how to structure \LaTeX{} documents
 - Math is beautiful and easy to typeset
-- \TeX is definitely something designed in the 70's
+- \TeX{} is definitely something designed in the 70's
 
 ## Walkthrough
 
-\LaTeX is a language for marking up text.
+\LaTeX{} is a language for marking up text.
 You write plain ASCII text in a `.tex` file (say, `bob.tex`), then run it through the `pdflatex` command[^thrice] (so, `pdflatex bob.tex`).
 `pdflatex`, as its name implies, spits out a PDF file that you can open with your favorite PDF viewer.
 Everyone has a favorite PDF viewer, right?
 
-First, a bit about syntax. \LaTeX commands begin with a `\`. So, to write the fancy \LaTeX logo, you'd type `\LaTeX`.
+First, a bit about syntax. \LaTeX{} commands begin with a `\`. So, to write the fancy \LaTeX{} logo, you'd type `\LaTeX{}`.
 Required arguments are surrounded with `{}`s; optional arguments are listed between `[]`s.
 For example: `\command[option1, option2]{required argument 1}{required argument 2}`.
 
 \LaTeX also has 'environments', which are used to wrap larger chunks of text.
-These begin with `\begin{environmentname}` and end with `\end{environmentname}`.
+These begin with `\begin{environment}` and end with `\end{environment}`.
 
 ### Document Classes
 
 The first thing in a `.tex` file is a document class command: `\documentclass{classname}`.
-Several document classes come built-in, including the following:
+Several document classes come built--in, including the following:
 
 - `article`: Used for conference and journal articles and typical classroom reports.
 - `report`: Used for small books or longer reports that span several chapters.
@@ -87,7 +87,7 @@ To insert the title and author, use the `\maketitle` command.
 
 Here's a short example:
 
-```latex
+```{.latex .numberLines}
 \documentclass{article}
 
 \title{Do Lizards Run The World?}
@@ -107,7 +107,7 @@ The document class controls the numbering and appearance of the titles for you.
 
 Continuing our example:
 
-```latex
+```{.latex .numberLines}
 \documentclass{article}
 
 \title{Do Lizards Run The World?}
@@ -128,16 +128,19 @@ Continuing our example:
 \subsubsection{Physicists don’t want the truth}
 \subsubsection{This foil hat is perfectly comfortable, thanks}
 
-\section{Conclusion: Perhaps the real aliens are the friends we made along the way}
+\section{Conclusion: Perhaps the real aliens
+         are the friends we made along the way}
 \end{document}
 ```
+
+![The document structure example, rendered](14/outline.png)
 
 ### Formatting Text
 
 For the most part, you can write text as you normally would in a word processor.
 To make a new paragraph, put two newlines in a row:
 
-```latex
+```{.latex .numberLines}
 This is a sentence.
 This is a second.
 
@@ -152,6 +155,7 @@ You can write them using the escape sequences ``\# \$ \% \^{} \& \_ \{ \} \`{} \
 Opening quotes are written with the `` ` `` character and close quotes with the `'` character.
 So, ``` ``text in double quotes''``` renders like "text in double quotes".
 
+
 The age-old standbys of bold, italic, and underlined text are present in \LaTeX as well:
 
 - `\textbf{bold face text here}`
@@ -160,7 +164,7 @@ The age-old standbys of bold, italic, and underlined text are present in \LaTeX 
 
 You can also put text in a monospaced font: `\texttt{I am a robot}` renders like \texttt{I am a robot}.
 
-Last but not least,URLs and hyperlinks can be added.
+Last but not least, URLs and hyperlinks can be added.
 For this, you need the `hyperref` package, which provides several commands.
 The `\url` command prints a URL in monospaced font; you use it like so: `\url{http://www.funroll-loops.info/}`.
 The `\href` command lets you add hyperlinks: `\href{http://url.com}{displayed, underlined text}` makes the text clickable
@@ -242,7 +246,7 @@ Subscripts and superscripts can be stacked to your heart's content:
 
 Set notation is a breeze: `\forall n \in \{1,2,3,4\}` appears as $\forall n \in \{1,2,3,4\}$.
 
-Summations (and products) can be done using subscripts and superscripts: `\sum_{i=0}^\infty \frac{1}{3^i} = \frac{3}{2}` renders to
+Summations (as well as products and integrals) can be done using subscripts and superscripts: `\sum_{i=0}^\infty \frac{1}{3^i} = \frac{3}{2}` renders to
 \begin{equation}
 	\sum_{i=0}^\infty \frac{1}{3^i} = \frac{3}{2}
 \end{equation}
@@ -259,14 +263,14 @@ For more math commands, consult [the wikibook on \LaTeX{}'s math mode](https://e
 ### Figures
 
 Figures go in the 'figure' environment, which positions them and lets you give them a caption.
-\LaTeX will place the figure in a spot on the page that makes sense, usually at the top or the bottom (but you can tweak this manually if you like).
+\LaTeX{} will place the figure in a spot on the page that makes sense, usually at the top or the bottom (but you can tweak this manually if you like).
 The `\caption` command sets a caption for the image.
 You can center the image on the page with the `\centering` command.
 
 The 'graphicx' package allows you to include pictures (`.png`, `.jpg`, `.eps`, or `.pdf`) with the `\includegraphics` command.
 Here is an example:
 
-```latex
+```{.latex .numberLines}
 \documentclass{article}
 \usepackage{graphicx}
 
@@ -292,7 +296,7 @@ Fortunately, there exist many websites, including [http://truben.no/table/](http
 
 Here is an example table:
 
-```latex
+```{.latex .numberLines}
 \begin{table}
     \begin{tabular}{l|l|l}
     ~          & Heading   & Another Heading \\ \hline
@@ -302,11 +306,17 @@ Here is an example table:
 \end{table}
 ```
 
+We've barely scratched the surface of what \LaTeX{} can do ---
+there's a reason it's the standard tool for writing papers in most scientific and engineering fields.
+It also has bibliography management tools, packages that can syntax highlight code, packages that you can use to draw gorgeous figures...
+whatever document feature your heart desires, there's probably at least one package out there for it.
+Go forth and make beautiful documents!
+
 \newpage
 ## Questions
 Name: `______________________________`
 
-1. How would you write an equation, such as $y^2 + x^2 = 1$, in the middle of a sentence?
+1. How would you write the equation $y^2 + x^2 = 1$ in the middle of a sentence?
 \vspace{10em}
 
 2. What is the environment used for numbered lists?
