@@ -36,7 +36,7 @@ include-before: |
     \footnotesize
     \parindent 0pt
     \parskip \baselineskip
-    \textcopyright{} 2017--2018 Nathan Jarus and Michael Wisely
+    \textcopyright{} 2016--2018 Nathan Jarus and Michael Wisely
 
     \indent
     This work is licensed under the Creative Commons Attribution--ShareAlike 4.0 International License.

@@ -26,6 +26,11 @@ For one example, the [WannaCry](https://en.wikipedia.org/wiki/WannaCry_ransomwar
 viruses use a memory safety exploit called [EternalBlue](https://www.rapid7.com/db/modules/exploit/windows/smb/ms17_010_eternalblue) "allegedly" developed
 by the NSA and released by "Russian" hackers early in 2017.
 
+<!--
+Image is in the public domain.
+source: https://commons.wikimedia.org/wiki/File:Smokey3.jpg
+-->
+
 ![Smokey Says: "Only You Can Prevent Ransomware"](09/Smokey3.jpg){height=35%}
 
 ### Takeaways

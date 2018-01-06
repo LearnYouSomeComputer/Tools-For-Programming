@@ -4,6 +4,10 @@
 What is a shell?
 A shell is a hard outer layer of a marine animal, found on beaches.
 
+<!--
+Licensed under CC0
+source: https://pixabay.com/es/mar-shell-almeja-oc%C3%A9ano-1162744/
+-->
 ![A shell.](02/shell.png)
 
 Now that that's cleared up, on to some cool shell facts.

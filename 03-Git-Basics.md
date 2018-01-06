@@ -356,8 +356,6 @@ As you code, you see a beautiful person emerge[^emerge] from the field's tall gr
 
 You grimace.
 
-![Grimace](03/grimace.png)
-
 The muse proceeds to explain in great detail how your program can be so much better than it is.
 You agree.
 This is a muse after all.
