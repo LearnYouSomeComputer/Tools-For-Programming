@@ -26,8 +26,9 @@ include-before: |
     \vfill
 
     \begingroup
-    The source code for this book is available at [https://github.com/michaelwisely/CS1001-Prelab-Book](https://github.com/michaelwisely/CS1001-Prelab-Book).
-    We welcome questions, corrections, and improvements.
+    The source code for this book is available at
+    [https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists](https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists).
+    We welcome questions, corrections, and improvements!
     \endgroup
 
     \vfill
