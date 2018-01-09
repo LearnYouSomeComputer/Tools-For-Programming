@@ -1,5 +1,5 @@
 ---
-title: THE CS 1001 ENCHIRIDION
+title: Tools For Computer Scientists
 subtitle: Or, How To Use A Computer Real Good
 author: Nathan Jarus and Michael Wisely
 institute: Missouri University of Science and Technology
