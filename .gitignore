@@ -1,5 +1,10 @@
 ## pandoc tex output
 cs1001_prelab.tex
+.commit-info.tex
+
+## Make hackery
+.dirty
+.update-dirty
 
 ## Built PDFs
 *.pdf
