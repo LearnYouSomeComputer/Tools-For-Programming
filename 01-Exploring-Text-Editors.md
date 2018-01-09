@@ -521,11 +521,13 @@ Granted, that requires... 13?... More keystrokes than `C-f`, but by golly, you c
 
 `M-x` is *very* useful for invoking commands that don't actually have keybindings.
 
+<!-- copyright
 \begin{figure}
 \centering
 	\includegraphics[height=0.3\textheight]{01/mxdonuts}
 \caption{Emacs has commands for all kinds of things!}
 \end{figure}
+-->
 
 #### Moving Around
 

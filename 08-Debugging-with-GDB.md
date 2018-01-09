@@ -12,8 +12,6 @@ Maybe take some extra time on a test.
 Steal a quick bagel for breakfast.
 Rob a bank[^escalation]...
 
-![When you can slow down time, taking candy from a baby is like taking candy from a baby.](08/candy.jpg){ width=80% }
-
 It was all fun up to this point.
 But now you're here: standing in front of at an array of red-hot lasers, trapped in the vault of the Big Bank of New York, wondering where it all went wrong, and wearing a fancy turtle neck.
 At least you look good in a turtle neck.

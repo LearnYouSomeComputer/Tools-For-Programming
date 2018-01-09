@@ -6,8 +6,6 @@ Despite their modern appearance and ergonomic appeal, some people don't much car
 Truly, it is a mind-bending reality that some people would prefer to use a mouse to click *buttons* rather than typing commands in a shell.
 What a world!
 
-![Ain't that just the way?](06/greg.jpg){ width=60% }
-
 In our first lab, we tried a number of different text editors.
 A couple of those (including Atom and Notepad++) included **graphical user interfaces** (GUIs).
 This means you're free to use your mouse to select text, move text, scroll through text, choose menu action, click buttons, et cetera.

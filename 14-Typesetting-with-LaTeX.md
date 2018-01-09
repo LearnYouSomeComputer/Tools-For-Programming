@@ -4,7 +4,11 @@
 
 Close your eyes. You are [Donald Knuth](http://www-cs-faculty.stanford.edu/~uno/).
 
-![You, aka Donald Knuth](14/don.png)
+<!--
+Licensed CC-BY-SA 2.5; taken by Jacob Appelbaum (ick)
+source: https://upload.wikimedia.org/wikipedia/commons/4/4f/KnuthAtOpenContentAlliance.jpg
+-->
+![You, aka Donald Knuth](14/don.jpg){height=35%}
 
 The year is 1977, and you have just finished hand-writing the final draft of the second edition of the second volume of *The Art of Computer Programming*.
 You send the draft off to the publisher for typesetting, and the proof that comes back is just horrendous.
