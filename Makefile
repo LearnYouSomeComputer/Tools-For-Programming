@@ -41,7 +41,7 @@ cs1001_prelab.tex: ${MD_PIECES} template.tex .commit-info.tex
 	pandoc --latex-engine=xelatex --template=template.tex --standalone --from markdown+${EXTENSIONS} --output cs1001_prelab.tex ${MD_PIECES}
 
 %.pdf: 00-FrontMatter.md %*.md .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output $@ $^
+	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output $@ $(filter %.md, $^)
 
 # .git/index is updated every time a commit, checkout, etc. occurs.
 # .dirty is updated the first time the index goes clean -> dirty.
