@@ -14,9 +14,9 @@ Now that that's cleared up, on to some cool shell facts.
 Did you know that shells play a vital role in the Linux operating system?
 PuTTY lets you type stuff to your shell and shows you what the shell outputs.
 
-When you log in to one of these machines, a program named `login` asks you for your username and password.
+When you log in to a Linux machine, a program named `login` asks you for your username and password.
 After you type in the right username and password, it looks in a particular file, `/etc/passwd`, which lists useful things about you like where your home directory is located.
-This file also has a program name in it -- the name of your shell.
+This file also has a program name in it --- the name of your shell.
 `login` runs your shell after it finishes setting up everything for you.
 
 Theoretically, you can use anything for your shell, but you probably want to use a program designed for that purpose.
@@ -56,7 +56,7 @@ Consider `pwd`:
 
 ~~~ shell
 $ pwd
-/usr/local/home/njmxv3
+/usr/local/home/nmjxv3
 ~~~
 
 When you type `pwd` and press \keys{\enter}, bash runs `pwd` for you.
@@ -155,7 +155,7 @@ drwx------ 2 nmjxv3 mst_users   0 Dec 28  2015 oclint-0.10.2
 
 The first column shows file permissions --- who can read, write, or execute your files; the fifth file size; the sixth the last time the file was modified; and the last the name of the file itself.
 
-Another `ls` option lets you show hidden files. In Linux, every file whose name begins with a `.` is a 'hidden' file.[^dotfiles]
+Another `ls` option lets you show hidden files. In Linux, every file whose name begins with a `.` is a **hidden** file.[^dotfiles]
 (This is the reason that many configuration files, such as `.vimrc`, are named starting with a `.`.)
 To include these files in a directory listing, use the `-a` flag.
 You may be surprised by how many files show up if you run `ls -a` in your home directory!
@@ -181,12 +181,12 @@ Linux has some common shorthand for specific directories:
 
 Unlike Windows, on Linux, every file lives in `/` or a subdirectory of `/`.
 There are no drive letters!
-You can refer to files via their *absolute path*: a series of directories that starts with `/` and ends with the file you are referring to,
+You can refer to files via their **absolute path**: a series of directories that starts with `/` and ends with the file you are referring to,
 such as `/home/flanders/bible/john.txt`.
 You can also refer to files via a *relative path*: a series of directories that does not start with `/` and is determined relative to where you are in the filesystem.
 For example, if you are in your home directory, you can edit a homework assignment directly by typing `emacs cs1585/lab02/cool-script.sh`.
 
-If you want to refer to a group of files that all follow a pattern (e.g., all files ending in `.cpp`), you can use a "glob" to do that.
+If you want to refer to a group of files that all follow a pattern (e.g., all files ending in `.cpp`), you can use a **glob** to do that.
 Linux has two glob patterns:
 
 - `*` matches 0 or more characters in a file/directory name
@@ -242,14 +242,14 @@ You can scroll like you would with `less`, and \keys{q} quits the manual.
 Inside `man`, `/search string` searches for some text in the man page.
 Press \keys{n} to go to the next match and \keys{N} to go to the previous match.
 
-Man pages look intimidating the first few times you look at them[^still], but don't worry.
+Man pages look intimidating the first few times you look at them,[^still] but don't worry.
 They are split into several sections.
 First, there's the `NAME` section that lists the name of the program.
 Following that is a `SYNOPSIS` section which very, very briefly summarizes the different arguments the program takes.
 Typically the section you want is the `DESCRIPTION` or `OPTIONS` section, which explains what each option does.
 Sometimes, interactive programs (such as `less` or `vim`) have a section on how to use the interactive features as well.
 
-If you're just trying to remember the name of one option, it's best to use the search feature to look for interesting keywords.
+If you're just trying to remember the name of one option, it's best to use the search feature to look for relevant keywords.
 Otherwise, take your time and peruse the various features.
 
 At the end of each man page, it may list related `FILES` or other commands and documentation that you should `SEE ALSO`.
@@ -313,7 +313,7 @@ If we type `echo "I love to program" | wc`, the `|` will redirect `echo`'s outpu
 \begin{figure}[!h]
 \centering
 \begin{tikzpicture}
-	\node (e) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{echo ``I love to program''\strut}};
+	\node (e) [shape=rectangle,inner sep=8pt,draw,rounded corners] at (0,0) {\texttt{echo "I love to program"\strut}};
 	\node (w) [shape=rectangle,inner sep=8pt,draw,rounded corners] at ($(e.east) + (2,0)$) {\texttt{wc\strut}};
 	\draw[-{Stealth[length=5pt]}] (e.east) -- (w.west);
 	\draw[-{Stealth[length=5pt]}] (w.east) -- node[above] {\texttt{STDOUT}} +(2,0);
@@ -350,7 +350,8 @@ So, we can do `cat myFile.txt | sort | uniq | wc` to sort the lines in 'myFile.t
 
 Another common use for piping is to scroll through the output of a command that prints out a lot of data: `my_very_talkative_program | less`.
 
-We can use `>` to write program output to files instead.
+So far, we've been redirecting output from one program to another, eventually putting some output on the screen.
+We can use `>` to redirect program output to files instead.
 
 For example:
 ```
@@ -475,15 +476,15 @@ How would you print the top three scores from the file?
 
 Special Filenames:
 
-- `.`: Current directory
-- `..`: Parent directory
-- `~`: Home directory
-- `/`: Root directory
+- `.` Current directory
+- `..` Parent directory
+- `~` Home directory
+- `/` Root directory
 
 Glob patterns:
 
-- `*`: Match 0 or more characters of a file or directory name
-- `?`: Match exactly 1 character of a file or directory name
+- `*` Match 0 or more characters of a file or directory name
+- `?` Match exactly 1 character of a file or directory name
 
 IO Redirection:
 
