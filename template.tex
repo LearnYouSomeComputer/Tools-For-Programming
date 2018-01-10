@@ -2,8 +2,30 @@
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
+\usepackage{ifxetex,ifluatex}
 $if(fontfamily)$
+\ifxetex
+	\PassOptionsToPackage{no-math}{fontspec} % font families may load fontspec
+\fi
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+% Fix for sourcecodepro curly quotes from https://tex.stackexchange.com/questions/354873/xelatex-sourcecodepro-listings-curly-quotes-always
+% Can be removed once https://github.com/silkeh/latex-sourcecodepro/pull/5 lands in texlive...
+\makeatletter
+\defaultfontfeatures[\ttfamily] {
+	Numbers   = \sourcecodepro@figurestyle ,
+	Scale     = \SourceCodePro@scale ,
+	Extension = .otf
+}
+
+		% Monospace font
+\setmonofont [
+	UprightFont    = *-\sourcecodepro@regstyle ,
+	ItalicFont     = *-\sourcecodepro@regstyle It ,
+	BoldFont       = *-\sourcecodepro@boldstyle ,
+	BoldItalicFont = *-\sourcecodepro@boldstyle It
+]{SourceCodePro}
+\makeatother
+
 $else$
 \usepackage{lmodern}
 $endif$
@@ -12,7 +34,6 @@ $if(linestretch)$
 \setstretch{$linestretch$}
 $endif$
 \usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}

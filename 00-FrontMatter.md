@@ -5,8 +5,10 @@ author: Nathan Jarus and Michael Wisely
 institute: Missouri University of Science and Technology
 
 documentclass: book
-papersize: a5paper
+papersize: letter
 colorlinks: true
+
+fontfamily: sourcecodepro
 
 toc: true
 toc-depth: 0
