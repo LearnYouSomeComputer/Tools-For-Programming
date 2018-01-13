@@ -19,6 +19,12 @@ header-includes:
 - \newunicodechar{↩}{$\color{blue}\scriptstyle\hookleftarrow$}
 - \usepackage{tikz}
 - \usetikzlibrary{positioning,arrows.meta,calc}
+- \let\shiftsymbol\shift
+- \renewcommand{\shift}{Shift \shiftsymbol}
+- \let\backspacesymbol\backspace
+- \renewcommand{\backspace}{Backspace \backspacesymbol}
+- \let\tabsymbol\tab
+- \renewcommand{\tab}{Tab \tabsymbol}
 
 include-before: |
     \pagestyle{empty}

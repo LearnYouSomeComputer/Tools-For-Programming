@@ -363,7 +363,7 @@ From here, you can:
 - Press \keys{i} to search forward and ignore the case (so searching for "bob" will match "Bob" as well)
 - Press \keys{b} to search backwards
 - Press \keys{r} to replace matches with a new string. `jpico` will prompt whether or not to replace for each match
-- Press \keys{k} to select from the current mark (set with \keys{\ctrl + \shift + 6) to the first match
+- Press \keys{k} to select from the current mark (set with \keys{\ctrl + \shift + 6}) to the first match
 - Press \keys{a} to search in all open files
 - Enter a number to jump to the N-th next match
 
