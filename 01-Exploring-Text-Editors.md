@@ -519,13 +519,11 @@ Granted, that requires... 13?... More keystrokes than `C-f`, but by golly, you c
 
 `M-x` is *very* useful for invoking commands that don't actually have keybindings.
 
-<!-- copyright
-\begin{figure}
-\centering
-	\includegraphics[height=0.3\textheight]{01/mxdonuts}
-\caption{Emacs has commands for all kinds of things!}
-\end{figure}
+<!-- copyright 2009 Will Willis
+Used with permission
+source: http://twitpic.com/2db8f
 -->
+![Emacs has commands for all kinds of things![^willwillis]](01/mx-donuts.jpg){width=50%}
 
 #### Moving Around
 
@@ -976,3 +974,4 @@ This keyboard is also the reason for why ~ refers to your home directory in Linu
 [^javascript]: JavaScript is the language of the web. It makes web pages interactive!
 [^rich]: Just don't expect to get rich.
 [^fret]: Please, please don't fret. It'll be OK. Just keep a-readin', friend.
+[^willwillis]: \textcopyright{} 2009 Will Willis. Used with permission.
