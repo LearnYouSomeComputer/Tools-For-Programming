@@ -9,7 +9,7 @@ You go to fetch ingredients from the refrigerator, but alas! It is empty.
 Someone else has been eating all your sandwiches while you were engrossed in regular expressions.
 
 You hop on your velocipede[^bike] and pedal down to the local bodega only to discover that they, too, are out of sandwich fixin's.
-Just as you feared -- you are left with no choice other than to derive a sandwich from first principles.
+Just as you feared --- you are left with no choice other than to derive a sandwich from first principles.
 
 A day of cycling rewards you with the necessities: brisket, salt, vinegar, cucumbers, yeast, rye, wheat, caraway seeds, sugar, mustard seed, garlic cloves, red bell peppers, dill, and peppercorns.
 Fortunately you didn't have to tow a cow home!
@@ -29,15 +29,14 @@ And whenever I eat my way through what I've prepared, I'll have to do it all ove
 Isn't there a Better Way?"
 
 A bite of crunchy pickle is accompanied by a revelation.
-If the human brain is a computer, then this sandwich is code[^code]: without it, your brain could compute nothing![^torture]
+If the human brain is a computer, then this sandwich is code:[^code] without it, your brain could compute nothing![^torture]
 "Wow!" you exclaim through a mouthful of pickle, "This is yet another problem solved by GNU Make!"
 
 Using the powers of `git`, you travel into the future, read the rest of this chapter, then head off your past self before they pedal headfirst down the road of wasted time.[^time]
 Instead of this hippie artisanal handcrafted sandwich garbage, you sit your past self down at their terminal and whisper savory nothings[^nothings] in their ear.
-They -- you -- crack open a fresh editor and pen the pastrami of your dreams:
+They --- you --- crack open a fresh editor and pen the pastrami of your dreams:
 
-```makefile
-
+```{.makefile .numberLines}
 pickles: cucumbers vinegar dill
 	brine --with=dill cucumbers
 
@@ -98,27 +97,30 @@ It has other uses, too: this book is built with `make`!
 
 ### A bit about compiling and linking
 
-Before we can set up a makefile for a C`++` project, we need to talk about compiling and linking code.
-"Compiling" refers to the process of turning C`++` code into machine instructions.
-Each `.cpp` file gets compiled separately, so if you use something defined in another file or library -- for example, `cin` --
-the compiler leaves itself a note saying "later on when you figure out where `cin` is, put its address here".
-Once your code is compiled, the linker then goes through all your compiled code and any libraries you have used and fills in all the notes
+Before we can set up a makefile for a C`++` project, we need to talk about *compiling* and *linking* code.
+*Compiling* refers to the process of turning C`++` code into machine instructions.
+Each `.cpp` file gets compiled separately, so if you use something defined in another file or library --- for example, `cin` ---
+the compiler doesn't know exactly what memory address that thing will end up at.
+So, instead of putting in a memory address, it leaves itself a note saying "later on when you figure out where `cin` is, put its address here".
+Once your code is compiled, the *linker* then goes through all your compiled code and any libraries you have used and fills in all the notes
 with the appropriate addresses.
 
 You can separate these steps: `g++ -c file.cpp` just does the compilation step to `file.cpp` and produces a file named `file.o`.
-This is a so-called *object file*; it consists of assembly code and cookies left out for the linker.[^milk]
+This is a so-called **object file**; it consists of assembly code and cookies left out for the linker.[^milk]
 
 To link a bunch of object files together, you call `g++` again[^confusing] like so: `g++ file1.o file2.o -o myprogram`.
 `g++` notices that you have given it a bunch of object files, so instead of going through the compilation process,
 it prepares a detailed list[^twice] explaining to the linker which files and libraries you used and how to combine them together.
 It sets the list next to your object files[^milk2] and waits for the linker.
 When the linker arrives, it paws through your object files, eats all the cookies,
-and then through a terrifying process not entirely understood by humans[^exaggerating],
-leaves you a beautiful executable wrapped up under your tree[^lovecraft].
+and then through a terrifying process not entirely understood by humans,[^exaggerating]
+leaves you a beautiful executable wrapped up under your tree.[^lovecraft]
 
-<!-- copyright
-![How Executables are Made](07/compile.png){width=70%}
+<!-- copyright 2003-2016 Keith Parkansky
+Used with permission
+Source: http://www.aboutdebian.com/compile.gif
 -->
+![How Executables are Made[^keithparkansky]](07/compile.png){width=70%}
 
 So, what's the big deal?
 Well, if you compile your code to object files and then change some of your code, you only need to rebuild the object files
@@ -138,7 +140,7 @@ Along with each target goes one or more commands that, when run, create the targ
 For example, let's say you want to build an executable named `program` by compiling all the C`++` files in the current directory.
 You could do the following:
 
-```makefile
+```{.makefile .numberLines}
 program:
 	g++ *.cpp -o program
 ```
@@ -147,9 +149,9 @@ Here, `program` is the target name. In a makefile, every target name is followed
 On the next line, indented one tab, is the command that, when run, produces a file named `program`.
 
 **NOTE:** Unlike most programs, `make` *requires* that you use tabs, not spaces, to indent.[^tabs]
-If you use spaces, you'll get a very strange error message. So make sure to set your editor to put actual tabs in your makefiles.
+If you use spaces, you'll get a very strange error message. So, make sure to set your editor to put actual tabs in your makefiles.
 
-Once you've put this rule in your makefile, you can tell `make` to build `program` by running `make program`.[^execute]
+Once you've put this rule in your makefile, you can tell `make` to build your `program` executable by running `make program` in your shell.[^execute]
 You can also just run `make`; if you don't specify a target name, `make` will build the first target in your makefile.
 
 Now, if you edit your code and run `make program` again, you'll notice a problem:
@@ -159,16 +161,17 @@ $ make program
 make: 'program' is up to date.
 ```
 
-Well, that's no good. `make` determines if it needs to re-build a target by looking at when the associated file was last modified and comparing that
-with the modification times of the files the target depends on.
-In this case, our `program` has no dependencies, so `make` doesn't think anything needs to happen!
+Well, that's no good. Why doesn't `make` want to build our program again?
+`make` determines if it needs to re-build a target by comparing when the target was last modified to
+the modification times of the files the target depends on.
+We haven't listed any dependencies for the `program` target, so `make` doesn't think anything needs to happen!
 
-Let's fix that. Since `make` is not omniscient[^yet], we need to explicitly state what each file depends on.
+Let's fix that. Since `make` is not omniscient,[^yet] we need to explicitly state what files each target depends on.
 For our example, let's suppose we have a classic CS 1570 assignment with a `main.cpp` file, a `funcs.cpp` file, and an associated `funcs.h` header.
 Whenever any one of these files change, we want to recompile `program`.
 We specify these dependencies after the colon following the target name:
 
-```makefile
+```{.makefile .numberLines}
 program: main.cpp funcs.h funcs.cpp
 	g++ *.cpp -o program
 ```
@@ -176,11 +179,11 @@ program: main.cpp funcs.h funcs.cpp
 Now when we change those files and run `make`, it will re-build `program`!
 
 This is all well and good, you say, but what about all those promises of sweet, sweet incremental compilation the previous section suggested?
-Not to worry! You can tell `make` about each one of your targets and dependencies and it will do the work of running each compilation and linking step
-as needed.
+Not to worry: you can have one target depend on files produced by other targets!
+Then, `make` will do the work of running each compilation and linking step as needed.
 Continuing our example, we add two new targets for our object files, `main.o` and `funcs.o`:
 
-```makefile
+```{.makefile .numberLines}
 program: main.o funcs.o
 	g++ main.o funcs.o -o program
 
@@ -207,19 +210,24 @@ But now you know everything you need to get started using `make` to `make life-e
 
 ### Phony Targets
 
-Building files is great and all, but sometimes there are commands that you want to run often that you'd really rather not type out each time.
+Building files is great and all, but there's more to life than just compiling code.[^hope]
+Sometimes you'll have a somewhat-complicated command that you'll want to run often --- for example,
+commands to clean up all the files `make` generates in your current directory.
+(We'll also want something similar to run unit tests later on in this book.)
 You *could* write a shell script, but you've already got a makefile; why not use that?
-The most common example of this is commands to clean up all the files `make` generates in your current directory.
-In this case, you don't want to generate any new files, and you don't want to lie to `make` because you're an honest upstanding citizen.
 
-Fortunately, `make` supports this through something called *phony targets*.
-You can tell `make`, "Hey, this target isn't actually a file; just run the commands listed here whenever I ask you to build this target,"
-and `make` will be like, "Sure thing, boss! Look at me, not being confused at all about why there's no file named 'clean'!"
+However, `make` expects targets to generate files, so if you make a target named `clean` that just deletes stuff,
+it's possible for `make` to get a little confused.
+You don't want to generate any new files, and you don't want to lie to `make` because you're an honest upstanding citizen.
+
+Fortunately, `make` supports targets that don't produce files through something called *phony targets*.
+You can tell `make`, "Hey, this target doesn't actually produce a file; just run the commands listed here whenever I ask you to build this target,"
+and `make` will be like, "Sure thing, boss! Look at me, not being confused at all about why there's no file named `clean`!"
 
 Let's make a `clean` target for our example from the last section.
 Having a target named `clean` that gets rid of all the compiled files in your current directory is good `make` etiquette.
 
-```makefile
+```{.makefile .numberLines}
 program: main.o funcs.o
 	g++ main.o funcs.o -o program
 
@@ -239,22 +247,24 @@ clean:
 Now when you run `make clean`, it will delete any object files, as well as your compiled program.[^anger]
 There are a few pieces to this target:
 
-1. There is a special target named `.PHONY`. Every target `.PHONY` depends on is a phony target that gets run every time you ask `make` to build it.
+1. There is a special target named `.PHONY`. Every target `.PHONY` depends on is a *phony target* that gets run every time you ask `make` to build it.
 2. The `-` in front of a command tells `make` to ignore errors[^retval] from that command.
-Normally when a program exits with an error, `make` bails out under the assumption that if that command failed, anything that depended on it probably won't work either.
-Rather than trying anyway, it stops and lets you know what command failed so you can fix it.
-In this case, we don't care if there isn't a file named `program` to delete; we just want to delete them if they exist.
+Normally when a program exits with an error, `make` bails out under the assumption that if that command failed,
+anything that was supposed to run after it probably won't work either.
+Rather than trying anyway, it stops and lets you know what command failed so you can fix whatever is broken.
+In this case, we don't care if there isn't a file named `program` to delete; we just want to delete it if it exists.
 3. The `@` in front of a command tells `make` to not print the command to the screen when `make` executes it.
 We use it here so the output of `make clean` doesn't clutter up the screen.
 
 ### Variables
 
-When writing more complex makefiles, you will want to use variables so that you can easily change targets in the future.
-It is common to use variables to hold lists of files, compiler flags, and even programs!
+Variables come in handy in a number of places in makefiles.
+Maybe you don't want to have to manually list out every object file,
+or maybe you want to make it easy to switch which compiler you're using (I hear all the cool kids are using `clang++`[^clang]).
 
 Here's the syntax for variables:
 
-- `var=value` sets `var` to `value.
+- `var=value` sets the variable `var` to `value`.
 - `${var}` or `$(var)` accesses the value of `var`.[^vars]
 - The line `target: var=thing` sets the value of `var` to `thing` when building `target` and its dependencies.
 
@@ -267,7 +277,7 @@ We'll make a `CFLAGS` variable to hold the "release" flags and a `DEBUGFLAGS` va
 That way, if we want to change our flags later on, we only need to look in one spot.
 We'll also add a phony `debug` target so that running `make debug` builds our program in debug mode.
 
-```makefile
+```{.makefile .numberLines}
 CFLAGS = -O2
 DEBUGFLAGS = -g -Wall -Wextra
 
@@ -291,21 +301,21 @@ clean:
 Note that the `debug` target doesn't actually have any commands to run; it just changes the `CFLAGS` variable and then builds the `program` target.
 (We'll talk about the `-g` flag in the next chapter. It's quite cool.)
 
-As an aside, since `make` only tracks the modification times of files, when switching from doing a debug build to a release build or vice-versa,
+**Note**: since `make` only tracks the modification times of files, when switching from doing a debug build to a release build or vice-versa,
 you will want to run `make clean` first so that `make` will rebuild all your code with the appropriate compiler flags.
 
 ### Pattern Targets
 
 You've probably noticed that our example so far has had an individual target for each object file.
-If you had more files, adding all those targets would be a lot of work.
-Instead of writing each of these out manually, `make` supports pattern targets that can save you a lot of work.
+If you had a lot more files, adding all those targets by hand would be a lot of work.
+Instead of writing each of these out manually, `make` has *pattern targets* that can save you a lot of work.
 
 Before we set up a pattern target, we need some way to identify the files we want to compile.
 `make` supports a wide variety of fancy variable assignment statements that are incredibly handy in combination with pattern targets.
 
 You can store the files that match a glob expression using the `wildcard` function:
 `cppfiles=$(wildcard *.cpp)`<!--* my markdown highlighter doesn't understand verbatim blocks so this shuts it up about italics-->
-stores the name of every file ending in `.cpp` in a variable named `cppfiles`.
+stores the name of every file in the current directory ending in `.cpp` in a variable named `cppfiles`.
 
 Once you have your list of C`++` files, you may want a list of their associated object files.
 You can do pattern substitution on a list of filenames like so:
@@ -313,8 +323,9 @@ You can do pattern substitution on a list of filenames like so:
 This will turn your list of files ending in `.cpp` into a list of files ending in `.o` instead!
 
 When writing a pattern rule, as with substitution, you use `%` for the variable part of the target name.
-For example: `%.o: %.cpp` creates a target that builds a `.o` file from a matching `.cpp` file.
+For example: `%.o: %.cpp` creates a target that builds a file ending in `.o` from a matching `.cpp` file.
 
+Hmm, but how would we write a command for this target? `g++` still needs to know the actual names of our files!
 `make` has several special variables that you can use in any target, but are especially handy for pattern targets:
 
 - `$@`: The name of the target.
@@ -323,7 +334,7 @@ For example: `%.o: %.cpp` creates a target that builds a `.o` file from a matchi
 
 Let's rewrite our example using a pattern target to make the object files:
 
-```makefile
+```{.makefile .numberLines}
 SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:%.cpp=%.o)
 HEADERS=$(wildcard *.h)
@@ -335,17 +346,28 @@ program: ${OBJECTS}
 	g++ -c $<
 ```
 
-Now our `program` target depends on all the object files which are calculated from the names of all the `.cpp` files in the current directory.
-The target for each object file depends on the associated `.cpp` file as well as all the headers.[^headers]
+Let's walk through this example step by step.
+First, we create three variables: `SOURCES` will keep track of all our `.cpp` files,
+`OBJECTS` contains the names of the object files we want to produce from our `.cpp` files,
+and `HEADERS` contains all our header files.
+
+The `program` target now depends on all our object files.
+To produce the `program` executable, we tell `g++` to link all our object files into a `program` executable.
+
+How do we get these object files? From the pattern rule at the end!
+The rule `%.o: %.cpp ${HEADERS}` says "to make a file named `whatever.o`, you need a file named `whatever.cpp` and every header file in the current directory".
+To produce `whatever.o`, we compile the first dependency (which will be `whatever.cpp`) with `g++`.
 With this pattern rule, you won't need to update your makefile if you add more files to your program later!
 
-### Useful `make` Flags
+Why have every object file depend on all headers?
+In all honesty, this is something of a hack: we don't have a simple way to automatically figure out exactly which headers each `.cpp` file `#include`s.
+So, we just make it so any header change causes everything to recompile.
+Typically this is a fine assumption --- in practice, you spend most of your time editing `.cpp` files, and when you do change a header
+(say, changing the type of a function parameter), that usually requires changes in a bunch of places anyway.
+If you're interested in more accurately calculating dependencies, check out the `makedepend` program!
 
-`make` has a few flags that come in handy from time to time:
-
-- `-j3` runs up to 3 jobs in parallel.[^cores]
-- `-B` makes targets even if they seem up-to-date. Useful if you forget a dependency or don't want to run `make clean`!
-- `-f <filename>` uses a different makefile other than one named `makefile` or `Makefile`.
+Another upside of using patterns in makefiles is being able to easily copy an existing makefile into a new project.
+Done right, you'll have to change the program name (and if you make a variable for that, it's a change in one place) and little else!
 
 \newpage
 ## Questions
@@ -353,7 +375,7 @@ Name: `______________________________`
 
 Consider the following makefile:
 
-```makefile
+```{.makefile .numberLines}
 default: triangles
 
 triangles: main.o TrianglePrinter.o funcs.o
@@ -376,6 +398,51 @@ funcs.o: funcs.cpp funcs.h
 \newpage
 
 ## Quick Reference
+
+### Useful `make` Flags
+
+`make` has a few flags that come in handy from time to time:
+
+- `-j3` runs up to 3 jobs (i.e., builds 3 targets) in parallel.[^cores]
+- `-B` makes targets even if they seem up-to-date. Useful if you forget a dependency or don't want to run `make clean`!
+- `-f <filename>` uses a different makefile other than one named `makefile` or `Makefile`.
+
+### Syntax
+
+Do not forget: you must use tabs, not spaces, to indent commands in makefiles!
+
+#### Targets
+
+Creating a target:
+```make
+target-name: list of dependencies
+	command-that-produces target-name from list of dependencies
+```
+
+Pattern targets:
+```
+%.o: %.cpp
+	command that produces a .o file from a .cpp file
+```
+
+Telling make that a target doesn't produce a file:
+```make
+.PHONY: target-name
+```
+
+#### Variables
+
+- `var=value` sets the variable `var` to `value`.
+- `${var}` or `$(var)` accesses the value of `var`.[^vars]
+- The line `target: var=thing` sets the value of `var` to `thing` when building `target` and its dependencies.
+- `txtfiles = $(wildcard *.txt)` stores the name of every file matching the glob `*.txt` in the `txtfiles` variable.
+- `cowfiles = $(txtfiles:%.txt=%.cow)` turns every `.txt` filename in `txtfiles` into a corresponding name ending in `.cow` instead.
+
+Special variables in targets (known as [automatic variables](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html)):
+
+- `$@`: The name of the target.
+- `$<`: The name of the first dependency.
+- `$^`: The names of all the dependencies.
 
 ## Further Reading
 
@@ -415,10 +482,11 @@ Fortunately some other poor soul (i.e., your compiler maintainer) has figured th
 Maybe re-doing the whole process from scratch will fix things.
 (It probably won't, but hey, it's worth a shot!)
 [^retval]: In other words, a non-zero return value from that command.
-[^headers]: This is because header files might be included in several places.
-If you're interested in more accurately calculating dependencies, check out the `makedepend` program.
 [^cores]: The general rule of thumb for the fastest builds is to use one more job than you have CPU cores.
 This makes sure there's always a job ready to run even if some of them need to load files off the hard drive.
 [^tofu]: Or tofu and potatoes, if that's your thing.
 [^vars]: Be careful not to confuse this with `bash`'s `$()`, which executes whatever is between the parentheses.
 [^execute]: Don't try to execute the makefile itself. `bash` is confused enough without trying to interpret `make`'s syntax!
+[^hope]: I hope so, at least...I've been stuck in this basement compiling the Linux kernel by hand for the past 82 years!
+[^clang]: And that it has nice error messages!
+[^keithparkansky]: \textcopyright{} 2003-2016 Keith Parkansky. Used with permission. Source: [http://www.aboutdebian.com/](http://www.aboutdebian.com/)
