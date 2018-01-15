@@ -116,9 +116,11 @@ When the linker arrives, it paws through your object files, eats all the cookies
 and then through a terrifying process not entirely understood by humans,[^exaggerating]
 leaves you a beautiful executable wrapped up under your tree.[^lovecraft]
 
-<!-- copyright
-![How Executables are Made](07/compile.png){width=70%}
+<!-- copyright 2003-2016 Keith Parkansky
+Used with permission
+Source: http://www.aboutdebian.com/compile.gif
 -->
+![How Executables are Made[^keithparkansky]](07/compile.png){width=70%}
 
 So, what's the big deal?
 Well, if you compile your code to object files and then change some of your code, you only need to rebuild the object files
@@ -487,3 +489,4 @@ This makes sure there's always a job ready to run even if some of them need to l
 [^execute]: Don't try to execute the makefile itself. `bash` is confused enough without trying to interpret `make`'s syntax!
 [^hope]: I hope so, at least...I've been stuck in this basement compiling the Linux kernel by hand for the past 82 years!
 [^clang]: And that it has nice error messages!
+[^keithparkansky]: \textcopyright{} 2003-2016 Keith Parkansky. Used with permission. Source: [http://www.aboutdebian.com/](http://www.aboutdebian.com/)
