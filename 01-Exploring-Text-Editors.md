@@ -104,8 +104,16 @@ Notepad++ also features a column editor that can insert text or a column of incr
 #### Multiple Cursors
 
 Notepad++ supports multiple cursors, allowing you to edit text in multiple locations at once.
-To place multiple cursors, hold \keys{\ctrl} and left-click everywhere you want a cursor.
+To place multiple cursors, you'll need to enable it first.
+Navigate to \menu{Settings > Preferences > Editing}, and toggle the box within the \menu{Multi-Editing Settings} box.
+After that, just hold \keys{\ctrl} and left-click everywhere you want a cursor.
 Then, you can type as normal and your edits will appear at each cursor location.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[height=0.5\textheight]{01/npp-multi-editing-enable.png}
+    \caption{Enabling Multi-Cursor Editing}
+\end{figure}
 
 For example, suppose we've written the declaration for a class named `road` and that we've copied the member function declarations to an implementation file.
 We want to scope them (`road::width()` instead of `width()`), but that's tedious to do one function at a time.
@@ -363,7 +371,7 @@ From here, you can:
 - Press \keys{i} to search forward and ignore the case (so searching for "bob" will match "Bob" as well)
 - Press \keys{b} to search backwards
 - Press \keys{r} to replace matches with a new string. `jpico` will prompt whether or not to replace for each match
-- Press \keys{k} to select from the current mark (set with \keys{\ctrl + \shift + 6) to the first match
+- Press \keys{k} to select from the current mark (set with \keys{\ctrl + \shift + 6}) to the first match
 - Press \keys{a} to search in all open files
 - Enter a number to jump to the N-th next match
 
