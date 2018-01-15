@@ -12,7 +12,7 @@ Many users miss the ability to use a mouse or simply copy/paste lines from files
 
 Fortunately, there are myriad text editors available.[^standard]
 Many popular options are available to you on campus machines and can be installed on your personal computers as well!
-These editors offer many features that may (hopefully) already be familiar to you.
+These editors offer many features that may already be familiar to you.
 Such features include:
 
 - Syntax highlighting
@@ -26,7 +26,7 @@ In this lab, you will try using several text editors with the goal of finding on
 Several of the editors you will see do not have a graphical user interface (GUI).
 Although the ability to use a mouse is comfortable and familiar, don't discount the console editors!
 Despite their learning curves, many experienced programmers still prefer console editors due to their speed, stability, and convenience.
-Knowing a console editor is also handy in situations where you need to edit files on a machine halfway around the globe[^globe]!
+Knowing a console editor is also handy in situations where you need to edit files on a machine halfway around the globe![^globe]
 
 **Note:** This chapter focuses on text editors; integrated development environments will be discussed later in the semester.
 Even if you prefer to use an IDE for development, you will still run into situations where a simple text editor is more convenient to use.
@@ -40,16 +40,6 @@ Even if you prefer to use an IDE for development, you will still run into situat
 ## Walkthrough
 
 **Note**: Because this is your first pre-lab, the walkthrough will be completed in class.
-
-For each:
-
-- Helpful URLs (main website) / tutorial mode
-- Special terminology
-- Moving around text, cut/copy/paste, nifty editing features
-- Multiple files, tabs/splits
-- Nifty features (e.g. notepad++ doc map)
-- Configuring things; handy config settings
-- Plugins
 
 ### Notepad++
 
@@ -72,7 +62,7 @@ In addition to those shortcuts, if your cursor is on a brace, bracket, or parent
 
 ##### Line-based shortcuts
 
-- \keys{\ctrl+\shift+\backspace}: Delete to start/end of line
+- \keys{\ctrl+\shift+\backspace}: Delete to start/end of line <!--TODO which is which? -->
 - \keys{\ctrl+l}: Delete current line
 - \keys{\ctrl+t}: Transpose (swap) current and previous lines
 - \keys{\ctrl+\shift+\arrowkeyup} / \keys{\arrowkeydown}: Move current line/selection up or down
@@ -93,7 +83,7 @@ To do this, use \keys{\Alt+\shift+\arrowkeyup} / \keys{\arrowkeydown} / \keys{\a
 \keys{\Alt} and left-click.
 
 If you have selected a column of text, you can type to insert text on each line in the column or edit as usual (e.g., \keys{\del} deletes the selection or one character from each line).
-Notepad++ also features a column editor that can insert text or a column of increasing numbers. When you have performed a column selection, press \keys{\Alt+c} to open it.
+Notepad++ also features a column editor that can insert text or a column of increasing numbers. When you have performed a column selection, press \keys{\Alt+c} to open the column editor window.
 
 \begin{figure}[!h]
     \centering
@@ -155,7 +145,7 @@ One common setting is to switch Notepad++ to use spaces instead of tabs:
 
 #### Plugins
 
-Notepad++ has support for plugins; you can see a list of them [here](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central)[^npp-plugins].
+Notepad++ has support for plugins; you can see a list of them [here](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central).[^npp-plugins]
 Unfortunately, plugins must be installed to the same directory Notepad++ is installed in, so you will need to install Notepad++ yourself to use plugins.
 
 ### Atom
@@ -167,10 +157,10 @@ Thus there is Atom.
 Atom is a featureful text editor that is developed by [GitHub](https://atom.io/).
 Designed with customization in mind, Atom is built on top of the engine that drives the Google Chrome web browser.
 Atom allows users to customize just about every feature that it offers.
-Style can be changed using cascading style sheets[^css] and behavior can be changed using JavaScript[^javascript].
+Style can be changed using cascading style sheets[^css] and behavior can be changed using JavaScript.[^javascript]
 
-Additionally, being a hip-and-trendy\texttrademark  piece of software, you can install community packages written by other developers.
-In fact, if you find that Atom is missing some particular behavior, you can create a package and make it available to the world, as well[^rich]!
+Additionally, being a hip-and-trendy\texttrademark{}  piece of software, you can install community packages written by other developers.
+In fact, if you find that Atom is missing some particular behavior, you can create a package and make it available to the world, as well![^rich]
 
 Atom has a GUI, so it is mouse friendly and human friendly, too.
 
@@ -197,7 +187,7 @@ As you double click files, they open up in new **tabs**.
     \caption{Atom with multiple tabs in one pane}
 \end{figure}
 
-To switch between tabs, simply click on them at the top.
+To switch between tabs, simply click on them at the top of the window.
 It works much the same way as browser tabs do.
 
 Keep an eye on your tabs!
@@ -229,7 +219,7 @@ You can also close panes by choosing \menu{Close Pane}.
 
 You may notice that Atom's drop-down menu options are sparse.
 There is not much to choose from.
-Don't fret[^fret]!
+Don't fret![^fret]
 
 Most of Atom's functionality is accessible using its **command palette**.
 To open the command palette simply type \keys{\ctrl + \shift + p}.
@@ -262,28 +252,30 @@ Atom has a helpful search tool that makes it easy to quickly find the keybinding
 If you don't see a keybinding for a command you like, just create your own!
 You can also choose preset keymaps to make Atom behave like other text editors including (but not limited to) emacs!
 
-### JPico
+### Nano
 
-`jpico` is a command-line text editor for Linux, Windows, and macOS.
+`nano` is a command-line text editor for Linux, Windows, and macOS.
 People choose this editor because it is easy to use (as command-line editors go), has syntax highlighting, and is usually installed on Linux systems.
 It may seem simple, but it has a surprising number of features that most people are unaware of.
 Many features draw inspiration from `emacs`, so you may observe some parallels between the two editors.
 
-(Historical note: `jpico` is actually [`joe`](http://joe-editor.sourceforge.net/)[^joe] configured to use commands similar to [`pico`](http://www.guckes.net/pico/)[^pico].
-`pico` is a small (eh? eh?) text editor that came with the PINE newsreader[^news] and was designed to be easy to use[^nerds].)
+(Historical note: `nano` was created as a Free as in Freedom[^GNU] replacement for [`pico`](http://www.guckes.net/pico/).[^pico]
+`pico` is a small (eh? eh?) text editor that came with the PINE newsreader[^news] and was designed to be easy to use.[^nerds])
+
+You can open files in `nano` by passing them as command-line arguments:
+
+~~~
+$ nano my-cool-file.txt
+~~~
 
 #### How to Get Help
 
-At the top of the `jpico` screen is a window with help information. You can toggle it on and off with \keys{\ctrl + g}.
-There are several pages of help information.
-To scroll forwards through the pages, press \keys{\esc} and then \keys{.}; to scroll backwards, press \keys{\esc} and then \keys{,}.
+At the bottom of the `nano` screen are two lines that show commonly used commands.
+For more detailed documentation, \keys{\ctrl + g} displays a summary of all the available keyboard shortcuts.
 
 The notation for controls may be unfamiliar to you. In Unix-land, `^` is shorthand for the \keys{\ctrl} key.
 So, for instance, `^X` corresponds to \keys{\ctrl + x}.
-For historical reasons[^esc], pressing \keys{\ctrl + [} is the same as pressing \keys{\esc}, so something like `^[K` corresponds to \keys{\esc}, then \keys{k}.
-
-The `joe` website contains more detailed documentation, but the key mappings are different.
-It is still useful as an explanation behind the rather terse help messages in `jpico`!
+`M-U` is read as "meta-U"; typically this is equivalent to pressing \keys{\Alt + u}.
 
 #### Moving Around
 
@@ -296,25 +288,27 @@ If you'd rather exercise your pinky finger (i.e., press \keys{\ctrl} a lot) than
 - \keys{\ctrl + a}: Beginning of line
 - \keys{\ctrl + e}: End of line
 
-You can also move by word; \keys{\ctrl+Space} moves forward one word, and \keys{\ctrl +z} moves back one word.
+You can also move by word; \keys{\ctrl + \arrowkeyright} or \keys{\ctrl+Space} moves forward one word,
+and \keys{\ctrl + \arrowkeyleft} or \keys{\Alt + Space} moves back one word.
+
+Furthermore, \keys{\Alt + )} and \keys{\Alt + (} jump to the next or previous paragraph.
 
 \keys{PgUp} and \keys{PgDn} move up and down one screen at a time. Alternatively, \keys{\ctrl+y} and \keys{\ctrl+v} do the same thing.
 
-Analogously, to jump to the beginning of a file, press \keys{\ctrl+w} \keys{\ctrl+y}, and to jump to the end, \keys{\ctrl+w} \keys{\ctrl+v}.
+Analogously, to jump to the beginning of a file, press \keys{\ctrl+home}, and to jump to the end, \keys{\ctrl+end}.
 
-If there's a particular line number you want to jump to (for instance, if you're fixing a compiler error), press \keys{\ctrl+w} \keys{\ctrl+t}, then type the line number to go to and press \keys{\enter}.
-
-Deleting text is the same as cutting text in `jpico`. See the **Copy and Paste** section for a list of ways to delete things.
+If there's a particular line number you want to jump to (for instance, if you're fixing a compiler error), press \keys{\ctrl+\shift+-}, then type the line number to go to and press \keys{\enter}.
+Alternatively, to see where you are in a file, press \keys{\ctrl+c}.
 
 #### Undo and Redo
 
-These are pretty easy. Undo is \keys{\esc},\keys{-}; redo is \keys{\esc},\keys{=}.
+These are pretty easy. Undo is \keys{\Alt + u}; redo is \keys{\Alt + e}.
 
 #### Copy and Paste
 
 <!-- TODO mention using PuTTY clipboard -->
 
-You: "So, `jpico` is kinda cool. But \keys{\ctrl+c} and \keys{\ctrl+v} both mean something other than 'copy' and 'paste'. Can't I just use the normal clipboard?"
+You: "So, `nano` is kinda cool. But \keys{\ctrl+c} and \keys{\ctrl+v} both mean something other than 'copy' and 'paste'. Can't I just use the normal clipboard?"
 
 Ghost of UNIX past: "It's 1969 and what on earth is a clipboard?"
 
@@ -336,90 +330,64 @@ GOUP: "?????????!"
 
 Seriously, though, the concept of a system-wide clipboard wasn't invented until the 1980s, when GUIs first became available.[^teletype]
 Before that, every terminal program had to invent its own copy/paste system!
-Some programs, including `jpico`, don't just have *a* clipboard--they have a whole buffer
-(usually called a 'killring', which sounds like a death cult)
-of everything you've cut that you can cycle through!
+In `nano`, the clipboard is known as the 'cutbuffer'; text can be cut or copied to the cutbuffer and then 'un-cut' (i.e., pasted).
 
-There are a number of ways to cut (or delete) things:
+You can cut one line with \keys{\ctrl + k}, or cut from the cursor to the end of the file with \keys{\Alt + t}.
+\keys{\Alt + 6} copies one line, rather than cutting it.
 
-- \keys{\ctrl + d}: Cut a character
-- \keys{\esc},\keys{d}: Cut from the cursor to the end of the current word
-- \keys{\esc},\keys{h}: Cut from the cursor to the beginning of the current word
-- \keys{\ctrl + k}: Cut a line
-- \keys{\esc},\keys{k}: Cut from the cursor to the end of the line
-
-You can repeat a cut command to add more to the last thing cut.
+You can repeat a cut or copy command to add more to the last thing cut or copied.
 For example, to cut several lines at once, just keep pressing \keys{\ctrl + k}.
 When you paste, all the lines will get pasted as one piece of text.
 
 If you want to cut a selection of text, press \keys{\ctrl + \shift + 6} to start selecting text.
-Move the cursor around like normal; once you have completed selecting, press \keys{\ctrl + k} to cut the selection.
+Move the cursor around like normal; once you have completed selecting, press \keys{\ctrl + k} to cut the selection or \keys{\Alt + 6} to copy it.
 
-Cut text goes to the killring. To paste the last thing cut, press \keys{\ctrl + u}.
-To paste something else from the killring, press \keys{\ctrl+u}, then press \keys{\esc},\keys{u} until the desired text appears.
+Cut/copied text goes to the cutbuffer. To un-cut (paste) the contents of the cutbuffer, press \keys{\ctrl + u}.
 
 #### Search and Replace
 
 \keys{\ctrl+w} lets you search for text. Type the text you want to search for and press \keys{\enter}.
-`jpico` displays the following options:
+\keys{\Alt+w} will jump to the next search result.
 
-`(I)gnore (R)eplace (B)ackwards Bloc(K) (A)ll files NNN (^C to abort):`
+Alternatively, before pressing \keys{enter}, you can toggle a number of search features:
 
-From here, you can:
+- \keys{\Alt + c} to make the search case-sensitive
+- \keys{\Alt + b} to search backwards, instead of forwards
+- \keys{\Alt + r} to search using a regular expression (see the Regular Expressions chapter for more)
+- \keys{\ctrl + r} to interactively replace each match with a given replacement string (you can use backreferences in the replacement if you are searching by regular expression)
 
-- Press \keys{\enter} to search forwards
-- Press \keys{i} to search forward and ignore the case (so searching for "bob" will match "Bob" as well)
-- Press \keys{b} to search backwards
-- Press \keys{r} to replace matches with a new string. `jpico` will prompt whether or not to replace for each match
-- Press \keys{k} to select from the current mark (set with \keys{\ctrl + \shift + 6}) to the first match
-- Press \keys{a} to search in all open files
-- Enter a number to jump to the N-th next match
+To search-and-replace only in part of a file, you can set a mark (with \keys{\ctrl + \shift + 6} at one end of the region to replace in,
+navigate to the other, then press \keys{\ctrl+w} to replace only in the marked area.
 
 #### Multiple Files
 
-`jpico` can open multiple files and has some support for displaying multiple files on the screen at once.
+`nano` refers to open files as 'buffers'.
+It displays only one buffer at a time, but it can have multiple buffers open simultaneously.
 
-To open another file, press \keys{\esc},\keys{e}, then enter the name of the file to open.
-If you press \keys{\tab}, `jpico` will show you a listing of files matching what you've typed in so far.
+By default, \keys{\ctrl + r} reads the contents of a file (or the output of a command) into the current buffer.
+This makes it easy to make copies of files or to save the output of commands.
+To do this, press \keys{\ctrl + r} and enter a filename to read in.
+Once you've pressed \keys{\ctrl + r}, you can press \keys{\ctrl + t} to open a file browser, which is quite nifty!
+Alternatively, you can press \keys{\ctrl + x} to execute a command and put its output in the current buffer.
 
-<!--TODO fix alignment -->
-\newpage
-You can split the screen horizontally with \keys{\esc},\keys{o}.
-Switch between windows with \keys{\esc},\keys{n} and \keys{\esc},\keys{p}.
-You can adjust the size of the window with \keys{\esc},\keys{g} and \keys{\esc},\keys{j}.
+To open a file in a new buffer, press \keys{\ctrl + r}, then \keys{\Alt + f}.
+Then open a file or execute a command; the file or command output will appear in a new buffer.
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[height=0.3\textheight]{01/jpico-two-split.png}
-    \caption{\texttt{jpico} with two files open on screen}
-\end{figure}
-
-To either show only the current window or to show all windows, press \keys{\esc},\keys{i}.
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[height=0.3\textheight]{01/jpico-zoom-out.png}
-    \caption{\texttt{jpico} `zoomed out' to show three open files at once}
-\end{figure}
+You can switch between open buffers with \keys{\Alt + ,} and \keys{\Alt + .}.
+The top left corner shows how many buffers are open and which buffer you're currently displaying.
 
 #### Configuration
 
-`jpico` looks for a configuration file in `~/.jpicorc`, or, failing that, in `/etc/joe/jpicorc`.
-To change `jpico`'s configuration, first copy the default config file to your home directory:
-
-```
-cp /etc/joe/jpicorc ~/.jpicorc
-```
-
-Each setting follows the form `-settingname options`. If there is whitespace between the `-` and the start of the line, the setting is disabled.
+`nano` looks for a configuration file in `~/.nanorc` and gives second priority to settings in `/etc/nanorc`.
 
 Some handy options:
 
-- `-istep 4`: sets indentation width to 4 columns
-- `-spaces`: uses spaces for indentation, rather than tabs
-- `-mouse`: enables the mouse!
+- `set tabsize 4`: sets indentation width to 4 columns
+- `set tabstospaces`: uses spaces for indentation, rather than tabs
+- `set linenumbers`: show line numbers
+- `set mouse`: enables the mouse!
 
-(You can read more about mouse support [here](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md#xterm-mouse-support)[^jpico-mouse].)
+(You can read more about mouse support [here](https://www.nano-editor.org/dist/v2.9/nano.html#Using-the-Mouse).)
 
 ### Emacs
 
@@ -448,20 +416,20 @@ Your changes to the tutorial won't be saved.
 #### Starting Emacs
 
 The command used to start Emacs is simply `emacs`.
-Just like `jpico`, you can open specific files by listing them as arguments to the command.
+Just like `nano`, you can open specific files by listing them as arguments to the command.
 
 ~~~shell
 $ emacs main.cpp
 ~~~
 
-When it starts, Emacs will first check to see whether or not it has the ability to open any GUI windows for you[^emacs-gui].
+When it starts, Emacs will first check to see whether or not it has the ability to open any GUI windows for you.[^emacs-gui]
 Assuming it can, Emacs will opt to start its GUI interface.
 The Emacs GUI is no more featureful than the command-line interface.
 Sure, you have the ability to reach for your mouse and click the Cut button, but that is no faster than simply typing \keys{\ctrl+k}.
 
 In the name of speed and convenience, many Emacs users choose to skip the GUI.
 You can start Emacs without a GUI by running `emacs -nw`.
-The `-nw` flag tells Emacs[^shorter-letter]...
+The `-nw` flag tells Emacs...[^shorter-letter]
 
 > Dear Emacs,
 >
@@ -470,7 +438,7 @@ The `-nw` flag tells Emacs[^shorter-letter]...
 > isn't that so great?
 >
 > Please don't bother with any of that, though. I just want you to open in the
-> command-line like jpico, so that I can get some work done and move on with my life.
+> command-line like `nano` so that I can get some work done and move on with my life.
 >
 > With love,
 > Me, the user.
@@ -511,7 +479,7 @@ Finally, if you done goofed, you can always tell Emacs to cancel your keybinding
 Simply type `C-g`.
 According to the Emacs help page...
 
-> C-g runs the command keyboard-quit... this character quits directly.
+> `C-g` runs the command keyboard-quit...this character quits directly.
 > At a top-level, as an editor command, this simply beeps.
 
 As mentioned, you can also use `C-g` to get your fill of beeps.
@@ -529,43 +497,48 @@ Granted, that requires... 13?... More keystrokes than `C-f`, but by golly, you c
 
 `M-x` is *very* useful for invoking commands that don't actually have keybindings.
 
-<!-- copyright
-\begin{figure}
-\centering
-	\includegraphics[height=0.3\textheight]{01/mxdonuts}
-\caption{Emacs has commands for all kinds of things!}
-\end{figure}
+<!-- copyright 2009 Will Willis
+Used with permission
+source: http://twitpic.com/2db8f
 -->
+![Emacs has commands for all kinds of things![^willwillis]](01/mx-donuts.jpg){width=50%}
 
 #### Moving Around
 
 Although you can use your arrow keys to move your cursor around, you will feel much fancier if you learn the proper keybindings to do so in Emacs.
 
 Moving by character:
+
 - `C-f` Move forward a character
 - `C-b` Move backward a character
 
 Moving by word:
+
 - `M-f` Move forward a word
 - `M-b` Move backward a word
 
 Moving by line:
+
 - `C-n` Move to next line
 - `C-p` Move to previous line
 
 Moving around lines:
+
 - `C-a` Move to beginning of line
 - `C-e` Move to end of line
 
 Moving by sentence:
+
 - `M-a` Move back to beginning of sentence
 - `M-e` Move forward to end of sentence
 
 Scrolling by page:
+
 - `C-v` Move forward one screenful (Page Down)
 - `M-v` Move backward one screenful (Page Up)
 
 Some other useful commands:
+
 - `C-l` Emacs will keep your cursor in place and shift the text within your window.
   Try typing `C-l` a few times in a row to see what it does.
 - `C-s` starts search.
@@ -598,12 +571,12 @@ If you have anything open that has not been saved, Emacs will prompt you to see 
 
 #### Kill and Yank
 
-In Emacs, your "copied" and "cut" information is stored in the "kill ring"[^violent].
-The kill ring is... a ring that stores things you've killed (cut), so that you can yank (paste) them later.
+In Emacs, your "copied" and "cut" information is stored in the "kill ring".[^violent]
+The kill ring is...a ring that stores things you've killed (cut), so that you can yank (paste) them later.
 
 Vocabulary:
 
-- **Kill**[^violent] - Cut
+- **Kill** - Cut
 - **Yank** - Paste
 
 In order to kill parts of a file, you'll need to be able to select them.
@@ -708,18 +681,19 @@ For example, rather than having separate commands for deleting words, lines, par
 Vim has a single delete command (`d`) that can be combined with motion commands to delete a word (`w`), line (`d`), paragraph (`{`), etc.
 In this sense, learning to use Vim is like learning a language: difficult at first, but once you become fluent it's easy to express complex tasks.
 
-Vim offers a tutorial: at a command prompt, run `vimtutor`.
+Vim offers a tutorial as a separate program: at a command prompt, run `vimtutor`.
 You can also access help in Vim by typing `:help <thing you want help with>`.
 The help search can be tab-completed.
 To close the help window, type `:q`.
 
 #### Getting into Insert mode
 
-Vim is what's known as a 'modal editor'; keys have different meanings in different modes.
+Vim is what's known as a 'modal editor': keys have different meanings in different modes.
 When you start Vim, it is in 'normal' mode; here, your keys will perform different commands -- no need to press \keys{\ctrl} all the time!
 However, usually when you open a text file, you want to, you know, type some text into it.
 For this task, you want to enter 'insert' mode.
-There are a number of ways to put `vim` into insert mode, but the simplest is just to press \keys{i}.
+There are a number of ways to put `vim` into insert mode, but the simplest is just to press \keys{i}, which drops you into insert mode
+wherever your cursor is.
 
 Some other ways to get into insert mode:
 
@@ -785,11 +759,11 @@ If you've saved your file already and just want to quit, `:q` quits; `:q!` lets 
 
 #### Copy and Paste
 
-Vim has an internal clipboard like `jpico`. The command to copy (yank, in Vim lingo) is \keys{y}.
+Vim has an internal clipboard like `nano`. The command to copy (yank, in Vim lingo) is \keys{y}.
 Combine this with a motion command; `yw` yanks one word and `y3j` yanks 4 lines.
 As with `cc`, `yy` yanks the current line.
 
-In addition to yank there is the \keys{d} command to cut/delete text; it is used in the same way.
+In addition to yank, there is the \keys{d} command to cut/delete text; it is used in the same way.
 
 Pasting is done with \keys{p} or \keys{P}; the former pastes the clipboard contents after the character the cursor is on, the latter pastes before the cursor.
 
@@ -861,7 +835,7 @@ For each of the following editors...
 
 - Notepad++
 - Atom
-- JPico
+- Nano
 - Vim
 - Emacs
 
@@ -903,11 +877,6 @@ Once you get comfortable with an editor, check out “plugins” for various lan
 
 ![Learning editors is easy and fun!](01/learning-curve.png)
 
-## Quick Reference
-
-- How to get out of an editor / help everything is broken
-- Doing common stuff: open file, save, motion commands
-
 ## Further Reading
 
 ### Notepad++
@@ -917,12 +886,27 @@ Once you get comfortable with an editor, check out “plugins” for various lan
 - [Notepad++ Plugin Directory](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central), a list of plugins you might want to install
 - [Notepad++ Source Code](https://github.com/notepad-plus-plus/notepad-plus-plus) -- Notepad++ is free and open source, so you can modify it yourself!
 
-### JPico
+### Atom
 
-- [The Joe Website](http://joe-editor.sourceforge.net/)
-- [Joe Manual](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md)
-- [Joe Source Code](https://sourceforge.net/projects/joe-editor/files/)
-- [Some Joe History](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/history.md)
+- [The Atom Website](https://atom.io/)
+- [Atom Manual](https://flight-manual.atom.io/)
+- [Package List](https://atom.io/packages)
+- [Atom Source Code](https://github.com/atom/atom)
+
+### Nano
+
+- [The Nano Website](https://www.nano-editor.org/)
+- [Nano FAQ](https://www.nano-editor.org/dist/v2.9/faq.html), including some history of its development
+- [Nano Manual](https://www.nano-editor.org/dist/v2.9/nano.html)
+- [Nano Source Code](http://savannah.gnu.org/projects/nano)
+
+### Emacs
+
+- [The Emacs Website](https://www.gnu.org/software/emacs/)
+- [Emacs Manual](https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html)
+- [Emacs Wiki](https://www.emacswiki.org/)
+- [Emacs Packages](https://www.emacswiki.org/emacs/CategoryPackaging)
+- [Emacs Source Code](http://savannah.gnu.org/projects/emacs/)
 
 ### Vim
 
@@ -938,12 +922,12 @@ Once you get comfortable with an editor, check out “plugins” for various lan
 [^others-too]: And many other programming languages, for that matter.
 [^compilers]: Including compilers.
 [^standard]: If you are reading this, you may ignore the rest of this chapter and instead learn `ed`, [the standard editor](https://www.gnu.org/fun/jokes/ed-msg.html).
-[^globe]: Thanks to cloud computing, this is becoming commonplace, yo.
+[^globe]: Thanks to cloud computing, it may not even be on the globe!
 [^npp]: Website: [https://notepad-plus-plus.org/](https://notepad-plus-plus.org/)
 [^large]: Of course, this feature might encourage making large files rather than multiple manageable files...
 [^outdent]: *Outdent* (verb). Latin: To remove a tooth; English: The opposite of indent.
 [^npp-plugins]: [http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central](http://docs.notepad-plus-plus.org/index.php?title=Plugin_Central)
-[^joe]: [http://joe-editor.sourceforge.net](http://joe-editor.sourceforge.net)
+[^GNU]: Or, less tongue-in-cheek: licensed so users can modify and distribute the software as they please --- `nano` is licensed under the GNU GPL.
 [^pico]: [http://www.guckes.net/pico/](http://www.guckes.net/pico/)
 [^news]: A newsreader is a program for reading Usenet posts. Imagine Reddit, but in the 1980s.
 [^nerds]: Well, easy to use for people (sometimes known as 'humanitty') who were already used to using Unix terminal programs!
@@ -955,7 +939,6 @@ People (and old software) dislike change, so to this day your terminal still pre
 They were incredibly slow to output anything, and there was no way to erase what had already been printed, so having a 'cursor' didn't really make much sense
 (how would you show it?).
 Some terminals didn't even have arrow keys as a result!
-[^jpico-mouse]: [https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md#xterm-mouse-support](https://sourceforge.net/p/joe-editor/mercurial/ci/default/tree/docs/man.md#xterm-mouse-support)
 [^gvim]: The graphical version is cleverly named `gvim`.
 [^hjkl]: Why these letters? Two reasons: first, they're on the home row of a QWERTY keyboard, so they're easy to reach.
 Second, when Bill Joy wrote `vi` (which inspired `vim`), he was using a Lear Siegler ADM-3A terminal, which didn't have individual arrow keys.
@@ -965,7 +948,7 @@ This keyboard is also the reason for why ~ refers to your home directory in Linu
 [^shorter-letter]: Well, the `nw` in `-nw` stands for no window, but Emacs takes it much more dramatically.
 [^violent]: Don't ask why Emacs has such violent terms. There's no keyboard-related excuse for that one.
 [^css]: CSS is used to specify the design for websites, and it works in Atom, too.
-[^javascript]: JavaScript[^java] is the language of the web. It makes web pages interactive!
-[^java]: JavaScript should never, ever be confused with Java. They are very different.
+[^javascript]: JavaScript is the language of the web. It makes web pages interactive!
 [^rich]: Just don't expect to get rich.
 [^fret]: Please, please don't fret. It'll be OK. Just keep a-readin', friend.
+[^willwillis]: \textcopyright{} 2009 Will Willis. Used with permission.
