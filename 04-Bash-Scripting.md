@@ -4,10 +4,10 @@
 
 In addition to being a fully-functional[^functional] interactive shell, Bash can also run commands from a text file (known as a 'shell script').
 It even includes conditionals and loops!
-These scripts are the duct tape and bailing wire of computer programming -- great for connecting other programs together.
+These scripts are the duct tape and bailing wire of computer programming --- great for connecting other programs together.
 Use shell scripts to write one-off tools for odd jobs, to build utilities that make your life easier, and to customize your shell.
 
-**Note**: There's nothing special about the contents of a shell script -- everything you learn in this lab you could type into the Bash prompt itself.
+**Note**: There's nothing special about the contents of a shell script --- everything you learn in this lab you could type into the Bash prompt itself.
 
 ### Takeaways
 
@@ -17,7 +17,7 @@ Use shell scripts to write one-off tools for odd jobs, to build utilities that m
 ## Walkthrough
 
 Here's a quick example of what a shell script looks like:
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 g++ *.cpp
@@ -29,7 +29,7 @@ To run it, put it in a file named, say, `runit1.sh`, then type `./runit1.sh`[^pa
 
 Two things to note:
 
-1. The first line, called a "shebang"[^shebang], tells Bash what program to run the script through. In this case, it's a Bash script.
+1. The first line, called a "shebang",[^shebang] tells Bash what program to run the script through. In this case, it's a Bash script.
 2. The rest of the file is a sequence of commands, one per line, just as you would type them into the shell.
 
 For simple scripts, this may be all you need!
@@ -45,7 +45,7 @@ Let's check out some of those features and use them to improve this example.
 There's no special keyword for declaring variables; you just define what you want them to be.
 When you use them, you must prefix the variable name with a `$`:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 # Assign the value "big" to the variable COW
@@ -84,7 +84,7 @@ $ echo $?
 
 Bash also provides variables holding the command-line arguments passed to the script.
 A command-line argument is something that you type after the command; for instance, in the command `ls /tmp`, `/tmp` is the first argument passed to `ls`.
-The name of the command that started the script is stored in `$0`. This is almost always just the name of the script[^symlinks].
+The name of the command that started the script is stored in `$0`. This is almost always just the name of the script.[^symlinks]
 The variables `$1` through `$9` contain the first through ninth command line arguments, respectively.
 To get the 10th argument, you have to write `${10}`, and likewise for higher argument numbers.
 
@@ -108,7 +108,7 @@ So as a rule, rather than `$1`, use `"$1"`, and iterate over `"$@"` rather than 
 
 We can spiff up our example to allow the user to set the name of the executable to be produced:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 g++ *.cpp -o "$1"
@@ -126,11 +126,11 @@ If the command succeeds (i.e., returns 0), the body of the if statement is execu
 
 Bash provides some handy commands for writing common conditional expressions:
 `[ ]` is shorthand for the `test` command, and `[[  ]]` is a Bash builtin.
-`[ ]` works on shells other than Bash, but `[[ ]]` is far less confusing[^portability].
+`[ ]` works on shells other than Bash, but `[[ ]]` is far less confusing.[^portability]
 
 Here's an example of how to write `if` statements in Bash:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 # Emit the appropriate greeting for various people
@@ -153,7 +153,7 @@ Be careful not to forget the semicolon after the condition or the `fi` at the en
 #### Writing conditionals with `[[ ]]`
 
 Since Bash is dynamically typed, `[[ ]]` has one set of operators for comparing strings and another set for comparing numbers.
-That way, you can specify which type of comparison to use, rather than hoping that Bash guesses right[^javascript2].
+That way, you can specify which type of comparison to use, rather than hoping that Bash guesses right.[^javascript2]
 
 Comparing Strings:
 
@@ -189,7 +189,7 @@ Checking Attributes of Files:
 
 Here's an example that, given a directory, lists the files in it; and given a file, prints the contents of the file:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 # First, check to make sure we got an argument
@@ -218,7 +218,7 @@ Boolean Logic:
 
 You can also group statements using parentheses:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 num=5
@@ -238,7 +238,7 @@ fi
 
 When working with `(( ))`,  you do not need to prefix variable names with `$`:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 x=5
@@ -252,11 +252,11 @@ fi
 
 #### Case statements
 
-Case statements in Bash work similar to the `==` operator for `[[ ]]`; you can make cases for strings and globs.
+Case statements in Bash work similar to the `==` operator for `[[ ]]`: you can make cases for strings and globs.
 
 Here is an example case statement:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 case $1 in
@@ -278,7 +278,7 @@ case $1 in
 esac
 ```
 
-Do not forget the double semicolon at the end of each case -- `;;` is *required* to end a case.
+Do not forget the double semicolon at the end of each case --- `;;` is *required* to end a case.
 They are analogous to `break` in C++; bash case statements do not have fallthrough.
 
 As with `if`, `case` statements end with `esac`.
@@ -288,7 +288,7 @@ As with `if`, `case` statements end with `esac`.
 We can use conditional statements to spiff up our previous `runit2.sh` script.
 This example demonstrates numeric comparison using both `(( ))` and `[[ ]]`.
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 # If the user specifies an executable name, use that name;
@@ -315,7 +315,7 @@ Can you make this example even spiffier using file attribute checks?
 Inside `(( ))`, you do not need to prefix variable names with `$`!
 
 For example,
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 x=5
@@ -337,7 +337,7 @@ Bash for loops typically follow a pattern of looping over the contents of an arr
 
 For (heh) example, you can print out the names of all `.sh` files in the current directory like so:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 for file in *.sh; do
@@ -347,7 +347,7 @@ done
 
 Or sum all command-line arguments:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 sum=0
@@ -361,7 +361,7 @@ echo $sum
 
 If you need a counting for loop (C-style loop), you can get one of those with `(( ))`:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 for (( i=1; i < 9; i++ )); do
@@ -379,7 +379,7 @@ As with for loops, the loop body is enclosed between `do` and `done`.
 Any conditional you'd use with an if statement will also work with a while loop.
 
 For example,
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 input=""
@@ -401,7 +401,7 @@ Furthermore, they can only return an error code; "returning" other values requir
 
 Here's a simple function example:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 # Declare a function named 'parrot'
@@ -420,7 +420,7 @@ parrot These are "several arguments"
 
 To return something, the easiest solution is to `echo` it and have the caller catch the value:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 average() {
@@ -442,7 +442,7 @@ Here, `my_average=$(average 1 2 3 4)` calls `average` with the arguments `1 2 3 
 
 One word of warning: in Bash, all variables are globally scoped by default, so it is easy to accidentally clobber a variable:
 
-```bash
+```{.bash .numberLines}
 #!/bin/bash
 
 # create a bunch of files with "hello" in them
@@ -467,9 +467,9 @@ You can scope variables to functions with the `local` builtin; run `help local` 
 
 ### Tips
 
-To write a literal ``\ , `, $, ", ’, #``, escape it with `\`; for instance, `"\$"` gives a literal `$`.
+To write a literal `\` , `` ` ``, `$`, `"`, `'`, or `#`, escape it with `\`; for instance, `"\$"` gives a literal `$`.
 
-When writing scripts, sometimes you will want to change directories -- for instance, maybe you want to write some temporary files in `/tmp`.
+When writing scripts, sometimes you will want to change directories --- for instance, maybe you want to write some temporary files in `/tmp`.
 Rather than using `cd` and keeping track of where you were so you can `cd` back later, use `pushd` and `popd`.
 `pushd` pushes a new directory onto the directories stack and `popd` removes a directory from this stack.
 Use `dirs` to print out the stack.
@@ -528,7 +528,8 @@ This list is stored in the `$PATH` variable; the list of directories is delimite
 Your `$PATH` may look something like this:
 ```
 $ echo $PATH
-/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:
+/bin:/usr/games:/usr/local/games
 ```
 
 When you type in a command, say, `g++`, Bash looks through each directory in `$PATH` in order until it finds one with an executable named `g++` in it.
@@ -631,15 +632,11 @@ Boolean Logic:
 
 ### Statements
 
-#### If
-
 ```bash
 if <condition>; then
 	<commands to run>
 fi
 ```
-
-#### Case
 
 ```bash
 case <variable or expression> in
@@ -653,9 +650,7 @@ case <variable or expression> in
 esac
 ```
 
-#### Loops
-
-Iterating loop:
+#### Iterating loop:
 
 ```bash
 for <variable-name> in <array>; do
@@ -663,7 +658,7 @@ for <variable-name> in <array>; do
 done
 ```
 
-Counting loop:
+#### Counting loop:
 
 ```bash
 for ((i=0; i < 7; i++)); do
@@ -671,7 +666,7 @@ for ((i=0; i < 7; i++)); do
 done
 ```
 
-While loop:
+#### While loop:
 
 ```bash
 while <condition>; do
