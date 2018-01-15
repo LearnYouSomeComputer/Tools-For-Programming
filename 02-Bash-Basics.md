@@ -153,12 +153,67 @@ drwx------ 2 nmjxv3 mst_users   0 Dec 28  2015 oclint-0.10.2
 -rwxr-xr-x 1 nmjxv3 mst_users 960 Jan 15  2016 vector.hpp
 ```
 
-The first column shows file permissions --- who can read, write, or execute your files; the fifth file size; the sixth the last time the file was modified; and the last the name of the file itself.
+The columns in `ls`'s output are as follows:
+
+1. File permissions --- who can read, write, or execute your files
+2. Number of hard links (don't worry about this for now)
+3. The user who owns the file
+4. The group that owns the file
+5. The file size
+6. The last time the file was modified
+7. The file name.
 
 Another `ls` option lets you show hidden files. In Linux, every file whose name begins with a `.` is a **hidden** file.[^dotfiles]
 (This is the reason that many configuration files, such as `.vimrc`, are named starting with a `.`.)
 To include these files in a directory listing, use the `-a` flag.
 You may be surprised by how many files show up if you run `ls -a` in your home directory!
+
+#### A brief note on file permissions
+
+Linux has separate permissions for the user who owns the file, users in the 'group' that owns the file, and everyone else.
+(Group permissions are useful in the case of shared documents --- imagine making an `accounting` group that allows
+ all accountants in a company to edit various spreadsheets on a shared drive.)
+
+For each of these collections of users (the owning user, the users in the owning group, and other users), you can set whether
+those users can `r`ead, `w`rite, or e`x`ecute the file.
+(Setting e`x`ecute on a directory allows users to `cd` into it, which is why directories almost always are marked executable.)
+
+To change file permissions (also known as the "file mode"), you use the `chmod` (change mode) command like so: `chmod <mode> <filename>`.
+Modes are written like so: `<collection><+/-><permission>`[^octal]
+
+- `<collection>` is `u` for the owning user, `g` for users in the owning group, `o` for other users, or `a` for all users
+- `+` adds a permission; `-` removes the permission
+- `<permission>` is `r` for read, `w` for write, or `x` for execute.
+
+So, for example, let's say you've downloaded some cool program (`not-a-virus`) from the internet and you want to run it.
+
+~~~
+$ ./not-a-virus
+bash: ./not-a-virus: Permission denied
+~~~
+
+Darn! Guess you'll just have to install that ransomware on purpose...or, we could change the file permissions!
+We can see that right now, nobody can execute this cool program:
+
+~~~
+$ ls -l ./not-a-virus
+-rw-r--r-- 1 nmjxv3 mst-users 31 Jan 15 00:07 ./not-a-virus
+~~~
+
+Let's change that! We'll make it so anyone can execute that file.
+
+~~~
+$ chmod a+x ./not-a-virus
+$ ls -l ./not-a-virus
+-rwxr-xr-x 1 nmjxv3 mst-users 31 Jan 15 00:07 ./not-a-virus
+~~~
+
+Nice! Now you can edit the file, and everyone can read it and execute it...
+
+~~~
+$ ./not-a-virus
+HACKED
+~~~
 
 #### Change your Location with `cd`
 
@@ -519,3 +574,5 @@ however, copying a directory requires `cp` to copy every file in the directory a
 [^still]: Okay, they never really stop looking scary, but after a while they start to feel less like a horror movie jump scare
 and more like the monster you just know is there in the hall waiting to eat you if you were to get out of bed.
 [^superficial]: The distinction is mostly superficial; under the hood they look the same to the operating system. Don't worry about it too much.
+[^octal]: There is another notation for these permissions that uses the octal (base 8, as opposed to base 10 or base 16) representation
+of the bitfield where the file permissions are stored. We won't go into it, but you can read about it in the `chmod` man page.
