@@ -36,8 +36,7 @@ Using the powers of `git`, you travel into the future, read the rest of this cha
 Instead of this hippie artisanal handcrafted sandwich garbage, you sit your past self down at their terminal and whisper savory nothings[^nothings] in their ear.
 They --- you --- crack open a fresh editor and pen the pastrami of your dreams:
 
-```makefile
-
+```{.makefile .numberLines}
 pickles: cucumbers vinegar dill
 	brine --with=dill cucumbers
 
@@ -139,7 +138,7 @@ Along with each target goes one or more commands that, when run, create the targ
 For example, let's say you want to build an executable named `program` by compiling all the C`++` files in the current directory.
 You could do the following:
 
-```makefile
+```{.makefile .numberLines}
 program:
 	g++ *.cpp -o program
 ```
@@ -170,7 +169,7 @@ For our example, let's suppose we have a classic CS 1570 assignment with a `main
 Whenever any one of these files change, we want to recompile `program`.
 We specify these dependencies after the colon following the target name:
 
-```makefile
+```{.makefile .numberLines}
 program: main.cpp funcs.h funcs.cpp
 	g++ *.cpp -o program
 ```
@@ -182,7 +181,7 @@ Not to worry: you can have one target depend on files produced by other targets!
 Then, `make` will do the work of running each compilation and linking step as needed.
 Continuing our example, we add two new targets for our object files, `main.o` and `funcs.o`:
 
-```makefile
+```{.makefile .numberLines}
 program: main.o funcs.o
 	g++ main.o funcs.o -o program
 
@@ -226,7 +225,7 @@ and `make` will be like, "Sure thing, boss! Look at me, not being confused at al
 Let's make a `clean` target for our example from the last section.
 Having a target named `clean` that gets rid of all the compiled files in your current directory is good `make` etiquette.
 
-```makefile
+```{.makefile .numberLines}
 program: main.o funcs.o
 	g++ main.o funcs.o -o program
 
@@ -276,7 +275,7 @@ We'll make a `CFLAGS` variable to hold the "release" flags and a `DEBUGFLAGS` va
 That way, if we want to change our flags later on, we only need to look in one spot.
 We'll also add a phony `debug` target so that running `make debug` builds our program in debug mode.
 
-```makefile
+```{.makefile .numberLines}
 CFLAGS = -O2
 DEBUGFLAGS = -g -Wall -Wextra
 
@@ -333,7 +332,7 @@ Hmm, but how would we write a command for this target? `g++` still needs to know
 
 Let's rewrite our example using a pattern target to make the object files:
 
-```makefile
+```{.makefile .numberLines}
 SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:%.cpp=%.o)
 HEADERS=$(wildcard *.h)
@@ -374,7 +373,7 @@ Name: `______________________________`
 
 Consider the following makefile:
 
-```makefile
+```{.makefile .numberLines}
 default: triangles
 
 triangles: main.o TrianglePrinter.o funcs.o
