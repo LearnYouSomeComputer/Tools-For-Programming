@@ -25,6 +25,7 @@ header-includes:
 - \renewcommand{\backspace}{Backspace \backspacesymbol}
 - \let\tabsymbol\tab
 - \renewcommand{\tab}{Tab \tabsymbol}
+- \usepackage{afterpage}
 
 include-before: |
     \pagestyle{empty}
