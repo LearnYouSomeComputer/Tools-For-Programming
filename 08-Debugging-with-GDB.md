@@ -159,7 +159,7 @@ Use those print statements to check your assumptions about how your code works.
 \afterpage{% Put bertha on her own page
 \begin{figure}[p!]
 \centering
-\includegraphics[width=\textwidth]{08/bertha.png}
+\includegraphics[width=\textwidth]{08/bertha.jpg}
 \caption{Bertha!}
 \end{figure}
 \clearpage
