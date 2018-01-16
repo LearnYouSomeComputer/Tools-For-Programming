@@ -47,4 +47,3 @@ cs1001_prelab.tex: ${MD_PIECES} template.tex .commit-info.tex
 # .dirty is updated the first time the index goes clean -> dirty.
 .commit-info.tex: .dirty .git/index commit-info.sh
 	./commit-info.sh > .commit-info.tex
-
