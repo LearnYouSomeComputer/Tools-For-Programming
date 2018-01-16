@@ -527,6 +527,17 @@ How would you print the top three scores from the file?
 
 - `-n num_lines`: Display `num_lines` lines, rather than the default of 10
 
+`sort [<filename>]`: Sort lines of a file or STDIN
+
+- `-u`: Remove duplicate lines from output
+- `-n`: Perform numerical sort instead of string sort
+
+`wc [<filenames>]`: Count characters, words, and lines in files or STDIN
+
+`echo <string>`: Print string to STDOUT
+
+- `-e`: Interpret backslash escapes (i.e., `\n` is printed as a newline)
+
 `man <command>`: Display manual page for a command
 
 Special Filenames:
