@@ -174,12 +174,109 @@ You may find it useful to have a couple of PuTTY windows open, so that you can m
 
 # Parsing command-line arguments in C++
 
+Throughout this book you'll find commands like `ls -l` or `grep needle haystack.txt`.
+Everything following the command name (`ls` or `grep`) is a command *argument*.
+You too can write programs that take arguments!
+
+In C++, the arguments given to a command are passed as parameters to your `main` function.
+Instead of writing `int main()`, your `main` function will take two arguments:
+
+- An `int` which gives the number of arguments passed on the command line.
+- A `char**` which is an array of NTCAs[^2d] (also known as C-strings) which are the string values of the arguments passed.
+
+These arguments are traditionally named `argc` and `argv`, for "argument count" and "argument values", respectively.
+You can name them whatever you like, however; C++ doesn't care.
+
+Let's do an example: here is a program that prints its arguments out to the screen, one per line:
+
+```C++
+#include<iostream>
+using namespace std;
+
+int main(int argc, char** argv)
+{
+  cout << "Index\tArgument" << endl;
+  for(int i = 0; i < argc; i++)
+  {
+    cout << i << "\t" << argv[i] << endl;
+  }
+
+  return 0;
+}
+```
+
+Let's run it and see what happens:
+
+```
+$ ./print a b c
+Index   Argument
+0       ./print
+1       a
+2       b
+3       c
+```
+
+The "0th" argument is always passed; it is the name of the program that was run.
+So the first argument on the command line is at `argc[1]`, and so on.
+
+For a practical example, let's write a program that counts the number of lines in a file (like `wc -l`, but less fancy).
+If the user doesn't pass us exactly one file, we want to print out a message telling them how to use the program;
+otherwise, we should open the file and count the number of newlines in it.
+
+```{.cpp .numberLines}
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main(int argc, char** argv)
+{
+  if(argc != 2)
+  {
+    cout << "Counts the number of newlines in the given filename"
+         << endl << "Usage: " << argv[0] << " [<filename>]" << endl;
+    return 1; // exit the program
+  }
+
+  ifstream fin(argv[1]);
+  char buffer;
+  int newline_count = 0;
+
+  while(fin.get(buffer))
+  {
+    if(buffer == '\n')
+    {
+      newline_count++;
+    }
+  }
+
+  fin.close();
+
+  cout << argv[1] << " has " << newline_count << " lines." << endl;
+
+  return 0;
+}
+```
+
+In this example, you can see the use of `argv[0]` to display the program name
+It is a common pattern to check the arguments passed before doing anything else and exit the program if they are incorrect.
+Finally, we can use `argv[1]` as we would any other NTCA.
+We could even access the individual characters of the filename by doing something like `argv[1][0]`.
+
+Now, you may be wondering, "how do I get fancy-dancy options parsing, like `ls` and friends?"
+Well, there are a few options.
+The classic choice is [`getopt`](https://www.gnu.org/software/libc/manual/html_node/Getopt.html),
+but the C standard library also has [a few other options](https://www.gnu.org/software/libc/manual/html_node/Parsing-Program-Arguments.html).
+Boost also has a C++-style library for argument parsing, [program_options](http://www.boost.org/doc/libs/1_65_0/doc/html/program_options.html).
+Or, you can write your own!
+
 # Submitting homework with Git
 
 
 [^another]: Windows is also an operating system.
 [^google]: Uh... Google it.
 [^pun]: Pun intended.
+[^2d]: Yep, it's a two-dimensional array. We use `char**` rather than something like `char[][100]` since we don't know how big the array or its subarrays will be;
+the operating system works this out when it runs your program.
 
 <!--  LocalWords:  PuTTY
  -->
