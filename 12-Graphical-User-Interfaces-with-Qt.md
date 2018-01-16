@@ -18,7 +18,7 @@ You may feel some slight discomfort as you read the next bit:
 
 \begin{figure}
 \centering
-\includegraphics[width=0.5\textwidth]{13/zalgo.png}
+\includegraphics[width=0.5\textwidth]{12/zalgo.png}
 \end{figure}
 
 You lift your hands to sip your coffee, but instead of hands, you see a large mouse cursor.
@@ -154,7 +154,7 @@ We then ask Qt to display our text editor window using the `.show()` member func
 So we've got an **application** set up with a text editing **widget**, and we've asked Qt to show it.
 In order to see our application in action, we need to ask it to run using `app.exec()`.
 
-![Our first app! Boy howdy. That sure ain't vim.](13/not_vim.png){width=45%}
+![Our first app! Boy howdy. That sure ain't vim.](12/not_vim.png){width=45%}
 
 ### Laying out your App
 
@@ -170,7 +170,7 @@ To position a bunch of widgets on screen, we use a **layout** widget.
 For example, let's say we want to put a quit button above our text editor (in the same window of course).
 We can use a `QVBoxLayout` to **vertically** (hence the `V`) stack our widgets.
 
-![We can organize the widgets in our application by creating a vertical stack. First we add the button (to the top) then we add the text editor (beneath the button).](13/layout.png){width=45%}
+![We can organize the widgets in our application by creating a vertical stack. First we add the button (to the top) then we add the text editor (beneath the button).](12/layout.png){width=45%}
 
 ~~~{.cpp .numberLines}
 // #includes left out for the sake of brevity

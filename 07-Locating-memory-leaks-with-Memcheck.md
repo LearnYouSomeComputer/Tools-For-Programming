@@ -33,7 +33,7 @@ Image is in the public domain.
 source: https://commons.wikimedia.org/wiki/File:Smokey3.jpg
 -->
 
-![Smokey Says: "Only You Can Prevent Ransomware"](09/Smokey3.jpg){height=35%}
+![Smokey Says: "Only You Can Prevent Ransomware"](07/Smokey3.jpg){height=35%}
 
 ### Takeaways
 

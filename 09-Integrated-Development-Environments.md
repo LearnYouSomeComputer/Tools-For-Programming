@@ -50,7 +50,7 @@ We'll be using the Code::Blocks IDE.
 To open this IDE, run the `codeblocks` command in a shell.
 Hopefully, after a while of thinking about it, the system will deign to display a window somewhat like the following:
 
-![Code::Blocks](06/open.png)
+![Code::Blocks](09/open.png)
 
 Look! Buttons! Windows! Tabs!
 
@@ -65,7 +65,7 @@ To create a new project, click any of the numerous "new project" buttons.
 Code::Blocks knows how to make a bunch of different kinds of software, but if you want to make a plain 'ol terminal application in C++, you'll want
 to choose the "Console application" option:
 
-![New project dialog](06/new-console-application.png){width=80%}
+![New project dialog](09/new-console-application.png){width=80%}
 
 Code::Blocks will ask you for a name and a location to store the project in.
 It will also ask you about compilers and targets --- the default values are fine; we'll talk about them later.
@@ -76,14 +76,14 @@ or you're making a project for something you were already working on.
 To do this, first put your files where you want them (usually in the project directory --- or you can make the project directory be the location of your files),
 then right-click the project and click "Add files":
 
-![Adding files](06/add-files.png){width=50%}
+![Adding files](09/add-files.png){width=50%}
 
 ### Building
 
 Once you've created a project and put some files in it, you'll probably want to compile your code!
 Below you can see the various compilation options Code::Blocks offers --- you can build your code and run it in one step!
 
-![The Build menu](06/build-actions.png){width=50%}
+![The Build menu](09/build-actions.png){width=50%}
 
 When you click "build", Code::Blocks only compiles the files that have changed since you last built the project.
 Typically this works fine, but sometimes you'll want to recompile everything; for this task, the "rebuild" button is what you want.
@@ -96,7 +96,7 @@ If you are planning to use a debugger or Valgrind, you should use the "debug" ta
 You can see your project's target configurations in the project build options (right-click on the project and choose "Build options").
 For now, the options Code::Blocks chooses for you should be sufficient; later on in this book we'll discuss some additional flags that you might want to add.
 
-<!-- ![Build options for the Debug target](06/build-options.png){width=80%} -->
+<!-- ![Build options for the Debug target](09/build-options.png){width=80%} -->
 
 ### Navigation and Editing
 
@@ -105,36 +105,36 @@ Since Code::Blocks is primarily designed for writing C++ programs, it offers spe
 
 If you type a class instance name followed by a `.`, Code::Blocks will show a list of potential member functions and variables you may want:
 
-![Class member completion list](06/completion-list.png){width=80%}
+![Class member completion list](09/completion-list.png){width=80%}
 
 You can type the first few letters of the desired method or variable to narrow the list down,
 then press \keys{\tab} to have Code::Blocks complete the name for you.
 
 Once you've typed out a complete function name, Code::Blocks will show you the type signature, so you know what parameters it takes:
 
-![Type signature hint](06/completion-parameter-hint.png){width=80%}
+![Type signature hint](09/completion-parameter-hint.png){width=80%}
 
 You can also access the "Open Declaration" and "Open Implementation" features of the tab completion window by right-clicking on any function or variable name:
 
-![The result of right-clicking on `append`](06/find-symbol.png){width=70%}
+![The result of right-clicking on `append`](09/find-symbol.png){width=70%}
 
 In the same menu, under the "Code refactoring" submenu, you can rename a variable or function across all files in your project:
 
-![Renaming a symbol](06/rename-symbol.png){width=80%}
+![Renaming a symbol](09/rename-symbol.png){width=80%}
 
 If you are navigating through a large file, you can jump to function implementations with the "Code Completion" toolbar.
 First, select the scope your function is declared in (typically either `<global>` or the name of the class your function is a member of):
 
-![Selecting a scope](06/navigating-scope.png)
+![Selecting a scope](09/navigating-scope.png)
 
 Then select your function from the next drop-down, and Code::Blocks will jump you to that point in the file!
 
-![Selecting a function](06/navigating-members.png){width=80%}
+![Selecting a function](09/navigating-members.png){width=80%}
 
 You can collapse (or 'fold') code between braces by clicking the `-` button in the margin by the line number.
 This is particularly handy when working with long functions that are hard to fit all on one screen.
 
-![Folding the definition of the `Cell` class](06/folding.png){width=80%}
+![Folding the definition of the `Cell` class](09/folding.png){width=80%}
 
 ### Debugging
 
@@ -145,11 +145,11 @@ In short, a debugger allows you to pause the execution of your program, inspect 
 You can tell the debugger to stop execution at a specific line by setting a breakpoint on that line: click to the right of the line number,
 and a little stop sign will appear:
 
-![Setting a breakpoint](06/set-breakpoint.png){width=60%}
+![Setting a breakpoint](09/set-breakpoint.png){width=60%}
 
 Once you've set one or more breakpoints, you can click the red arrow on the debugger toolbar to run your program and have it stop at that breakpoint.
 
-![The debugger toolbar](06/debugger-toolbar.png){width=70%}
+![The debugger toolbar](09/debugger-toolbar.png){width=70%}
 
 Other buttons on the toolbar allow you to step your code by line, or by CPU instruction.
 
@@ -157,14 +157,14 @@ When you are running a program in the debugger, you can right-click on variables
 and its value, along with function argument values and local variable values.
 Once you're watching a variable, you can edit its value while the program is running!
 
-![Watching a new variable](06/watch-variable.png){width=45%}
+![Watching a new variable](09/watch-variable.png){width=45%}
 
-![The "Watches" window](06/watch-window.png){width=35%}
+![The "Watches" window](09/watch-window.png){width=35%}
 
 Code::Blocks also opens a tab at the bottom of the window that allows you to send commands to `gdb`, just as you would when using `gdb` from the command line.
 While Code::Blocks doesn't add any new functionality to `gdb`, it does make some common debugging tasks a lot easier!
 
-![The `gdb` tab](06/gdb-window.png){width=90%}
+![The `gdb` tab](09/gdb-window.png){width=90%}
 
 \newpage
 ## Questions
@@ -185,7 +185,7 @@ Name: `______________________________`
   Try changing to your linuxhome directory (i.e., `cd ~`).
   Otherwise you’ll be waiting *all day* for Code::Blocks to open up.
 - If Code::Blocks doesn't let you navigate to your cloned repository, you can find it by going the long way.
-  You can find your SDRIVE by going to its absolute path: `/nethome/users/<username>/cs1001/lab06/` (or whatever you call your repository.)
+  You can find your SDRIVE by going to its absolute path: `/nethome/users/<username>/cs1001/lab09/` (or whatever you call your repository.)
 
 ### Building with Code::Blocks
 

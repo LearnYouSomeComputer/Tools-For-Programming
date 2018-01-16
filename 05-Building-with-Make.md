@@ -120,7 +120,7 @@ leaves you a beautiful executable wrapped up under your tree.[^lovecraft]
 Used with permission
 Source: http://www.aboutdebian.com/compile.gif
 -->
-![How Executables are Made[^keithparkansky]](07/compile.png){width=70%}
+![How Executables are Made[^keithparkansky]](05/compile.png){width=70%}
 
 So, what's the big deal?
 Well, if you compile your code to object files and then change some of your code, you only need to rebuild the object files

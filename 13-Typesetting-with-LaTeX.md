@@ -8,7 +8,7 @@ Close your eyes. You are [Donald Knuth](http://www-cs-faculty.stanford.edu/~uno/
 Licensed CC-BY-SA 2.5; taken by Jacob Appelbaum (ick)
 source: https://upload.wikimedia.org/wikipedia/commons/4/4f/KnuthAtOpenContentAlliance.jpg
 -->
-![You, aka Donald Knuth](14/don.jpg){height=35%}
+![You, aka Donald Knuth](13/don.jpg){height=35%}
 
 The year is 1977, and you have just finished hand-writing the final draft of the second edition of the second volume of *The Art of Computer Programming*.
 You send the draft off to the publisher for typesetting, and the proof that comes back is just horrendous.
@@ -133,7 +133,7 @@ Continuing our example:
 \end{document}
 ```
 
-![The document structure example, rendered](14/outline.png)
+![The document structure example, rendered](13/outline.png)
 
 ### Formatting Text
 
