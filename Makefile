@@ -3,16 +3,16 @@ MD_PIECES = 00-FrontMatter.md	\
 	02-Bash-Basics.md	\
 	03-Git-Basics.md	\
 	04-Bash-Scripting.md	\
-	05-Regular-Expressions.md	\
-	06-Integrated-Development-Environments.md	\
-	07-Building-with-Make.md	\
-	08-Debugging-with-GDB.md	\
-	09-Locating-memory-leaks-with-Memcheck.md	\
+	05-Building-with-Make.md	\
+	06-Debugging-with-GDB.md	\
+	07-Locating-memory-leaks-with-Memcheck.md	\
+	08-Unit-testing.md	\
+	09-Integrated-Development-Environments.md	\
 	10-Profiling.md	\
-	11-Unit-testing.md	\
-	12-Using-C++11-and-the-Standard-Template-Library.md	\
-	13-Graphical-User-Interfaces-with-Qt.md	\
-	14-Typesetting-with-LaTeX.md \
+	11-Regular-Expressions.md	\
+	12-Graphical-User-Interfaces-with-Qt.md	\
+	13-Typesetting-with-LaTeX.md \
+	14-Using-C++11-and-the-Standard-Template-Library.md	\
 	15-Appendices.md
 
 EXTENSIONS = raw_tex+fenced_code_attributes

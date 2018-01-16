@@ -1,6 +1,6 @@
 # Regular Expressions
 
-![https://xkcd.com/208/](05/regular_expressions.png)
+![https://xkcd.com/208/](11/regular_expressions.png)
 
 ## Motivation
 
