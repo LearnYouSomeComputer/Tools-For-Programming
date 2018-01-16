@@ -53,6 +53,7 @@ You would scream, but you have no menu entry for that.
 ### Takeaways
 
 - Experiment with Qt to build Graphical User Interfaces
+- Get a taste of event-driven programming
 - Learn a bit about how large libraries and projects are organized
 - Appreciate the simplicity of programming Command Line Interface applications.
 
@@ -72,9 +73,9 @@ It's just a little less.
 Qt's preprocessor is called the Meta Object Compiler (`moc`).
 Fortunately, you don't have to work with it (or `g++`) directly, since Qt can generate a `Makefile` for you!
 
-So...you don't need to run `moc`, `g++`, or even make your own `Makefile`... so what *do* you have to do?
+So...you don't need to run `moc`, `g++`, or even make your own `Makefile`...so what *do* you have to do?
 
-Qt uses project files, which end in `.pro` to determine how to build your projects.
+Qt uses project files, which end in `.pro`, to determine how to build your projects.
 You can generate a new `.pro` file for a Qt project by running the command `qmake -project`.
 
 Qt is a big library, so to speed up compile times not everything gets added in all at first.
@@ -87,7 +88,7 @@ QT += widgets
 That tells `qmake` to include the widgets library files when it generates the makefile.
 Once we've added this line, we can just `#include <QtWidgets>` and use all the widgets Qt provides to our hearts' content.
 
-If you already have a `.pro` file, then you can just run `qmake` to generate a `Makefile`.
+Once you have a `.pro` file, you can run `qmake` to generate a `Makefile`.
 Then you can run `make` to compile everything together!
 
 ~~~shell
@@ -100,7 +101,7 @@ $ echo "QT += widgets" >> project_name.pro
 # Run this once to create your Makefile
 $ qmake
 
-# ... then this whenever you want to recompile
+# ...then this whenever you want to recompile
 $ make
 ~~~
 
@@ -114,7 +115,7 @@ Although you instantiate the `QApplication` in `main()`, you can access it throu
 
 So that's nice, right?
 A `QApplication` is an object that represents your entire application.
-Not the windows, no buttons... it's the *whole* thing.
+Not the windows, no buttons...it's the *whole* thing.
 
 All of those clickable things that we all love to click: those are called **widgets**.
 If you want a useful application, you can't work with just a `QApplication`.
@@ -153,7 +154,7 @@ We then ask Qt to display our text editor window using the `.show()` member func
 So we've got an **application** set up with a text editing **widget**, and we've asked Qt to show it.
 In order to see our application in action, we need to ask it to run using `app.exec()`.
 
-![Our first app! Boy howdy. That sure ain't vim.](13/not_vim.png){width=80%}
+![Our first app! Boy howdy. That sure ain't vim.](13/not_vim.png){width=45%}
 
 ### Laying out your App
 
@@ -169,7 +170,7 @@ To position a bunch of widgets on screen, we use a **layout** widget.
 For example, let's say we want to put a quit button above our text editor (in the same window of course).
 We can use a `QVBoxLayout` to **vertically** (hence the `V`) stack our widgets.
 
-![We can organize the widgets in our application by creating a vertical stack. First we add the button (to the top) then we add the text editor (beneath the button).](13/layout.png)
+![We can organize the widgets in our application by creating a vertical stack. First we add the button (to the top) then we add the text editor (beneath the button).](13/layout.png){width=45%}
 
 ~~~{.cpp .numberLines}
 // #includes left out for the sake of brevity
@@ -205,7 +206,7 @@ A couple of odd things to note:
 
 1. On line 7, the `&` tells Qt to set up a keyboard shortcut, \keys{\Alt + q}, that 'presses' the button.[^QShortcut]
 2. You may notice that on lines 6, 7, and 9, we allocate memory with `new` but never call `delete`.
-    Unlike normal C++ objects, Qt objects are written so that they clean up their children when they are destructed.
+    Unlike typical C++ objects, Qt objects are written so that they clean up their children when they are destructed.
     In this case, our `QTextEdit` and `QPushButton` are added as children to our `QVBoxLayout` object,
     and that layout object is added as a child to the `QWidget` created on line 13.
     This means that as long as we clean up that `QWidget`, all our other objects will get cleaned up automatically!
@@ -213,7 +214,7 @@ A couple of odd things to note:
 
 The rest is similar to the last example.
 With layouts, we have the ability to specify how we want our widgets organized on screen.
-In addition to vertical layouts there are horizontal layouts (`QBoxLayout`) and grid layouts (`QGridLayout`) and a handful of others.
+In addition to vertical layouts there are horizontal layouts (`QBoxLayout`), grid layouts (`QGridLayout`), and a handful of others.
 
 So, that's dandy...but our quit button doesn't actually do anything!
 To make our buttons work, we need to talk about Signals and Slots.
@@ -329,10 +330,10 @@ The `QMainWindow`  has one big ol' widget that goes in the middle of the window 
 `setCentralWidget()` is a member function of `QMainWindow` that sets this widget.
 
 To create your menus (File, Edit, whatever you want) you need to add them to your `QMainWindow`.
-`menuBar()` is a member function that returns a pointer to the menubar, which you can use to add new menus.
-Similarly, `addToolBar()` is a member function that  creates a new toolbars.
+It has a `menuBar()` member function that returns a pointer to the menubar, which you can use to add new menus.
+Similarly, there is an `addToolBar()` member function that creates a new toolbars.
 
-Since toolbar buttons and menu items do the same thing (fire an event when clicked), Qt represens them both as `QActions`.
+Since toolbar buttons and menu items do the same thing (fire an event when clicked), Qt represents them both as `QActions`.
 You can add the same `QAction` to both a menu and a toolbar --- so there's less code repetition as well!
 `QAction`s have a `triggered()` signal that is emitted whenever their menu item or button is clicked.
 
@@ -557,7 +558,7 @@ We define our signal in the `Notepad` class definition in `notepad.h`:
     void useFile(QString fileName);
 ~~~
 
-This tells Qt that the QButton is capable of hootin' and hollerin' about being clicked.
+This tells Qt that `Notepad` is capable of hootin' and hollerin' about files.
 `signals` is another keyword understood by moc.
 Unlike with slots, you do **not** implement the signal function --- you just have to declare it.
 
