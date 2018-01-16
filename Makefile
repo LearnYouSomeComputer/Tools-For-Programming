@@ -17,28 +17,30 @@ MD_PIECES = 00-FrontMatter.md	\
 
 EXTENSIONS = raw_tex+fenced_code_attributes
 
+TITLE = tools-for-computer-scientists
+
 # Runs every time `make` is called;
 # check to see whether the index has become dirty!
 DIRTY := $(shell ./dirty.sh)
 
 .PHONY: all tex dirty
 
-all: cs1001_prelab.pdf
+all: ${TITLE}.pdf
 
-tex: cs1001_prelab.tex
+tex: ${TITLE}.tex
 
 quick: tex
-	xelatex cs1001_prelab.tex
+	xelatex ${TITLE}.tex
 
-book: cs1001_prelab.pdf
-	pdfbook --short-edge --letterpaper cs1001_prelab.pdf
+book: ${TITLE}.pdf
+	pdfbook --short-edge --letterpaper ${TITLE}.pdf
 	@echo -e "\n\nDone! Be sure to print that bad-boy using short-edge duplexing."
 
-cs1001_prelab.pdf: ${MD_PIECES} template.tex .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output cs1001_prelab.pdf ${MD_PIECES}
+${TITLE}.pdf: ${MD_PIECES} template.tex .commit-info.tex
+	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output ${TITLE}.pdf ${MD_PIECES}
 
-cs1001_prelab.tex: ${MD_PIECES} template.tex .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --standalone --from markdown+${EXTENSIONS} --output cs1001_prelab.tex ${MD_PIECES}
+${TITLE}.tex: ${MD_PIECES} template.tex .commit-info.tex
+	pandoc --latex-engine=xelatex --template=template.tex --standalone --from markdown+${EXTENSIONS} --output ${TITLE}.tex ${MD_PIECES}
 
 %.pdf: 00-FrontMatter.md %*.md .commit-info.tex
 	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output $@ $(filter %.md, $^)

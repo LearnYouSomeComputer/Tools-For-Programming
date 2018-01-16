@@ -185,7 +185,7 @@ Name: `______________________________`
   Try changing to your linuxhome directory (i.e., `cd ~`).
   Otherwise you’ll be waiting *all day* for Code::Blocks to open up.
 - If Code::Blocks doesn't let you navigate to your cloned repository, you can find it by going the long way.
-  You can find your SDRIVE by going to its absolute path: `/nethome/users/<username>/cs1001/lab09/` (or whatever you call your repository.)
+  You can find your SDRIVE by going to its absolute path: `/nethome/users/<username>/cs1585/lab09/` (or whatever you call your repository.)
 
 ### Building with Code::Blocks
 
