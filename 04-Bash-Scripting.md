@@ -72,7 +72,7 @@ To determine whether a command succeeded or failed, you can check the `$?` varia
 Traditionally, a value of `0` indicates success, and a non-zero value indicates failure.
 Some programs may use different return values to indicate different types of failures; consult the man page for a program to see how it behaves.
 
-For example, if you run `g++` on a file that doesn't exist, g++ returns `1`:
+For example, if you run `g++` on a file that doesn't exist, `g++` returns `1`:
 ```
 $ g++ no-such-file.cpp
 g++: error: no-such-file.cpp: No such file or directory
@@ -84,7 +84,7 @@ $ echo $?
 
 Bash also provides variables holding the command-line arguments passed to the script.
 A command-line argument is something that you type after the command; for instance, in the command `ls /tmp`, `/tmp` is the first argument passed to `ls`.
-The name of the command that started the script is stored in `$0`. This is almost always just the name of the script.[^symlinks]
+The name of the command that started the script is stored in `$0`. This is (almost) always just the name of the script.[^symlinks]
 The variables `$1` through `$9` contain the first through ninth command line arguments, respectively.
 To get the 10th argument, you have to write `${10}`, and likewise for higher argument numbers.
 
@@ -135,14 +135,12 @@ Here's an example of how to write `if` statements in Bash:
 
 # Emit the appropriate greeting for various people
 
-if [[ $1 = "Jeff" ]]; then
+if [[ "$1" = "Jeff" ]]; then
 	echo "Hi, Jeff"
-elif [[ $1 == "Maggie" ]]; then
-	echo "Hello, Maggie"
-elif [[ $1 == *.txt ]]; then
-	echo "You’re a text file, $1"
-elif [ "$1" = "Stallman" ]; then
+elif [[ "$1" == "Stallman" ]]; then
 	echo "FREEDOM!"
+elif [[ "$1" == *.txt ]]; then
+	echo "You’re a text file, $1"
 else
 	echo "Who in blazes are you?"
 fi
@@ -163,8 +161,7 @@ Comparing Strings:
 - `!=` means either:
 	- String inequality, if both operands are strings, or
 	- Glob fails to match, if the RHS is a glob.
-- `<`: The LHS sorts before the RHS.
-- `>`: The LHS sorts after the RHS.
+- `<` / `>`: The LHS lexicographically[^lexicographically] compares as less than / greater than the RHS.
 - `-n`: The string is not empty (e.g., `[[ -n "$var" ]]`).
 - `-z`: The string is empty (length is zero).
 
@@ -204,7 +201,7 @@ if [[ -f "$1" ]]; then
 elif [[ -d "$1" ]]; then
 	ls "$1"
 else
-	echo "I don't know what to do with $1!";
+	echo "I don't know what to do with $1!"
 fi
 ```
 
@@ -365,7 +362,7 @@ If you need a counting for loop (C-style loop), you can get one of those with `(
 #!/bin/bash
 
 for (( i=1; i < 9; i++ )); do
-    echo $i;
+    echo $i
 done
 ```
 
@@ -467,6 +464,8 @@ You can scope variables to functions with the `local` builtin; run `help local` 
 
 ### Tips
 
+Bash contains a help system for its built-in commands: `help pushd` tells you information about the `pushd` command.
+
 To write a literal `\` , `` ` ``, `$`, `"`, `'`, or `#`, escape it with `\`; for instance, `"\$"` gives a literal `$`.
 
 When writing scripts, sometimes you will want to change directories --- for instance, maybe you want to write some temporary files in `/tmp`.
@@ -506,8 +505,6 @@ $ dirs
 
 Putting `set -u` at the top of your script will give you an error if you try to use a variable without setting it first.
 This is particularly handy if you make a typo; for example, `rm -r $delete_mee/*` will call `rm -r /*` if you haven't set `$delete_mee`!
-
-Bash contains a help system for its built-in commands: `help pushd` tells you information about the `pushd` command.
 
 ### Customizing Bash
 
@@ -574,13 +571,13 @@ See `help variables` for a list of knobs and dials you can fiddle with.
 ## Questions
 Name: `______________________________`
 
-1. What does the `let` builtin do?
+1. In your own words, what is the difference between `g++ $file` and `g++ "$file"`?
 \vspace{10em}
 
-2. Write a script that prints "fizz" if the first argument is divisible by 3, "buzz" if it is divisible by 5, and "fizzbuzz" if it is divisible by both 3 and 5.[^interview]
-\vspace{20em}
+2. Write a script that prints "directory" if the first argument is a directory and "file" if the first argument is a file.
+\vspace{15em}
 
-3. Write a script that prints "directory" if the first argument is a directory and "file" if the first argument is a file.
+3. Write a script that prints "fizz" if the first argument is divisible by 3, "buzz" if it is divisible by 5, and "fizzbuzz" if it is divisible by both 3 and 5.[^interview]
 \newpage
 
 ## Quick Reference
@@ -597,8 +594,7 @@ Comparing Strings:
 - `!=` means either:
 	- String inequality, if both operands are strings, or
 	- Glob fails to match, if the RHS is a glob.
-- `<`: The LHS sorts before the RHS.
-- `>`: The LHS sorts after the RHS.
+- `<`/`>`: The LHS lexicographically compares less than / greater than the RHS.
 - `-n`: The string is not empty (e.g., `[[ -n "$var" ]]`).
 - `-z`: The string is empty (length is zero).
 
@@ -698,3 +694,4 @@ In this book, we'll use `[[ ]]` because it has fewer gotchas.
 [^javascript2]: If you know some JavaScript you might be familiar with the problem of too-permissive operators:
 in JS, `"4" + 1 == "41"`, but `"4" - 1 == 3`.
 [^interview]: Also, why do so many people ask this as an interview question!?
+[^lexicographically]: I.e., how [`strcmp()`](http://www.cplusplus.com/reference/cstring/strcmp/) sorts strings: `LHS < RHS` if and only if `strcmp(LHS, RHS) < 0`.
