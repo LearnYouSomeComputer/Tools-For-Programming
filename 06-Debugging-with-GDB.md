@@ -13,7 +13,7 @@ Steal a quick bagel for breakfast.
 Rob a bank...[^escalation]
 
 It was all fun up to this point.
-But now you're here: standing in front of at an array of red-hot lasers, trapped in the vault of the Big Bank of New York, wondering where it all went wrong, and wearing a fancy turtle neck.
+But now you're here: standing in front of an array of red-hot lasers, trapped in the vault of the Big Bank of New York, wondering where it all went wrong, and wearing a fancy turtle neck.
 At least you look good in a turtle neck.
 Not everyone can pull that off.
 
