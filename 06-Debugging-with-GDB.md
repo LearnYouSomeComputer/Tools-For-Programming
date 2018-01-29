@@ -173,7 +173,7 @@ Why do you think it's broken?
 What fixes did you try?
 
 (This may seem foolish, but this technique once revealed to me that I had been debugging code
-for an hour under the misapprehension that 9 was a prime number.
+for an hour under the misapprehension that 9 was a prime number.[^statistically]
 You'd be amazed at the things you don't realize until you think about how to explain something
 to someone else.)
 
@@ -293,7 +293,7 @@ For example, if your code segfaults, it'll print something like
 
 ~~~
 Program received signal SIGSEGV, Segmentation fault.
-0x0000555555554923 in pretty_print (array=...) at segfault.cpp:14
+0x555555554923 in pretty_print (array=...) at segfault.cpp:14
 14    cout << array.elements[i] << ", ";
 ~~~
 
@@ -317,8 +317,8 @@ you can use the `backtrace` (or `bt` for short) command to ask `gdb` where you c
 
 ~~~
 (gdb) bt
-#0  0x0000555555554923 in pretty_print (array=...) at segfault.cpp:14
-#1  0x00005555555549b3 in main () at segfault.cpp:24
+#0  0x555555554923 in pretty_print (array=...) at segfault.cpp:14
+#1  0x5555555549b3 in main () at segfault.cpp:24
 ~~~
 
 The backtrace shows you the function stack: starting from `main()`,
@@ -372,9 +372,10 @@ the next (`main`) is numbered `1`, and so on.
 `up` increments the number of the selected stack frame; `down` decrements it.
 
 So, for example, to move to `main`'s stack frame, we'd do:
+
 ~~~
 (gdb) up
-#1  0x00005555555549b3 in main () at segfault.cpp:24
+#1  0x5555555549b3 in main () at segfault.cpp:24
 24	  pretty_print(stuff);
 ~~~
 
@@ -469,15 +470,15 @@ Breakpoint 2 at 0x555555554b05: file guess.cpp, line 17.
 (gdb) break 19
 Breakpoint 3 at 0x555555554ba0: file guess.cpp, line 19.
 (gdb) info breakpoints
-Num Type       Disp Enb Address            What
-1   breakpoint keep y   0x0000555555554af6 at guess.cpp:15
-2   breakpoint keep y   0x0000555555554b05 at guess.cpp:17
-3   breakpoint keep y   0x0000555555554ba0 at guess.cpp:19
+Num Type       Disp Enb Address        What
+1   breakpoint keep y   0x555555554af6 at guess.cpp:15
+2   breakpoint keep y   0x555555554b05 at guess.cpp:17
+3   breakpoint keep y   0x555555554ba0 at guess.cpp:19
 (gdb) delete 2
 (gdb) info breakpoints
-Num Type       Disp Enb Address            What
-1   breakpoint keep y   0x0000555555554af6 at guess.cpp:15
-3   breakpoint keep y   0x0000555555554ba0 at guess.cpp:19
+Num Type       Disp Enb Address        What
+1   breakpoint keep y   0x555555554af6 at guess.cpp:15
+3   breakpoint keep y   0x555555554ba0 at guess.cpp:19
 ~~~
 
 #### Stepping through the code
@@ -639,7 +640,7 @@ Name: `______________________________`
 2. How would you set a breakpoint for line 17 of file `my_funcs.cpp`?
 \vspace{10em}
 
-3. Consult `help list`. How would you list the source code of the `encabulate_beziers` function?
+3. Consult `help list`. How would you list the source code of a function named `encabulate_beziers`?
 \vspace{10em}
 
 4. What is the difference between `break` and `advance`?
@@ -701,3 +702,4 @@ Name: `______________________________`
 [^dont]: Don't actually do this, though.
     We're just demonstrating how you'd pass command line arguments.
 [^picture]: Well, a picture of her. The publisher wouldn't let us include a live chicken tucked between the pages of the book.
+[^statistically]: In my defense, odd numbers between 2 and 10 have a 75% chance of being prime, so I was statistically correct!
