@@ -2,11 +2,11 @@
 
 ## Motivation
 
-Wow. You've made it six chapters through this book. And probably some appendices too. And yet you have made not one sandwich. Not one!
+Wow. You've made it four chapters through this book. And probably some appendices too. And yet you have made not one sandwich. Not one!
 
 Let's fix that. Time for a classic pastrami on rye.
 You go to fetch ingredients from the refrigerator, but alas! It is empty.
-Someone else has been eating all your sandwiches while you were engrossed in regular expressions.
+Someone else has been eating all your sandwiches while you were engrossed by a thorny bash script.
 
 You hop on your velocipede[^bike] and pedal down to the local bodega only to discover that they, too, are out of sandwich fixin's.
 Just as you feared --- you are left with no choice other than to derive a sandwich from first principles.
@@ -134,7 +134,7 @@ Of course, doing all this by hand would be awful...which is why we have `make`!
 When you run `make`, it looks for a file named `Makefile` or `makefile` in the current directory for a recipe for building your code.
 The contents of your `makefile` determine what gets made and how.
 
-Most of what goes in a `makefile` are *targets*: the names of files you want to create.
+Most of what goes in a `makefile` are **targets**: the names of files you want to create.
 Along with each target goes one or more commands that, when run, create the target file.
 
 For example, let's say you want to build an executable named `program` by compiling all the C`++` files in the current directory.
@@ -220,7 +220,7 @@ However, `make` expects targets to generate files, so if you make a target named
 it's possible for `make` to get a little confused.
 You don't want to generate any new files, and you don't want to lie to `make` because you're an honest upstanding citizen.
 
-Fortunately, `make` supports targets that don't produce files through something called *phony targets*.
+Fortunately, `make` supports targets that don't produce files through something called **phony targets**.
 You can tell `make`, "Hey, this target doesn't actually produce a file; just run the commands listed here whenever I ask you to build this target,"
 and `make` will be like, "Sure thing, boss! Look at me, not being confused at all about why there's no file named `clean`!"
 
