@@ -68,7 +68,7 @@ We say it's local because it's stored locally --- in a place where you can acces
 
 When you work with a local Git repository, you will:
 
-- **ask Git to track** of changes to files.
+- **ask Git to track** changes to files.
   Git *does not* automatically track files.
   You have to tell it to track stuff.
 - **ask Git to take snapshots** of the files in your repository.
@@ -99,7 +99,7 @@ An empty repository will contain no files and an empty timeline (with no snapsho
 Try the following to create your own, empty repository on GitLab:
 
 1. Log in to [https://git-classes.mst.edu/](https://git-classes.mst.edu/) using your Single Sign-On credentials.
-2. Click the `+` (New Project) button in the upper right to create a new repository on GitLab.
+2. Click the `+` (New Project) button in the middle of the top bar to create a new repository on GitLab.
 3. Under Project Name, give your project a good name. Let's call it `my-fancy-project`.
     - You can enter a description if you like, or you can leave it blank.
     - Make sure your repository's visibility is set to Private.
@@ -110,7 +110,7 @@ Now that you've created your repository, it's ready for you to start working.
 Let's try cloning the remote repository into a local repository.
 
 1. Look for the "Create a new repository" section and copy the command that starts with `git clone https://...my-fancy-project.git`
-2. Connect to a campus Linux machine using PuTTY and paste that command in your bash shell.
+2. Connect to a campus Linux machine and paste that command in your bash shell.
 3. Press enter, and type in your username and password when prompted.
 4. Run `ls`. You should see that a folder called `my-fancy-project` was created in your current working directory.
 5. Use `cd` to enter your freshly cloned repository.
@@ -844,6 +844,7 @@ Name: `______________________________`
 - [The Git Book](https://git-scm.com/book/en/v2)
 - [Git Branching Tutorial](http://learngitbranching.js.org/)
 - [GitHub's Git Tutorial](https://try.github.io/levels/1/challenges/1)
+- [Advice on writing good commit messages](https://chris.beams.io/posts/git-commit/)
 
 [^open]: Now open them again, because it's hard to read with your eyes shut.
 [^next-big-thing]: This is your daydream, friend. I have no idea what this program is or does.
