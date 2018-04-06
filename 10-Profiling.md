@@ -392,60 +392,66 @@ Instead of going fame-by-frame,[^movie] we're going instruction-by-instruction.
 Tools built using Valgrind can see *every single instruction* that is run by a program.
 This level of detail can be very powerful, but it can also be pretty slow.
 
-Let's consider our program from the `gprof` section, but let's use ten thousand iterations for each for-loop instead of two billion.[^all-day]
-This time when we compile it, we need to pass the `-g` flag instead of `-pg`.[^g-pg]
+Let's consider our program from the `gperftool` section.
+This time when we compile it, we just need to pass the `-g` flag; no need for `-lprofiler`!
 Then we'll run our program through `callgrind` as shown.
 
 ~~~shell
-# -g this time! NOT -pg
-$ g++ -g -o main main.cpp
-$ valgrind --tool=callgrind ./main
+$ g++ -g -o fibonnaci fibonnaci.cpp
+$ valgrind --tool=callgrind ./fibonnaci
 ~~~
 
-Like `gprof`, callgrind will generate a data file for us.
-However, the output file does not always have the same name.
-Each `callgrind.out.NNNN` file is named according to its process ID.
-When we use `callgrind_annotate` to view the profile information, we need to make sure we pass the right `callgrind.out.NNNN`.
+Like `gperftool`, callgrind will generate a data file for us.
+The output file does not always have the same name; each `callgrind.out.NNNN` file is named according to its process ID.
+When we use `kcachegrind` to view the profile information, we need to make sure we pass the right `callgrind.out.NNNN`.
+Unlike `gperftool`, `callgrind` outputs a file that `kcachegrind` can read.
 
 ~~~shell
-# Be careful! The process ID (31147 in this case) will change!
-# Run `ls` to check the name of your callgrind output file.
-$ callgrind_annotate --auto=yes callgrind.out.31147
+$ ls
+callgrind.out.2653    fibonnaci    fibonnaci.cpp
+$ kcachegrind callgrind.out.2653
 ~~~
 
-In its output, `callgrind_annotate` will show you how many CPU instructions were run for each line of code.
-Let's have a look at the annotated source for `main`.
+The first thing you'll notice is that there are a lot more things in the flat profile!
+Callgrind truly does monitor *everything*.
+Fortunately, there is a way to display only relevant information.
+In the top right-hand corner of the flat profile, there is a drop-down which should read `(No Grouping)` right now.
+Here you can group by "ELF object" --- the executable or library where the function is stored, source file, or C++ class.
 
-~~~
-.      int main(void)
-3      {
-16         cout << "Inside main" << endl;
-8,991  => ???:std::ostream::operator<<(std::ostream& (*)(std::ost...
-2,425  => /build/eglibc-SvCtMH/eglibc-2.19/elf/../sysdeps/x86_64/...
-4,735  => ???:std::basic_ostream<char, std::char_traits<char> >& ...
-.
-30,004     for (int i = 0; i < 10000; i++) {
-.          }
-.
-1          func1();
-61,383 => main.cpp:func1() (1x)
-1          func2();
-30,672 => main.cpp:func2() (1x)
-.
-1          return 0;
-20     }
-~~~
+We'll group by source file.
+A second listing will appear, allowing you to choose which functions should be displayed based on the file they're defined in.
+Make sure `fibonnaci.cpp` is selected in the list.
+
+Also, we'll switch to Relative counts (using the button on the toolbar at the top of the window) since the instruction counts are quite large.
+
+![Callgrind Flat Profile](10/callgrind-flat-profile.png){width=80%}
+
+You may have noticed that the entries in the **Called** column match exactly what we'd expect from the program!
+Each of `do_iterative` and `do_recursive` are called once, and `fib_iterative` is called 200,000 times.
+`fib_recursive` has two entries: `fib_recursive` and `fib_recursive'2`.
+The first entry counts the number of calls from another function to `fib_recursive`, and the second counts the number of calls from `fib_recursive` to itself.
+We can see that 200 calls to `fib_recursive` generates over 4 million recursive steps!
+
+Furthermore, we can see that about 60% of the execution time was spent in `do_recursive` and its children and the remaining 40% in `do_iterative` and its children.
+
+The call graph reads the same as it does for `gperftool`, except the call counts along each edge are exact!
+
+Callgrind measures the number of CPU instructions executed by each line of code.
+We can see these counts in the Source Code view!
+First, we'll want to switch from relative back to absolute counts.
+Then, let's select `do_recursive` in the Flat Profile and examine its source code.
+
+![`do_recursive` Source Code view](10/callgrind-source.png)
 
 Let's break this down a bit:
 
-- We spend 16 CPU instructions printing `"Inside main"` to the console.
-  In reality, though, those 16 instructions simply make calls to other functions thanks to `cout` and the `<<` operator.
-  We actually spend 16 + 8,991 + 2,425 + 4,735 instructions printing to the console if you count the functions that we called.
-- We spent a total of 30,004 CPU instructions instantiating an int called `i`, checking that it's less than 10,000, and incrementing it.
-  All 30,004 of those instructions were used to perform the loop initialization, check, and post-loop actions.
-  Zero instructions were used in the body of the for-loop.
-- It took 1 CPU instruction to call `func1` one time (`1x`), but running `func1` used 61,383 instructions.
-- It took 1 CPU instruction to call `func2` one time (`1x`), but running `func2` used 30,672 instructions.
+- We spend 4 instructions setting up the function --- allocating memory for variables &c.
+- We spend 4 instructions printing "Recursive: " to the screen.
+    However, those 4 instructions really just measure the instructions it takes to call `operator<<`; that call takes a total of 305 instructions.
+    So overall we spend 309 instructions printing out that line.
+- A total of 1004 instructions are spent on the `for` loop itself.
+- Inside the `for` loop, we spend 600 instructions (3 per iteration) setting up the call to `fib_recursive`
+    and 74 million instructions actually computing Fibonnaci numbers.
 
 As you can see, `callgrind` gives us different details that `gprof` cannot.
 Based on where you run the most instructions, you can identify parts of your code that may need to be rewritten.
@@ -780,8 +786,6 @@ Name: `______________________________`
 [^literal]: They're literally glasses with rose-colored lenses. It's not a metaphor or any such nonsense.
 [^io]: Input/Output
 [^movie]: Since we're talking about programs... not movies.
-[^all-day]: Otherwise we'll be waiting all day for callgrind to do its thing.
-[^g-pg]: Uh... T.D.A. 2 is rated PG for Pretty Good.
 [^yay]: Yay!
 [^four]: 4 (four)
 [^stats]: Or if you really feel like being pedantic, you can throw a litany of statistical tests at it instead...
