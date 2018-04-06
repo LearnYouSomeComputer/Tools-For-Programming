@@ -117,8 +117,9 @@ System time
 In order to use it, just throw `time` in front of the program you want to run.
 It doesn't care if the program has command line arguments.
 
-~~~
-# If we want to see how long it takes to list the files in /tmp
+If we want to see how long it takes to list the files in /tmp:
+
+~~~shell
 $ time ls /tmp
 time ls -a /tmp
 .    ..
@@ -126,8 +127,11 @@ time ls -a /tmp
 real    0m0.004s
 user    0m0.001s
 sys     0m0.002s
+~~~
 
-# If we wanted to time a hello world program...
+If we wanted to time a hello world program:
+
+~~~shell
 $ g++ -o hello hello.cpp
 $ time ./hello
 ~~~
@@ -137,129 +141,182 @@ If you just want to see how long it takes your program to run, this is fine.
 However, if you want to compare the runtime of two programs --- say you make a change to your code and want to see
 if it sped up the program's execution or not --- you should measure its execution time a few times and average them.[^stats]
 
-### Profiling with `gprof`
+### Profiling with `gperftool`
 
 Although `time` is handy for determining run times, it doesn't give you any indication about which parts of your programs are slow and which parts are fast.
-However, `gprof` can do that for you!
-`gprof` samples your program as it runs to tell you how much time you're spending in each function.
-We'll discuss two different profiles that are included in `gprof`'s output: flat profiles and call graphs.
-
+However, `gperftool` can do that for you.
+`gperftool` samples your program (by default, 100 times per second) as it runs to tell you how much time you're spending in function calls.
+We'll use `kcachegrind` to display `gperftool`'s output in a GUI and discuss what its results mean.
 
 First, let's look at an example program.
-In this program, we have a few different functions.
-Each one has a for-loop that just wastes time for the sake of example.
+In this program, we have a few different functions:
+- Two different methods for computing the $n^{th}$ Fibonnaci number (`fib_iterative` and `fib_recursive`)
+- Two functions that repeatedly compute the $20^{th}$ Fibonnaci number (`do_iterative` and `do_recursive`)
+- `main`, which calls `fib_iterative` 200,000 times and `fib_recursive` 200 times
 
 ~~~{.cpp .numberLines}
 #include <iostream>
 using namespace std;
 
-void new_func1()
+long fib_iterative(const long n)
 {
-    cout << "Inside new_func1" << endl;
-    for (int i = 0; i < 2000000000; i++)
-    {
-    }
-    return;
+  long fib = 1;
+  long prev_fib = 0;
+
+  for(long i = 0; i < n; i++)
+  {
+    long tmp = fib;
+    fib += prev_fib;
+    prev_fib = tmp;
+  }
+
+  return fib;
 }
 
-void func1()
+void do_iterative(const int count)
 {
-    cout << "Inside func1" << endl;
-    for (int i = 0; i < 2000000000; i++)
-    {
-    }
-    new_func1();
-    return;
+  volatile long fib;
+  cout << "Iterative: ";
+  for(int i = 0; i < count; i++)
+    fib = fib_iterative(20);
+  cout << fib << endl;
 }
 
-void func2()
+long fib_recursive(const long n)
 {
-    cout << "Inside func2" << endl;
-    for (int i = 0; i < 2000000000; i++)
-    {
-    }
-    return;
+  if(n <= 1) return 1;
+  return fib_recursive(n-1) + fib_recursive(n-2);
 }
 
-int main(void)
+void do_recursive(const int count)
 {
-    cout << "Inside main" << endl;
-    for (int i = 0; i < 2000000000; i++)
-    {
-    }
-    func1();
-    func2();
-    return 0;
+  volatile long fib;
+  cout << "Recursive: ";
+  for(int i = 0; i < count; i++)
+    fib = fib_recursive(20);
+  cout << fib << endl;
+}
+
+int main()
+{
+  const int count = 200;
+
+  do_iterative(count * 1000);
+
+  do_recursive(count);
+  return 0;
 }
 ~~~
 
-In order to use `gprof` we have to pass an additional flag to `g++`.
-The `-pg` flag tells `g++` to record profile information whenever our compiled program runs.
-Each time you run your program it will generate a file called `gmon.out` which contains
-information that can then be interpreted by the `gprof` command.
+In order to use `gperftool`, we have to link its library with our code using the `-lprofiler` flag.
+We'll also want to use the `-g` flag so that `kcachegrind` can show us our source code when we're viewing our profiling output!
 
 Let's compile the program above.
-We'll assume it's called `main.cpp`.
+We'll assume it's called `fibonnaci.cpp`.
 
 ~~~shell
 $ ls
-main.cpp
-$ g++ -pg -o main main.cpp
+fibonnaci.cpp
+$ g++ -g -lprofiler -o  fibonnaci.cpp
 $ ls
-main    main.cpp
+fibonnaci    fibonnaci.cpp
 ~~~
 
-In order to generate `gmon.out`, we need to run `main`.
+By default, `gperftool` doesn't do anything when you execute your program.
+To get it to profile your code, you will need to set an environment variable, `CPUPROFILE`, to the name of the file where you want to store your profile output.
+We'll store ours in a file named `gperftool.prof`:
 
 ~~~shell
+$ CPUPROFILE=gperftool.prof ./fibonnaci
+Iterative: 10946
+Recursive: 10946
+PROFILE: interrupts/evictions/bytes = 4/0/608
 $ ls
-main    main.cpp
-$ ./main
-Inside main
-Inside func1
-Inside new_func1
-Inside func2
-$ ls
-gmon.out    main    main.cpp
+fibonnaci    fibonnaci.cpp    gperftool.prof
 ~~~
 
-Now that we have `gmon.out`, we can ask `gprof` to show us the profile.
+Now that we have `gperftool.prof`, we will use a program called `pprof` to turn this data into something `kcachegrind` can understand.
+`pprof` needs to know both the executable you ran (`./fibonnaci`) and the file holding `gperftool`'s profile output (`gperftool.prof`).
+We'll store this in a file named `gperftool.out`:
 
 ~~~shell
-$ gprof main
+$ pprof --callgrind ./fibonnaci gperftool.prof > gperftool.out
 ~~~
+
+Last but not least, open `gperftool.out` in `kcachegrind`:[^X11-dont-forget]
+
+~~~shell
+$ kcachegrind gperftool.out
+~~~
+
+To review, to use `gperftool`, you need to do the following:
+
+1. Link the profiler library into your program with `-lprofiler` and enable debug information with `-g`
+2. Run your program with the `CPUPROFILE` environment variable set to the name of the profiler output file
+3. Use `pprof` to convert the profiler output file into a format `kcachegrind` understands
+4. Use `kcachegrind` to visualize your output!
+
+### Using `kcachegrind` to Interpret `gperftool` Statistics
+
+When you open `kcachegrind`, you will see three panes.
+On the left is the **flat profile**, which shows a list of functions and statistics about them.
+On the bottom right is the **call graph** --- a directed graph showing what functions each function calls.
+
+On the top right is the **source code viewer**, which displays the source code for the currently selected function.
+Click on a function in the flat profile or call graph to change what code displays in the viewer.
+
+Across the top is a toolbar; of note are the **Relative** and **Shorten Templates** options.
+Relative converts counts to percentages; this is handy when working with large numbers
+that are hard to compare visually.
+Shorten Templates is useful when working with code that uses lots of templates.
+We'll see it used later on in the chapter.
 
 #### The Flat Profile
 
-Whenever you run `gprof`, you'll see a flat profile at the top followed by a call graph.
-In its output, `gprof` includes detailed documentation to help you better understand what you see.
-For the flat profile, it describes the sampling procedure and explains the meaning of each column.
-The same documentation can be found in the Further Reading section below.
+The flat profile for our Fibonnaci function should look something like this:
 
-For our above program, we see the following **flat profile**:
+![Flat Profile](10/gperftool-flat-profile.png){width=80%}
+
+The **Function** and **Location** columns indicate the function name and the file wherein
+the function was declared.
+Hopefully those are pretty straightforward...now for the remainder!
+
+First, the **Self** column.
+This is the number of times this function was executing when `gperftool` took a snapshot of your program's execution.
+Here we can see that we took 4 snapshots; in 3 of them, `fib_recursive` was running.
+
+The **Incl.** ('Inclusive') column shows the number of times this function or a function it called was executing
+at the time of a snapshot.
+Naturally, a function called by `main` was executing in each of the 4 samples.
+Likewise, `do_recursive` calls `fib_recursive`, so it shows up in 3 of the samples.
+
+Finally, the **Called** column indicates the number of times this function appears in a backtrace across all samples.
+(`main` is a special case --- **called** is meant to measure the number of times a function is called; as far as we are concerned,
+ `main` "spontaneously" begins executing, so it has a called count of 0.)
+Usually this is the same as **Incl.** except in the case where the function is recursive. <!-- TODO is this correct? -->
+
+So, in our example, `do_recursive` appears a total of 3 times in the backtraces taken at each sample.
+(Recall, though, that we only called `do_recursive` once; **called** is a best guess at the call count, not an exact measure.)
+This is all well and good.
+However, `fib_recursive` appears a total of 47 times! How does this work?
+
+Let's make an example backtrace that `gperftool` would see when taking a snapshot.
+We'll write it the way `gdb` would display it:
 
 ~~~
-  %   cumulative   self              self     total
- time   seconds   seconds    calls   s/call   s/call  name
- 26.11      5.61     5.61                             main
- 24.99     10.98     5.37        1     5.37     5.37  new_func1()
- 24.94     16.34     5.36        1     5.36    10.73  func1()
- 24.89     21.69     5.35        1     5.35     5.35  func2()
+#1 fib_recursive(n=17)
+#2 fib_recursive(n=18)
+#3 fib_recursive(n=19)
+#4 fib_recursive(n=20)
+#5 do_recursive(count=200)
+#6 main()
 ~~~
 
-When your program runs, it makes a note in `gmon.out` of the function name...
+For this snapshot, `gperftool` would add 1 to the **called** count for `do_recursive`, but 4 to the **called** count for `fib_recursive`.
 
-- Every time a function is called.
-  This ensures that our function call counts are exact.
-- Every 0.01 seconds.
-  This gives us a rough idea as to how much time we're spending in each function.
-  These are referred to as "samples".
-
-You can see in the profile that `main`, `new_func1`, `func1`, and `func2` were each called one time, and we spent roughly 25% of our time in each one.
-That makes sense to see, given that each of those functions wastes time using the same kind of for-loop (one with two billion iterations).
-
-The functions are sorted by the amount of time spent running in each.
-That is, the function with the most samples is the one we spent the most time in.
+If you've got a slow program, looking at the **Incl.** column will tell you where it's spending most of its time.
+You can then look into how those "expensive" functions are implemented and see if you can speed them (or a function they call) up.
+The **Called** column will also show you at a glance whether you've got some out-of-control recursion going on!
 
 The columns shown contain the following information:
 
@@ -272,63 +329,60 @@ The columns shown contain the following information:
 
 #### The Call Graph
 
-In addition to the Flat Profile, `gprof` shows you a Call Graph.
+In addition to the Flat Profile, `kcachegrind` shows you a Call Graph.
 The Call Graph goes one step further than the Flat Profile by showing you how much time you spent running a function and its children.
-Again, `gprof` will display a bunch of documentation for interpreting the Call Graph, and that same information is linked in the Further Reading section below.
 
-For our program above, we see the following Call Graph:
+![Call Graph, focused on `main`](10/gperftool-call-graph.png){width=80%}
 
-~~~
-index % time    self  children    called     name
-                                                 <spontaneous>
-[1]    100.0    5.57   16.17                 main [1]
-                5.41    5.35       1/1           func1() [2]
-                5.41    0.00       1/1           func2() [3]
------------------------------------------------
-                5.41    5.35       1/1           main [1]
-[2]     49.5    5.41    5.35       1         func1() [2]
-                5.35    0.00       1/1           new_func1() [4]
------------------------------------------------
-                5.41    0.00       1/1           main [1]
-[3]     24.9    5.41    0.00       1         func2() [3]
------------------------------------------------
-                5.35    0.00       1/1           func1() [2]
-[4]     24.6    5.35    0.00       1         new_func1() [4]
------------------------------------------------
-~~~
+The Call Graph provides information relative to the currently selected function in the Flat Profile.
 
-Let's start by making some observations about index `[1]`.
-The call graph shows...
+- Each function box is annotated with the number of measurements where it, or one of its children, was executing when the selected function was executing.
+    Thus, `main()` was executing in all four measurements and `do_iterative()` was executing in one of the four measurements where `main()` was executing.
+- Each arrow is annotated with the number of times the parent function called the child function while the selected function was executing.
+    Thus, `do_recursive()` called `fib_recursive()` three times, and `fib_recursive()` called itself forty times across all measurements.
 
-- we spent 100% of our time running `main`.
-  That makes sense, given that `main` is the entry point to our program.
-- we spent 5.57 seconds in `main`, 5.41 seconds in `func1`, and 5.41 seconds in `func2`.
-  These values agree, roughly, with our Flat Profile.
-- `func1` spent 5.35 seconds running its children functions.
-  This makes sense, because `func1` calls `new_func1`, which takes 5.35 seconds to run.
-- `main` spent 16.17 seconds on its children.
-  This makes sense because `func1` + `new_func1` + `func2` is roughly 16 seconds.
+Double-clicking on a function in the Call Graph or selecting it in the Flat Profile changes the perspective of the call graph.
+Functions are only shown if they called or were called by the selected function.
+This can help you narrow down an unwieldy call graph to show just the information relevant to the function you're interested in.
 
-As you can see, the Call Graph essentially breaks down how much time `main` spends running itself, as well as how much time it spends calling other functions.
-By accounting for these separately, you can better see where your time is going.
+![Call Graph, focused on `do_recursive`](10/gperftool-call-graph-2.png){width=40%}
 
-In the following entries, you can see more detail about where time is spent for functions other than `main`.
-Index `[2]`, for example, shows you the amount of time spent when `main` calls `func1`.
-The breakdown shows the amount of time spent running code in `func1`, as well as the amount of time running its only child: `new_func1`.
+Above the call graph is a set of tabs; of interest to us is the one marked **Source Code**.
+Since we've compiled with the `-g` flag, `gperftool` is able to annotate where each function was executing when it took its sample.
 
-Although this example does not demonstrate it, `gprof` has the ability to show you details for more complicated call graphs.
-For example, if both `func1` and `func2` called `new_func1`, `gprof` would show you how much time you're spending in `new_func1` when it's called by `func1` and when it's called by `func2`.
-If you have a situation where calling context changes its running time, you may find this extra information useful.
-Perhaps `new_func1` is very fast when `func1` calls it, but it's very slow when `func2` calls it.
-You could use this information as a clue to figure out why `new_func1` is sometimes slow.
+![Source Code](10/gperftool-source.png){width=80%}
+
+Here we see that `fib_recursive` was executing line 29 in one sample, line 31 in another, and line 32 in a third.
+(Lines 29 and 32 "executing" indicates that the function was in the process of setting itself up or cleaning up before returning.)
+We can also see that line 31 generated 40 calls to `fib_recursive`.
+
+Now, this is all well and good, you say, but c'mon! We're calling these functions thousands of times and all we get are four lousy samples?
+
+You can increase the sampling rate by setting the `CPUPROFILE_FREQUENCY` environment variable to the number of times per second it should take a measurement.
+So, to sample 1000 times a second, you could do the following:
+
+```
+$ CPUPROFILE=gperftool.prof CPUPROFILE_FREQUENCY=1000 ./fibonnaci
+```
+
+This, of course, still won't be exactly right, but it'll provide more detail and more accurate counts.
+
+You step out of your chair, take three menacing steps towards me, and begin pounding both your fists on the fourth wall.[^remember-movie]
+"What good is a computer if it can't produce exact counts?"
+
+You pound your fists again, harder.
+
+"GIVE ME THE EXACT CALL COUNTS!"
+
+Okay, buddy, relax, it's alright, we can do that. Just sit down and keep reading the book, okay?
 
 ### Profiling with `callgrind`
 
-`gprof`'s approach to take samples every 0.01 seconds works for many people when they're trying to identify slow spots in their code.
+`gperftool`'s approach to take 100 samples every second works for many people when they're trying to identify slow spots in their code.
 However, it is not perfect.
 
 Remember our film predicament?
-`gprof` is like looking at every 50th frame (checking every two seconds of film).
+`gperftool` is like looking at every 50th frame (checking every two seconds of film).
 It gives you a *good* idea of how much movie time we spend looking at Mr. St. Rumpterfrabble, but it's not perfect.
 If we take the time to go frame-by-frame, that's the most detailed we can possibly get.
 
@@ -732,6 +786,8 @@ Name: `______________________________`
 [^four]: 4 (four)
 [^stats]: Or if you really feel like being pedantic, you can throw a litany of statistical tests at it instead...
 but you probably only care about that if you're trying to do science.
+[^X11-dont-forget]: Don't forget to turn on X-forwarding if you haven't already!
+[^remember-movie]: We're doing a movie metaphor this chapter, remember?
 
 <!--  LocalWords:  profiler profilers gprof callgrind Rumpterfrabble
  -->
