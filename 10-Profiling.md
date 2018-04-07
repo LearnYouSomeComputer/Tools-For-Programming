@@ -466,36 +466,68 @@ However, there are profilers that are concerned with resources other than time.
 Instead of looking at program timing, `massif` looks at memory usage.
 The information that it gives you can be useful for identifying code that hogs memory unnecessarily.
 
-Since we're talking about memory, let's use a memory-oriented example.
+Since we're talking about memory, let's use two memory-oriented examples.
+We'll have one program, `list.cpp`, which uses a linked list to store Fibonnaci numbers during computation.
+Here's the implementation, minus the linked list:
 
-~~~cpp
-#include <iostream>
-#include <unistd.h>
+~~~ {.cpp .numberLines startFrom=41}
+List* fibonnacci(unsigned long n)
+{
+  List* fib = new List(1);
 
-using namespace std;
+  fib = fib->prepend(1);
+
+  for(unsigned long i = 2; i <= n; i++)
+  {
+    fib = fib->prepend(fib->number() + fib->next()->number());
+  }
+
+  return fib;
+}
 
 int main()
 {
-  // Allocate an array of arrays of chars
-  char** strings = new char*[10];
-  for(int i = 0; i < 10; i++)
+  List* fib = fibonnacci(2000);
+  List* iterator = fib;
+
+  while(iterator != NULL)
   {
-    strings[i] = new char[1000];
+    cout << iterator->number() << endl;
+    iterator = iterator->next();
   }
 
-  // Sleep (i.e., waste -- do nothing) for one second.
-  sleep(1);
-
-  // Deallocate everything
-  for(int i = 0; i < 10; i++)
-  {
-    delete[] strings[i];
-  }
-  delete[] strings;
-
+  delete fib;
   return 0;
 }
+~~~
 
+The other program, `vector.cpp`, does the same thing, but with a vector instead:
+
+~~~ {.cpp .numberLines startFrom=72}
+Vector fibonnaci(unsigned long n)
+{
+  Vector fib;
+
+  fib.push_back(1);
+  fib.push_back(1);
+
+  for(unsigned long i = 2; i <= n; i++)
+  {
+    fib.push_back(fib[i-1] + fib[i-2]);
+  }
+
+  return fib;
+}
+
+int main()
+{
+  Vector fib = fibonnaci(2000);
+
+  for(int i = 0; i < 2000; i++)
+  {
+    cout << fib[i] << endl;
+  }
+}
 ~~~
 
 When we compile this program, we'll need to use the same flags that we used when compiling for `callgrind`.
@@ -503,196 +535,155 @@ Then we can run the compiled program through `massif`.
 It's worth mentioning that `massif`, by default, is only concerned about watching memory on the heap.
 If you need to see information about the stack, you can use the `--stack=yes` flag.
 
-~~~shell
-# -g this time! NOT -pg
-$ g++ -g -o main main.cpp
-$ valgrind --tool=massif --time-unit=B ./main
+Also, `massif` uses seconds as its unit of time by default.
+While this makes sense, our program is *very* fast.
+Every single one of our allocations happens within one millisecond.
+That means that even if we use milliseconds as our `--time-unit`, all of the allocations happen (apparently) at the same time.
+If we use bytes as our time unit, the amount of memory allocated is a function of our memory operations (allocations and deallocations).
+This makes our plot look a lot saner.
+To do so, we'll pass `--time-unit=B` to `massif`.
+
+~~~
+$ g++ -g -o list list.cpp
+$ valgrind --tool=massif --time-unit=B ./list
 ~~~
 
-Like `callgrind`, we'll get a numbered output file with a name like `massif.out.NNNN` (where `NNNN` is the process ID).
-`ms_print` is the tool we use to get information from our data file.
+**Note:** For much of this book, we have gently steered you around dealing with C++ library innards.
+Sure, they might have shown up in a stack trace or profiling list, but for the most part we could just ignore them
+and go about our business without paying them any mind.
+Unfortunately, if we attempt the same with `massif`, the output we get will likely be ridiculously uninformative!
+If you see a big (about 75 KB) allocation coming from some file in `/usr/lib` in your output, you'll need to tell `massif` to ignore it.
+To do so, pick out the first function name that isn't `???` in the call stack for that big allocation; for you, it may be something like `_GLOBAL__sub_I_eh_alloc.cc`
+or `call_init.part.0`.
+For this example, we'll use `call_init.part.0`.
+You'll pass that in *two* flags to `massif`: `--alloc-fn` and `--ignore-fn`.
+(The first tells `massif` to treat that function like a memory allocation function; the second tells it to ignore allocations from that function.)
+So, you'd end up running the following command, instead of the one above:
 
-~~~shell
-# Be careful! The process ID (5029 in this case) will change!
-# Run `ls` to check the name of your massif output file.
-$ ms_print massif.out.5029
+~~~
+$ valgrind --tool=massif --time-unit=B --alloc-fn='call_init.part.0' --ignore-fn='call_init.part.0' ./list
+~~~
+
+Such is life. Remember, you have shell scripts and makefiles at your disposal! Use those to keep from having to type such an egregious command over and over.
+
+Like `callgrind`, we'll get a numbered output file with a name like `massif.out.NNNN` (where `NNNN` is the process ID).
+
+~~~
+$ ls
+list.cpp    list    massif.out.5029    vector.cpp
+~~~
+
+We'll visualize this using the `massif-visualizer` tool:
+
+~~~
+$ massif-visualizer massif.out.5029
 ~~~
 
 #### Reading the Memory Graph
 
-The output from `ms_print` starts off with a neat graph of memory usage drawn in ASCII.
-The Y-axis is the total amount of memory that your program has allocated on the heap.
-As you can see, our program allocates more and more memory (1000 bytes at a time actually) until it reaches its peak at 10,080 bytes.
-After that, we start deallocating memory until it reaches back to zero.
+Let's have a look at the memory allocation graph for the list example.
 
-So what's with the `@` and `#`?
+![Linked list memory allocation graph](10/list-graph.png){width=80%}
 
-- Columns drawn using `:` are plain snapshots.
-  They show how much is allocated on the heap at that time.
-- Columns drawn using `@` are detailed snapshots.
-  `massif` includes extra data in its tabular output for detailed snapshots.
-  We'll have a look at detailed snapshot here in a minute.
-- Columns drawn using `#` indicate the peak memory usage.
+The X-axis is time, in this case measured in total bytes allocated/deallocated.
 
-~~~
-    KB
-10.01^                                    ###
-     |                                    #
-     |                                ::::#  ::::
-     |                                :   #  :
-     |                            @@@@:   #  :   :::
-     |                            @   :   #  :   :
-     |                         :::@   :   #  :   :  ::::
-     |                         :  @   :   #  :   :  :
-     |                     :::::  @   :   #  :   :  :   :::
-     |                     :   :  @   :   #  :   :  :   :
-     |                  ::::   :  @   :   #  :   :  :   :  ::::
-     |                  :  :   :  @   :   #  :   :  :   :  :
-     |              :::::  :   :  @   :   #  :   :  :   :  :   :::
-     |              :   :  :   :  @   :   #  :   :  :   :  :   :
-     |           ::::   :  :   :  @   :   #  :   :  :   :  :   :  ::::
-     |           :  :   :  :   :  @   :   #  :   :  :   :  :   :  :
-     |       :::::  :   :  :   :  @   :   #  :   :  :   :  :   :  :   ::::
-     |       :   :  :   :  :   :  @   :   #  :   :  :   :  :   :  :   :
-     |   :::::   :  :   :  :   :  @   :   #  :   :  :   :  :   :  :   :   :::
-     |   :   :   :  :   :  :   :  @   :   #  :   :  :   :  :   :  :   :   :
-   0 +----------------------------------------------------------------------->KB
-     0                                                                   20.02
-~~~
+The Y-axis is the amount of memory that your program has allocated on the heap at a given time.
+As you can see, our program allocates more and more memory until it reaches its peak at 32.3 KB.
+After that, we deallocate memory, one list node at a time.
 
-The X-axis is time.
-You're probably wondering "why is time measured in bytes instead of seconds?"
-Well, actually, you can totally use seconds.
-Here's what that looks like:
+This plot contains two kinds of graph: the Total Cost Graph and the Detailed Cost Graphs.
+The display of these graphs can be toggled via buttons on the toolbar.
+The total cost graph shows the total memory consumption of your program.
+The detailed cost graphs break the memory consumption down based on where the memory was allocated.
+Hover your mouse cursor over different parts of the graph to see details.
 
-~~~
-    KB
-10.01^                   ::::::::::::::::::::::::::::::::::::::::::::::::::::#
-     |                   :                                                   #
-     |                   :                                                   #
-     |                   :                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-     |                   @                                                   #
-   0 +----------------------------------------------------------------------->s
-     0                                                                   1.366
-~~~
-
-Looks ridiculous, right?
-
-Our program is *very* fast.
-We allocate every single array within one millisecond.
-That means that even if we use milliseconds as our `--time-unit`, all of the allocations happen (apparently) at the same time.
-Additionally, we've got that `sleep(1)` in there, so our plot is stretched *way* out.
-By using bytes as our time unit, the amount of memory allocated is a function of our memory operations (allocations and deallocations).
-This makes our plot look a lot saner.
+In this graph we can see two places where our program allocated memory.
+Most of it is allocated by the linked list.
+Since linked lists allocate and free memory one node at a time, our allocation graph looks like a pyramid.
+The second portion (in green) is in `_IO_file_doallocate`.
+This is the output buffer for `cout`!
 
 #### Reading the Snapshot Table
 
 The memory graph is handy for getting a quick idea of how memory is allocated by your program.
-To give you more information about the memory snapshots, `ms_print` includes details in a table below the graph.
+To give you more information about the memory snapshots, `massif-visualizer` includes details in a table next to the graph.
 
-~~~
---------------------------------------------------------------------------------
-n        time(B)         total(B)   useful-heap(B) extra-heap(B)    stacks(B)
---------------------------------------------------------------------------------
-0              0                0                0             0            0
-1             88               88               80             8            0
-2          1,104            1,104            1,080            24            0
-3          2,120            2,120            2,080            40            0
-4          3,136            3,136            3,080            56            0
-5          4,152            4,152            4,080            72            0
-~~~
+![Linked list memory snapshots](10/list-snapshots.png){width=60%}
 
-Let's look at the `useful-heap` column.
+Snapshots are colored from green to red, with the reddest being the snapshot taken at peak memory usage.
+Most snapshots just record total memory usage and are plotted by the total cost graph.
+About every 10 snapshots, a detailed snapshot is taken which records which functions are responsible for the various memory allocations.
+These details are plotted in the detailed cost graphs.
 
-- We start with zero bytes allocated.
-  If we haven't allocated anything yet, the count should be zero.
-  Makes sense.
-- Our first allocation requires 80 bytes.
-  Given that our first allocation is for an array of 10 8-byte pointers (since this was run on a 64-bit computer), this seems sane.
-- The following allocations each cause our `useful-heap` to grow by 1,000 bytes at a time.
-  If you look at the for-loop in our program, every loop allocates 1,000 chars at 1 byte a piece.
-
-If you add the `useful-heap` and the `extra-heap` together, you achieve the `total` amount of memory allocated at that point.
-Since we're only allocating memory for the first half of the program, the time matches the `total` exactly.
-For a discussion of the `extra-heap` column, refer to `massif`'s documentation in the Further Reading section.
-The short version is that those bytes are "administrative."
-
-~~~
---------------------------------------------------------------------------------
-n        time(B)         total(B)   useful-heap(B) extra-heap(B)    stacks(B)
---------------------------------------------------------------------------------
-10          9,232            9,232            9,080           152            0
-11         10,248           10,248           10,080           168            0
-12         10,248           10,248           10,080           168            0
-13         11,264            9,232            9,080           152            0
-14         12,280            8,216            8,080           136            0
-~~~
-
-Once we reach the peak (snapshot #12), we can see that the time (in bytes) continues to increase, but the total starts to go down.
+Once we reach the peak (snapshot #31), we can see that the time (in bytes) continues to increase, but the total starts to go down.
 With each deallocation of `N` bytes, the total will decrease by `N` bytes, but the time will increase by `N` bytes.
 
-In addition to normal snapshots, you'll see a small number of detailed snapshots.
-Each detailed snapshot shows you what the heap looks like.
-In the detailed snapshot below, you'll see that as of snapshot 9, the memory we allocated on line 12 totals 8,000 bytes.
-This makes sense, since we've run line 12 a total of 8 times by the time we reach snapshot 9.
+At the peak memory allocation, we can see that:
 
-~~~
-98.34% (8,080B) (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
-->97.37% (8,000B) 0x4007DA: main (main.cpp:12)
-|
-->00.97% (80B) in 1+ places, all below ms_print's threshold (01.00%)
-~~~
+- 31.2 KB of our memory has been allocated by the call to `prepend` on line 49 of `list.cpp`.
+- There's one other allocation caused by `prepend`; examining the source code, we see that happens on line 45.
+- 1 KB of memory is allocated by our call to `operator<<` on line 62 of main, where we print out the entries in the list.
+- One other 16 byte allocation has happened; this corresponds to the call to the `List` constructor on line 43.
 
-Toward the end of our program, we see a final detailed snapshot at snapshot 22.
+Looking at the last snapshot, we can see that all of our heap memory has been deallocated [^yay]!
+From the X axis, we can see that we've allocated and deallocated a total of about 98 KB.
+In other words, if we summed the memory that we `new`'d and `delete`'d we would have 98 KB.
 
-~~~
-90.91% (80B) (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
-->90.91% (80B) 0x4007AE: main (main.cpp:9)
-|
-->00.00% (0B) in 1+ places, all below ms_print's threshold (01.00%)
-~~~
+You may notice that our peak allocation of 32.3 KB happens right around 49 KB, even though we haven't freed any memory before this point.
+What gives?
+Well, memory allocations aren't free --- every call to `new` requires some bookkeeping on the behalf of the operating system so it knows that
+that block of memory is allocated.
+`massif` tracks this as "extra heap cost"; you can see this cost if you hover your cursor over the appropriate entry in the cost graph.
 
-By the end, we've deallocated everything except our `char**`.
-The only memory remaining on the heap is 80 bytes.
-Snapshot 23 shows our final memory situation.
+![Information for the peak snapshot](10/list-peak.png){width=30%}
 
-~~~
---------------------------------------------------------------------------------
-n        time(B)         total(B)   useful-heap(B) extra-heap(B)    stacks(B)
---------------------------------------------------------------------------------
-23         20,496                0                0             0            0
-~~~
+We can see we have a heap cost of 32.3 KB plus administrative overhead of 15.6 KB, which adds up to a total heap usage of 47.8 KB!
 
-All of our heap memory has been deallocated [^yay], and we've allocated and deallocated a total of 20,496 bytes.
-In other words, if we summed the memory that we `new`'d and `delete`'d we would have 20,496 bytes.
+#### Comparing `List` and `Vector` results
+
+Now that we've got an idea of what `massif` can show us, let's look at how our vector solution differs from our list solution.
+If we just run `massif` as before, we'll see that the total cost graph looks jagged, but the detailed cost graphs form a nice pyramid.
+Even worse, sometimes the detailed cost graphs say the memory use is higher than the total cost graph!
+How can this be?
+Well, recall that the detailed graphs are built just from the detailed snapshots, so the total cost graph contains far more data points than the detailed ones.
+To get a more accurate detailed cost graph, we can increase the number of detailed snapshots taken.
+
+Let's run `massif` on our vector example, but pass it `--detailed-freq=1` in addition to our other flags.
+This will make every snapshot a detailed snapshot.
+
+![Vector cost graph](10/vector-cost.png){width=80%}
+
+Instead of being a smooth pyramid, it's jagged. To see why, let's look at snapshots 3 and 4, where the first dip occurs:
+
+![Snapshots 3 and 4](10/vector-free.png){width=60%}
+
+We can see that in snapshot 3, we've allocated 16 bytes in `Vector`'s constructor and 32 in `push_back`.
+Snapshot 4 is taken when the memory allocated in the constructor is freed.
+In other words, these two snapshots happen when the vector resizes: a new array is allocated that's twice as large as the existing one,
+all the data is copied over, then the old array is freed.
+Most of the sawtooths in the cost graph correspond to the vector resizing!
+
+Also, let's consider that both our vector and list store the same amount of data (2000 entries),
+but while our list consumed 32 KB, our vector consumes 12 KB at most (and that during a resize)!
+This stark difference in memory consumption is because each list node must store both a number and a pointer, whereas
+the vector just stores an array of numbers.
+Furthermore, while our list had 15.6 KB of heap overhead, our vector has at most 16 bytes because it has, at most, two blocks of heap memory allocated.
+The list, on the other hand, has 2000 blocks allocated at its peak!
+
+Hopefully this comparison highlights some of the interesting things `massif` can show you about how programs use memory.
 
 \newpage
 ## Questions
 
 Name: `______________________________`
 
-1. Use `time` to time the execution of a simple Hello World program. What were the values for `real`, `user`, and `sys`? Do those values make sense?
+1. Use `time` to time the execution of a simple Hello World program. What were the values for `real`, `user`, and `sys`? Explain what each of these values means.
 \vspace{8em}
 
-2. Briefly explain, in your own words, the difference between the way `gprof` (`g++ -pg`) and `callgrind` profile programs.
+2. Briefly explain, in your own words, the difference between the way `gperftool` and `callgrind` profile programs.
 \vspace{8em}
 
-3. Briefly summarize the output you get when you use `time`, `gprof`, and `callgrind_annotate` to profile a program.
+3. Briefly summarize the output you get when you use `time`, `gperftool`, and `callgrind` to profile a program.
 \vspace{8em}
 
 4. Briefly explain, in your own words, why we would use bytes as our unit of time in `massif` instead of seconds (or milliseconds).

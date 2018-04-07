@@ -1,0 +1,661 @@
+desc: --ignore-fn=_GLOBAL__sub_I_eh_alloc.cc --alloc-fn=call_init.part.0 --ignore-fn=call_init.part.0 --time-unit=B --massif-out-file=list-massif.out
+cmd: ./list
+time_unit: B
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=2376
+mem_heap_B=1584
+mem_heap_extra_B=792
+mem_stacks_B=0
+heap_tree=detailed
+n2: 1584 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 1568 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 1552 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 1552 0x108A09: main (list.cpp:57)
+  n0: 16 in 1 place, below massif's threshold (1.00%)
+ n0: 16 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=2
+#-----------
+time=3912
+mem_heap_B=2608
+mem_heap_extra_B=1304
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=5448
+mem_heap_B=3632
+mem_heap_extra_B=1816
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=6984
+mem_heap_B=4656
+mem_heap_extra_B=2328
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=9576
+mem_heap_B=6384
+mem_heap_extra_B=3192
+mem_stacks_B=0
+heap_tree=detailed
+n2: 6384 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 6368 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 6352 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 6352 0x108A09: main (list.cpp:57)
+  n0: 16 in 1 place, below massif's threshold (1.00%)
+ n0: 16 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=6
+#-----------
+time=11112
+mem_heap_B=7408
+mem_heap_extra_B=3704
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=12648
+mem_heap_B=8432
+mem_heap_extra_B=4216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=14184
+mem_heap_B=9456
+mem_heap_extra_B=4728
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=15720
+mem_heap_B=10480
+mem_heap_extra_B=5240
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=17256
+mem_heap_B=11504
+mem_heap_extra_B=5752
+mem_stacks_B=0
+heap_tree=detailed
+n2: 11504 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 11488 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 11472 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 11472 0x108A09: main (list.cpp:57)
+  n0: 16 in 1 place, below massif's threshold (1.00%)
+ n0: 16 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=11
+#-----------
+time=18792
+mem_heap_B=12528
+mem_heap_extra_B=6264
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=20328
+mem_heap_B=13552
+mem_heap_extra_B=6776
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=21864
+mem_heap_B=14576
+mem_heap_extra_B=7288
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=23400
+mem_heap_B=15600
+mem_heap_extra_B=7800
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=24936
+mem_heap_B=16624
+mem_heap_extra_B=8312
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=26472
+mem_heap_B=17648
+mem_heap_extra_B=8824
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=28008
+mem_heap_B=18672
+mem_heap_extra_B=9336
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=29544
+mem_heap_B=19696
+mem_heap_extra_B=9848
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=31080
+mem_heap_B=20720
+mem_heap_extra_B=10360
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=32616
+mem_heap_B=21744
+mem_heap_extra_B=10872
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=34152
+mem_heap_B=22768
+mem_heap_extra_B=11384
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=35688
+mem_heap_B=23792
+mem_heap_extra_B=11896
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=37224
+mem_heap_B=24816
+mem_heap_extra_B=12408
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=38376
+mem_heap_B=25584
+mem_heap_extra_B=12792
+mem_stacks_B=0
+heap_tree=detailed
+n2: 25584 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 25568 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 25552 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 25552 0x108A09: main (list.cpp:57)
+  n0: 16 in 1 place, below massif's threshold (1.00%)
+ n0: 16 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=25
+#-----------
+time=39912
+mem_heap_B=26608
+mem_heap_extra_B=13304
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=41448
+mem_heap_B=27632
+mem_heap_extra_B=13816
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=42984
+mem_heap_B=28656
+mem_heap_extra_B=14328
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=44520
+mem_heap_B=29680
+mem_heap_extra_B=14840
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=46056
+mem_heap_B=30704
+mem_heap_extra_B=15352
+mem_stacks_B=0
+heap_tree=detailed
+n2: 30704 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 30688 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 30672 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 30672 0x108A09: main (list.cpp:57)
+  n0: 16 in 1 place, below massif's threshold (1.00%)
+ n0: 16 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=30
+#-----------
+time=47592
+mem_heap_B=31728
+mem_heap_extra_B=15864
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=49056
+mem_heap_B=33040
+mem_heap_extra_B=16016
+mem_stacks_B=0
+heap_tree=peak
+n3: 33040 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 32000 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 31984 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 31984 0x108A09: main (list.cpp:57)
+  n0: 16 in 1 place, below massif's threshold (1.00%)
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37F87: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const (streambuf:451)
+       n1: 1024 0x4F43FA4: std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long) (locale_facets.h:2376)
+        n0: 1024 0x108A37: main (list.cpp:62)
+ n0: 16 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=32
+#-----------
+time=50592
+mem_heap_B=32016
+mem_heap_extra_B=15504
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=52128
+mem_heap_B=30992
+mem_heap_extra_B=14992
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=53664
+mem_heap_B=29968
+mem_heap_extra_B=14480
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=55200
+mem_heap_B=28944
+mem_heap_extra_B=13968
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=56736
+mem_heap_B=27920
+mem_heap_extra_B=13456
+mem_stacks_B=0
+heap_tree=detailed
+n3: 27920 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 26896 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 26896 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 26896 0x108A09: main (list.cpp:57)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37F87: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const (streambuf:451)
+       n1: 1024 0x4F43FA4: std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long) (locale_facets.h:2376)
+        n0: 1024 0x108A37: main (list.cpp:62)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=37
+#-----------
+time=58272
+mem_heap_B=26896
+mem_heap_extra_B=12944
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=59808
+mem_heap_B=25872
+mem_heap_extra_B=12432
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=61344
+mem_heap_B=24848
+mem_heap_extra_B=11920
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=62880
+mem_heap_B=23824
+mem_heap_extra_B=11408
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=64416
+mem_heap_B=22800
+mem_heap_extra_B=10896
+mem_stacks_B=0
+heap_tree=detailed
+n3: 22800 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 21776 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 21776 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 21776 0x108A09: main (list.cpp:57)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37F87: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const (streambuf:451)
+       n1: 1024 0x4F43FA4: std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long) (locale_facets.h:2376)
+        n0: 1024 0x108A37: main (list.cpp:62)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=42
+#-----------
+time=65952
+mem_heap_B=21776
+mem_heap_extra_B=10384
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=67488
+mem_heap_B=20752
+mem_heap_extra_B=9872
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=69024
+mem_heap_B=19728
+mem_heap_extra_B=9360
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=70560
+mem_heap_B=18704
+mem_heap_extra_B=8848
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=72096
+mem_heap_B=17680
+mem_heap_extra_B=8336
+mem_stacks_B=0
+heap_tree=detailed
+n3: 17680 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 16656 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 16656 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 16656 0x108A09: main (list.cpp:57)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37F87: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const (streambuf:451)
+       n1: 1024 0x4F43FA4: std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long) (locale_facets.h:2376)
+        n0: 1024 0x108A37: main (list.cpp:62)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=47
+#-----------
+time=73632
+mem_heap_B=16656
+mem_heap_extra_B=7824
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=75168
+mem_heap_B=15632
+mem_heap_extra_B=7312
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=76704
+mem_heap_B=14608
+mem_heap_extra_B=6800
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=77856
+mem_heap_B=13840
+mem_heap_extra_B=6416
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=79008
+mem_heap_B=13072
+mem_heap_extra_B=6032
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=80160
+mem_heap_B=12304
+mem_heap_extra_B=5648
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=81312
+mem_heap_B=11536
+mem_heap_extra_B=5264
+mem_stacks_B=0
+heap_tree=detailed
+n3: 11536 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 10512 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 10512 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 10512 0x108A09: main (list.cpp:57)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37F87: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const (streambuf:451)
+       n1: 1024 0x4F43FA4: std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long) (locale_facets.h:2376)
+        n0: 1024 0x108A37: main (list.cpp:62)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=54
+#-----------
+time=82464
+mem_heap_B=10768
+mem_heap_extra_B=4880
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=83616
+mem_heap_B=10000
+mem_heap_extra_B=4496
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=84768
+mem_heap_B=9232
+mem_heap_extra_B=4112
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=85920
+mem_heap_B=8464
+mem_heap_extra_B=3728
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=87072
+mem_heap_B=7696
+mem_heap_extra_B=3344
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=88224
+mem_heap_B=6928
+mem_heap_extra_B=2960
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=89376
+mem_heap_B=6160
+mem_heap_extra_B=2576
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=90528
+mem_heap_B=5392
+mem_heap_extra_B=2192
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=91680
+mem_heap_B=4624
+mem_heap_extra_B=1808
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=92832
+mem_heap_B=3856
+mem_heap_extra_B=1424
+mem_stacks_B=0
+heap_tree=detailed
+n3: 3856 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 2832 0x108B8F: List::prepend(unsigned long) (list.cpp:31)
+  n1: 2832 0x1089E0: fibonnacci(unsigned long) (list.cpp:49)
+   n0: 2832 0x108A09: main (list.cpp:57)
+  n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37F87: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long) const (streambuf:451)
+       n1: 1024 0x4F43FA4: std::ostream& std::ostream::_M_insert<unsigned long>(unsigned long) (locale_facets.h:2376)
+        n0: 1024 0x108A37: main (list.cpp:62)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=64
+#-----------
+time=93984
+mem_heap_B=3088
+mem_heap_extra_B=1040
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=95136
+mem_heap_B=2320
+mem_heap_extra_B=656
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=96288
+mem_heap_B=1552
+mem_heap_extra_B=272
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=98112
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
