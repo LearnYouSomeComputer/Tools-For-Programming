@@ -72,16 +72,16 @@ There are tools called **profilers** that automate this process for you.
 You can think of them like souped-up stop watches.
 They can give you detailed breakdowns of how your program spends its time, so that you can identify areas for improvement.
 
-We'll talk about four (4) tools you have at your disposal for evaluating and analyzing your programs' performance.
+We'll talk about four tools you have at your disposal for evaluating and analyzing your programs' performance.
 `time` will tell you how much, uh, time your programs take to run overall.
-`gprof` and `callgrind` give you a more detailed view of how long each part of your program takes to run.
+`gperftool` and `callgrind` give you a more detailed view of how long each part of your program takes to run.
 Last, but not least, `massif` will tell you about how much memory your program uses!
 
 ### Takeaways
 
 - Realize that films should feature more dogs balancing on beach balls
 - Gain a basic understanding of what a profiler is and how different profilers work
-- Understand how to use and interpret results from `time`, `gprof`, `callgrind`, and `massif`
+- Understand how to use and interpret results from `time`, `gperftool`, `callgrind`, and `massif`
 
 ## Walkthrough
 
@@ -119,7 +119,7 @@ It doesn't care if the program has command line arguments.
 
 If we want to see how long it takes to list the files in /tmp:
 
-~~~shell
+~~~
 $ time ls /tmp
 time ls -a /tmp
 .    ..
@@ -131,7 +131,7 @@ sys     0m0.002s
 
 If we wanted to time a hello world program:
 
-~~~shell
+~~~
 $ g++ -o hello hello.cpp
 $ time ./hello
 ~~~
@@ -214,10 +214,10 @@ We'll also want to use the `-g` flag so that `kcachegrind` can show us our sourc
 Let's compile the program above.
 We'll assume it's called `fibonnaci.cpp`.
 
-~~~shell
+~~~
 $ ls
 fibonnaci.cpp
-$ g++ -g -lprofiler -o  fibonnaci.cpp
+$ g++ -g fibonnaci.cpp -lprofiler -o fibonnaci
 $ ls
 fibonnaci    fibonnaci.cpp
 ~~~
@@ -226,7 +226,7 @@ By default, `gperftool` doesn't do anything when you execute your program.
 To get it to profile your code, you will need to set an environment variable, `CPUPROFILE`, to the name of the file where you want to store your profile output.
 We'll store ours in a file named `gperftool.prof`:
 
-~~~shell
+~~~
 $ CPUPROFILE=gperftool.prof ./fibonnaci
 Iterative: 10946
 Recursive: 10946
@@ -239,13 +239,13 @@ Now that we have `gperftool.prof`, we will use a program called `pprof` to turn 
 `pprof` needs to know both the executable you ran (`./fibonnaci`) and the file holding `gperftool`'s profile output (`gperftool.prof`).
 We'll store this in a file named `gperftool.out`:
 
-~~~shell
+~~~
 $ pprof --callgrind ./fibonnaci gperftool.prof > gperftool.out
 ~~~
 
 Last but not least, open `gperftool.out` in `kcachegrind`:[^X11-dont-forget]
 
-~~~shell
+~~~
 $ kcachegrind gperftool.out
 ~~~
 
@@ -260,7 +260,7 @@ To review, to use `gperftool`, you need to do the following:
 
 When you open `kcachegrind`, you will see three panes.
 On the left is the **flat profile**, which shows a list of functions and statistics about them.
-On the bottom right is the **call graph** --- a directed graph showing what functions each function calls.
+On the bottom right is a pane containing several tabs, including the **call graph** --- a directed graph showing what functions each function calls.
 
 On the top right is the **source code viewer**, which displays the source code for the currently selected function.
 Click on a function in the flat profile or call graph to change what code displays in the viewer.
@@ -396,7 +396,7 @@ Let's consider our program from the `gperftool` section.
 This time when we compile it, we just need to pass the `-g` flag; no need for `-lprofiler`!
 Then we'll run our program through `callgrind` as shown.
 
-~~~shell
+~~~
 $ g++ -g -o fibonnaci fibonnaci.cpp
 $ valgrind --tool=callgrind ./fibonnaci
 ~~~
@@ -406,7 +406,7 @@ The output file does not always have the same name; each `callgrind.out.NNNN` fi
 When we use `kcachegrind` to view the profile information, we need to make sure we pass the right `callgrind.out.NNNN`.
 Unlike `gperftool`, `callgrind` outputs a file that `kcachegrind` can read.
 
-~~~shell
+~~~
 $ ls
 callgrind.out.2653    fibonnaci    fibonnaci.cpp
 $ kcachegrind callgrind.out.2653
@@ -453,12 +453,12 @@ Let's break this down a bit:
 - Inside the `for` loop, we spend 600 instructions (3 per iteration) setting up the call to `fib_recursive`
     and 74 million instructions actually computing Fibonnaci numbers.
 
-As you can see, `callgrind` gives us different details that `gprof` cannot.
+As you can see, `callgrind` gives us different details that `gperftool` cannot.
 Based on where you run the most instructions, you can identify parts of your code that may need to be rewritten.
 
 ### Profiling memory usage with `massif`
 
-The tools we've seen so far (`time`, `gprof`, and `callgrind`) are all concerned with the speed of our program.
+The tools we've seen so far (`time`, `gperftool`, and `callgrind`) are all concerned with the speed of our program.
 They help us figure out how we're spending our time as we run our programs.
 However, there are profilers that are concerned with resources other than time.
 
@@ -769,5 +769,5 @@ but you probably only care about that if you're trying to do science.
 [^X11-dont-forget]: Don't forget to turn on X-forwarding if you haven't already!
 [^remember-movie]: We're doing a movie metaphor this chapter, remember?
 
-<!--  LocalWords:  profiler profilers gprof callgrind Rumpterfrabble
+<!--  LocalWords:  profiler profilers callgrind Rumpterfrabble
  -->
