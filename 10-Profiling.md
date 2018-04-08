@@ -72,7 +72,7 @@ There are tools called **profilers** that automate this process for you.
 You can think of them like souped-up stop watches.
 They can give you detailed breakdowns of how your program spends its time, so that you can identify areas for improvement.
 
-We'll talk about four (4)[^four] tools you have at your disposal for evaluating and analyzing your programs' performance.
+We'll talk about four (4) tools you have at your disposal for evaluating and analyzing your programs' performance.
 `time` will tell you how much, uh, time your programs take to run overall.
 `gprof` and `callgrind` give you a more detailed view of how long each part of your program takes to run.
 Last, but not least, `massif` will tell you about how much memory your program uses!
@@ -764,7 +764,6 @@ Name: `______________________________`
 [^io]: Input/Output
 [^movie]: Since we're talking about programs... not movies.
 [^yay]: Yay!
-[^four]: 4 (four)
 [^stats]: Or if you really feel like being pedantic, you can throw a litany of statistical tests at it instead...
 but you probably only care about that if you're trying to do science.
 [^X11-dont-forget]: Don't forget to turn on X-forwarding if you haven't already!
