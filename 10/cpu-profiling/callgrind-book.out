@@ -134,7 +134,7 @@ calls=1 0
 fn=(866)
 0 8
 
-ob=(8) /home/nathan/school/CS1001-Prelab-Book/10/fib_callgrind
+ob=(8) ./fib_callgrind
 fl=(23) ???
 fn=(406) _start
 0 11
@@ -175,7 +175,7 @@ cfn=(416)
 calls=1 0 
 0 17
 0 4
-cfi=(24) /home/nathan/school/CS1001-Prelab-Book/10/fibonnaci.cpp
+cfi=(24) ./fibonnaci.cpp
 cfn=(422) _GLOBAL__sub_I__Z13fib_iterativel
 calls=1 51 
 0 46281

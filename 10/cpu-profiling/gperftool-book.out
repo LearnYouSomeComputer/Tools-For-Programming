@@ -1,6 +1,6 @@
 events: Hits
 
-fl=(1) /home/nathan/school/CS1001-Prelab-Book/10/fibonnaci.cpp
+fl=(1) ./fibonnaci.cpp
 fn=(1) fib_iterative
 9 1
 
