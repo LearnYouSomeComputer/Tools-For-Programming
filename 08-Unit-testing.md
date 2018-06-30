@@ -206,7 +206,7 @@ TEST_CASE("Fibonacci Domain", "[Fibonacci]")
   CHECK_NOTHROW(fibonacci(10));
   CHECK_THROWS_AS(fibonacci(-1), domain_error);
   CHECK_THROWS_WITH(fibonacci(-1), "Fibonacci not defined for"
-      "negative indices");
+      " negative indices");
 }
 ```
 
@@ -399,7 +399,7 @@ template class Vector<int>;
 
 so that `gcov` properly reports if we forget to test any member functions of our `Vector` class.
 
-As with Address Sanitizer and `gprof`, `gcov` requires some compile-time instrumentation.
+As with Address Sanitizer (and `gperftool`, which you'll see in a future chapter), `gcov` requires some compile-time instrumentation.
 Compile your test files with the `--coverage` flag.
 
 Once you have compiled your tests, execute them as normal.
@@ -474,7 +474,7 @@ Typically, more code means more bugs; we do not want our unit tests to be comple
 Tests should be obviously correct as much as is possible.
 Start by testing basic functions, such as accessors and mutators.
 Once those have been tested, you can use them in more complex functionality tests;
-if one of those tests fails, you know that the bug does lies somewhere other than your basic functions.
+if one of those tests fails, you know that the bug does lie somewhere other than your basic functions.
 
 If you come across a bug in your program, write a unit test that reproduces it,
 then fix your code so that the test passes.
