@@ -1,0 +1,432 @@
+desc: --detailed-freq=1 --ignore-fn=_GLOBAL__sub_I_eh_alloc.cc --alloc-fn=call_init.part.0 --ignore-fn=call_init.part.0 --time-unit=B --massif-out-file=vector-massif.out
+cmd: ./vector
+time_unit: B
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n0: 0 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+#-----------
+snapshot=1
+#-----------
+time=24
+mem_heap_B=16
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n1: 16 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16 0x108F43: Vector::Vector() (vector.cpp:13)
+  n1: 16 0x108D44: fibonnaci(unsigned long) (vector.cpp:74)
+   n0: 16 0x108E25: main (vector.cpp:89)
+#-----------
+snapshot=2
+#-----------
+time=64
+mem_heap_B=48
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 48 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 32 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 32 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 32 0x108E25: main (vector.cpp:89)
+ n1: 16 0x108F43: Vector::Vector() (vector.cpp:13)
+  n1: 16 0x108D44: fibonnaci(unsigned long) (vector.cpp:74)
+   n0: 16 0x108E25: main (vector.cpp:89)
+#-----------
+snapshot=3
+#-----------
+time=64
+mem_heap_B=48
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 48 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 32 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 32 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 32 0x108E25: main (vector.cpp:89)
+ n1: 16 0x108F43: Vector::Vector() (vector.cpp:13)
+  n1: 16 0x108D44: fibonnaci(unsigned long) (vector.cpp:74)
+   n0: 16 0x108E25: main (vector.cpp:89)
+#-----------
+snapshot=4
+#-----------
+time=88
+mem_heap_B=32
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 32 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 32 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 32 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 32 0x108E25: main (vector.cpp:89)
+ n1: 0 0x108F43: Vector::Vector() (vector.cpp:13)
+  n1: 0 0x108D44: fibonnaci(unsigned long) (vector.cpp:74)
+   n0: 0 0x108E25: main (vector.cpp:89)
+#-----------
+snapshot=5
+#-----------
+time=160
+mem_heap_B=96
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 96 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 96 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 96 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 96 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=6
+#-----------
+time=160
+mem_heap_B=96
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 96 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 96 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 96 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 96 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=7
+#-----------
+time=200
+mem_heap_B=64
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 64 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 64 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 64 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 64 0x108E25: main (vector.cpp:89)
+ n1: 0 0x108F43: Vector::Vector() (vector.cpp:13)
+  n1: 0 0x108D44: fibonnaci(unsigned long) (vector.cpp:74)
+   n0: 0 0x108E25: main (vector.cpp:89)
+#-----------
+snapshot=8
+#-----------
+time=336
+mem_heap_B=192
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 192 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 192 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 192 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 192 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=9
+#-----------
+time=336
+mem_heap_B=192
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 192 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 192 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 192 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 192 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=10
+#-----------
+time=408
+mem_heap_B=128
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 128 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 128 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 128 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 128 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=11
+#-----------
+time=672
+mem_heap_B=384
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 384 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 384 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 384 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 384 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=12
+#-----------
+time=672
+mem_heap_B=384
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 384 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 384 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 384 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 384 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=13
+#-----------
+time=808
+mem_heap_B=256
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 256 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 256 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 256 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 256 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=14
+#-----------
+time=1328
+mem_heap_B=768
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 768 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 768 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 768 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 768 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=15
+#-----------
+time=1328
+mem_heap_B=768
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 768 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 768 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 768 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 768 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=16
+#-----------
+time=1592
+mem_heap_B=512
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 512 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 512 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 512 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 512 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=17
+#-----------
+time=2624
+mem_heap_B=1536
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 1536 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1536 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 1536 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 1536 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=18
+#-----------
+time=2624
+mem_heap_B=1536
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 1536 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1536 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 1536 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 1536 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=19
+#-----------
+time=3144
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 1024 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 1024 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 1024 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=20
+#-----------
+time=5200
+mem_heap_B=3072
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 3072 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 3072 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 3072 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 3072 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=21
+#-----------
+time=5200
+mem_heap_B=3072
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 3072 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 3072 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 3072 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 3072 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=22
+#-----------
+time=6232
+mem_heap_B=2048
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2048 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 2048 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 2048 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=23
+#-----------
+time=10336
+mem_heap_B=6144
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 6144 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 6144 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 6144 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 6144 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=24
+#-----------
+time=10336
+mem_heap_B=6144
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 6144 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 6144 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 6144 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 6144 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=25
+#-----------
+time=12392
+mem_heap_B=4096
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 4096 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4096 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 4096 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 4096 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=26
+#-----------
+time=20592
+mem_heap_B=12288
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n2: 12288 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 12288 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 12288 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 12288 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=27
+#-----------
+time=20592
+mem_heap_B=12288
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=peak
+n2: 12288 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 12288 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 12288 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 12288 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=28
+#-----------
+time=24696
+mem_heap_B=8192
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 8192 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 8192 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 8192 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 8192 0x108E25: main (vector.cpp:89)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=29
+#-----------
+time=25728
+mem_heap_B=9216
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=detailed
+n3: 9216 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 8192 0x108FD4: Vector::push_back(int) (vector.cpp:41)
+  n1: 8192 0x108DBB: fibonnaci(unsigned long) (vector.cpp:81)
+   n0: 8192 0x108E25: main (vector.cpp:89)
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37AE2: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (streambuf:451)
+       n1: 1024 0x4F43D44: std::ostream& std::ostream::_M_insert<long>(long) (locale_facets.h:2371)
+        n0: 1024 0x108E56: main (vector.cpp:93)
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=30
+#-----------
+time=33928
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=detailed
+n2: 1024 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x5786B9B: _IO_file_doallocate (in /usr/lib/libc-2.26.so)
+  n1: 1024 0x57955F7: _IO_doallocbuf (in /usr/lib/libc-2.26.so)
+   n1: 1024 0x5794876: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+    n1: 1024 0x57938E5: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.26.so)
+     n1: 1024 0x5788195: fwrite (in /usr/lib/libc-2.26.so)
+      n1: 1024 0x4F37AE2: std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const (streambuf:451)
+       n1: 1024 0x4F43D44: std::ostream& std::ostream::_M_insert<long>(long) (locale_facets.h:2371)
+        n0: 1024 0x108E56: main (vector.cpp:93)
+ n0: 0 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=31
+#-----------
+time=34960
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n1: 0 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 0 in 3 places, all below massif's threshold (1.00%)
