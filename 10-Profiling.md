@@ -217,7 +217,7 @@ We'll assume it's called `fibonnaci.cpp`.
 ~~~
 $ ls
 fibonnaci.cpp
-$ g++ -g fibonnaci.cpp -lprofiler -o fibonnaci
+$ g++ -g -lprofiler -o fibonnaci fibonnaci.cpp
 $ ls
 fibonnaci    fibonnaci.cpp
 ~~~
