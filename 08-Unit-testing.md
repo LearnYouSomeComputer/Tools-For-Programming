@@ -38,23 +38,23 @@ Unit testing is widely used in industry because it is quite effective at keeping
 You can even measure how much of your code is tested by unit tests --- 100% code coverage means that you've found
 at least most of the obvious bugs!
 
-This chapter will focus on the Catch unit testing framework for C++.
+This chapter will focus on the Catch2 unit testing framework for C++.
 There are a number of popular unit testing frameworks; Boost has one,[^sink] Google makes one called `gtest`, etc.
-However, Catch is easy to install, easy to write tests in, and downright beautiful compared to Boost's test framework.
+However, Catch2 is easy to install, easy to write tests in, and downright beautiful compared to Boost's test framework.
 (It's also popular, in case you were wondering.)
 
 ### Takeaways
 
-- Learn how to write unit tests with Catch
+- Learn how to write unit tests with Catch2
 - Organize your code and tests to preserve your sanity
 - Measure how much of your code is covered by the tests you've written
 
 ## Walkthrough
 
-### Setting up Catch
+### Setting up Catch2
 
-Catch is distributed as a single `.hpp` file that you can download and include in your project.
-Download it from [GitHub](https://github.com/philsquared/Catch) --- the link to the single header is in the `README`.
+Catch2 is distributed as a single `.hpp` file that you can download and include in your project.
+Download it from [GitHub](https://github.com/catchorg/Catch2) --- the link to the single header is in the `README`.
 
 In *exactly one* `.cpp` file, you must include the following lines:
 
@@ -66,7 +66,7 @@ In *exactly one* `.cpp` file, you must include the following lines:
 This generates a `main()` function that runs your unit tests.
 You will have two programs now --- your actual program, and a program that runs your unit tests.
 
-Every other file you write tests in should include Catch:
+Every other file you write tests in should include Catch2:
 
 ```c++
 #include "catch.hpp"
@@ -95,11 +95,11 @@ int fibonacci(int n)
 }
 ```
 
-In Catch, every test lives inside a `TEST_CASE` block.
+In Catch2, every test lives inside a `TEST_CASE` block.
 You can make these as fine-grained as you want, but generally you'll find it easy to collect a bunch of related checks
 into one `TEST_CASE`.
 Each test case has a name and a tag; generally you'll tag all test cases for a function/class with the same tag.
-(You can tell Catch to run only tests with specific names or tags if you like.)
+(You can tell Catch2 to run only tests with specific names or tags if you like.)
 
 Inside a test case, you can put one or more `REQUIRE` or `CHECK` assertions.
 A `REQUIRE` statement checks that a certain condition holds; if it does not, it reports a test failure and stops the execution of that test case.
@@ -153,13 +153,13 @@ If we fix that and re--run our tests, everything is kosher:
 All tests passed (4 assertions in 1 test case)
 ```
 
-Now, you may notice that Catch expands the thing inside the `CHECK` function --- it prints the value that `fibonacci` returns.
+Now, you may notice that Catch2 expands the thing inside the `CHECK` function --- it prints the value that `fibonacci` returns.
 It does this by the power of *template magic*.
 This magic is only so powerful.[^errors]
-So, if you want to write a more complex expression, you'll need to either break it into individual assertions or tell Catch to not attempt to expand it.
+So, if you want to write a more complex expression, you'll need to either break it into individual assertions or tell Catch2 to not attempt to expand it.
 For 'and' statements, rather than `CHECK(x && y);`, write `CHECK(x); CHECK(y);`.
 For 'or' statements, enclose your expression in an extra pair of parentheses: `CHECK((x || y));`.
-(The extra parentheses tell Catch to not attempt to expand the expression; you can do this with 'and' statements as well, but expansion is nice to have.)
+(The extra parentheses tell Catch2 to not attempt to expand the expression; you can do this with 'and' statements as well, but expansion is nice to have.)
 
 There are also matching assertions `REQUIRE_FALSE` and `CHECK_FALSE` that check to make sure a statement is false, rather than true.
 
@@ -188,7 +188,7 @@ int fibonacci(int n)
 }
 ```
 
-Catch provides a number of assertions for testing whether expressions throw exceptions and what kinds of exceptions are thrown.
+Catch2 provides a number of assertions for testing whether expressions throw exceptions and what kinds of exceptions are thrown.
 As before, each assertion comes in a `CHECK` and a `REQUIRE` flavor.
 
 - `CHECK_NOTHROW(expression)`: Asserts the expression does not throw an exception.
@@ -206,7 +206,7 @@ TEST_CASE("Fibonacci Domain", "[Fibonacci]")
   CHECK_NOTHROW(fibonacci(10));
   CHECK_THROWS_AS(fibonacci(-1), domain_error);
   CHECK_THROWS_WITH(fibonacci(-1), "Fibonacci not defined for"
-      "negative indices");
+      " negative indices");
 }
 ```
 
@@ -215,7 +215,7 @@ TEST_CASE("Fibonacci Domain", "[Fibonacci]")
 At this point you know enough to start writing tests for functions.
 Before you go too hog--wild, shoving test cases every which where, let's talk about how to organize tests so they're easy to find and use.
 
-First, we can't have our `main()` function and Catch's auto-generated `main()` in the same program.
+First, we can't have our `main()` function and Catch2's auto-generated `main()` in the same program.
 You'll need to organize your code so that you can compile your test cases without including your `main()` function.
 So make your program's `main()` as small as possible and have it call other functions that can be unit tested.
 
@@ -226,10 +226,10 @@ then make a separate test file for each implementation file.
 For example, if we made `fibonacci.h` and `fibonacci.cpp` files for our function above, we'd also make a `test_fibonacci.cpp` file
 that contains our unit tests.
 
-Third, compiling Catch's auto-generated `main()` function takes a while.
+Third, compiling Catch2's auto-generated `main()` function takes a while.
 This is doubly annoying because it never changes!
 Rather than rebuilding it all the time, we can harness the power of makefiles and incremental compilation by making a separate `test_main.cpp` file
-that just contains Catch's `main()`.
+that just contains Catch2's `main()`.
 This file looks exactly like this:
 
 ```{.cpp .numberLines}
@@ -248,7 +248,7 @@ Then in `test_fibonacci.cpp`, we just have the following includes:
 Building this code is done as follows:
 
 ```
-$ g++ -c test_main.cpp                  # Compile Catch's main()
+$ g++ -c test_main.cpp                  # Compile Catch2's main()
 $ g++ -c test_fibonacci.cpp             # Compile Fibonacci tests
 $ g++ test_main.o test_fibonacci.o -o testsuite  # Link testsuite
 ```
@@ -301,7 +301,7 @@ class Vector
 To test the `[]` operator or the copy constructor, we need to make a vector that contains elements to access or copy.
 You could write a bunch of test cases and duplicate the same test setup code in each, but there is a better option!
 Each `TEST_CASE` can be split into multiple `SECTION`s, each of which has a name.
-For each section, Catch runs the test case from the beginning but only executes one section each run.
+For each section, Catch2 runs the test case from the beginning but only executes one section each run.
 
 We can use this to set up a test vector once to test the constructor and accessor functions:
 
@@ -344,7 +344,7 @@ TEST_CASE("Vector Elements", "[vector]")
 }
 ```
 
-In this example, Catch runs lines 1--16, then starts over and runs lines 1--8 and 18--26, then lines 1--8, 18, and 28--35.
+In this example, Catch2 runs lines 1--16, then starts over and runs lines 1--8 and 18--26, then lines 1--8, 18, and 28--35.
 Since we get a fresh `v` vector for each section, the code inside each section can mutate `v` however it likes without impacting any of the other
 sections' tests!
 Even better, we can add more setup as we go through the test case; our `copy` vector is only created for the sections that test the copy constructor.
@@ -355,11 +355,11 @@ test assertions.
 
 ### Advanced Tests
 
-Catch provides some advanced features that come in handy when testing code that uses strings and floating point arithmetic.
+Catch2 provides some advanced features that come in handy when testing code that uses strings and floating point arithmetic.
 
 When testing code that produces strings, sometimes you do not know what the entire string produced will be,
 but you want to check that it contains some particular substring.
-Catch offers a pair of assertions, `CHECK_THAT` and `REQUIRE_THAT`, that use a *matcher* to check only parts of strings.
+Catch2 offers a pair of assertions, `CHECK_THAT` and `REQUIRE_THAT`, that use a *matcher* to check only parts of strings.
 For instance, we can test that a string starts with "Dear Prudence" like so:
 
 ```
@@ -377,7 +377,7 @@ REQUIRE_THAT(my_string, StartsWith("Dear Prudence") &&
 These matchers can also be used in the `THROWS_WITH` assertions!
 
 Testing floating point code presents a challenge because floating point operations may have some round-off that prevents exact equality checks from working.
-Catch provides a class named `Approx` that performs approximate equality checks; for instance, `CHECK(PI == Approx(3.14));`.
+Catch2 provides a class named `Approx` that performs approximate equality checks; for instance, `CHECK(PI == Approx(3.14));`.
 By default, the comparison can be off by 0.001%, but you can change this!
 For a more precise comparison, you can set the `epsilon` to a smaller percentage: `CHECK(PI = Approx(3.1415).epsilon(0.0001));`.
 
@@ -399,7 +399,7 @@ template class Vector<int>;
 
 so that `gcov` properly reports if we forget to test any member functions of our `Vector` class.
 
-As with Address Sanitizer and `gprof`, `gcov` requires some compile-time instrumentation.
+As with Address Sanitizer (and `gperftool`, which you'll see in a future chapter), `gcov` requires some compile-time instrumentation.
 Compile your test files with the `--coverage` flag.
 
 Once you have compiled your tests, execute them as normal.
@@ -474,7 +474,7 @@ Typically, more code means more bugs; we do not want our unit tests to be comple
 Tests should be obviously correct as much as is possible.
 Start by testing basic functions, such as accessors and mutators.
 Once those have been tested, you can use them in more complex functionality tests;
-if one of those tests fails, you know that the bug does lies somewhere other than your basic functions.
+if one of those tests fails, you know that the bug does lie somewhere other than your basic functions.
 
 If you come across a bug in your program, write a unit test that reproduces it,
 then fix your code so that the test passes.
@@ -541,11 +541,11 @@ Floating Point:
 
 ## Further Reading
 
-- [Catch Tutorial](https://github.com/philsquared/Catch/blob/master/docs/tutorial.md)
-- [Catch Manual](https://github.com/philsquared/Catch/blob/master/docs/Readme.md)
-- [Floating Point Comparisons](https://github.com/philsquared/Catch/blob/master/docs/assertions.md#floating-point-comparisons)
-- [Matcher Expressions](https://github.com/philsquared/Catch/blob/master/docs/matchers.md)
-- [Catch GitHub Repository](https://github.com/philsquared/Catch)
+- [Catch2 Tutorial](https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md#top)
+- [Catch2 Manual](https://github.com/catchorg/Catch2/blob/master/docs/Readme.md#top)
+- [Floating Point Comparisons](https://github.com/catchorg/Catch2/blob/master/docs/assertions.md#floating-point-comparisons)
+- [Matcher Expressions](https://github.com/catchorg/Catch2/blob/master/docs/matchers.md#top)
+- [Catch2 GitHub Repository](https://github.com/catchorg/Catch2)
 
 <!-- -->
 
