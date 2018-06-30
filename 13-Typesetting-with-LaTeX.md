@@ -91,7 +91,7 @@ Here's a short example:
 \documentclass{article}
 
 \title{Do Lizards Run The World?}
-\author{Nathan Jarus}
+\author{Natasha Jarus}
 \date{\today}
 
 \begin{document}
@@ -111,7 +111,7 @@ Continuing our example:
 \documentclass{article}
 
 \title{Do Lizards Run The World?}
-\author{Nathan Jarus}
+\author{Natasha Jarus}
 \date{\today}
 
 \begin{document}
