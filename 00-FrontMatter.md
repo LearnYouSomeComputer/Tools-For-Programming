@@ -1,7 +1,7 @@
 ---
 title: Tools For Computer Scientists
 subtitle: Or, How To Use A Computer Real Good
-author: Nathan Jarus and Michael Wisely
+author: Natasha Jarus and Michael Wisely
 institute: Missouri University of Science and Technology
 
 documentclass: book
@@ -50,7 +50,7 @@ include-before: |
     \footnotesize
     \parindent 0pt
     \parskip \baselineskip
-    \textcopyright{} 2016--2018 Nathan Jarus and Michael Wisely
+    \textcopyright{} 2016--2018 Natasha Jarus and Michael Wisely
 
     \indent
     This work is licensed under the Creative Commons Attribution--ShareAlike 4.0 International License.
