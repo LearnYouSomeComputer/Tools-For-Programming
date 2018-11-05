@@ -275,8 +275,8 @@ Write a regular expression to match an email address.
 \vspace{8em}
 
 3. Imagine that you are the owner of Pat's Pizza Pie Pizzaria, a pizza joint that's fallen on tough times.
-You're trying to reinvent the business as a hip, fancy eatery, "The Garden of Olives (And Also Peperoncinis)".
-As part of this reinvention, you need to jazz up that menu by replacing "pizza" with "foccacia and fresh tomato sauce".
+You're trying to reinvent the business as a hip, fancy eatery, "The Garden of Olives (And Also Pepperoncinis)".
+As part of this reinvention, you need to jazz up that menu by replacing "pizza" with "focaccia and fresh tomato sauce".
 Suppose your menu is stored in "menu.txt". Write a command to update every instance of "pizza" and place the new, hip menu in "carte-du-jour.txt".
 (**Hint**: you'll need to use some of the I/O redirection stuff you learned in Chapter 2.)
 \newpage
