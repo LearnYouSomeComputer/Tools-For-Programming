@@ -1,6 +1,6 @@
 ---
-title: Tools For Computer Scientists
-subtitle: Or, How To Use A Computer Real Good
+title: Tools For Programming
+subtitle: How To Use A Computer Real Good
 author: Natasha Jarus and Michael Wisely
 institute: Missouri University of Science and Technology
 
@@ -38,7 +38,7 @@ include-before: |
 
     \begingroup
     The source code for this book is available at
-    [https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists](https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists).
+    [https://github.com/LearnYouSomeComputer/Tools-For-Programming](https://github.com/LearnYouSomeComputer/Tools-For-Programming).
     \input{.commit-info.tex}
 
     We welcome questions, corrections, and improvements!

@@ -17,7 +17,7 @@ MD_PIECES = 00-FrontMatter.md	\
 
 EXTENSIONS = raw_tex+fenced_code_attributes
 
-TITLE = tools-for-computer-scientists
+TITLE = tools-for-programming
 
 # Runs every time `make` is called;
 # check to see whether the index has become dirty!
