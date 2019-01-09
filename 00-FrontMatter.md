@@ -39,7 +39,7 @@ include-before: |
     \begingroup
     The source code for this book is available at
     [https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists](https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists).
-    \input{.commit-info}
+    \input{.commit-info.tex}
 
     We welcome questions, corrections, and improvements!
     \endgroup

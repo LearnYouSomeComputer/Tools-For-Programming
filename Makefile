@@ -37,13 +37,13 @@ book: ${TITLE}.pdf
 	@echo -e "\n\nDone! Be sure to print that bad-boy using short-edge duplexing."
 
 ${TITLE}.pdf: ${MD_PIECES} template.tex .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output ${TITLE}.pdf ${MD_PIECES}
+	pandoc --pdf-engine=xelatex --template=template.tex --from markdown-latex_macros+${EXTENSIONS} --output ${TITLE}.pdf ${MD_PIECES}
 
 ${TITLE}.tex: ${MD_PIECES} template.tex .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --standalone --from markdown+${EXTENSIONS} --output ${TITLE}.tex ${MD_PIECES}
+	pandoc --pdf-engine=xelatex --template=template.tex --standalone --from markdown-latex_macros+${EXTENSIONS} --output ${TITLE}.tex ${MD_PIECES}
 
 %.pdf: 00-FrontMatter.md %*.md .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output $@ $(filter %.md, $^)
+	pandoc --pdf-engine=xelatex --template=template.tex --from markdown-latex_macros+${EXTENSIONS} --output $@ $(filter %.md, $^)
 
 # .git/index is updated every time a commit, checkout, etc. occurs.
 # .dirty is updated the first time the index goes clean -> dirty.
