@@ -36,13 +36,13 @@ book: ${TITLE}.pdf
 	pdfbook --short-edge --letterpaper ${TITLE}.pdf
 	@echo -e "\n\nDone! Be sure to print that bad-boy using short-edge duplexing."
 
-${TITLE}.pdf: ${MD_PIECES} template.tex .commit-info.tex
+${TITLE}.pdf: ${MD_PIECES} template.tex .commit-info.tex lysc-titlepage.sty
 	pandoc --pdf-engine=xelatex --template=template.tex --from markdown-latex_macros+${EXTENSIONS} --output ${TITLE}.pdf ${MD_PIECES}
 
-${TITLE}.tex: ${MD_PIECES} template.tex .commit-info.tex
+${TITLE}.tex: ${MD_PIECES} template.tex .commit-info.tex lysc-titlepage.sty
 	pandoc --pdf-engine=xelatex --template=template.tex --standalone --from markdown-latex_macros+${EXTENSIONS} --output ${TITLE}.tex ${MD_PIECES}
 
-%.pdf: 00-FrontMatter.md %*.md .commit-info.tex
+%.pdf: 00-FrontMatter.md %*.md .commit-info.tex lysc-titlepage.sty
 	pandoc --pdf-engine=xelatex --template=template.tex --from markdown-latex_macros+${EXTENSIONS} --output $@ $(filter %.md, $^)
 
 # .git/index is updated every time a commit, checkout, etc. occurs.

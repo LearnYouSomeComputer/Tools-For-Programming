@@ -1,7 +1,7 @@
 ---
 title: Tools For Programming
 subtitle: How To Use A Computer Real Good
-author: Natasha Jarus and Michael Wisely
+author: Natasha Jarus \and Michael Wisely
 institute: Missouri University of Science and Technology
 
 documentclass: book
@@ -26,6 +26,11 @@ header-includes:
 - \let\tabsymbol\tab
 - \renewcommand{\tab}{Tab \tabsymbol}
 - \usepackage{afterpage}
+- \usepackage{lysc-titlepage}
+- \titleimage{\includegraphics{logo.png}}
+- \titlefontcolor{white}
+- \definecolor{titlegreen}{HTML}{008080}
+- \titlebgcolor{titlegreen}
 
 include-before: |
     \pagestyle{empty}
