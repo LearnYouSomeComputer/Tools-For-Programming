@@ -11,7 +11,7 @@ colorlinks: true
 fontfamily: sourcecodepro
 
 toc: true
-toc-depth: 0
+toc-depth: 2
 
 header-includes:
 - \usepackage[os=win]{menukeys}
