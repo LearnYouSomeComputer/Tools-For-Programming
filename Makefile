@@ -17,7 +17,7 @@ MD_PIECES = 00-FrontMatter.md	\
 
 EXTENSIONS = raw_tex+fenced_code_attributes
 
-TITLE = tools-for-computer-scientists
+TITLE = tools-for-programming
 
 # Runs every time `make` is called;
 # check to see whether the index has become dirty!
@@ -36,14 +36,14 @@ book: ${TITLE}.pdf
 	pdfbook --short-edge --letterpaper ${TITLE}.pdf
 	@echo -e "\n\nDone! Be sure to print that bad-boy using short-edge duplexing."
 
-${TITLE}.pdf: ${MD_PIECES} template.tex .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output ${TITLE}.pdf ${MD_PIECES}
+${TITLE}.pdf: ${MD_PIECES} template.tex .commit-info.tex lysc-titlepage.sty
+	pandoc --pdf-engine=xelatex --template=template.tex --from markdown-latex_macros+${EXTENSIONS} --output ${TITLE}.pdf ${MD_PIECES}
 
-${TITLE}.tex: ${MD_PIECES} template.tex .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --standalone --from markdown+${EXTENSIONS} --output ${TITLE}.tex ${MD_PIECES}
+${TITLE}.tex: ${MD_PIECES} template.tex .commit-info.tex lysc-titlepage.sty
+	pandoc --pdf-engine=xelatex --template=template.tex --standalone --from markdown-latex_macros+${EXTENSIONS} --output ${TITLE}.tex ${MD_PIECES}
 
-%.pdf: 00-FrontMatter.md %*.md .commit-info.tex
-	pandoc --latex-engine=xelatex --template=template.tex --from markdown+${EXTENSIONS} --output $@ $(filter %.md, $^)
+%.pdf: 00-FrontMatter.md %*.md .commit-info.tex lysc-titlepage.sty
+	pandoc --pdf-engine=xelatex --template=template.tex --from markdown-latex_macros+${EXTENSIONS} --output $@ $(filter %.md, $^)
 
 # .git/index is updated every time a commit, checkout, etc. occurs.
 # .dirty is updated the first time the index goes clean -> dirty.

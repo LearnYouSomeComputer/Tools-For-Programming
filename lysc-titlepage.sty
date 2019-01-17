@@ -1,0 +1,40 @@
+\ProvidesPackage{lysc-titlepage}
+
+\RequirePackage{geometry}
+\RequirePackage{pagecolor}
+\RequirePackage{afterpage}
+\RequirePackage{xcolor}
+
+\newcommand*{\titleimage}[1]{\gdef\@titleimage{#1}}
+\newcommand*{\@titleimage}{}
+\newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
+\newcommand*{\@subtitle}{}
+\renewcommand*{\and}{{\LARGE and }}
+
+\newcommand*{\titlebgcolor}[1]{\gdef\@titlebgcolor{#1}}
+\newcommand*{\@titlebgcolor}{none}
+\newcommand*{\titlefontcolor}[1]{\gdef\@titlefontcolor{#1}}
+\newcommand*{\@titlefontcolor}{black}
+
+\renewcommand*{\maketitle}{%
+\begin{titlepage}
+	\pagestyle{empty}
+	\newgeometry{centering}
+	\pagecolor{\@titlebgcolor}
+	\afterpage{\nopagecolor}
+	\afterpage{\restoregeometry}
+
+	\centering
+	\vfill
+	\@titleimage
+	\vfill
+	{\color{\@titlefontcolor}\sffamily
+	{\fontsize{32}{0}\bfseries\@title \strut\par}
+	{\LARGE or: {\huge \@subtitle} \strut\par}
+	\vspace{1cm}
+	{\LARGE by: {\huge\@author} \strut\par}
+	\vfill
+	}
+\end{titlepage}
+}
+\endinput

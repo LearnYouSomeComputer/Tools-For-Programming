@@ -1,7 +1,7 @@
 ---
-title: Tools For Computer Scientists
-subtitle: Or, How To Use A Computer Real Good
-author: Natasha Jarus and Michael Wisely
+title: Tools For Programming
+subtitle: How To Use A Computer Real Good
+author: Natasha Jarus \and Michael Wisely
 institute: Missouri University of Science and Technology
 
 documentclass: book
@@ -11,7 +11,7 @@ colorlinks: true
 fontfamily: sourcecodepro
 
 toc: true
-toc-depth: 0
+toc-depth: 2
 
 header-includes:
 - \usepackage[os=win]{menukeys}
@@ -26,6 +26,11 @@ header-includes:
 - \let\tabsymbol\tab
 - \renewcommand{\tab}{Tab \tabsymbol}
 - \usepackage{afterpage}
+- \usepackage{lysc-titlepage}
+- \titleimage{\includegraphics{logo.png}}
+- \titlefontcolor{white}
+- \definecolor{titlegreen}{HTML}{008080}
+- \titlebgcolor{titlegreen}
 
 include-before: |
     \pagestyle{empty}
@@ -38,8 +43,8 @@ include-before: |
 
     \begingroup
     The source code for this book is available at
-    [https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists](https://github.com/LearnYouSomeComputer/Tools-For-Computer-Scientists).
-    \input{.commit-info}
+    [https://github.com/LearnYouSomeComputer/Tools-For-Programming](https://github.com/LearnYouSomeComputer/Tools-For-Programming).
+    \input{.commit-info.tex}
 
     We welcome questions, corrections, and improvements!
     \endgroup
@@ -50,7 +55,7 @@ include-before: |
     \footnotesize
     \parindent 0pt
     \parskip \baselineskip
-    \textcopyright{} 2016--2018 Natasha Jarus and Michael Wisely
+    \textcopyright{} 2016--2019 Natasha Jarus and Michael Wisely
 
     \indent
     This work is licensed under the Creative Commons Attribution--ShareAlike 4.0 International License.
