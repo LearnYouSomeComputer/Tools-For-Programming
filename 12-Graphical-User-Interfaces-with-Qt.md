@@ -59,7 +59,7 @@ You would scream, but you have no menu entry for that.
 
 ## Walkthrough
 
-It's worth mentioning before we get to deep that you should spend some time looking through your starter repository's example code in addition to this walkthrough.
+It's worth mentioning before we get too deep that you should spend some time looking through your starter repository's example code in addition to this walkthrough.
 Qt requires a non-negligible amount of code to get anything interesting done.
 We've included a few examples here, as well as a discussion of some conceptual stuff, but you'll need to spend time looking at the example code to see how
 all the pieces fit together.
