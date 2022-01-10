@@ -1,0 +1,51 @@
+# Windows
+
+- PuTTY
+- XMing / XWin32 / some other X client
+- Atom
+- Notepad++
+- Code::Blocks
+- Visual Studio Code (different from visual studio!)
+- kdbg
+- QCacheGrind https://kcachegrind.github.io/html/Download.html
+- MSysGit
+- smartgit http://www.syntevo.com/smartgit/
+- glade
+- lyx
+- gummi
+- gtk+ 3.2 windows libraries
+- MikTex
+- TeXworks
+- Graphviz/dot
+
+# Linux
+
+- GCC 7
+- Clang (installed so stuff like `clang++` and `llvm-symbolizer` work without having to specify a version number)
+- GDB
+- GNU Make
+- vim
+- emacs
+- atom
+- code::blocks
+- vs code
+- git
+- valgrind
+- gperftool and pprof
+- kcachegrind (please verify this works; there was a bug with the ubuntu package last I checked)
+- callgrind-annotate
+- gcov
+- Qt
+- texlive with all the fixin's
+- scan-build (clang analyzer)
+- cppcheck
+- clang-format
+- clang-tidy
+- lyx
+- gummi
+- gtkmm-documentation / libgtkmm-3.x
+- glade
+- massif-visualizer
+- boost
+- dot (graphviz)
+- boost libraries
